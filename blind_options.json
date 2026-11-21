@@ -1,0 +1,2620 @@
+{
+  "_meta": {
+    "note": "盲听选择题：96 课，每题 1 正确 + 2 干扰。correctIdx 为正确项下标(0/1/2)。evidence 为正确项依据句 i，conflict 为干扰项相斥句 i。AI 生成，需人工抽检。",
+    "source": "question.en + sentences[].en；正确项据课文事实，干扰项与课文相斥",
+    "generated": "2026-11-21 (full 96)",
+    "suspect": {
+      "41": "正确项为推断，无直接原句",
+      "68": "源question.en被截断",
+      "74": "因果链较长",
+      "76": "因果链较长"
+    }
+  },
+  "1": {
+    "q": "Why did the writer complain to the people behind him?",
+    "options": [
+      "People behind him talked loudly.",
+      "The play was too long.",
+      "He could not find his seat."
+    ],
+    "correctIdx": 0,
+    "zh": [
+      "他身后的人在大声说话。",
+      "戏太长。",
+      "他找不到座位。"
+    ],
+    "evidence": [
+      5,
+      6
+    ],
+    "conflict": [
+      [
+        3,
+        4
+      ],
+      [
+        2
+      ]
+    ]
+  },
+  "2": {
+    "q": "Why was the writer's aunt surprised?",
+    "options": [
+      "It was already one o'clock.",
+      "It was Sunday morning.",
+      "It was dark outside all day."
+    ],
+    "correctIdx": 0,
+    "zh": [
+      "已经一点钟了。",
+      "那是星期天早上。",
+      "外面一整天都很黑。"
+    ],
+    "evidence": [
+      17
+    ],
+    "conflict": [
+      [
+        1,
+        4
+      ],
+      [
+        6,
+        8
+      ]
+    ]
+  },
+  "3": {
+    "q": "How many cards did the writer send?",
+    "options": [
+      "He sent no cards at all.",
+      "He sent thirty-seven cards.",
+      "He sent cards to all his friends."
+    ],
+    "correctIdx": 0,
+    "zh": [
+      "他一张也没寄。",
+      "他寄了三十七张。",
+      "他给所有朋友都寄了。"
+    ],
+    "evidence": [
+      10,
+      14
+    ],
+    "conflict": [
+      [
+        12
+      ],
+      [
+        10
+      ]
+    ]
+  },
+  "4": {
+    "q": "Why is Tim finding this trip exciting?",
+    "options": [
+      "He had never been abroad before.",
+      "He was tired of living in Australia.",
+      "He had already visited Perth."
+    ],
+    "correctIdx": 0,
+    "zh": [
+      "他以前从没出过国。",
+      "他厌倦了住在澳大利亚。",
+      "他已经去过珀斯了。"
+    ],
+    "evidence": [
+      9
+    ],
+    "conflict": [
+      [
+        2,
+        3
+      ],
+      [
+        8
+      ]
+    ]
+  },
+  "5": {
+    "q": "What does 'No wrong numbers' mean?",
+    "options": [
+      "Pigeons carry messages between the two garages.",
+      "He installed a telephone in the new garage.",
+      "He drives between the two garages every day."
+    ],
+    "correctIdx": 0,
+    "zh": [
+      "鸽子在两个车库间传消息。",
+      "他在新车库装了电话。",
+      "他每天开车往返两个车库。"
+    ],
+    "evidence": [
+      3,
+      5,
+      6
+    ],
+    "conflict": [
+      [
+        2
+      ],
+      [
+        1,
+        2
+      ]
+    ]
+  },
+  "6": {
+    "q": "Who is Percy Buttons?",
+    "options": [
+      "A beggar who calls at every house once a month.",
+      "A neighbour who lives in Bridge Street.",
+      "A policeman looking for a thief."
+    ],
+    "correctIdx": 0,
+    "zh": [
+      "每月来每家一次的乞丐。",
+      "住在布里奇街的邻居。",
+      "找小偷的警察。"
+    ],
+    "evidence": [
+      10,
+      11
+    ],
+    "conflict": [
+      [
+        1,
+        8
+      ],
+      []
+    ]
+  },
+  "7": {
+    "q": "Did the detectives save the diamonds?",
+    "options": [
+      "No — the parcel was full of stones and sand.",
+      "Yes — they saved the diamonds.",
+      "No — the thieves stole the diamonds."
+    ],
+    "correctIdx": 0,
+    "zh": [
+      "没有——包裹里全是石头和沙子。",
+      "是的——他们救回了钻石。",
+      "没有——小偷把钻石偷走了。"
+    ],
+    "evidence": [
+      7
+    ],
+    "conflict": [
+      [
+        2
+      ],
+      [
+        5,
+        6
+      ]
+    ]
+  },
+  "8": {
+    "q": "Why is Joe's garden the most beautiful one in the town?",
+    "options": [
+      "He made neat paths and built a wooden bridge.",
+      "He grew the most flowers and vegetables.",
+      "His garden was the largest in town."
+    ],
+    "correctIdx": 0,
+    "zh": [
+      "他修了整齐的小路还搭了木桥。",
+      "他种的花和蔬菜最多。",
+      "他的花园是镇上最大的。"
+    ],
+    "evidence": [
+      7
+    ],
+    "conflict": [
+      [
+        6
+      ],
+      [
+        5
+      ]
+    ]
+  },
+  "9": {
+    "q": "What does 'a cold welcome' refer to?",
+    "options": [
+      "The big clock stopped and refused to welcome the New Year.",
+      "The Town Hall was closed that evening.",
+      "It snowed on New Year's Eve."
+    ],
+    "correctIdx": 0,
+    "zh": [
+      "大钟停了，拒绝迎接新年。",
+      "那晚市政厅关门了。",
+      "新年前夜下雪了。"
+    ],
+    "evidence": [
+      4,
+      11
+    ],
+    "conflict": [
+      [
+        1
+      ],
+      []
+    ]
+  },
+  "10": {
+    "q": "What happened to the clavichord?",
+    "options": [
+      "A visitor damaged it while playing jazz.",
+      "It was made in Germany in 1681.",
+      "Grandfather sold it many years ago."
+    ],
+    "correctIdx": 0,
+    "zh": [
+      "一位客人弹爵士乐时弄坏了它。",
+      "它 1681 年产于德国。",
+      "祖父多年前把它卖了。"
+    ],
+    "evidence": [
+      7,
+      8,
+      9
+    ],
+    "conflict": [
+      [
+        3
+      ],
+      [
+        6
+      ]
+    ]
+  },
+  "11": {
+    "q": "Who paid for Tony's dinner?",
+    "options": [
+      "Tony — he made the writer pay.",
+      "The writer paid for Tony's dinner.",
+      "Tony's lawyer paid for it."
+    ],
+    "correctIdx": 0,
+    "zh": [
+      "托尼——他让作者付钱。",
+      "作者替托尼付了钱。",
+      "托尼的律师付的钱。"
+    ],
+    "evidence": [
+      9,
+      12
+    ],
+    "conflict": [
+      [
+        12
+      ],
+      [
+        2
+      ]
+    ]
+  },
+  "12": {
+    "q": "Where is Captain Alison going and how?",
+    "options": [
+      "He will sail across the Atlantic in Topsail.",
+      "He will fly to Portsmouth tomorrow.",
+      "He will stay at home for two months."
+    ],
+    "correctIdx": 0,
+    "zh": [
+      "他将乘 Topsail 横渡大西洋。",
+      "他明天飞往朴次茅斯。",
+      "他将在家待两个月。"
+    ],
+    "evidence": [
+      1,
+      3,
+      11
+    ],
+    "conflict": [
+      [
+        1
+      ],
+      [
+        9
+      ]
+    ]
+  },
+  "13": {
+    "q": "Why will the police have a difficult time?",
+    "options": [
+      "They will try to keep order for the singers.",
+      "The singers will arrive by plane.",
+      "The police will give five performances."
+    ],
+    "correctIdx": 0,
+    "zh": [
+      "他们要维持歌手到场时的秩序。",
+      "歌手将乘飞机到达。",
+      "警察要演出五场。"
+    ],
+    "evidence": [
+      4,
+      8,
+      9
+    ],
+    "conflict": [
+      [
+        4
+      ],
+      [
+        7
+      ]
+    ]
+  },
+  "14": {
+    "q": "Did the young man speak English?",
+    "options": [
+      "Yes — he asked the writer if he spoke English.",
+      "No — he only spoke French.",
+      "No — he said nothing during the journey."
+    ],
+    "correctIdx": 0,
+    "zh": [
+      "是的——他问作者是否会说英语。",
+      "没有——他只说法语。",
+      "没有——他一路上什么也没说。"
+    ],
+    "evidence": [
+      15,
+      16
+    ],
+    "conflict": [
+      [
+        9
+      ],
+      [
+        12
+      ]
+    ]
+  },
+  "15": {
+    "q": "What was the good news?",
+    "options": [
+      "The writer would get an extra thousand pounds a year.",
+      "The writer was asked to leave the firm.",
+      "Twenty people would be hired."
+    ],
+    "correctIdx": 0,
+    "zh": [
+      "作者每年将多拿一千英镑。",
+      "作者被要求离开公司。",
+      "将雇用二十个人。"
+    ],
+    "evidence": [
+      14
+    ],
+    "conflict": [
+      [
+        7,
+        8
+      ],
+      [
+        8
+      ]
+    ]
+  },
+  "16": {
+    "q": "What was the polite request?",
+    "options": [
+      "A note thanking him and reminding him of the signs.",
+      "A traffic ticket for parking wrongly.",
+      "A fine from the police station."
+    ],
+    "correctIdx": 0,
+    "zh": [
+      "一张道谢并提醒注意路标的便条。",
+      "一张违规停车罚单。",
+      "警察局的罚款单。"
+    ],
+    "evidence": [
+      9,
+      11,
+      13
+    ],
+    "conflict": [
+      [
+        4
+      ],
+      [
+        4
+      ]
+    ]
+  },
+  "17": {
+    "q": "Why doesn't Aunt Jennifer tell anyone how old she is?",
+    "options": [
+      "She dislikes being grown up.",
+      "She is only seventeen years old.",
+      "She never appears on the stage."
+    ],
+    "correctIdx": 0,
+    "zh": [
+      "她不喜欢长大。",
+      "她只有十七岁。",
+      "她从不上台演出。"
+    ],
+    "evidence": [
+      11
+    ],
+    "conflict": [
+      [
+        2,
+        6
+      ],
+      [
+        4
+      ]
+    ]
+  },
+  "18": {
+    "q": "What had happened to the writer's bag?",
+    "options": [
+      "The dog had taken it into the garden.",
+      "A thief had stolen it.",
+      "The writer had left it at home."
+    ],
+    "correctIdx": 0,
+    "zh": [
+      "狗把它叼到花园里去了。",
+      "小偷偷走了它。",
+      "作者把它落在家里了。"
+    ],
+    "evidence": [
+      13
+    ],
+    "conflict": [
+      [
+        10,
+        11
+      ],
+      [
+        3
+      ]
+    ]
+  },
+  "19": {
+    "q": "When will the writer see the play?",
+    "options": [
+      "Next Wednesday.",
+      "That same evening.",
+      "He will not see it at all."
+    ],
+    "correctIdx": 0,
+    "zh": [
+      "下星期三。",
+      "当天晚上。",
+      "他根本看不成。"
+    ],
+    "evidence": [
+      15,
+      17
+    ],
+    "conflict": [
+      [
+        1
+      ],
+      [
+        6
+      ]
+    ]
+  },
+  "20": {
+    "q": "Why is fishing the writer's favourite sport?",
+    "options": [
+      "He enjoys sitting in a boat doing nothing.",
+      "He catches a lot of fish.",
+      "He sells the fish he catches."
+    ],
+    "correctIdx": 0,
+    "zh": [
+      "他喜欢坐在船上什么都不做。",
+      "他钓到很多鱼。",
+      "他把钓到的鱼卖掉。"
+    ],
+    "evidence": [
+      15
+    ],
+    "conflict": [
+      [
+        8,
+        10
+      ],
+      []
+    ]
+  },
+  "21": {
+    "q": "Why do people think the writer is mad?",
+    "options": [
+      "He stays near the noisy airport despite offers to leave.",
+      "He works at the airport.",
+      "He wants the airport to be closed."
+    ],
+    "correctIdx": 0,
+    "zh": [
+      "尽管有人出钱让他搬走，他仍留在嘈杂的机场旁。",
+      "他在机场工作。",
+      "他想让机场关闭。"
+    ],
+    "evidence": [
+      9,
+      10,
+      11
+    ],
+    "conflict": [
+      [],
+      []
+    ]
+  },
+  "22": {
+    "q": "How did Jane receive a letter from a stranger?",
+    "options": [
+      "She sent a message in a bottle thrown into the sea.",
+      "The post office delivered it by mistake.",
+      "A friend handed it to her."
+    ],
+    "correctIdx": 0,
+    "zh": [
+      "她把纸条装进瓶子扔进海里。",
+      "邮局误投了。",
+      "一个朋友转交给她。"
+    ],
+    "evidence": [
+      2,
+      3,
+      4
+    ],
+    "conflict": [
+      [
+        6
+      ],
+      []
+    ]
+  },
+  "23": {
+    "q": "Why is the new house special?",
+    "options": [
+      "It is the only modern house in the district.",
+      "It is the largest house in the country.",
+      "It was built by the writer's sister."
+    ],
+    "correctIdx": 0,
+    "zh": [
+      "它是这一带唯一的现代住宅。",
+      "它是全国最大的房子。",
+      "它是作者的姐姐建的。"
+    ],
+    "evidence": [
+      10,
+      11
+    ],
+    "conflict": [
+      [
+        9
+      ],
+      [
+        6
+      ]
+    ]
+  },
+  "24": {
+    "q": "Had the writer's money been stolen?",
+    "options": [
+      "No — a girl found it outside his room.",
+      "Yes — it was never found.",
+      "No — he had left it at home."
+    ],
+    "correctIdx": 0,
+    "zh": [
+      "没有——一个女孩在他房间外捡到了。",
+      "是的——一直没找到。",
+      "没有——他落在家里了。"
+    ],
+    "evidence": [
+      8,
+      9
+    ],
+    "conflict": [
+      [],
+      [
+        3
+      ]
+    ]
+  },
+  "25": {
+    "q": "Why does the writer not understand the porter?",
+    "options": [
+      "He spoke neither slowly nor clearly.",
+      "The porter could not speak any English at all.",
+      "The writer spoke too quickly and unclearly."
+    ],
+    "correctIdx": 0,
+    "zh": [
+      "他说话既不慢也不清楚。",
+      "搬运工根本不会说英语。",
+      "作者说得又快又不清楚。"
+    ],
+    "evidence": [
+      7
+    ],
+    "conflict": [
+      [
+        6,
+        14
+      ],
+      [
+        4
+      ]
+    ]
+  },
+  "26": {
+    "q": "Who is the student's best critic?",
+    "options": [
+      "His seven-year-old sister.",
+      "A famous art critic.",
+      "His art teacher."
+    ],
+    "correctIdx": 0,
+    "zh": [
+      "他七岁的妹妹。",
+      "一位著名的艺术评论家。",
+      "他的美术老师。"
+    ],
+    "evidence": [
+      9,
+      10,
+      17
+    ],
+    "conflict": [
+      [
+        7
+      ],
+      [
+        7,
+        10
+      ]
+    ]
+  },
+  "27": {
+    "q": "What happened to the boys in the night?",
+    "options": [
+      "Water filled their tent.",
+      "They lost their sleeping bags.",
+      "Their tent caught fire."
+    ],
+    "correctIdx": 0,
+    "zh": [
+      "帐篷里灌满了水。",
+      "他们把睡袋弄丢了。",
+      "他们的帐篷着火了。"
+    ],
+    "evidence": [
+      8,
+      9,
+      12
+    ],
+    "conflict": [
+      [
+        10
+      ],
+      [
+        6
+      ]
+    ]
+  },
+  "28": {
+    "q": "What is Jasper White's problem?",
+    "options": [
+      "People keep parking cars outside his gate.",
+      "His own car has been stolen.",
+      "He cannot get into his house."
+    ],
+    "correctIdx": 0,
+    "zh": [
+      "人们总把车停在他家大门外。",
+      "他自己的车被偷了。",
+      "他进不了自己的房子。"
+    ],
+    "evidence": [
+      3,
+      5
+    ],
+    "conflict": [
+      [
+        4
+      ],
+      [
+        3,
+        4
+      ]
+    ]
+  },
+  "29": {
+    "q": "Does Captain Fawcett think any trip is too dangerous?",
+    "options": [
+      "Yes. He refused a trip to Rockall as too dangerous.",
+      "No. He never turns down a passenger.",
+      "No. He only flies to big, busy airports."
+    ],
+    "correctIdx": 0,
+    "zh": [
+      "是的。他因太危险而拒绝飞往罗卡尔岛。",
+      "不。他从不拒绝乘客。",
+      "不。他只飞往大型繁忙的机场。"
+    ],
+    "evidence": [
+      9,
+      10
+    ],
+    "conflict": [
+      [
+        8,
+        10
+      ],
+      [
+        4,
+        7
+      ]
+    ]
+  },
+  "30": {
+    "q": "What happened to the man in the boat?",
+    "options": [
+      "A ball struck him hard and he nearly fell into the water.",
+      "He fell into the river and was rescued.",
+      "He was knocked down by a passing boat."
+    ],
+    "correctIdx": 0,
+    "zh": [
+      "一个球重重打在他身上，他差点掉进水里。",
+      "他掉进河里，被人救了上来。",
+      "他被一艘经过的小船撞倒了。"
+    ],
+    "evidence": [
+      5,
+      7
+    ],
+    "conflict": [
+      [
+        7,
+        9
+      ],
+      [
+        5,
+        7
+      ]
+    ]
+  },
+  "31": {
+    "q": "What was Frank's first job?",
+    "options": [
+      "Repairing bicycles in a small shop.",
+      "Making spare parts for aeroplanes.",
+      "Running a large business company."
+    ],
+    "correctIdx": 0,
+    "zh": [
+      "在一家小店里修理自行车。",
+      "制造飞机零件。",
+      "经营一家大公司。"
+    ],
+    "evidence": [
+      3,
+      4
+    ],
+    "conflict": [
+      [
+        5,
+        6
+      ],
+      [
+        3
+      ]
+    ]
+  },
+  "32": {
+    "q": "Who was the thief?",
+    "options": [
+      "The well-dressed woman.",
+      "The shop assistant.",
+      "The detective."
+    ],
+    "correctIdx": 0,
+    "zh": [
+      "那位衣着考究的女士。",
+      "那名店员。",
+      "那位侦探。"
+    ],
+    "evidence": [
+      8,
+      10
+    ],
+    "conflict": [
+      [
+        10
+      ],
+      [
+        3,
+        10
+      ]
+    ]
+  },
+  "33": {
+    "q": "Why was the girl in hospital?",
+    "options": [
+      "Her boat struck a rock and she spent a night in the water.",
+      "She was hurt in a car accident.",
+      "She fell from a cliff."
+    ],
+    "correctIdx": 0,
+    "zh": [
+      "她的小船撞上礁石，她在水里待了一整夜。",
+      "她在车祸中受伤。",
+      "她从悬崖上摔了下来。"
+    ],
+    "evidence": [
+      3,
+      4
+    ],
+    "conflict": [
+      [
+        2
+      ],
+      [
+        7,
+        8
+      ]
+    ]
+  },
+  "34": {
+    "q": "How long had the police taken to find his bicycle?",
+    "options": [
+      "Five days.",
+      "Twenty years.",
+      "Four hundred days."
+    ],
+    "correctIdx": 0,
+    "zh": [
+      "五天。",
+      "二十年。",
+      "四百天。"
+    ],
+    "evidence": [
+      6
+    ],
+    "conflict": [
+      [
+        10
+      ],
+      [
+        6
+      ]
+    ]
+  },
+  "35": {
+    "q": "How did Roy stop the thieves?",
+    "options": [
+      "He drove his bus into the back of their car.",
+      "He ran after them on foot.",
+      "He shot at them."
+    ],
+    "correctIdx": 0,
+    "zh": [
+      "他开公交车撞上了他们车的尾部。",
+      "他徒步追赶他们。",
+      "他朝他们开枪。"
+    ],
+    "evidence": [
+      8,
+      9
+    ],
+    "conflict": [
+      [
+        6
+      ],
+      [
+        6,
+        9
+      ]
+    ]
+  },
+  "36": {
+    "q": "What is Debbie going to try to do?",
+    "options": [
+      "Swim across the English Channel.",
+      "Row across the Channel in a small boat.",
+      "Swim from England to France."
+    ],
+    "correctIdx": 0,
+    "zh": [
+      "横渡英吉利海峡。",
+      "划小船横渡海峡。",
+      "从英国游到法国。"
+    ],
+    "evidence": [
+      1
+    ],
+    "conflict": [
+      [
+        1,
+        5
+      ],
+      [
+        2
+      ]
+    ]
+  },
+  "37": {
+    "q": "When was the last time this country hosted the Olympic Games?",
+    "options": [
+      "Never. The Games have never been held in this country before.",
+      "Four years ago.",
+      "Last year."
+    ],
+    "correctIdx": 0,
+    "zh": [
+      "从来没有——这个国家以前从未举办过奥运会。",
+      "四年前。",
+      "去年。"
+    ],
+    "evidence": [
+      9
+    ],
+    "conflict": [
+      [
+        1
+      ],
+      [
+        9
+      ]
+    ]
+  },
+  "38": {
+    "q": "Why did Harrison sell his house so quickly?",
+    "options": [
+      "He could not bear the cold, rainy English weather.",
+      "He wanted to return to the Mediterranean.",
+      "The house was too expensive."
+    ],
+    "correctIdx": 0,
+    "zh": [
+      "他无法忍受英国寒冷多雨的天气。",
+      "他想回到地中海地区。",
+      "那房子太贵了。"
+    ],
+    "evidence": [
+      6,
+      9,
+      10
+    ],
+    "conflict": [
+      [
+        2
+      ],
+      [
+        4
+      ]
+    ]
+  },
+  "39": {
+    "q": "Why did Mr. Gilbert telephone Dr. Millington?",
+    "options": [
+      "To find out whether his operation had been successful.",
+      "To ask for a bedside telephone.",
+      "To book another operation."
+    ],
+    "correctIdx": 0,
+    "zh": [
+      "想弄清楚自己的手术是否成功。",
+      "为了申请一部床边电话。",
+      "为了预约另一台手术。"
+    ],
+    "evidence": [
+      2,
+      5,
+      9
+    ],
+    "conflict": [
+      [
+        4,
+        5
+      ],
+      [
+        9,
+        11
+      ]
+    ]
+  },
+  "40": {
+    "q": "Was Mrs. Rumbold a good companion at dinner?",
+    "options": [
+      "No. She was busy eating and hardly spoke.",
+      "Yes. She talked about a new play.",
+      "Yes. She enjoyed a lively conversation."
+    ],
+    "correctIdx": 0,
+    "zh": [
+      "不是。她只顾吃东西，几乎不说话。",
+      "是的。她谈了一出新戏。",
+      "是的。她聊得很开心。"
+    ],
+    "evidence": [
+      4,
+      7,
+      9,
+      11
+    ],
+    "conflict": [
+      [
+        6,
+        7
+      ],
+      [
+        4,
+        13
+      ]
+    ]
+  },
+  "41": {
+    "q": "What kind of shopping does the writer enjoy,",
+    "options": [
+      "Buying ties.",
+      "Buying hats.",
+      "Buying only things they need."
+    ],
+    "correctIdx": 0,
+    "zh": [
+      "买领带。",
+      "买帽子。",
+      "只买他们需要的东西。"
+    ],
+    "evidence": [
+      10,
+      11,
+      12
+    ],
+    "conflict": [
+      [
+        2
+      ],
+      [
+        7,
+        8
+      ]
+    ]
+  },
+  "42": {
+    "q": "What happened when the snake charmer began to play jazz?",
+    "options": [
+      "The snake went on dancing slowly.",
+      "The snake stopped dancing.",
+      "The snake danced faster."
+    ],
+    "correctIdx": 0,
+    "zh": [
+      "蛇继续慢慢地“跳舞”。",
+      "蛇停了下来，不再舞动。",
+      "蛇舞动得更快了。"
+    ],
+    "evidence": [
+      11,
+      12
+    ],
+    "conflict": [
+      [
+        12
+      ],
+      [
+        12,
+        13
+      ]
+    ]
+  },
+  "43": {
+    "q": "How was the plane able to clear the mountains?",
+    "options": [
+      "He threw out two heavy food sacks to make the plane lighter.",
+      "They flew around the mountains.",
+      "The wind pushed the plane over the mountains."
+    ],
+    "correctIdx": 0,
+    "zh": [
+      "他扔掉两袋沉重的食物，使飞机变轻得以爬升。",
+      "飞机绕过了群山。",
+      "风把飞机吹过了群山。"
+    ],
+    "evidence": [
+      8,
+      9
+    ],
+    "conflict": [
+      [
+        9
+      ],
+      [
+        8,
+        9
+      ]
+    ]
+  },
+  "44": {
+    "q": "How did Mrs. Sterling get her bag back?",
+    "options": [
+      "She ran after them and they dropped the bag.",
+      "The police caught the thieves.",
+      "She bought a new bag."
+    ],
+    "correctIdx": 0,
+    "zh": [
+      "她追了上去，窃贼吓得丢下提包跑了。",
+      "警察抓住了窃贼。",
+      "她买了一个新包。"
+    ],
+    "evidence": [
+      8,
+      13
+    ],
+    "conflict": [
+      [
+        13
+      ],
+      [
+        13,
+        15
+      ]
+    ]
+  },
+  "45": {
+    "q": "How did Sam get his money back?",
+    "options": [
+      "The thief sent the money back little by little with notes.",
+      "The police caught the thief.",
+      "The villagers gave back all the money at once."
+    ],
+    "correctIdx": 0,
+    "zh": [
+      "小偷附着字条，把钱一点一点寄了回来。",
+      "警察抓住了小偷。",
+      "村民们一次性把钱全还了回来。"
+    ],
+    "evidence": [
+      9,
+      13,
+      15
+    ],
+    "conflict": [
+      [
+        7
+      ],
+      [
+        9,
+        15
+      ]
+    ]
+  },
+  "46": {
+    "q": "What did the man in this story do?",
+    "options": [
+      "He hid in a wooden box to fly from London to Sydney.",
+      "He stole a box of clothing.",
+      "He worked at Sydney airport."
+    ],
+    "correctIdx": 0,
+    "zh": [
+      "他藏在木箱里，想从伦敦坐飞机到悉尼。",
+      "他偷了一箱衣服。",
+      "他在悉尼机场工作。"
+    ],
+    "evidence": [
+      6,
+      10,
+      11
+    ],
+    "conflict": [
+      [
+        2,
+        6
+      ],
+      [
+        4,
+        5
+      ]
+    ]
+  },
+  "47": {
+    "q": "What evidence is there of a ghost?",
+    "options": [
+      "Five empty whisky bottles and moved furniture.",
+      "The villagers admitted drinking the whisky.",
+      "Nothing unusual happened at the pub."
+    ],
+    "correctIdx": 0,
+    "zh": [
+      "五个空威士忌酒瓶和被挪动的家具。",
+      "村民承认喝了那些威士忌。",
+      "酒馆里什么异常情况都没有发生。"
+    ],
+    "evidence": [
+      6,
+      9,
+      10
+    ],
+    "conflict": [
+      [
+        11,
+        12
+      ],
+      [
+        4,
+        6,
+        9
+      ]
+    ]
+  },
+  "48": {
+    "q": "Why did the writer become very worried?",
+    "options": [
+      "He realized the dentist had pulled out the wrong tooth.",
+      "The dentist asked too many questions.",
+      "His mouth was full of cotton wool."
+    ],
+    "correctIdx": 0,
+    "zh": [
+      "他意识到牙医拔错了牙。",
+      "牙医问了太多问题。",
+      "他嘴里塞满了棉花。"
+    ],
+    "evidence": [
+      9,
+      11
+    ],
+    "conflict": [
+      [
+        9,
+        11
+      ],
+      [
+        9,
+        11
+      ]
+    ]
+  },
+  "49": {
+    "q": "How did the dream end?",
+    "options": [
+      "A storm blew the bed off the roof and smashed it to pieces.",
+      "The young man carried the bed back into his house unharmed.",
+      "The young man woke up before the bed hit the ground."
+    ],
+    "correctIdx": 0,
+    "zh": [
+      "一阵暴风把床从屋顶吹落，摔得粉碎。",
+      "年轻人把床完好无损地搬回了屋里。",
+      "年轻人在床落地之前就醒了。"
+    ],
+    "evidence": [
+      8,
+      9,
+      11
+    ],
+    "conflict": [
+      [
+        9,
+        11
+      ],
+      [
+        10
+      ]
+    ]
+  },
+  "50": {
+    "q": "Why did the writer not get off the bus at Woodford Green?",
+    "options": [
+      "The conductor forgot to put him off at Woodford Green.",
+      "The writer fell asleep and missed his stop.",
+      "The bus broke down before reaching Woodford Green."
+    ],
+    "correctIdx": 0,
+    "zh": [
+      "售票员忘了让他在伍德福德草地站下车。",
+      "作者睡着了，错过了下车站。",
+      "公共汽车在到达伍德福德草地前抛锚了。"
+    ],
+    "evidence": [
+      8,
+      17
+    ],
+    "conflict": [
+      [
+        10,
+        12
+      ],
+      [
+        14,
+        19
+      ]
+    ]
+  },
+  "51": {
+    "q": "Why did Hugh's diet not work?",
+    "options": [
+      "He rewarded himself with chocolate and sweets.",
+      "He forgot to write down the list of forbidden foods.",
+      "He ate only the foods allowed by his diet."
+    ],
+    "correctIdx": 0,
+    "zh": [
+      "他用巧克力和糖果来奖励自己（偷吃禁食）。",
+      "他忘了列出禁吃的食物清单。",
+      "他只吃减肥清单上允许的食物。"
+    ],
+    "evidence": [
+      13,
+      15
+    ],
+    "conflict": [
+      [
+        4
+      ],
+      [
+        6,
+        15
+      ]
+    ]
+  },
+  "52": {
+    "q": "What is the writer's carpet made of?",
+    "options": [
+      "It is made of the books spread all over the floor.",
+      "It is a wool carpet bought from a shop.",
+      "It is a new carpet he bought for the new house."
+    ],
+    "correctIdx": 0,
+    "zh": [
+      "它是铺满地板的一千多本书（书就是地毯）。",
+      "它是从商店买来的羊毛地毯。",
+      "它是搬进新家时买的新地毯。"
+    ],
+    "evidence": [
+      3,
+      6,
+      7,
+      11
+    ],
+    "conflict": [
+      [
+        7,
+        11
+      ],
+      [
+        2,
+        6
+      ]
+    ]
+  },
+  "53": {
+    "q": "What caused the fire?",
+    "options": [
+      "A snake wound round the power wires and sent sparks to the ground.",
+      "Broken glass started the fire.",
+      "A cigarette end carelessly thrown away caused the fire."
+    ],
+    "correctIdx": 0,
+    "zh": [
+      "一条蛇缠在高压电线上，迸出火花引发了火灾。",
+      "碎玻璃引发了火灾。",
+      "被人随手扔掉的烟头引发了火灾。"
+    ],
+    "evidence": [
+      8,
+      11,
+      13
+    ],
+    "conflict": [
+      [
+        5
+      ],
+      [
+        6
+      ]
+    ]
+  },
+  "54": {
+    "q": "What two interruptions did the writer have?",
+    "options": [
+      "The telephone rang and then the doorbell rang.",
+      "The children came home from school and interrupted her.",
+      "The doorbell rang, but it was only a neighbour borrowing sugar."
+    ],
+    "correctIdx": 0,
+    "zh": [
+      "电话响了，接着门铃也响了。",
+      "孩子们放学回家打断了她。",
+      "门铃响了，但只是邻居来借糖。"
+    ],
+    "evidence": [
+      7,
+      14
+    ],
+    "conflict": [
+      [
+        3
+      ],
+      [
+        15
+      ]
+    ]
+  },
+  "55": {
+    "q": "What did the team find?",
+    "options": [
+      "They found a small worthless gold coin and an empty tin trunk.",
+      "They found a large amount of buried treasure.",
+      "They found nothing at all in the cave."
+    ],
+    "correctIdx": 0,
+    "zh": [
+      "他们只发现了一枚几乎不值钱的小金币和一只空锡箱。",
+      "他们发现了大量埋藏的财宝。",
+      "他们在山洞里什么也没找到。"
+    ],
+    "evidence": [
+      9,
+      11
+    ],
+    "conflict": [
+      [
+        9,
+        10
+      ],
+      [
+        9,
+        11
+      ]
+    ]
+  },
+  "56": {
+    "q": "How fast did the winning car go?",
+    "options": [
+      "It reached a speed of forty miles an hour.",
+      "It reached a speed of over three hundred miles an hour.",
+      "It broke down and did not finish the race."
+    ],
+    "correctIdx": 0,
+    "zh": [
+      "它达到了每小时四十英里的速度。",
+      "它达到了每小时三百多英里的速度。",
+      "它中途抛锚，没能完成比赛。"
+    ],
+    "evidence": [
+      12
+    ],
+    "conflict": [
+      [
+        12
+      ],
+      [
+        11,
+        12
+      ]
+    ]
+  },
+  "57": {
+    "q": "Did the woman get what she wanted?",
+    "options": [
+      "Yes, she finally bought the dress she had first asked for.",
+      "No, she left the shop without buying anything.",
+      "She bought a fur coat instead of the dress."
+    ],
+    "correctIdx": 0,
+    "zh": [
+      "是的，她最终买下了最初想要的那条连衣裙。",
+      "没有，她什么也没买就离开了商店。",
+      "她买了一件皮大衣而不是连衣裙。"
+    ],
+    "evidence": [
+      17
+    ],
+    "conflict": [
+      [
+        17
+      ],
+      [
+        7,
+        17
+      ]
+    ]
+  },
+  "58": {
+    "q": "Why does the vicar refuse to cut down the tree?",
+    "options": [
+      "Because the tree brings the village income from tourists.",
+      "Because he believes the tree is truly cursed.",
+      "Because tourists have stopped coming to see the tree."
+    ],
+    "correctIdx": 0,
+    "zh": [
+      "因为这棵树给村子带来了游客和收入。",
+      "因为他相信这棵树真的有诅咒。",
+      "因为游客已经不再来看这棵树了。"
+    ],
+    "evidence": [
+      11,
+      12
+    ],
+    "conflict": [
+      [
+        11,
+        15
+      ],
+      [
+        3,
+        12
+      ]
+    ]
+  },
+  "59": {
+    "q": "Why did Rex run away?",
+    "options": [
+      "Because his owner removed the gate and he was annoyed.",
+      "Because the neighbours chased him away.",
+      "Because he was hit by a car near the gate."
+    ],
+    "correctIdx": 0,
+    "zh": [
+      "因为主人把大门拆掉了，瑞克斯很恼火就跑走了。",
+      "因为邻居们把它赶走了。",
+      "因为它在门口被车撞了。"
+    ],
+    "evidence": [
+      11
+    ],
+    "conflict": [
+      [
+        3,
+        11
+      ],
+      [
+        11
+      ]
+    ]
+  },
+  "60": {
+    "q": "Does what Madam Bellinsky said come true?",
+    "options": [
+      "Yes, his wife hurried to him and led him away to meet his sister.",
+      "No, none of her predictions came true.",
+      "A stranger, not his wife, led him away."
+    ],
+    "correctIdx": 0,
+    "zh": [
+      "是的，他的妻子匆匆走向他，带他去接姐姐（预言应验了）。",
+      "没有，她的预言一个也没应验。",
+      "是一个陌生人而不是他妻子把他带走的。"
+    ],
+    "evidence": [
+      9,
+      11,
+      12
+    ],
+    "conflict": [
+      [
+        9,
+        11
+      ],
+      [
+        9
+      ]
+    ]
+  },
+  "61": {
+    "q": "What is the special importance of a telescope in space?",
+    "options": [
+      "Being above the atmosphere, it sends the clearest pictures of stars and galaxies.",
+      "It is important because it is the cheapest telescope ever built.",
+      "It can take photographs only from the earth's surface."
+    ],
+    "correctIdx": 0,
+    "zh": [
+      "它位于大气层之上，能拍到最清晰的恒星与星系照片。",
+      "它重要是因为它是有史以来最便宜的望远镜。",
+      "它只能从地球表面拍照。"
+    ],
+    "evidence": [
+      9,
+      10
+    ],
+    "conflict": [
+      [
+        2
+      ],
+      [
+        9
+      ]
+    ]
+  },
+  "62": {
+    "q": "What was the danger to the villages after the fire?",
+    "options": [
+      "Heavy rain would wash away the soil and cause serious floods.",
+      "The fire would spread to the surrounding villages again.",
+      "Strong winds would blow the soil over the villages."
+    ],
+    "correctIdx": 0,
+    "zh": [
+      "暴雨会冲走泥土并引发严重的水灾。",
+      "大火会再次蔓延到周围的村庄。",
+      "强风会把泥土吹到村庄里。"
+    ],
+    "evidence": [
+      7,
+      8
+    ],
+    "conflict": [
+      [
+        2,
+        9
+      ],
+      [
+        7
+      ]
+    ]
+  },
+  "63": {
+    "q": "Why did Jenny want to leave the wedding reception?",
+    "options": [
+      "Because she disliked seeing so many people laughing at her father.",
+      "Because the speech was boring and nobody laughed.",
+      "Because she was tired and wanted to sleep."
+    ],
+    "correctIdx": 0,
+    "zh": [
+      "因为她不喜欢看到那么多人嘲笑她父亲。",
+      "因为演讲很无聊，没人笑。",
+      "因为她累了，想睡觉。"
+    ],
+    "evidence": [
+      16
+    ],
+    "conflict": [
+      [
+        8
+      ],
+      [
+        16
+      ]
+    ]
+  },
+  "64": {
+    "q": "Why was the first tunnel not completed?",
+    "options": [
+      "Because the British feared invasion at the time.",
+      "Because the plan was far too expensive.",
+      "Because the problem of ventilation could not be solved."
+    ],
+    "correctIdx": 0,
+    "zh": [
+      "因为当时英国人害怕遭到入侵。",
+      "因为这个计划太昂贵了。",
+      "因为通风难题无法解决。"
+    ],
+    "evidence": [
+      12
+    ],
+    "conflict": [
+      [
+        12
+      ],
+      [
+        9,
+        10
+      ]
+    ]
+  },
+  "65": {
+    "q": "Why did the police have to push Jumbo off the main street?",
+    "options": [
+      "Because the elephant was holding up the traffic and refused to move.",
+      "Because Jumbo was ill and could not walk.",
+      "Because the police wanted to arrest the circus owner."
+    ],
+    "correctIdx": 0,
+    "zh": [
+      "因为这头小象挡住了交通，而且拒绝挪动。",
+      "因为江伯生病了，走不动。",
+      "因为警察想逮捕马戏团老板。"
+    ],
+    "evidence": [
+      7,
+      8
+    ],
+    "conflict": [
+      [
+        8
+      ],
+      [
+        13,
+        14
+      ]
+    ]
+  },
+  "66": {
+    "q": "What was 'sweet as honey' and why?",
+    "options": [
+      "The fourth engine, preserved in beeswax by bees, was still in perfect condition.",
+      "It was the honey stored in the plane's fuel tank.",
+      "It was the beeswax the enthusiasts used to restore the plane."
+    ],
+    "correctIdx": 0,
+    "zh": [
+      "那是第四个发动机，被蜜蜂做成了蜂巢、用蜂蜡完好保存。",
+      "是飞机油箱里储存的蜂蜜。",
+      "是爱好者们用来修复飞机的蜂蜡。"
+    ],
+    "evidence": [
+      13,
+      14
+    ],
+    "conflict": [
+      [
+        13,
+        14
+      ],
+      [
+        10,
+        13
+      ]
+    ]
+  },
+  "67": {
+    "q": "Why does Tazieff risk his life like this?",
+    "options": [
+      "To study active volcanoes and tell us more about them.",
+      "To win fame and become rich.",
+      "To take photographs for a newspaper."
+    ],
+    "correctIdx": 0,
+    "zh": [
+      "为了研究活火山，让我们了解更多关于火山的知识。",
+      "为了出名和发财。",
+      "为了给报纸拍摄照片。"
+    ],
+    "evidence": [
+      2,
+      14
+    ],
+    "conflict": [
+      [
+        14
+      ],
+      [
+        11,
+        12
+      ]
+    ]
+  },
+  "68": {
+    "q": "Why did Elizabeth tell Nigel that",
+    "options": [
+      "To stop Nigel from following her around all morning.",
+      "Because she really had a toothache and needed treatment.",
+      "Because she wanted Nigel to come with her to the dentist."
+    ],
+    "correctIdx": 0,
+    "zh": [
+      "为了摆脱他，不让他一上午都跟着自己。",
+      "因为她真的牙疼，需要治疗。",
+      "因为她想让奈吉尔陪她一起去看牙医。"
+    ],
+    "evidence": [
+      7,
+      15
+    ],
+    "conflict": [
+      [
+        15
+      ],
+      [
+        7,
+        16
+      ]
+    ]
+  },
+  "69": {
+    "q": "Do you think that the writer passed his driving test? Why?",
+    "options": [
+      "No, he failed: he reacted too slowly and 'killed' the imaginary child.",
+      "Yes, he passed because he drove well in heavy traffic.",
+      "Yes, the examiner was pleased and smiled at him."
+    ],
+    "correctIdx": 0,
+    "zh": [
+      "没有通过：他反应太慢，被考官说成“撞死了”那个假想的孩子。",
+      "通过了，因为他在繁忙车流中开得很好。",
+      "通过了，因为考官对他微笑、很满意。"
+    ],
+    "evidence": [
+      12,
+      15
+    ],
+    "conflict": [
+      [
+        12,
+        15
+      ],
+      [
+        14,
+        15
+      ]
+    ]
+  },
+  "70": {
+    "q": "How was the drunk removed from the ring?",
+    "options": [
+      "Three men came into the ring and dragged him to safety.",
+      "The bull carried him out of the ring.",
+      "He walked out of the ring by himself."
+    ],
+    "correctIdx": 0,
+    "zh": [
+      "三个人进入场地，迅速把醉汉拖到了安全处。",
+      "公牛把他驮出了场地。",
+      "他自己走出了场地。"
+    ],
+    "evidence": [
+      13
+    ],
+    "conflict": [
+      [
+        13,
+        15
+      ],
+      [
+        13
+      ]
+    ]
+  },
+  "71": {
+    "q": "Has Big Ben ever gone wrong?",
+    "options": [
+      "Yes, once a painter's pot of paint slowed it down and it gave the wrong time.",
+      "No, it has never gone wrong or stopped.",
+      "It stopped because the Houses of Parliament burned down in 1834."
+    ],
+    "correctIdx": 0,
+    "zh": [
+      "是的，有一次油漆工的油漆桶挂在指针上，使它走慢了。",
+      "没有，它从未出过故障或停过。",
+      "它因为1834年议会大厦被烧而停摆。"
+    ],
+    "evidence": [
+      12,
+      13
+    ],
+    "conflict": [
+      [
+        12
+      ],
+      [
+        4,
+        5,
+        8
+      ]
+    ]
+  },
+  "72": {
+    "q": "What mistake was made?",
+    "options": [
+      "The average speed was reported as 299 but was really 301 miles per hour.",
+      "He had not actually broken the world record at all.",
+      "The car's engine was not really 2,500 horsepower."
+    ],
+    "correctIdx": 0,
+    "zh": [
+      "平均速度报错了：实际是每小时301英里，而非299英里。",
+      "他其实根本没有打破世界纪录。",
+      "汽车的马力报错了，其实并不是2500马力。"
+    ],
+    "evidence": [
+      9,
+      10,
+      11
+    ],
+    "conflict": [
+      [
+        3,
+        11
+      ],
+      [
+        5
+      ]
+    ]
+  },
+  "73": {
+    "q": "Did the boy go where he wanted to?",
+    "options": [
+      "No, he was taken to Perpignan and sent back to England.",
+      "Yes, the next car took him to the centre of Paris.",
+      "Yes, he went on with his journey and was never caught."
+    ],
+    "correctIdx": 0,
+    "zh": [
+      "没有，他被带到了佩皮尼昂，然后被送回了英国。",
+      "是的，下一辆车把他送到了巴黎市中心。",
+      "是的，他继续旅行，始终没有被抓到。"
+    ],
+    "evidence": [
+      12,
+      13,
+      14
+    ],
+    "conflict": [
+      [
+        12,
+        13
+      ],
+      [
+        14
+      ]
+    ]
+  },
+  "74": {
+    "q": "Why was their disguise 'too perfect'?",
+    "options": [
+      "Because the sheriff did not believe they were famous actors even after they told him their names.",
+      "Because the sheriff recognized them at once and asked for their autographs.",
+      "Because they had left their dark glasses at home."
+    ],
+    "correctIdx": 0,
+    "zh": [
+      "因为即使他们报出姓名，治安官也不相信他们是著名演员。",
+      "因为治安官立刻认出了他们，还找他们签名。",
+      "因为他们把墨镜落在家里了。"
+    ],
+    "evidence": [
+      15,
+      16,
+      17,
+      18,
+      19
+    ],
+    "conflict": [
+      [
+        11,
+        12,
+        16
+      ],
+      [
+        2
+      ]
+    ]
+  },
+  "75": {
+    "q": "How did the woman get help?",
+    "options": [
+      "She stamped out the letters 'SOS' in the snow, and a pilot saw the signal.",
+      "She lit a big fire to attract a passing plane.",
+      "She walked to the nearest village to call for help."
+    ],
+    "correctIdx": 0,
+    "zh": [
+      "她在雪地上踩出“SOS”字样，一名飞行员看到了这个信号。",
+      "她点起一大堆火来吸引路过的飞机。",
+      "她走到最近的村庄去求救。"
+    ],
+    "evidence": [
+      14,
+      15,
+      16
+    ],
+    "conflict": [
+      [
+        14,
+        15
+      ],
+      [
+        6,
+        14
+      ]
+    ]
+  },
+  "76": {
+    "q": "What was the joke?",
+    "options": [
+      "It was a fake TV news report about the macaroni harvest, broadcast on April 1st.",
+      "The announcer said the September rains had ruined the whole crop.",
+      "Mrs. Brabante won the famous macaroni-eating competition."
+    ],
+    "correctIdx": 0,
+    "zh": [
+      "那是一档4月1日播出的、关于通心粉丰收的假新闻报道。",
+      "播音员说九月的雨季毁掉了全部收成。",
+      "布拉班特夫人赢得了著名的吃通心粉比赛。"
+    ],
+    "evidence": [
+      1,
+      2,
+      13,
+      15
+    ],
+    "conflict": [
+      [
+        8
+      ],
+      [
+        14
+      ]
+    ]
+  },
+  "77": {
+    "q": "Did the doctors find out how the woman died?",
+    "options": [
+      "No, the doctors have not yet decided how the woman died.",
+      "Yes, they proved that she died of a rare disease.",
+      "Yes, the small wax figure showed the cause of death."
+    ],
+    "correctIdx": 0,
+    "zh": [
+      "没有，医生们还没有确定这位妇女的死因。",
+      "是的，他们证实她死于一种罕见的疾病。",
+      "是的，那个小蜡像显示了死因。"
+    ],
+    "evidence": [
+      4,
+      11
+    ],
+    "conflict": [
+      [
+        11
+      ],
+      [
+        9,
+        11
+      ]
+    ]
+  },
+  "78": {
+    "q": "For how long did the writer give up smoking?",
+    "options": [
+      "For a whole week.",
+      "For a whole month.",
+      "He never smoked again after reading the article."
+    ],
+    "correctIdx": 0,
+    "zh": [
+      "整整一个星期。",
+      "整整一个月。",
+      "读完那篇文章后他再也没有抽过烟。"
+    ],
+    "evidence": [
+      3,
+      7
+    ],
+    "conflict": [
+      [
+        3,
+        7
+      ],
+      [
+        10,
+        13
+      ]
+    ]
+  },
+  "79": {
+    "q": "Why did the plane turn back?",
+    "options": [
+      "Because the police had been told that a bomb had been planted on the plane.",
+      "Because the important person on board felt frightened.",
+      "Because the plane had engine trouble after taking off."
+    ],
+    "correctIdx": 0,
+    "zh": [
+      "因为警方得到消息说飞机上被人放了一枚炸弹。",
+      "因为机上那位重要人物感到害怕。",
+      "因为飞机起飞后发动机出了故障。"
+    ],
+    "evidence": [
+      10,
+      11,
+      13
+    ],
+    "conflict": [
+      [
+        11
+      ],
+      [
+        11,
+        13
+      ]
+    ]
+  },
+  "80": {
+    "q": "How many people visited the Great Exhibition of 1851?",
+    "options": [
+      "Six million people.",
+      "Two million people.",
+      "Only a few thousand visitors from Europe."
+    ],
+    "correctIdx": 0,
+    "zh": [
+      "六百万人。",
+      "两百万人。",
+      "只有几千名来自欧洲的参观者。"
+    ],
+    "evidence": [
+      11
+    ],
+    "conflict": [
+      [
+        11
+      ],
+      [
+        9,
+        11
+      ]
+    ]
+  },
+  "81": {
+    "q": "Why did the prisoner attack the driver?",
+    "options": [
+      "Because he needed the car to escape from the camp as quickly as possible.",
+      "Because the elderly driver recognized him as an escaped prisoner.",
+      "Because the driver tried to raise the alarm in the camp."
+    ],
+    "correctIdx": 0,
+    "zh": [
+      "因为他需要那辆车尽快逃出营房。",
+      "因为那位年长的司机认出他是个逃犯。",
+      "因为司机想在营房里拉响警报。"
+    ],
+    "evidence": [
+      14,
+      16
+    ],
+    "conflict": [
+      [
+        13,
+        14
+      ],
+      [
+        11,
+        12
+      ]
+    ]
+  },
+  "82": {
+    "q": "What was the monster called?",
+    "options": [
+      "It was called an oarfish.",
+      "It was called a killer whale.",
+      "It was called a giant shark."
+    ],
+    "correctIdx": 0,
+    "zh": [
+      "它被叫作皇带鱼。",
+      "它被叫作逆戟鲸。",
+      "它被叫作巨型鲨鱼。"
+    ],
+    "evidence": [
+      3,
+      10
+    ],
+    "conflict": [
+      [
+        10
+      ],
+      [
+        7,
+        10
+      ]
+    ]
+  },
+  "83": {
+    "q": "Why did Patrick keep on asking the same question?",
+    "options": [
+      "Because he loved to hear the policeman say that Mr. Lane had been defeated.",
+      "Because he did not believe the policeman's answer.",
+      "Because he wanted to meet Mr. Lane at his house."
+    ],
+    "correctIdx": 0,
+    "zh": [
+      "因为他喜欢听警察说出莱恩先生被击败的话。",
+      "因为他不相信警察的回答。",
+      "因为他想在莱恩先生家里见到他。"
+    ],
+    "evidence": [
+      3,
+      15
+    ],
+    "conflict": [
+      [
+        15
+      ],
+      [
+        2,
+        5,
+        15
+      ]
+    ]
+  },
+  "84": {
+    "q": "Who will be driving the buses next week?",
+    "options": [
+      "University students will drive the buses.",
+      "The busmen themselves will drive the buses.",
+      "Owners of private cars will drive the buses."
+    ],
+    "correctIdx": 0,
+    "zh": [
+      "将由大学生来开公共汽车。",
+      "将由公共汽车司机自己来开车。",
+      "将由私家车主来开公共汽车。"
+    ],
+    "evidence": [
+      9,
+      10,
+      11
+    ],
+    "conflict": [
+      [
+        1,
+        9
+      ],
+      [
+        7,
+        9
+      ]
+    ]
+  },
+  "85": {
+    "q": "How long has Mr. Page been teaching?",
+    "options": [
+      "For a total of forty years.",
+      "For thirty years.",
+      "For more than fifty years."
+    ],
+    "correctIdx": 0,
+    "zh": [
+      "总共四十年。",
+      "三十年。",
+      "五十多年。"
+    ],
+    "evidence": [
+      7
+    ],
+    "conflict": [
+      [
+        7
+      ],
+      [
+        7
+      ]
+    ]
+  },
+  "86": {
+    "q": "What was the danger?",
+    "options": [
+      "The driverless speedboat was circling and came straight at them at tremendous speed.",
+      "A large shark was swimming straight towards them.",
+      "The speedboat had caught fire and was sinking fast."
+    ],
+    "correctIdx": 0,
+    "zh": [
+      "无人驾驶的快艇不停转圈，并以极快的速度直冲向他们。",
+      "一条大鲨鱼正径直朝他们游过来。",
+      "快艇着火了，并且正在迅速下沉。"
+    ],
+    "evidence": [
+      1,
+      6,
+      7,
+      10
+    ],
+    "conflict": [
+      [
+        6,
+        7
+      ],
+      [
+        4,
+        14
+      ]
+    ]
+  },
+  "87": {
+    "q": "What was wrong with the man's story?",
+    "options": [
+      "The 8 o'clock train did not run at all on the morning of the murder.",
+      "He reached the station too late to catch the 8 o'clock train.",
+      "He was not at work at 10 o'clock that day."
+    ],
+    "correctIdx": 0,
+    "zh": [
+      "凶杀发生那天早上，8点钟的火车根本没有开。",
+      "他到车站太晚，没赶上8点钟的火车。",
+      "那天10点钟他并没有在上班。"
+    ],
+    "evidence": [
+      13,
+      15,
+      16
+    ],
+    "conflict": [
+      [
+        9
+      ],
+      [
+        5
+      ]
+    ]
+  },
+  "88": {
+    "q": "Why is the rescue taking so long?",
+    "options": [
+      "Because they have to drill through a hard layer of rock.",
+      "Because the trapped men are too weak to be moved.",
+      "Because the rescue workers are waiting for explosives to arrive."
+    ],
+    "correctIdx": 0,
+    "zh": [
+      "因为他们必须钻透一层坚硬的岩石。",
+      "因为被困的人太虚弱，无法被抬出来。",
+      "因为救援人员正在等炸药运到。"
+    ],
+    "evidence": [
+      4,
+      7,
+      9
+    ],
+    "conflict": [
+      [
+        13
+      ],
+      [
+        4,
+        5
+      ]
+    ]
+  },
+  "89": {
+    "q": "Who made the only funny joke that evening and why?",
+    "options": [
+      "The advertiser, because he made a slip of the tongue.",
+      "The comedians, because their show was extremely funny.",
+      "The announcer, because he told a joke on purpose."
+    ],
+    "correctIdx": 0,
+    "zh": [
+      "做广告的人，因为他把话说错了。",
+      "喜剧演员们，因为他们的演出非常有趣。",
+      "播音员，因为他是故意讲了个笑话。"
+    ],
+    "evidence": [
+      8,
+      10,
+      12
+    ],
+    "conflict": [
+      [
+        5,
+        8
+      ],
+      [
+        8,
+        9,
+        12
+      ]
+    ]
+  },
+  "90": {
+    "q": "What kind of fish are they?",
+    "options": [
+      "They are favourite eating fish such as cod and skate.",
+      "They are sharks.",
+      "They are killer whales."
+    ],
+    "correctIdx": 0,
+    "zh": [
+      "它们是人类爱吃的鱼，比如鳕鱼和鳐鱼。",
+      "它们是鲨鱼。",
+      "它们是逆戟鲸。"
+    ],
+    "evidence": [
+      7,
+      8,
+      9
+    ],
+    "conflict": [
+      [
+        7
+      ],
+      [
+        7
+      ]
+    ]
+  },
+  "91": {
+    "q": "Where was the station's Commanding Officer?",
+    "options": [
+      "He was in the basket under the balloon.",
+      "He was in the control tower of the station.",
+      "He was waiting at a nearby airfield."
+    ],
+    "correctIdx": 0,
+    "zh": [
+      "他在气球下面的吊篮里。",
+      "他在基地的控制塔里。",
+      "他在附近的一个机场等着。"
+    ],
+    "evidence": [
+      7,
+      11,
+      12
+    ],
+    "conflict": [
+      [
+        3,
+        11
+      ],
+      [
+        9,
+        11
+      ]
+    ]
+  },
+  "92": {
+    "q": "Why did the policeman ask the writer to come to the police station?",
+    "options": [
+      "Because the policeman thought the writer was cleaning windows in the middle of the night.",
+      "Because the writer had stolen a ladder from a garden shed.",
+      "Because the writer's wife had called the police."
+    ],
+    "correctIdx": 0,
+    "zh": [
+      "因为警察认为作者在半夜擦窗户。",
+      "因为作者从花园小棚里偷了一架梯子。",
+      "因为作者的妻子报了警。"
+    ],
+    "evidence": [
+      7,
+      9,
+      12
+    ],
+    "conflict": [
+      [
+        4
+      ],
+      [
+        3,
+        17
+      ]
+    ]
+  },
+  "93": {
+    "q": "Where was the Statue of Liberty made?",
+    "options": [
+      "It was made in France, and was erected in Paris.",
+      "It was made in the United States.",
+      "It was made at New York Harbour."
+    ],
+    "correctIdx": 0,
+    "zh": [
+      "它是在法国制造的，并在巴黎竖起。",
+      "它是在美国制造的。",
+      "它是在纽约港制造的。"
+    ],
+    "evidence": [
+      2,
+      9,
+      10
+    ],
+    "conflict": [
+      [
+        2,
+        10
+      ],
+      [
+        8,
+        9
+      ]
+    ]
+  },
+  "94": {
+    "q": "What kind of race do the children compete in?",
+    "options": [
+      "An underwater tricycle race.",
+      "A swimming race across the pool.",
+      "A game of picking up weights from the pool floor."
+    ],
+    "correctIdx": 0,
+    "zh": [
+      "水下三轮车比赛。",
+      "横渡游泳池的游泳比赛。",
+      "从池底捡重物的游戏。"
+    ],
+    "evidence": [
+      6,
+      7,
+      8,
+      9
+    ],
+    "conflict": [
+      [
+        7,
+        9
+      ],
+      [
+        5,
+        7
+      ]
+    ]
+  },
+  "95": {
+    "q": "Why was the Ambassador particularly lucky?",
+    "options": [
+      "Because he was not wearing his hat when a shot was fired through his office window.",
+      "Because the fire extinguisher did not damage his clothes at all.",
+      "Because he was not in his office when the fire broke out."
+    ],
+    "correctIdx": 0,
+    "zh": [
+      "因为有人朝办公室窗户开枪时他没有戴帽子。",
+      "因为灭火器一点也没有弄坏他的衣服。",
+      "因为起火时他并不在办公室里。"
+    ],
+    "evidence": [
+      19,
+      21,
+      22
+    ],
+    "conflict": [
+      [
+        5,
+        12
+      ],
+      [
+        9,
+        10
+      ]
+    ]
+  },
+  "96": {
+    "q": "What happens to the lanterns at the end of the festival?",
+    "options": [
+      "They are placed into the water and drift out to sea.",
+      "They are taken down and burned.",
+      "They are given to the children as presents."
+    ],
+    "correctIdx": 0,
+    "zh": [
+      "它们被放入水中，漂向大海。",
+      "它们被取下来烧掉。",
+      "它们被当作礼物送给孩子们。"
+    ],
+    "evidence": [
+      9,
+      10,
+      11
+    ],
+    "conflict": [
+      [
+        10,
+        11
+      ],
+      [
+        10,
+        11
+      ]
+    ]
+  }
+}

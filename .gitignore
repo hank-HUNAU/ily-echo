@@ -1,4 +1,9 @@
 shots/
 _p1_shots/
+_p2_shots/
+_p3_shots/
 .env
 tests/
+# 盲听选项的一次性生成中间产物（成品是 blind_options.json）
+_blind_*.json
+_gen_blind_*.py

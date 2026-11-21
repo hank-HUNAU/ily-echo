@@ -60,6 +60,7 @@ h2{font-size:18px;margin:0 0 10px}
 .cell.done{border-color:var(--ok);background:#F0FFF9}
 .cell.doing{border-color:var(--brand);background:var(--brandSoft)}
 .cell.due::after{content:"";position:absolute;top:6px;right:6px;width:8px;height:8px;border-radius:50%;background:var(--bad)}
+.cell.miss span{color:var(--bad)}
 /* 底部导航 */
 nav.tabs{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--line);
  display:flex;z-index:30;padding-bottom:calc(20px + env(safe-area-inset-bottom,0px))}
@@ -105,21 +106,28 @@ nav.tabs .fabbtn svg{width:26px;height:26px;margin:0;stroke:#fff}
 .coGrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
 .coCard{border:1px solid var(--line);border-radius:14px;background:#fff;padding:12px 10px 11px;text-align:center;position:relative;
  -webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
-/* 封面即状态：dim 灰蒙未下载 / prog 中央绿环进度 / lit 点亮 */
-.cover{position:relative;display:block;width:66px;height:88px;margin:0 auto 8px;border-radius:11px;overflow:hidden}
+/* 封面即状态（v4.2 屏 9）：全部彩色，不灰度化 —— dim 待下载压 10% / prog 下载中压 22% / lit 点亮 / fail 彩色+红环 */
+.cover{position:relative;display:block;width:66px;height:88px;margin:0 auto 8px;border-radius:11px;overflow:hidden;background:#F1F3F5}
 .cover .bkc{width:100%;height:100%;border-radius:11px;object-fit:cover;display:block;border:0.5px solid var(--line);background:#F1F3F5}
-.cover.dim .bkc{filter:grayscale(1)}
-.cover.dim::after{content:"";position:absolute;inset:0;background:rgba(222,226,230,.8)}
-.cover.prog .bkc{filter:grayscale(.5) brightness(.92);opacity:.85}
+.cover.dim .bkc{filter:brightness(.9)}
+.cover.prog .bkc{filter:brightness(.78)}
+.cover.lit .bkc{filter:none}
+.cover.fail .bkc{filter:brightness(.86) saturate(.85)}
+.cover.soon .bkc{filter:brightness(.94) saturate(.9)}
 .pring{position:absolute;inset:0;margin:auto;width:56px;height:56px;filter:drop-shadow(0 1px 4px rgba(0,0,0,.35))}
 .pring .arc{transition:stroke-dashoffset .4s}
 .cover.prog .pring{animation:ppulse 1.6s ease-in-out infinite}
 @keyframes ppulse{0%,100%{transform:scale(1)}50%{transform:scale(1.07)}}
 .ppct{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.55);font-style:normal}
-.ppct.rd{font-size:20px;color:#E03131;text-shadow:0 1px 3px rgba(255,255,255,.7)}
-.cover.fail .bkc{filter:grayscale(1);opacity:.55}
+.ppct.rd{font-size:20px;color:var(--bad);text-shadow:0 1px 3px rgba(255,255,255,.7)}
 .cover.fail .pring{animation:none}
-.coCard.off{opacity:.72}
+/* 角标：待下载=线性下载箭头 / 已下载=品牌绿勾 */
+.dlbadge{position:absolute;top:4px;right:4px;width:20px;height:20px;border-radius:50%;background:rgba(255,255,255,.95);
+ box-shadow:0 1px 3px rgba(0,0,0,.18);display:flex;align-items:center;justify-content:center;color:var(--sub)}
+.dlbadge svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.dlbadge.ok{background:var(--focus);color:#fff}
+.coCard.off .coName{color:var(--sub)}
+.stfoot{display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--sub);padding:12px 4px 2px}
 .coName{font-size:15px;font-weight:600;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 /* 书名类文本一律单行：窄屏收缩省略，绝不跨行 */
 .oneline{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -236,6 +244,129 @@ audio{width:100%}
 .pmini svg{width:26px;height:26px}
 .pmain{width:56px;height:56px;border-radius:50%;background:var(--brand);display:flex;align-items:center;justify-content:center}
 .pmain svg{width:24px;height:24px}
+/* ===== 盲听三分支（P2）===== */
+.blind-wrap{padding:6px 0}
+.blind-listen{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:46px 18px 20px;min-height:46vh}
+.blind-ear{width:88px;height:88px;border-radius:50%;background:var(--brandSoft);display:flex;align-items:center;justify-content:center;color:var(--focus);animation:blindPulse 2s ease-in-out infinite}
+.blind-ear svg{width:44px;height:44px}
+@keyframes blindPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
+.blind-ttl{font-size:22px;font-weight:700;color:var(--ink);margin-top:22px}
+.blind-sub{font-size:14px;color:var(--sub);margin-top:8px}
+.blind-q{font-size:19px;font-weight:600;color:var(--ink);line-height:1.5;padding:16px 18px;background:#fff;border:1px solid var(--line);border-radius:16px;margin:6px 0 14px}
+.blind-opts{display:flex;flex-direction:column;gap:10px}
+.blind-opt{display:flex;align-items:center;gap:12px;text-align:left;width:100%;min-height:58px;padding:10px 14px;border:1.5px solid var(--line);border-radius:14px;background:#fff;font-family:inherit;font-size:15px;color:var(--ink);cursor:pointer}
+.blind-opt b{flex:0 0 30px;height:30px;border-radius:50%;background:var(--brandSoft);color:var(--focus);display:flex;align-items:center;justify-content:center;font-size:14px}
+.blind-opt span{flex:1;line-height:1.4}
+.blind-opt.right{border-color:var(--brand);background:var(--brandSoft)}
+.blind-opt.right b{background:var(--brand);color:#fff}
+.blind-opt.wrong{border-color:var(--bad);background:#FFF5F5;opacity:.7}
+.blind-opt.wrong b{background:#F1BFC0;color:#fff}
+.blind-reveal{margin-top:14px;padding:12px 14px;background:var(--brandSoft);border-radius:14px;color:var(--focus);font-size:14px;line-height:1.5}
+.blind-hint{margin-top:10px;padding:10px 14px;background:#fff;border:1px dashed var(--line);border-radius:12px;color:var(--sub);font-size:14px}
+/* ===== 精听 Anki 句卡（P2-2）===== */
+.int-wrap{padding:2px 0}
+.int-card{margin:4px 16px 0;background:#fff;border:1px solid var(--line);border-radius:18px;min-height:300px;display:flex;flex-direction:column;overflow:hidden}
+.ankiTop{display:flex;align-items:center;justify-content:space-between;padding:12px 16px}
+.ankiTag{background:var(--brandSoft);color:var(--focus);border-radius:999px;padding:3px 10px;font-weight:600;font-size:12px}
+.ankiFav{color:var(--warn);font-size:14px;font-weight:600;cursor:pointer;opacity:.55}
+.ankiFav.on{opacity:1}
+.ankiBody{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;text-align:center;padding:16px 22px}
+.ankiEn{font-family:Georgia,"Times New Roman",serif;font-size:20px;line-height:1.5;color:var(--ink);font-weight:600}
+.ankiZh{font-size:16px;line-height:1.6;color:var(--sub)}
+.ankiFoot{display:flex;justify-content:space-between;padding:12px 16px;border-top:1px solid var(--line);font-size:11.5px;color:var(--sub)}
+.int-tip{text-align:center;font-size:11px;color:var(--sub);margin:8px 0}
+.int-bar{padding:0 24px;background:#fff;margin:0 16px;border-radius:14px 14px 0 0}
+.int-lang{display:flex;justify-content:flex-end;padding:10px 0 4px}
+.int-lang .seg{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden}
+.int-lang .seg span{padding:5px 12px;font-size:12px;color:var(--sub);cursor:pointer;background:#fff}
+.int-lang .seg span.on{background:var(--brandSoft);color:var(--focus);font-weight:600}
+.int-prog{display:flex;align-items:center;gap:8px;font-size:11px;color:var(--sub);padding:8px 0}
+.int-track{flex:1;height:4px;background:#E3E5E8;border-radius:2px;position:relative}
+.int-track i{position:absolute;left:0;top:0;height:4px;background:var(--brand);border-radius:2px}
+.int-track b{position:absolute;top:-5px;width:14px;height:14px;border-radius:50%;background:var(--brand);border:2.5px solid #fff;margin-left:-7px}
+.int-ctl{display:flex;align-items:center;justify-content:center;gap:26px;padding:10px 20px 4px;background:#fff;margin:0 16px;border-radius:0 0 14px 14px}
+.int-mini{width:44px;height:44px;display:flex;align-items:center;justify-content:center;border:0;background:none;color:var(--brand);cursor:pointer}
+.int-mini svg{width:26px;height:26px}
+.int-play{width:56px;height:56px;border-radius:50%;background:var(--brand);border:0;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.int-play svg{width:24px;height:24px}
+/* ===== 跟读全文容器 + 工具条（P2-3）===== */
+.shadow-wrap{padding-bottom:calc(96px + env(safe-area-inset-bottom,0px))}
+.kstage{overflow-y:auto;display:block;gap:0;padding:16px 18px;height:calc(100vh - 300px);min-height:230px;max-height:560px;background:#fff;margin:0 16px;border-radius:16px;border:1px solid var(--line);scrollbar-width:none}
+.kstage::-webkit-scrollbar{display:none}
+.krow{transition:opacity .2s}
+.krow .en{font-family:Georgia,"Times New Roman",serif;font-size:17px;line-height:1.5;color:var(--ink)}
+.krow .zh{font-size:14px;line-height:1.5;color:var(--sub);margin-top:3px}
+.krow.dim{opacity:.32}
+.krow.now .en{font-size:21px;font-weight:700}
+.krow.now .zh{opacity:1}
+.kplayer{display:flex;align-items:center;gap:10px;padding:10px 18px 4px}
+.kplay{width:28px;height:28px;border-radius:50%;background:var(--brand);border:0;display:flex;align-items:center;justify-content:center;flex:0 0 28px;cursor:pointer}
+.kplay svg{width:14px;height:14px;fill:#fff}
+.ktrack{flex:1;height:4px;background:#E3E5E8;border-radius:2px;position:relative}
+.ktrack i{position:absolute;left:0;top:0;height:4px;background:var(--brand);border-radius:2px}
+.ktrack b{position:absolute;top:-4px;width:12px;height:12px;border-radius:50%;background:var(--brand);border:2px solid #fff;margin-left:-6px}
+.ktime{font-size:11px;color:var(--sub);font-variant-numeric:tabular-nums}
+.ktool{display:flex;align-items:center;gap:10px;padding:10px 18px 14px}
+.ktool .seg{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;height:34px}
+.ktool .seg span{padding:7px 12px;font-size:13px;color:var(--sub);cursor:pointer;background:#fff;display:flex;align-items:center}
+.ktool .seg span.on{background:var(--brandSoft);color:var(--focus);font-weight:600}
+.ktool .fbtn{min-height:34px;height:34px;border-radius:999px;padding:0 16px;font-size:13px;border:0;background:var(--focus);color:#fff;font-family:inherit;font-weight:600;cursor:pointer;margin-left:auto}
+@media (orientation:landscape) and (max-height:520px){ .kstage{height:230px;min-height:230px;gap:2px;padding:2px 18px} .krow .en{line-height:1.32} .krow .zh{margin-top:0} .krow.now .en{font-size:19px} }
+/* ===== 录音关（屏5/6）：全篇中文 · 断点录制 · 完成卡 ===== */
+.khead2{display:flex;align-items:center;justify-content:space-between;padding:8px 18px 6px;font-size:15px;font-weight:600;color:var(--ink)}
+.khead2 a{color:var(--focus);text-decoration:none;font-size:13px}
+.rec-row .zh{font-size:15px;line-height:1.5;color:var(--sub)}
+.krow.now.rec-row .zh{font-size:18px;color:var(--ink);font-weight:600}
+.rec-row.done .zh{color:var(--focus)}
+.rec-state{background:#EDF1F4;color:var(--sub)}
+.rec-state.on{background:var(--brandSoft);color:var(--focus)}
+.rec-prog{padding:10px 18px 0}
+.rsegs{display:flex;gap:4px}
+.rseg{flex:1;height:5px;border-radius:3px;background:#E3E5E8;transition:background .2s}
+.rseg.done{background:var(--focus)}
+.rseg.now{background:var(--brand)}
+.rec-time{display:flex;justify-content:space-between;font-size:11px;color:var(--sub);margin-top:6px;font-variant-numeric:tabular-nums}
+.rec-ctl{display:flex;align-items:center;justify-content:center;gap:18px;padding:12px 20px 6px}
+/* 录音关滚动容器压矮，保证进度条+三按钮进视口 */
+.rec-wrap .kstage{height:auto;max-height:42vh;min-height:180px}
+.rec-ctl .fbtn.sm{width:88px;min-height:44px;height:44px;border-radius:12px;background:#fff;border:1px solid var(--line);color:var(--ink);font-weight:500}
+.rec-ctl .fbtn.sm[disabled]{opacity:.45}
+.rec-big{width:56px;height:56px;border-radius:50%;border:0;background:var(--focus);color:#fff;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex:0 0 56px}
+.rec-big.on{animation:pulse 1s infinite}
+.rec-hint{text-align:center;font-size:12px;color:var(--sub);padding:0 18px 8px}
+/* 完成卡 */
+.reccard{background:#fff;border:1px solid var(--line);border-radius:16px;margin:18px 16px 0;padding:18px}
+.rct{font-size:20px;font-weight:700;color:var(--ink)}
+.rcs{font-size:13px;color:var(--sub);margin-top:6px}
+.rcrow{display:flex;justify-content:space-between;margin-top:14px;font-size:13px;color:var(--sub)}
+.rcrow b{color:var(--ink);font-weight:600}
+.rcacts{margin:20px 16px 0;display:flex;flex-direction:column;gap:9px}
+.rcacts .fbtn{min-height:54px;border-radius:14px;background:var(--focus);color:#fff;border:0;font-size:16px;font-weight:600;font-family:inherit;cursor:pointer}
+.rcacts .fbtn.ghost{background:#fff;border:1px solid var(--line);color:var(--ink);min-height:46px;font-size:14px;font-weight:500}
+/* ===== 复习 7 轮：屏 7 到期入口 / 屏 8 完成本轮 ===== */
+.rev-entry{display:flex;flex-direction:column;min-height:calc(100vh - 210px);padding:0 18px}
+.rev-ttl{font-size:22px;font-weight:700;color:var(--ink);margin-top:26px;letter-spacing:.3px}
+.rev-card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px;margin-top:20px}
+.rev-lab{font-size:12.5px;color:var(--sub);margin-bottom:12px}
+.rev-pills{display:flex;gap:8px;flex-wrap:wrap}
+.rev-pills .pill{font-size:14px;padding:4px 14px;border-radius:999px}
+.rev-pills .pill.pc{background:#EDF1F4;color:var(--sub)}
+.rev-blind{margin-top:12px;display:flex}
+.pill.mute{background:#EDF1F4;color:var(--sub);font-size:12.5px;padding:3px 11px}
+.rev-note{font-size:12.5px;color:var(--sub);margin-top:12px;line-height:1.6}
+.rev-acts{margin-top:auto;padding:18px 0 6px;display:flex;flex-direction:column;gap:9px}
+.rev-acts .fbtn{min-height:52px;border-radius:14px;background:var(--focus);color:#fff;border:0;font-size:16px;font-weight:600;font-family:inherit;cursor:pointer}
+.rev-acts .fbtn.ghost{background:#fff;border:1px solid var(--line);color:var(--ink);min-height:46px;font-size:14px;font-weight:500}
+.rev-done-wrap{display:flex;flex-direction:column;min-height:calc(100vh - 150px);padding:0 16px}
+/* 7 轮时间轴：只画轮次位图，无曲线、无「艾宾浩斯」字样 */
+.rnd{display:flex;align-items:center;justify-content:space-between;margin-top:18px;padding:0 2px}
+.rnd .dot{width:26px;height:26px;border-radius:50%;border:1.5px solid var(--line);background:#fff;color:var(--sub);
+ font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex:0 0 26px}
+.rnd .dot.sm{width:20px;height:20px;flex:0 0 20px;font-size:11px;border:0;background:var(--brandSoft);color:var(--focus)}
+.rnd .dot.done{background:var(--focus);border-color:var(--focus);color:#fff}
+.rnd .dot.now{background:var(--brandSoft);border-color:var(--focus);color:var(--focus);box-shadow:0 0 0 3px rgba(16,185,129,.16)}
+.rnd .ln{flex:1;height:1.5px;background:var(--line);margin:0 3px}
+.rndlab{display:flex;justify-content:space-between;font-size:11.5px;color:var(--sub);margin-top:7px;padding:0 1px}
 @media (hover:none){.btn:active,.play:active,.star:active,nav.tabs a:active{transform:scale(.96)}}
 @media (hover:hover){.btn:hover,.play:hover{filter:brightness(1.05)}}
 .skel{height:16px;border-radius:8px;margin:10px 0;background:linear-gradient(90deg,#EEF0F3 25%,#F8F9FA 45%,#EEF0F3 65%);background-size:200% 100%;animation:skm 1.2s infinite}
@@ -376,6 +507,7 @@ const $=s=>document.querySelector(s);
 const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const pad=n=>(n<10?'0':'')+n;
 const todayStr=()=>{const d=new Date();return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());};
+const isoOf=ts=>{const d=new Date(ts);return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());};
 const fmtDate=s=>{if(!s)return'';const p=String(s).slice(0,10).split('-');return (+p[1])+'月'+(+p[2])+'日';};
 
 const store={
@@ -390,7 +522,7 @@ const store={
    v3 前是扁平 {课号:记录}——第二门课一接入就会与 NCE2 同课号写成同一条记录（静默互串）。
    迁移在读取时做一次，对同一份旧数据幂等；旧数据全部归属默认课程。 */
 const DEF_COURSE='nce2';
-function blankProg(){ return {stage:0,si:0,listened:{},shadow:{},hard:[],firstLearnAt:0,reviews:0,lastReviewAt:0,blindDone:false,retellDone:false}; }
+function blankProg(){ return {stage:0,si:0,listened:{},shadow:{},hard:[],firstLearnAt:0,reviews:0,lastReviewAt:0,blindDone:false,retellDone:false,revDone:null,revMiss:0}; }
 function migrateProg(raw){
   if(!raw||typeof raw!=='object') return {_v:4,courses:{}};
   if(raw._v===3||raw._v===4){
@@ -439,6 +571,45 @@ function progOf(cid){
 }
 function prog(no,cid){ const o=progOf(cid), k=String(no);
   if(!o[k]) o[k]=blankProg(); return o[k]; }
+/* ===== 复习 7 轮：本轮三段有效提取（v4.2 屏 7/8） =====
+   revDone 只对「当前轮」有效，换轮自动重置；seen 记录精听已走过的句卡，跨会话保留。
+   三段齐了才 reviews+1 —— 不允许「点一次就记账」。 */
+const REV_STEPS=['精听','跟读','录音'];
+const REV_GRACE_MS=3*864e5;                    /* 3 天宽限内补做不算漏 */
+function revState(p){
+  const r=(p.reviews||0)+1;
+  if(!p.revDone||typeof p.revDone!=='object'||p.revDone.r!==r) p.revDone={r:r,s:[false,false,false],seen:{}};
+  if(!Array.isArray(p.revDone.s)||p.revDone.s.length!==3) p.revDone.s=[false,false,false];
+  if(!p.revDone.seen||typeof p.revDone.seen!=='object') p.revDone.seen={};
+  return p.revDone;
+}
+function revMark(i){ const p=prog(CUR.no); const st=revState(p); if(!st.s[i]){ st.s[i]=true; saveProgress(); } return st; }
+function revMissing(p){
+  const st=revState(p), m=[];
+  st.s.forEach((v,i)=>{ if(!v) m.push(REV_STEPS[i]); });
+  return m;
+}
+/* 本轮收尾：三段齐了才 reviews+1；超 3 天宽限记未通关；随后进屏 8 */
+function finishReview(){
+  const p=prog(CUR.no);
+  const st=revState(p);
+  const miss=[];
+  st.s.forEach((v,i)=>{ if(!v) miss.push(REV_STEPS[i]); });
+  if(miss.length){ toast('本轮还差：'+miss.join(' / ')); CUR.rstep=Math.max(0,st.s.findIndex(v=>!v)); renderLesson(); return false; }
+  const due=nextDue(p);                       /* 必须在 reviews+1 之前算 */
+  const late=!!due&&(Date.now()-due>REV_GRACE_MS);
+  const snap=st.s.slice();
+  p.reviews=Math.min((p.reviews||0)+1,OFFSETS.length);
+  p.lastReviewAt=Date.now();
+  if(late) p.revMiss=(p.revMiss||0)+1;
+  p.revDone=null;                             /* 换轮重置 */
+  saveProgress();
+  syncEnqueue('review',0,null);
+  CUR.revDoneShown={round:p.reviews,s:snap,late:late};
+  CUR.rec=null; CUR.rstep=null;               /* 保留 CUR.blob：屏 8 的「分享给家人」要用 */
+  renderLesson();
+  return true;
+}
 /* 单课程汇总：已学 / 通关 / 复习轮数 / 最近课号 / 继续目标 */
 function progStat(cid){
   const o=progOf(cid), ks=Object.keys(o);
@@ -614,9 +785,18 @@ async function loadLesson(no,cid){
   const r=await fetch(path);
   DATACACHE[key]=await r.json(); return DATACACHE[key];
 }
+/* 盲听选项：96 课三选一（1正确+2干扰），懒加载一次 */
+let BLANDOPT=null;
+async function loadBlindOpt(){
+  if(BLANDOPT) return BLANDOPT;
+  try{ const r=await fetch('blind_options.json',{cache:'force-cache'}); BLANDOPT=await r.json(); }
+  catch(e){ BLANDOPT={}; }
+  return BLANDOPT;
+}
 
 /* ================= 路由 ================= */
 let CUR={no:0,data:null,stage:0,mode:'learn',course:'nce2'};
+window.CUR=CUR;   /* 调试/验收钩子 */
 /* hash 查询参数：#/lesson/12?m=rev&c=nce1 → {m:'rev',c:'nce1'} */
 function hashQs(){
   const o={}, q=(location.hash.split('?')[1]||'');
@@ -715,9 +895,12 @@ async function router(){
 
     CUR.mode=Q.m==='rev'?'rev':'learn';
     if(Q.c) CUR.course=Q.c;
+    CUR.revDoneShown=null;                      /* 每次进入课程页都从入口/当前段重来，不残留屏 8 */
+    if(CUR.mode==='rev') CUR.rstep=null;
     const no=+h.match(/#\/lesson\/(\d+)/)[1];
     if(CUR.no!==no||!CUR.data){
       CUR.no=no;
+      CUR.blind=null; CUR.blindStarted=false;   /* 换课重置盲听三分支状态 */
       $('#app').innerHTML='<h1>L'+no+'</h1><div class="sec"><div class="skel" style="width:70%"></div><div class="skel"></div><div class="skel"></div><div class="skel" style="width:85%"></div><div class="skel"></div><div class="skel" style="width:60%"></div></div>';
       CUR.data=await loadLesson(no,cid);
     }
@@ -817,28 +1000,34 @@ function fillStorage(){
   }).catch(()=>{ el.innerHTML=dot+(n?`离线 ${n} 门 · 已用 ${used}MB`:'暂无离线课程'); });
 }
 /* ================= 课程库（商店） ================= */
-/* 封面即状态：dim=灰蒙未下载 · prog=中央绿环下载进度 · lit=已下载点亮 · fail=下载失败红环（点封面重试） */
+/* 封面即状态（v4.2 屏 9）：soon 筹备中 / dim 待下载 / prog 下载中 / lit 已下载 / fail 失败（点封面重试） */
 function coverState(c){
   const st=dlGet(c.id), pct=dlPct(c.id);
-  if(!c.ready) return 'dim';
+  if(!c.ready) return 'soon';
   if(st&&st.state==='done') return 'lit';
   if(st&&st.state==='fail') return 'fail';
   if(st&&(st.state==='run'||(st.state==='pause'&&pct>0))) return 'prog';
   return 'dim';
 }
-/* 极简卡片：封面（自带状态）+ 名称；整卡点击（stcard），长按移除 */
+/* 极简卡片：彩色封面（自带状态角标）+ 名称；整卡点击（stcard），长按移除 */
 function renderStoreCard(c){
   const clickable=c.ready?` data-act="stcard" data-c="${c.id}" style="cursor:pointer"`:'';
   const stt=coverState(c), pct=dlPct(c.id);
-  let ring='';
+  const IC_DL='<svg viewBox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5M4 20h16"/></svg>';
+  const IC_OK='<svg viewBox="0 0 24 24"><path d="M4 12l5 5L20 6"/></svg>';
+  let ring='',badge='';
   if(stt==='prog'){
     const C=2*Math.PI*26, off=(C*(1-pct/100)).toFixed(1);
-    ring=`<svg class="pring" viewBox="0 0 64 64"><circle cx="32" cy="32" r="26" fill="none" stroke="rgba(255,255,255,.6)" stroke-width="6"/><circle class="arc" cx="32" cy="32" r="26" fill="none" stroke="#12B886" stroke-width="6" stroke-linecap="round" stroke-dasharray="${C.toFixed(1)}" stroke-dashoffset="${off}" transform="rotate(-90 32 32)"/></svg><b class="ppct">${pct}%</b>`;
+    ring=`<svg class="pring" viewBox="0 0 64 64"><circle cx="32" cy="32" r="26" fill="none" stroke="rgba(255,255,255,.65)" stroke-width="6"/><circle class="arc" cx="32" cy="32" r="26" fill="none" stroke="#0B8A5F" stroke-width="6" stroke-linecap="round" stroke-dasharray="${C.toFixed(1)}" stroke-dashoffset="${off}" transform="rotate(-90 32 32)"/></svg><b class="ppct">${pct}%</b>`;
   }else if(stt==='fail'){
-    ring=`<svg class="pring" viewBox="0 0 64 64"><circle cx="32" cy="32" r="26" fill="none" stroke="rgba(255,255,255,.6)" stroke-width="6"/><circle cx="32" cy="32" r="26" fill="none" stroke="#E03131" stroke-width="6" stroke-linecap="round"/></svg><b class="ppct rd">!</b>`;
+    ring=`<svg class="pring" viewBox="0 0 64 64"><circle cx="32" cy="32" r="26" fill="none" stroke="rgba(255,255,255,.65)" stroke-width="6"/><circle cx="32" cy="32" r="26" fill="none" stroke="#B04A43" stroke-width="6" stroke-linecap="round"/></svg><b class="ppct rd">!</b>`;
+  }else if(stt==='lit'){
+    badge=`<span class="dlbadge ok">${IC_OK}</span>`;
+  }else if(stt==='dim'){
+    badge=`<span class="dlbadge">${IC_DL}</span>`;
   }
   return `<div class="coCard${c.ready?'':' off'}" id="sc-${c.id}"${clickable}>
-    <span class="cover ${stt}"${stt==='fail'?' title="下载失败 · 点封面重试"':''}><img class="bkc" src="${c.cover}" alt="${esc(c.name)}" onerror="this.style.display='none'">${ring}</span>
+    <span class="cover ${stt}"${stt==='fail'?' title="下载失败 · 点封面重试"':''}><img class="bkc" src="${c.cover}" alt="${esc(c.name)}" onerror="this.style.display='none'">${ring}${badge}</span>
     <div class="coName">${esc(c.name)}</div></div>`;
 }
 /* 长按 600ms 移除课程（原 rmc 逻辑）；随后那次 click 会被吞掉 */
@@ -861,11 +1050,17 @@ function renderStoreCard(c){
 function renderStore(){
   const cs=catList();
   const codes=(CATALOG&&CATALOG.codes)||[];
+  const cnt={lit:0,prog:0,fail:0,ready:0,soon:0}; let mb=0;
+  cs.forEach(c=>{ const s=coverState(c); cnt[s]=(cnt[s]||0)+1;
+    if(c.ready) cnt.ready++;
+    if(s==='lit') mb+=(c.sizeMB||0); });
+  const todo=Math.max(0,cnt.ready-cnt.lit-cnt.prog-cnt.fail);   /* 待下载＝可下载但还没下 */
   let h=`<div class="topbar">
     <div class="ttitle">课程库</div>
     <a class="tbBack" href="#/home">‹ 返回</a></div>
-  <div class="tip" style="margin-bottom:12px">点封面：添加并自动下载 · 下载中再点暂停 · 长按封面移除。</div>
-  <div class="coGrid">${cs.map(renderStoreCard).join('')}</div>`;
+  <div class="tip" style="margin-bottom:12px">点封面：添加并自动下载 · 下载中再点暂停 · 长按移除</div>
+  <div class="coGrid">${cs.map(renderStoreCard).join('')}</div>
+  <div class="stfoot"><span>已下载 ${cnt.lit} 门 · 下载中 ${cnt.prog} 门 · 待下载 ${todo} 门${cnt.soon?` · 筹备中 ${cnt.soon} 门`:''}</span><span>${mb>0?'约 '+mb+'MB':'未占用空间'}</span></div>`;
   if(codes.length){
     h+=`<div class="sec"><h2>课程码</h2>
       <div class="codeRow"><input id="codeIn" placeholder="输入老师给的课程码" autocomplete="off" autocapitalize="characters">
@@ -936,8 +1131,12 @@ function cells(){
   for(let n=1;n<=total;n++){
     const p=o[n], cls=p?(p.reviews>=OFFSETS.length?'done':p.firstLearnAt?'doing':''):'';
     const due=dueSet.has(n);
-    const label=(p&&p.firstLearnAt)?(p.reviews>=OFFSETS.length?'通关':'第'+(p.reviews+1)+'轮'):'未学';
-    h+=`<div class="cell ${cls} ${due?'due':''}" data-go="${lessonHref(n,cid)}" data-t="${(TITLES[n-1]||'').toLowerCase()}"><b>L${n}</b><span>${label}</span></div>`;
+    /* 超过 3 天宽限仍在排队 → 标「未通关」，不静默清零轮次 */
+    const nd=(p&&p.firstLearnAt)?nextDue(p):0;
+    const over=!!nd&&(Date.now()-nd>REV_GRACE_MS);
+    const label=(p&&p.firstLearnAt)?(p.reviews>=OFFSETS.length?'通关':(over?'未通关':'第'+(p.reviews+1)+'轮')):'未学';
+    const tipTxt=(p&&p.firstLearnAt)?`第 ${(p.reviews||0)+1} 轮${over?'（已超出 3 天宽限）':''}`:'';
+    h+=`<div class="cell ${cls} ${due?'due':''}${over?' miss':''}" title="${esc(tipTxt)}" data-go="${lessonHref(n,cid)}" data-t="${(TITLES[n-1]||'').toLowerCase()}"><b>L${n}</b><span>${label}</span></div>`;
   }
   return h;
 }
@@ -964,48 +1163,158 @@ document.addEventListener('input',e=>{
 function renderLesson(){
   const p=prog(CUR.no), d=CUR.data;
   const rev=CUR.mode==='rev';
-  const steps=rev?['盲听','难句补练','录音']:STAGES;
-  if(rev&&CUR.rstep==null) CUR.rstep=0;
+  if(rev){
+    if(CUR.revDoneShown) return renderRevDone();      /* 屏 8：完成本轮 */
+    if(CUR.rstep==null) return renderRevEntry(p,d);   /* 屏 7：到期入口 */
+  }
+  const steps=rev?REV_STEPS:STAGES;                   /* 复习只跑后三段，盲听不重跑 */
   const cur=rev?CUR.rstep:(p.stage??0);
   let h=`<div class="topbar">
     <h1 style="flex:1;min-width:0;font-size:19px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">L${d.no} · ${esc(d.title)}</h1>
     <a class="tbBack" href="#/c/${curCourse()}">‹ 返回</a></div>
-  <div class="tip">${esc(d.titleZh)} · ${d.sentences.length} 句 ${rev?`· 第 ${p.reviews+1} 轮`:''}</div>
-  <div class="stepper">${steps.map((s,i)=>`<div class="st s${rev?[0,2,3][i]:i} ${i===cur?'on':''}" data-act="jump" data-v="${i}">${s}</div>`).join('')}</div>
+  <div class="tip">${esc(d.titleZh)} · ${d.sentences.length} 句 ${rev?`· 第 ${(p.reviews||0)+1} 轮`:''}</div>
+  <div class="stepper">${steps.map((s,i)=>{ const k=rev?i+1:i; return `<div class="st s${k} ${i===cur?'on':''}" data-act="jump" data-v="${i}">${s}</div>`; }).join('')}</div>
   <div id="stage"></div>`;
   $('#app').innerHTML=h;
   renderStage();
+}
+/* —— 屏 7：到期入口（盲听只在首学做一次，这里显示为已完成） —— */
+function renderRevEntry(p,d){
+  const round=(p.reviews||0)+1;
+  const nd=nextDue(p);
+  const late=!!nd&&(Date.now()-nd>REV_GRACE_MS);
+  $('#app').innerHTML=`<div class="topbar">
+    <h1 style="flex:1;min-width:0;font-size:19px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">L${d.no} · ${esc(d.title)}</h1>
+    <a class="tbBack" href="#/c/${curCourse()}">‹ 退出</a></div>
+  <div class="rev-entry">
+    <div class="rev-ttl">第 ${round} 轮 · 该复习了</div>
+    <div class="rev-card">
+      <div class="rev-lab">本轮三段</div>
+      <div class="rev-pills">${REV_STEPS.map(s=>`<span class="pill">${s}</span>`).join('')}</div>
+      <div class="rev-blind"><span class="pill mute">盲听 ✓ 已完成</span></div>
+    </div>
+    ${late?`<div class="rev-note" style="color:var(--warn)">已超出 3 天宽限，本轮将记为补做</div>`:''}
+    <div class="rev-acts">
+      <button class="fbtn" data-act="revbegin">开始本轮</button>
+      <button class="fbtn ghost sm" data-act="revlater">晚点再做（3 天内补做不算漏）</button>
+    </div>
+  </div>`;
+}
+/* —— 屏 8：完成本轮（7 轮时间轴 + 本轮做了什么） —— */
+function renderRevDone(){
+  const p=prog(CUR.no), d=CUR.data, V=CUR.revDoneShown;
+  const reviews=p.reviews||0, last=OFFSETS.length;
+  /* 时间轴只画轮次位图：首学 + 第 1..7 轮；已过轮次打勾，本轮为当前位，之后待做 */
+  const dots=[`<span class="dot done sm">✓</span>`];
+  for(let i=1;i<=last;i++){
+    if(i>1) dots.push('<span class="ln"></span>');
+    const cls=i<reviews?'done':(i===reviews?'now':'');
+    dots.push(`<span class="dot ${cls}">${i<reviews?'✓':i}</span>`);
+  }
+  const pills=REV_STEPS.map((s,i)=>`<span class="pill${V.s[i]?'':' pc'}">${s} ${V.s[i]?'✓':'—'}</span>`).join('');
+  $('#app').innerHTML=`<div class="topbar">
+    <h1 style="flex:1;min-width:0;font-size:19px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">第 ${V.round} 轮完成</h1>
+    <a class="tbBack" href="#/c/${curCourse()}">‹ 退出</a></div>
+  <div class="rev-done-wrap">
+    <div class="rev-ttl" style="text-align:center">本轮完成</div>
+    <div class="rnd">${dots.join('')}</div>
+    <div class="rndlab"><span>首学</span><span>第 ${V.round} 轮</span><span>通关</span></div>
+    <div class="rev-card" style="margin:22px 0 0">
+      <div class="rev-lab">本轮做了什么</div>
+      <div class="rev-pills">${pills}</div>
+    </div>
+    <div class="rev-note" style="text-align:center">${V.round>=last?'7 轮复习已全部完成，本课通关':`下次复习：${fmtDate(isoOf(nextDue(p)))}`}${p.revMiss?` · 未通关 ${p.revMiss} 轮`:''}</div>
+    ${V.late?`<div class="rev-note" style="text-align:center;color:var(--warn)">已超出 3 天宽限，本轮记为补做</div>`:''}
+    <div class="rev-acts">
+      <button class="fbtn" data-act="revclose">回到课程</button>
+      <button class="fbtn ghost sm" data-act="recshare">分享给家人</button>
+    </div>
+  </div>`;
 }
 function renderStage(){
   const p=prog(CUR.no), d=CUR.data, rev=CUR.mode==='rev';
   const el=$('#stage');
   const step=rev?CUR.rstep:p.stage;
   if(rev){
-    el.innerHTML=[stageBlind,stageHardDrill,stageRetell][step]();
+    /* 复习三段：精听 → 跟读 → 录音（无盲听、无难句补练） */
+    el.innerHTML=[stageIntensive,stageShadow,stageRetell][step]();
   }else{
     el.innerHTML=[stageBlind,stageIntensive,stageShadow,stageRetell][step]();
   }
+  /* 盲听首学：渲染后自动启动无字播放（同一 phase 只启动一次） */
+  if(!rev && step===0 && CUR.blind && CUR.blind.phase==='playing' && !CUR.blindStarted){
+    CUR.blindStarted=true; blindStart();
+  }
+  /* 精听：绑定卡片左右手势；复习轮记录已走过的句卡（精听段的有效提取判据） */
+  if((!rev&&step===1)||(rev&&step===0)){
+    bindIntGesture();
+    if(rev&&CUR.intSi!=null){
+      const st=revState(p);
+      if(!st.seen[CUR.intSi]){ st.seen[CUR.intSi]=1; saveProgress(); }
+    }
+  }
+  /* 跟读 / 录音：把焦点行滚到容器中部 */
+  const isShadow=(!rev&&step===2)||(rev&&step===1);
+  const isRec=(!rev&&step===3)||(rev&&step===2);
+  if(isShadow||isRec){
+    const ks=document.getElementById('kstage'), now=ks&&ks.querySelector('.krow.now');
+    if(ks&&now){ try{ ks.scrollTop=now.offsetTop-ks.clientHeight/2+now.offsetHeight/2; }catch(e){} }
+  }
   if(CUR.afterRender){ const f=CUR.afterRender; CUR.afterRender=null; f(); }
 }
-/* —— 精听 —— */
+/* —— 精听：Anki 句卡 + 左右手势切卡（P2-2） —— */
 function stageIntensive(){
-  const p=prog(CUR.no), d=CUR.data;
-  const n=Object.keys(p.listened).length, total=d.sentences.length;
-  let h=`<div class="sec"><h2>逐句精听</h2>${tipQ('int','点句子播放，句子下方会显示中文核对。听不懂的句子点 ★ 收藏，卡片页会自动生成记忆卡。')}
-    <div class="bar"><i style="width:${Math.round(n*100/total)}%"></i></div>
-    <div class="tip" style="margin-top:4px">${n}/${total}</div>`;
-  d.sentences.forEach((s,i)=>{
-    const star=p.hard.includes(i)?' on':'';
-    h+=`<div class="sent ${p.si===i?'cur':''}" id="sn${i}" data-act="plays" data-i="${i}" style="cursor:pointer">
-      <span class="idx">${i+1}</span>
-      <div class="tt">
-        <div class="en">${esc(s.en)}</div><div class="zh" id="zh${i}" style="display:none">${esc(s.zh)}</div>
-      </div>
-      <button class="star${star}" data-act="star" data-i="${i}" title="收藏难句">★</button>
-    </div>`;
-  });
-  h+=`<div style="margin-top:12px"><button class="btn" data-act="tostage" data-v="2">进入跟读 →</button></div></div>`;
-  return h;
+  const p=prog(CUR.no), d=CUR.data, total=d.sentences.length;
+  if(CUR.intSi==null) CUR.intSi=p.si||0;
+  if(CUR.intSi>=total) CUR.intSi=0;
+  if(!CUR.lang) CUR.lang='bi';   /* 中/英/双语，与跟读共用 */
+  const i=CUR.intSi, s=d.sentences[i];
+  const sEN=(CUR.lang==='zh')?'':`<div class="ankiEn">${esc(s.en)}</div>`;
+  const sZH=(CUR.lang==='en')?'':`<div class="ankiZh">${esc(s.zh)}</div>`;
+  const star=p.hard.includes(i)?' on':'';
+  const heard=!!p.listened[i];
+  /* 进度时间：优先用句子 t/t2，兜底展示总时长比例 */
+  const pct=Math.round((i+1)*100/total);
+  const seg=(v,label)=>`<span class="${CUR.lang===v?'on':''}" data-act="intlang" data-v="${v}">${label}</span>`;
+  return `<div class="int-wrap">
+    <div class="int-card" id="intCard">
+      <div class="ankiTop"><span class="ankiTag">句卡 ${i+1} / ${total}</span>
+        <span class="ankiFav${star?' on':''}" data-act="star" data-i="${i}" title="收藏难句">★ 收藏</span></div>
+      <div class="ankiBody">${heard?'':''}${sEN}${sZH}</div>
+      <div class="ankiFoot"><span>点播放听本句</span><span>${pad((p.reviews||0)+1)} / ${pad(OFFSETS.length)} 轮</span></div>
+    </div>
+    <div class="int-tip">← 左右滑动切句 →</div>
+    <div class="int-bar">
+      <div class="int-lang"><span class="seg">${seg('zh','中')}${seg('en','英')}${seg('bi','双语')}</span></div>
+      <div class="int-prog"><div class="int-track"><i style="width:${pct}%"></i><b style="left:${pct}%"></b></div></div>
+    </div>
+    <div class="int-ctl">
+      <button class="int-mini" data-act="intprev" aria-label="上一句"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 5h2v14H6zM20 5l-10 7 10 7z"/></svg></button>
+      <button class="int-play" data-act="intplay" aria-label="播放本句"><svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5l11 7-11 7z"/></svg></button>
+      <button class="int-mini" data-act="intnext" aria-label="下一句"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 5h2v14h-2zM4 5l10 7-10 7z"/></svg></button>
+    </div>
+    <div style="margin:14px 16px 0"><button class="btn" style="width:100%" data-act="tostage" data-v="${CUR.mode==='rev'?1:2}">进入跟读 →</button></div>
+  </div>`;
+}
+/* 绑定精听卡片左右手势：仅横向位移超阈值生效 */
+function bindIntGesture(){
+  const card=document.getElementById('intCard'); if(!card) return;
+  let x0=null,y0=null;
+  card.addEventListener('touchstart',e=>{ const t=e.changedTouches[0]; x0=t.clientX; y0=t.clientY; },{passive:true});
+  card.addEventListener('touchend',e=>{
+    if(x0==null) return; const t=e.changedTouches[0];
+    const dx=t.clientX-x0, dy=t.clientY-y0;
+    if(Math.abs(dx)>50 && Math.abs(dx)>Math.abs(dy)*1.4){ intStep(dx<0?1:-1); }
+    x0=y0=null;
+  },{passive:true});
+}
+function intStep(dir){
+  const total=CUR.data.sentences.length;
+  const ni=Math.max(0,Math.min(total-1,(CUR.intSi||0)+dir));
+  if(ni===CUR.intSi) return;
+  AU.pause(); CUR.intSi=ni;
+  const p=prog(CUR.no); p.si=ni; saveProgress();
+  renderStage();   /* 切卡后暂停并复位，不自动播放、不写 reviews */
 }
 function sentDetail(s){
   let h='';
@@ -1016,66 +1325,220 @@ function sentDetail(s){
 }
 /* —— 跟读 —— */
 function stageShadow(){
-  const p=prog(CUR.no), d=CUR.data;
-  if(CUR.si==null) CUR.si=p.si||0;
-  if(!CUR.loops) CUR.loops=1;
-  if(CUR.shReveal===undefined) CUR.shReveal=false;   /* 盲跟档：默认遮原文 */
-  const s=d.sentences[CUR.si];
-  const n=Object.values(p.shadow).filter(v=>v>0).length;
-  return `<div class="shadow">
-    <div style="display:flex;align-items:center;gap:8px">
-      <button class="btn sm g" data-act="ps">← 上一句</button>
-      <b style="flex:1;text-align:center">${CUR.si+1} / ${d.sentences.length}</b>
-      <button class="btn sm g" data-act="ns">下一句 →</button></div>
-    <div class="bar" style="margin:10px 0"><i style="width:${Math.round(n*100/d.sentences.length)}%"></i></div>
-    <div id="shTxt" class="${CUR.shReveal?'':'blurred'}"><div class="big">${esc(s.en)}</div><div class="tip" id="zhx">参考中文：${esc(s.zh)}</div></div>
-    <div style="margin:6px 0"><button class="btn sm" data-act="revsh">${CUR.shReveal?'🙈 隐藏原文（盲跟）':'👁 揭示原文核对'}</button></div>
-    <div class="cnt">循环
-      ${[1,3,5].map(n=>`<button class="btn sm ${CUR.loops===n?'':'g'}" data-act="loop" data-v="${n}">×${n}</button>`).join('')}
-      <span class="pill" id="loopLeft">剩 ${CUR.loopsLeft??CUR.loops} 遍</span>
-      <button class="play" id="btnPlay" data-act="plays" data-i="${CUR.si}">▶</button></div>
-    <div class="ab">
-      <button class="btn sm g" data-act="rec" id="btnRec">● 录跟读</button>
-      <button class="btn sm g" data-act="abmine" id="btnMine" ${CUR.blob?'':'disabled'}>▶ 我的录音</button>
-      <button class="btn sm g" data-act="aborig">▶ 原声</button>
-      ${STT_AVAIL?'<button class="btn sm" data-act="stt" id="btnStt">识别评分</button>':''}
+  const p=prog(CUR.no), d=CUR.data, total=d.sentences.length;
+  if(CUR.shSi==null) CUR.shSi=p.si||0;
+  if(CUR.shSi>=total) CUR.shSi=0;
+  if(!CUR.lang) CUR.lang='bi';
+  if(!CUR.loops || (CUR.loops!==1&&CUR.loops!==3)) CUR.loops=1;  /* 只 1↔3 两档 */
+  const cur=CUR.shSi;
+  /* 可见行窗口：横屏5行 / 竖屏7行（CSS 控制实际高度，这里给足够行） */
+  const half=3;
+  let rows='';
+  d.sentences.forEach((s,i)=>{
+    const now=i===cur, cls=now?'now':'dim';
+    const en=(CUR.lang==='zh')?'':`<div class="en">${esc(s.en)}</div>`;
+    const zh=(CUR.lang==='en')?'':`<div class="zh">${esc(s.zh)}</div>`;
+    rows+=`<div class="krow ${cls}" data-act="shrow" data-i="${i}">${en}${zh}</div>`;
+  });
+  const segLang=['zh','en','bi'].map(v=>`<span class="${CUR.lang===v?'on':''}" data-act="intlang" data-v="${v}">${{zh:'中',en:'英',bi:'双语'}[v]}</span>`).join('');
+  const segLoop=[1,3].map(n=>`<span class="${CUR.loops===n?'on':''}" data-act="loopsel" data-v="${n}">${n} 遍</span>`).join('');
+  const pct=Math.round((cur+1)*100/total);
+  return `<div class="shadow-wrap">
+    <div class="kstage" id="kstage">${rows}</div>
+    <div class="kplayer">
+      <button class="kplay" data-act="shplay" aria-label="播放/暂停"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5l11 7-11 7z"/></svg></button>
+      <div class="ktrack"><i style="width:${pct}%"></i><b style="left:${pct}%"></b></div>
+      <span class="ktime">${pad(cur+1)} / ${pad(total)}</span>
     </div>
-    <div class="tip">我的跟读：<span id="recState">${CUR.blob?'已录 ✓（重新录会覆盖）':'未录制'}</span></div>
-    <div>自评：<span class="stars" data-act="ratewrap">${[1,2,3,4,5].map(v=>`<i class="${(p.shadow[CUR.si]||0)>=v?'on':''}" data-act="rate" data-v="${v}">★</i>`).join('')}</span></div>
-    <div class="grade" id="grade">${CUR.grade||''}</div>
-    <div style="margin-top:12px"><button class="btn" data-act="tostage" data-v="3">进入录音 →</button></div>
+    <div class="ktool">
+      <div class="seg">${segLang}</div>
+      <div class="seg">${segLoop}</div>
+      <button class="fbtn sm" data-act="tostage" data-v="${CUR.mode==='rev'?2:3}">读完了 →</button>
+    </div>
   </div>`;
 }
-/* —— 盲听 —— */
+/* 聚焦到跟读某句（滚动容器居中 + 不自动播放） */
+function shFocus(i){
+  const total=CUR.data.sentences.length;
+  const ni=Math.max(0,Math.min(total-1,i));
+  CUR.shSi=ni; const p=prog(CUR.no); p.si=ni; saveProgress();
+  renderStage();
+}
+/* —— 盲听：无字播 1 遍 → 出题 → 答对直入/答错重听/再错揭底（11-18 拍板） —— */
 function stageBlind(){
   const p=prog(CUR.no), d=CUR.data;
-  return `<div class="sec"><h2>盲听整段 ${tipQ('blind','先看问题预测内容，再不看字幕完整听一遍，检验自己听懂了多少。听不出来先忍住，听完再揭晓字幕。')}</h2>
-    ${d.question?`<div class="detail"><b>📢 本课问题 · 听前先预测</b><div class="en">${esc(d.question.en)}</div><div class="zh">${esc(d.question.zh)}</div></div>`:''}
-    <div style="margin:8px 0"><button class="btn" data-act="playall">▶ 完整播放</button></div>
-    <div id="blindBox" class="${p.blindDone?'':'blur'}" style="padding:4px 0">
-      ${d.sentences.map((s,i)=>`<div class="sent"><span class="idx">${i+1}</span>
-        <div class="tt"><div class="en">${esc(s.en)}</div><div class="zh">${esc(s.zh)}</div></div></div>`).join('')}
+  if(!CUR.blind) CUR.blind={tries:0,showAnswer:false,phase:'playing',picked:-1};
+  const B=CUR.blind;
+  /* 进入即无字播 1 遍：只给一个大号聆听提示，不显示题干/选项/字幕/答案 */
+  if(B.phase==='playing'){
+    return `<div class="blind-wrap">
+      <div class="blind-listen">
+        <div class="blind-ear"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15v-3a8 8 0 0 1 16 0v3"/><path d="M4 15h3v5H5.5A1.5 1.5 0 0 1 4 18.5z"/><path d="M20 15h-3v5h1.5A1.5 1.5 0 0 0 20 18.5z"/></svg></div>
+        <div class="blind-ttl">仔细听</div>
+        <div class="blind-sub" id="blindListenState">正在播放全文，听完会自动出题…</div>
+        <button class="btn sm g" data-act="blindreplay" id="blindReplay" style="display:none;margin-top:14px">↻ 再听一遍</button>
+      </div>
+      <div class="tip" style="text-align:center;margin-top:8px">盲听只在首次学习做一次，不计分、不进复习。</div>
+    </div>`;
+  }
+  /* 出题态：题干 + 3 选项；答错重听后回到同一题 */
+  return `<div class="blind-wrap" id="blindQuiz">
+    <div class="blind-q">${esc((d.question&&d.question.en)||'')}</div>
+    <div class="blind-opts" id="blindOpts">
+      ${(CUR.blindOpt?CUR.blindOpt.options:[]).map((o,i)=>{
+        let cls='blind-opt';
+        if(B.showAnswer && i===CUR.blindOpt.correctIdx) cls+=' right';
+        else if(B.picked===i && i!==CUR.blindOpt.correctIdx) cls+=' wrong';
+        return `<button class="${cls}" data-act="blindpick" data-i="${i}"><b>${'ABC'[i]}</b><span>${esc(o)}</span></button>`;
+      }).join('')}
     </div>
-    <div style="margin:10px 0;display:flex;gap:8px;flex-wrap:wrap">
-      <button class="btn sm g" data-act="reveal" id="btnReveal">👁 揭晓字幕</button>
-      <label style="display:flex;align-items:center;gap:6px;font-size:14px"><input type="checkbox" class="ck" data-act="blinddone" ${p.blindDone?'checked':''}> 我已盲听完毕</label>
-    </div>
-    <div><button class="btn" data-act="tostage" data-v="${CUR.mode==='rev'?1:1}">进入精听 →</button></div></div>`;
+    ${B.showAnswer?`<div class="blind-reveal"><b>正确答案：${'ABC'[CUR.blindOpt.correctIdx]}</b> ${esc(CUR.blindOpt.options[CUR.blindOpt.correctIdx])}
+      <div style="font-size:12px;color:var(--sub);margin-top:2px">${esc((CUR.blindOpt.zh||[])[CUR.blindOpt.correctIdx]||'')}</div></div>
+      <button class="btn" style="width:100%;margin-top:10px" data-act="blind2jingting">进入精听 →</button>`:
+      `<button class="btn ghost sm" style="display:block;margin:12px auto 0" data-act="blindhint">显示中文提示</button>
+       <div class="blind-hint" id="blindHint" style="display:none">${esc((d.question&&d.question.zh)||'')}</div>
+       <div class="tip" style="text-align:center;margin-top:10px">作答 ${B.tries} / 2 · 答错自动重听一遍</div>`}
+  </div>`;
 }
-/* —— 复述 —— */
+/* 异步启动盲听播放：加载选项 → 无字播全文 → 播完出题 */
+async function blindStart(){
+  const B=CUR.blind;
+  const opts=await loadBlindOpt();
+  CUR.blindOpt=opts[String(CUR.no)]||null;
+  /* 无选项兜底：仍可听，播完直接进精听提示 */
+  const state=document.getElementById('blindListenState');
+  const replay=document.getElementById('blindReplay');
+  const t0=Date.now();
+  playAll(()=>{
+    STATS.blindSec=(STATS.blindSec||0)+Math.round((Date.now()-t0)/1000); saveStats();
+    if(replay) replay.style.display='';
+    if(state) state.textContent='听完了。准备出题…';
+    setTimeout(()=>{ if(window.el2BlindDone) window.el2BlindDone(); },600);
+  });
+}
+/* 播完出题的唯一入口：正常回调与验收脚本共用（headless 下音频不真播时用） */
+window.el2BlindDone=function(){
+  const B=CUR.blind; if(!B) return;
+  B.phase='question'; CUR.blindStarted=false; renderStage();
+};
+/* —— 录音：全篇模式（仅中文）· 断点录制 · 完成卡（屏 5/6） —— */
 function stageRetell(){
   const p=prog(CUR.no), d=CUR.data;
-  return `<div class="sec"><h2>段落复述</h2>${tipQ('retell','合上原文，用自己的话把这一课讲出来（英语）。先说清开头 → 经过 → 结尾，不追求逐词还原，说出意思就是成功。')}
-    <div style="margin:8px 0"><button class="btn rd" data-act="rec" data-retell="1" id="btnRec">● 录复述</button>
-      <button class="btn sm g" data-act="abmine" id="btnMine" ${CUR.blob?'':'disabled'}>▶ 回放我的复述</button>
-      <span class="tip" id="recState" style="margin-left:8px">${CUR.blob?'已录 ✓':'未录制'}</span></div>
-    <div style="margin:8px 0"><button class="btn sm g" data-act="retellhint">${CUR.retellHint?'隐藏提示（脱稿）':'🔑 看提示复述'}</button></div>
-    ${CUR.retellHint?`<div class="detail">${d.sentences.map((ss,i)=>`<div style="margin:3px 0"><b>${i+1}.</b> ${esc(ss.en.split(/\s+/).slice(0,4).join(' '))}…</div>`).join('')}</div>`:''}
-    <div class="detail">自检三问：① 谁做了什么？② 中间发生了什么？③ 结局/结果如何？</div>
-    <label style="display:flex;align-items:center;gap:6px;font-size:14px;margin:8px 0">
-      <input type="checkbox" class="ck" data-act="retelldone" ${p.retellDone?'checked':''}> 我完成复述</label>
-    ${finBlock()}
+  const body=d.sentences.slice(1);        /* 跳过第 0 句（题干/标题），只滚课文正文 */
+  const total=body.length;
+  if(!CUR.rec) CUR.rec={state:'idle',baseEl:0,segStart:0,cur:0,totalMs:0};
+  const R=CUR.rec;
+  if(R.state==='done') return recDoneCard();
+  const cur=Math.min(R.cur||0,total-1);
+  const rows=body.map((s,i)=>{
+    const done=i<cur, now=i===cur, cls=now?'now':(done?'':'dim');
+    return `<div class="krow ${cls} rec-row${done?' done':''}" data-act="recrow" data-i="${i}"><div class="zh">${esc(s.zh)}</div></div>`;
+  }).join('');
+  const rsegs=[...Array(total)].map((_,i)=>{
+    const c=i<cur?'done':(i===cur&&R.state==='recording'?'now':'');
+    return `<span class="rseg ${c}"></span>`;
+  }).join('');
+  const stateLbl=R.state==='recording'?'● 录制中':R.state==='paused'?'已暂停':'未开始';
+  const stateOn=R.state==='recording'?' on':'';
+  const pauseLbl=R.state==='paused'?'继续':'暂停';
+  const el=R.baseEl+(R.state==='recording'?(Date.now()-R.segStart)/1000:0);
+  return `<div class="shadow-wrap rec-wrap">
+    <div class="khead2"><span>背诵 · 全篇 · 仅中文</span><a href="#/c/${curCourse()}">‹ 退出</a></div>
+    <div class="kstage" id="kstage">${rows}</div>
+    <div class="ktool">
+      <span class="pill">第 ${cur+1} / ${total} 句</span>
+      <span class="pill rec-state${stateOn}">${stateLbl}</span>
+    </div>
+    <div class="rec-prog">
+      <div class="rsegs">${rsegs}</div>
+      <div class="rec-time"><span class="rec-time-now">${fmtSec(el)}</span><span>${R.state==='paused'?'已录片段保留':''}</span></div>
+    </div>
+    <div class="rec-ctl">
+      <button class="fbtn sm" data-act="recpause" ${R.state==='idle'?'disabled':''}>${pauseLbl}</button>
+      <button class="rec-big${R.state==='recording'?' on':''}" data-act="rectoggle" aria-label="录音">${R.state==='recording'?'■':'●'}</button>
+      <button class="fbtn sm" data-act="recfinish" ${(R.state==='idle'&&!R.baseEl)?'disabled':''}>完成录音</button>
+    </div>
+    <div class="rec-hint">断点录制可暂停继续，最后合成完整录音</div>
+    ${R.error?`<div class="rec-hint" style="color:var(--bad)">录音不可用：${esc(R.error)}</div>
+      <div style="text-align:center;padding-bottom:8px"><button class="fbtn sm" data-act="recback">跳过录音，直接完成</button></div>`:''}
   </div>`;
+}
+function fmtSec(sec){
+  sec=Math.max(0,Math.round(sec||0));
+  const m=Math.floor(sec/60), s=sec%60;
+  return (m>0?m+':'+pad(s):'00:'+pad(s));
+}
+function recDoneCard(){
+  const p=prog(CUR.no), d=CUR.data, rev=CUR.mode==='rev';
+  const dur=Math.round((CUR.rec.totalMs||0)/1000);
+  const durTxt=dur>=60?Math.floor(dur/60)+' 分 '+(dur%60)+' 秒':dur+' 秒';
+  return `<div class="shadow-wrap rec-done">
+    <div class="khead2"><span>本课完成</span><a href="#/c/${curCourse()}">‹ 退出</a></div>
+    <div class="reccard">
+      <div class="rct">录音完成</div>
+      <div class="rcs">第 ${d.no} 课 · ${esc(d.title)}</div>
+      <div class="rcrow"><span>录音方式</span><b>全篇模式（断点录制）</b></div>
+      <div class="rcrow"><span>用时</span><b>${durTxt}</b></div>
+    </div>
+    <div class="rcacts">
+      <button class="fbtn" data-act="recshare">分享到微信群</button>
+      <button class="fbtn ghost" data-act="recback">${rev?`完成第 ${p.reviews+1} 轮`:'完成，返回课程'}</button>
+    </div>
+  </div>`;
+}
+/* 录音控制：MediaRecorder pause/resume 保证最后一条完整文件 */
+let RECS=null;
+async function recBegin(){
+  const R=CUR.rec;
+  try{
+    if(!REC){
+      RECS=await navigator.mediaDevices.getUserMedia({audio:true});
+      RECCHUNKS=[]; REC=new MediaRecorder(RECS);
+      REC.ondataavailable=ev=>{ if(ev.data&&ev.data.size) RECCHUNKS.push(ev.data); };
+      REC.onstop=()=>{
+        try{ RECS.getTracks().forEach(t=>t.stop()); }catch(e){}
+        CUR.blob=new Blob(RECCHUNKS,{type:REC.mimeType||'audio/webm'});
+        try{ recSave(`${curCourse()}_${CUR.no}_recall`,CUR.blob); }catch(e){}
+        STATS.recN=(STATS.recN||0)+1; saveStats();
+        R.state='done'; R.totalMs=Math.round(R.baseEl*1000);
+        REC=null; RECS=null;
+        clearInterval(window.__recT);
+        if(CUR.mode==='rev'){ revMark(2); finishReview(); return; }
+        renderStage();
+      };
+      REC.start();
+    }else if(REC.state==='paused'){ REC.resume(); }
+    R.segStart=Date.now(); R.state='recording';
+    clearInterval(window.__recT); window.__recT=setInterval(recTick,300);
+    renderStage();
+  }catch(err){
+    CUR.rec.error=String(err&&err.message||err);
+    toast('麦克风不可用，可跳过录音直接完成');
+    renderStage();
+  }
+}
+function recPause(){
+  const R=CUR.rec;
+  if(REC&&REC.state==='recording'){
+    try{ REC.pause(); }catch(e){}
+    R.baseEl+=(Date.now()-R.segStart)/1000; R.state='paused';
+    clearInterval(window.__recT); renderStage();
+  }else if(R.state==='paused'){ recBegin(); }
+}
+function recFinish(){
+  const R=CUR.rec;
+  if(!REC) return;
+  if(R.state==='recording') R.baseEl+=(Date.now()-R.segStart)/1000;
+  try{ REC.stop(); }catch(e){}
+}
+function recTick(){
+  const R=CUR.rec;
+  if(!R||R.state!=='recording'||!CUR.data) return;
+  const el=R.baseEl+(Date.now()-R.segStart)/1000;
+  const ss=CUR.data.sentences.slice(1); let ci=0;
+  for(let i=0;i<ss.length;i++){ if((ss[i].t||0)<=el+0.3) ci=i; else break; }
+  if(ci!==R.cur){ R.cur=ci; renderStage(); }
+  else{ const t=document.querySelector('.rec-time-now'); if(t) t.textContent=fmtSec(el); }
 }
 function finBlock(){
   const p=prog(CUR.no), rev=CUR.mode==='rev';
@@ -1085,8 +1548,8 @@ function finBlock(){
   }
   if(p.firstLearnAt){
     const nd=nextDue(p);
-    return `<div class="detail" style="margin-top:10px">✓ 首次学习已完成（${fmtDate(new Date(p.firstLearnAt).toLocaleString())}）。
-      ${nd?`下一轮：<b>${fmtDate(new Date(nd).toLocaleString())}</b>`:'7 轮复习全部完成，本课通关 🎉'}
+    return `<div class="detail" style="margin-top:10px">✓ 首次学习已完成（${fmtDate(isoOf(p.firstLearnAt))}）。
+      ${nd?`下一轮：<b>${fmtDate(isoOf(nd))}</b>`:'7 轮复习全部完成，本课通关 🎉'}
       <div style="margin-top:8px"><a href="#/home" class="btn sm g" style="text-decoration:none">回首页</a></div></div>`;
   }
   return `<div style="margin-top:10px"><button class="btn ok" data-act="fin">✓ 完成本课</button></div>`;
@@ -1137,7 +1600,25 @@ document.addEventListener('click',async e=>{
     else{arr.push(i); const s=d.sentences[i]; const hard=hardAll(); hard.unshift({cid,no:CUR.no,i,en:s.en,zh:s.zh,pat:s.pat||'',ts:Date.now()}); store.setHard(hard);}
     saveProgress(); el.classList.toggle('on');
   }
+  else if(act==='intlang'){ CUR.lang=el.dataset.v; renderStage(); }
+  else if(act==='intprev'){ intStep(-1); }
+  else if(act==='intnext'){ intStep(1); }
+  else if(act==='intplay'){
+    const s=d.sentences[CUR.intSi||0];
+    playSeg(s.t,s.t2,()=>{ p.listened[CUR.intSi]=1; saveProgress(); syncEnqueue('intensive',0,null); });
+  }
   else if(act==='loop'){ CUR.loops=+el.dataset.v; CUR.loopsLeft=CUR.loops; refreshStage(); }
+  else if(act==='loopsel'){ CUR.loops=+el.dataset.v; renderStage(); }
+  else if(act==='shrow'){ shFocus(+el.dataset.i); }
+  else if(act==='shplay'){
+    const s=d.sentences[CUR.shSi||0];
+    CUR.loopsLeft=CUR.loops;
+    const once=()=>{ CUR.loopsLeft--;
+      if(CUR.loopsLeft>0){ playSeg(s.t,s.t2,once); }
+      else{ CUR.loopsLeft=CUR.loops; p.shadow[CUR.shSi]=1; saveProgress(); syncEnqueue('shadow',0,null); }
+    };
+    once();
+  }
   else if(act==='ps'){ if(CUR.si>0){CUR.si--;CUR.blob=null;CUR.grade='';refreshStage();} }
   else if(act==='ns'){ if(CUR.si<d.sentences.length-1){CUR.si++;CUR.blob=null;CUR.grade='';refreshStage();} }
   else if(act==='rate'){ p.shadow[CUR.si]=+el.dataset.v; STATS.shadowN=(STATS.shadowN||0)+1; saveProgress(); saveStats(); syncEnqueue('shadow',0,+el.dataset.v); refreshStage(); }
@@ -1182,21 +1663,84 @@ document.addEventListener('click',async e=>{
       r.start();
     }catch(err){ btn.disabled=false; btn.textContent='识别评分'; }
   }
-  else if(act==='tostage'){ if(CUR.mode==='rev'){CUR.rstep=+el.dataset.v;} else {p.stage=+el.dataset.v; p.si=CUR.si??p.si; saveProgress();} CUR.blob=null; CUR.grade=''; CUR.loopsLeft=null; renderLesson(); }
-  else if(act==='jump'){
-    if(rev) CUR.rstep=+el.dataset.v; else { p.stage=+el.dataset.v; saveProgress(); }
-    renderLesson();
+  else if(act==='tostage'){
+    if(CUR.mode==='rev'){
+      const v=+el.dataset.v, p0=prog(CUR.no), st=revState(p0);
+      /* 精听 → 跟读：必须走过全部句卡，才算本段有效提取 */
+      if(v===1){
+        const total=CUR.data.sentences.length, seen=Object.keys(st.seen||{}).length;
+        if(seen<total){ toast(`还有 ${total-seen} 句没看，滑完再进跟读`); return; }
+        revMark(0);
+      }
+      /* 跟读 → 录音：点「读完了」即本段有效提取 */
+      if(v===2) revMark(1);
+      CUR.rstep=v;
+    }else{
+      p.stage=+el.dataset.v; p.si=CUR.si??p.si; saveProgress();
+    }
+    CUR.blob=null; CUR.grade=''; CUR.loopsLeft=null; CUR.rec=null; renderLesson();
   }
-  else if(act==='reveal'){ const b=$('#blindBox'); b.classList.toggle('blur'); el.textContent=b.classList.contains('blur')?'👁 揭晓字幕':'🙈 重新遮上'; }
-  else if(act==='blinddone'){ p.blindDone=el.checked; saveProgress(); }
+  else if(act==='rectoggle'){ const R=CUR.rec; if(!R) return; if(R.state==='recording') recPause(); else recBegin(); }
+  else if(act==='recpause'){ recPause(); }
+  else if(act==='recfinish'){ recFinish(); }
+  else if(act==='recrow'){ const R=CUR.rec; if(R&&R.state!=='done'){ R.cur=+el.dataset.i; renderStage(); } }
+  else if(act==='recback'){
+    if(CUR.mode==='rev'){ revMark(2); finishReview(); return; }
+    p.firstLearnAt=p.firstLearnAt||Date.now(); p.stage=3; saveProgress();
+    CUR.rec=null; CUR.blob=null; location.hash='#/c/'+curCourse();
+  }
+  else if(act==='recshare'){
+    (async()=>{
+      const blob=CUR.blob;
+      if(!blob){ toast('还没有录音'); return; }
+      const name=`L${CUR.no}-${(CUR.data&&CUR.data.titleFile)||'recall'}.webm`;
+      try{
+        const file=new File([blob],name,{type:blob.type||'audio/webm'});
+        if(navigator.canShare&&navigator.canShare({files:[file]})){
+          await navigator.share({files:[file],title:'NCE2 L'+CUR.no,text:'我的背诵录音'});
+          toast('已打开分享');
+        }else{ toast('当前环境不支持直接分享，请用系统分享或微信转发'); }
+      }catch(e){ if(!e||e.name!=='AbortError') toast('分享未完成'); }
+    })();
+  }
+  else if(act==='jump'){
+    /* 四段条只读：设计稿 11-17 定稿，不可点自由切换 */
+    return;
+  }
+  else if(act==='blindpick'){
+    /* 点即判定，无提交按钮；不写对错内容，只记次数 */
+    const B=CUR.blind, O=CUR.blindOpt;
+    if(!O||B.showAnswer) return;
+    B.tries++; B.picked=+el.dataset.i;
+    STATS.blindN=(STATS.blindN||0)+1; saveStats();
+    p.blindDone=true; saveProgress();
+    if(B.picked===O.correctIdx){
+      /* 答对 → 直入精听 */
+      p.stage=1; saveProgress(); CUR.blind=null; CUR.blindStarted=false; renderLesson();
+    }else if(B.tries>=2){
+      /* 第 2 次仍错 → 揭底，等用户点「进入精听」 */
+      B.showAnswer=true; renderStage();
+    }else{
+      /* 答错 → 自动再听 1 遍，回同一题重选（回调走统一入口） */
+      B.picked=-1; B.phase='playing'; CUR.blindStarted=true; renderStage();
+      const state=document.getElementById('blindListenState');
+      if(state) state.textContent='再听一遍，听完重新选择…';
+      playAll(()=>{ if(window.el2BlindDone) window.el2BlindDone(); });
+    }
+  }
+  else if(act==='blindreplay'){ /* 播放中手动重听，不计作答 */
+    playAll(()=>{ if(window.el2BlindDone) window.el2BlindDone(); });
+  }
+  else if(act==='blindhint'){ const h=$('#blindHint'); if(h) h.style.display=h.style.display==='none'?'block':'none'; }
+  else if(act==='blind2jingting'){ p.stage=1; saveProgress(); CUR.blind=null; CUR.blindStarted=false; renderLesson(); }
   else if(act==='retelldone'){ p.retellDone=el.checked; saveProgress(); syncEnqueue('retell',0,null); }
   else if(act==='fin'){
     p.firstLearnAt=Date.now(); p.stage=3; saveProgress(); renderLesson();
   }
-  else if(act==='revfin'){
-    p.reviews=Math.min(p.reviews+1,OFFSETS.length); p.lastReviewAt=Date.now(); saveProgress();
-    location.hash='#/home';
-  }
+  else if(act==='revbegin'){ CUR.rstep=0; CUR.revDoneShown=null; renderLesson(); }
+  else if(act==='revlater'){ CUR.rstep=null; CUR.revDoneShown=null; location.hash='#/c/'+curCourse(); }
+  else if(act==='revclose'){ CUR.rstep=null; CUR.revDoneShown=null; location.hash='#/c/'+curCourse(); }
+  else if(act==='revfin'){ finishReview(); }
   else if(act==='playall'){ playAll(); }
 });
 
