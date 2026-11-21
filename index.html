@@ -23,6 +23,13 @@
  --acc:var(--focus);--accBtn:var(--focus);--ok:var(--brand);--badOld:#E03131;
  --stage1:var(--brand);--stage2:var(--focus);--stage3:var(--brand);--stage4:var(--focus)}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+/* ===== 全站隐藏滚动条（APP 视感，2026-11-21 定）=====
+   只去掉轨道/滑块，滚动能力完整保留：触摸拖动、滚轮、键盘 PageDown、拖拽进度条照常。
+   scrollbar-width（Firefox / 新 Chromium）+ ::-webkit-scrollbar（Safari / 旧 Chromium）双写。 */
+*{scrollbar-width:none;-ms-overflow-style:none}
+*::-webkit-scrollbar{width:0;height:0;display:none}
+/* 内层滚动容器：iOS 惯性滚动（滚动条已隐藏，不额外加 overscroll-behavior，避免内层不再把惯性交给页面） */
+.plyrics,.kstage,.card .b,.hchips,.lbooks,.lcaps{-webkit-overflow-scrolling:touch}
 body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Noto Sans SC","Microsoft YaHei",sans-serif;
  background:var(--bg);color:var(--ink);font-size:16px;line-height:1.6;font-variant-numeric:tabular-nums;touch-action:manipulation;padding-bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 .wrap{max-width:880px;margin:0 auto;padding:calc(14px + env(safe-area-inset-top,0px)) calc(14px + env(safe-area-inset-right,0px)) 20px calc(14px + env(safe-area-inset-left,0px))}

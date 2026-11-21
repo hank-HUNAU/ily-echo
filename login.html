@@ -9,6 +9,9 @@
 <style>
   :root{--acc:#10B981;--btn:#3B5BDB;--txt:#212529;--sub:#6C757D;--line:#E9ECEF;--bad:#E03131}
   *{box-sizing:border-box;margin:0;padding:0}
+  /* 全站隐藏滚动条（APP 视感）：只去轨道/滑块，滚动能力保留 */
+  *{scrollbar-width:none;-ms-overflow-style:none}
+  *::-webkit-scrollbar{width:0;height:0;display:none}
   body{font-family:-apple-system,BlinkMacSystemFont,"Noto Sans SC","Segoe UI",Roboto,sans-serif;
        background:linear-gradient(160deg,#F8FAF9 0%,#EAF7F1 100%);min-height:100vh;
        display:flex;align-items:center;justify-content:center;padding:20px;color:var(--txt)}
