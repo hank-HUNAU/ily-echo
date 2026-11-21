@@ -141,6 +141,17 @@ nav.tabs .fabbtn svg{width:26px;height:26px;margin:0;stroke:#fff}
 /* 难句/卡片 的课程筛选 */
 .hchips{display:flex;gap:8px;overflow-x:auto;padding:2px 0 10px;scrollbar-width:none}
 .hchips::-webkit-scrollbar{display:none}
+/* 教材页：筛选胶囊 / 当前课高亮 / 首用引导浮层 */
+.cfilter{padding:8px 14px 0;gap:6px}
+.fchip{display:inline-block;white-space:nowrap;border-radius:999px;padding:5px 10px;font-size:13px;background:#F1F3F5;color:var(--sub);border:1px solid var(--line);cursor:pointer}
+.fchip.on{background:var(--brandSoft);color:var(--focus);border-color:var(--focus)}
+.fchip.due{color:var(--bad);border-color:#EFC4C0;background:#FFF5F4}
+.cell.next{border-color:var(--focus);box-shadow:inset 0 0 0 1px var(--focus)}
+.cell.next span{color:var(--focus);font-weight:600}
+.introMask{position:fixed;inset:0;z-index:800;background:rgba(33,37,41,.45);display:flex;align-items:flex-end;justify-content:center}
+.introMask[hidden]{display:none}
+.introSheet{width:100%;max-width:560px;background:#fff;border-radius:20px 20px 0 0;padding:20px 18px calc(26px + env(safe-area-inset-bottom,0px));max-height:80vh;overflow-y:auto}
+.introSheet .item{padding:10px 2px}
 .hchip{flex:0 0 auto;min-height:44px;border:1.5px solid var(--line);background:#fff;color:var(--sub);border-radius:999px;padding:0 14px;font-size:14.5px;font-family:inherit;cursor:pointer}
 .hchip.on{border-color:var(--acc);background:var(--acc);color:#fff}
 .hchip i{font-style:normal;font-size:13px;opacity:.8;margin-left:3px}
@@ -945,6 +956,7 @@ async function router(){
     const cid=decodeURIComponent(h.slice(4).split('?')[0])||DEF_COURSE;
     const c=catCourse(cid);
     CUR.course=(c&&c.ready)?cid:DEF_COURSE;
+    CUR.cellFilter='all'; CUR.cellQ='';              /* 每次进教材页回到「全部」，筛选/搜索不跨页残留 */
     if(c&&c.ready) renderHome(); else renderCourseSoon(cid);
   }
   else renderCourses();
@@ -1105,86 +1117,106 @@ function renderCourseSoon(cid){
   <div class="sec"><div class="item"><img class="bk2" src="${c.cover}" alt="${esc(c.name)}" style="width:66px;height:88px;border-radius:12px">
     <div class="tt"><div class="en">教材数据准备中</div><div class="meta">${c.lessons||''} 课 · 音频对齐与课件制作进行中，敬请期待</div></div></div></div>`;
 }
+/* 教材页 = 一本书的课表（2026-11-21 IA 定案）：
+   今日任务归「我的课程」tab；本页只留跨课表的接续入口与待复习筛选，新手指引改浮层不占正文 */
+const SCHED_TIP='到期复习由系统自动排程：学完一课后，按 6小时 → 1天 → 2天 → 4天 → 7天 → 21天 → 60天 排 7 轮复习。';
+const CELL_FILTERS=[['all','全部'],['due','待复习'],['new','未学'],['doing','学习中'],['done','通关']];
+function introMarkup(){
+  return `<div class="introMask" id="introMask" hidden><div class="introSheet">
+    <div class="rev-ttl" style="text-align:center">怎么用？三步就上手</div>
+    <div class="item"><div class="tt"><div class="en">① 盲听整课</div><div class="meta">先读题预测，不看字幕完整听一遍，听大意</div></div></div>
+    <div class="item"><div class="tt"><div class="en">② 精听 → 跟读</div><div class="meta">点 ▶ 逐句抠懂每句，难句点 ★ 收藏；再逐句跟读</div></div></div>
+    <div class="item"><div class="tt"><div class="en">③ 录音 → 等 7 轮复习</div><div class="meta">全篇中文提示下脱稿背诵录音；系统自动排 7 轮复习提醒（红点提示）</div></div></div>
+    <button class="btn" id="introGo" style="width:100%;margin-top:8px">我知道了，开始学习</button>
+  </div></div>`;
+}
+function introShow(){ const m=document.getElementById('introMask'); if(m) m.hidden=false; }
+function introHide(persist){
+  const m=document.getElementById('introMask'); if(m) m.hidden=true;
+  if(persist){ try{ localStorage.setItem(LS+'intro','1'); }catch(e){} }
+}
 function renderHome(){
   const cid=curCourse();
   const c=catCourse(cid)||{lessons:96,name:'新概念英语 2',tag:'NCE2 Loop',cover:'covers/nce2_s.jpg'};
   const total=c.lessons||96;
   const due=dueList(cid);
   const s=progStat(cid);
-  const learned=s.learned, done=s.done, cont=s.cont;
-  const nxt=cont?(cont+1<=total?cont+1:1):1;
+  const learned=s.learned, done=s.done;
+  const nextNo=(s.cont||1)<=total?(s.cont||1):1;
+  const flt=CUR.cellFilter||'all';
+  const counts={all:total,due:due.length,new:total-learned,doing:learned-done,done:done};
+  const chips=CELL_FILTERS.map(([k,lab])=>{
+    const cls='fchip'+(k===flt?' on':'')+(k==='due'&&due.length?' due':'');
+    return `<span class="${cls}" data-filter="${k}">${lab} ${counts[k]}</span>`;
+  }).join('');
   let h=`<div class="topbar">
     <h1 style="flex:1;min-width:0;display:flex;align-items:center;gap:8px;font-size:19px;overflow:hidden"><img src="${c.cover}" alt="" style="width:24px;height:32px;border-radius:6px;object-fit:cover;border:0.5px solid var(--line);background:#F1F3F5;flex:0 0 24px"><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(c.name)}</span> <span style="font-size:12px;color:var(--sub);font-weight:400;flex:0 0 auto">${esc(c.tag||'')}</span></h1>
+    <span class="tipQ" id="homeIntroBtn" title="使用说明">?</span>
     <a class="tbBack" href="#/home">‹ 返回</a></div>
-  <div class="sec"><h2>今天要处理 ${tipQ('sched','到期复习由系统自动排程：学完一课后，按 6小时 → 1天 → 2天 → 4天 → 7天 → 21天 → 60天 排 7 轮复习。')}</h2>`;
-  if(due.length){
-    h+=due.map(d=>`<div class="item"><div class="tt"><div class="en">L${d.no} · 第 ${d.round} 轮</div>
-      <div class="meta">${d.overdueDays>0?`<span class="late">已逾期 ${d.overdueDays} 天</span>`:'今日到期'}</div></div>
-      <button class="btn sm" data-go="${lessonHref(d.no,cid,'rev')}">开始</button></div>`).join('');
-  }else{
-    h+=`<div class="empty">今天没有到期复习，${learned?'学一课新的吧':'从 L01 开始吧'}</div>`;
-  }
-  h+=`</div>
-  <div class="sec"><h2>继续学习</h2>
-    <div class="item"><div class="tt"><div class="en">L${cont||1}${cont?'':'（未开始）'}</div>
-      <div class="meta">已学 ${learned}/${total} · 通关 ${done}/${total}</div></div>
-      <button class="btn sm" data-go="${lessonHref(cont||1,cid)}">${learned?'继续':'开始'}</button>
-      <button class="btn sm g" data-go="${lessonHref(nxt,cid)}">下一课</button></div>
-    <div class="bar" style="margin-top:10px"><i style="width:${Math.round(learned*100/total)}%"></i></div>
-    <div class="tip" style="margin-top:4px">总进度 ${Math.round(learned*100/total)}%</div>
-    <div style="margin-top:10px"><button class="btn sm g" id="homeOlBtn">📥 下载离线包</button>
-      <span class="tip" style="margin:0 0 0 8px">下载后断网也能学</span></div>
+  <div class="sec" style="padding:10px 13px;margin-top:8px">
+    <div class="item" style="border:0;padding:0">
+      <div class="tt"><div class="en" style="font-size:15px">接着学 L${nextNo} · ${esc(TITLES[nextNo-1]||'')}</div>
+        <div class="meta">已学 ${learned}/${total} · 通关 ${done}/${total}</div></div>
+      <button class="btn sm" data-go="${lessonHref(nextNo,cid)}">继续</button>
+    </div>
   </div>
-  ${(()=>{ try{ if(localStorage.getItem(LS+'intro')) return ''; }catch(e){ return ''; }
-    return `<div class="sec" id="introBox"><h2>怎么用？三步就上手</h2>
-      <div class="item"><div class="tt"><div class="en">① 盲听整课</div><div class="meta">先读题预测，不看字幕完整听一遍，听大意</div></div></div>
-      <div class="item"><div class="tt"><div class="en">② 精听 → 跟读</div><div class="meta">点 ▶ 逐句抠懂每句，难句点 ★ 收藏；再逐句跟读</div></div></div>
-      <div class="item"><div class="tt"><div class="en">③ 录音 → 等 7 轮复习</div><div class="meta">全篇中文提示下脱稿背诵录音；系统自动排 7 轮复习提醒（红点提示）</div></div></div>
-      <button class="btn" id="introGo" style="width:100%;margin-top:6px">我知道了，开始学习</button></div>`;
-  })()}
-  <div class="sec"><h2>全部课程</h2>
-    <input id="cellQ" placeholder="搜索课号或标题（如 12 / dolphin）" autocomplete="off" style="width:100%;height:46px;border:1.5px solid var(--line);border-radius:12px;padding:0 14px;font-size:16px;outline:none;background:#FBFCFD;margin-bottom:10px">
-    <div class="grid">${cells()}</div></div>
-  <div class="foot">盲听 → 精听 → 跟读 → 录音 → 间隔复习</div>`;
+  <div class="hchips cfilter">${chips}${tipQ('sched',SCHED_TIP)}</div>
+  <input id="cellQ" placeholder="搜索课号或标题（如 12 / dolphin）" autocomplete="off" value="${esc(CUR.cellQ||'')}" style="width:calc(100% - 28px);margin:6px 14px 10px;height:46px;border:1.5px solid var(--line);border-radius:12px;padding:0 14px;font-size:16px;outline:none;background:#FBFCFD">
+  <div class="grid">${cells()}</div>
+  <div class="foot">上滑看全部 ${total} 课 · 红点＝今日到期</div>
+  ${introMarkup()}`;
   $('#app').innerHTML=h;
-  refreshOlUI();
+  applyCellQuery();
+  let seen=false; try{ seen=!!localStorage.getItem(LS+'intro'); }catch(e){}
+  if(!seen) introShow();
 }
 function cells(){
   const cid=curCourse();
   const c=catCourse(cid)||{lessons:96};
   const total=c.lessons||96;
   const dueSet=new Set(dueList(cid).map(d=>d.no));
-  const o=progOf(cid);
+  const o=progOf(cid), flt=CUR.cellFilter||'all';
+  const nextNo=(progStat(cid).cont||1);
   let h='';
   for(let n=1;n<=total;n++){
-    const p=o[n], cls=p?(p.reviews>=OFFSETS.length?'done':p.firstLearnAt?'doing':''):'';
+    const p=o[n], learned=!!(p&&p.firstLearnAt), done=!!(p&&p.reviews>=OFFSETS.length);
+    if(flt==='due'&&!dueSet.has(n)) continue;
+    if(flt==='new'&&learned) continue;
+    if(flt==='doing'&&(!learned||done)) continue;
+    if(flt==='done'&&!done) continue;
+    const cls=p?(done?'done':learned?'doing':''):'';
     const due=dueSet.has(n);
     /* 超过 3 天宽限仍在排队 → 标「未通关」，不静默清零轮次 */
     const nd=(p&&p.firstLearnAt)?nextDue(p):0;
     const over=!!nd&&(Date.now()-nd>REV_GRACE_MS);
-    const label=(p&&p.firstLearnAt)?(p.reviews>=OFFSETS.length?'通关':(over?'未通关':'第'+(p.reviews+1)+'轮')):'未学';
+    const label=(p&&p.firstLearnAt)?(done?'通关':(over?'未通关':'第'+(p.reviews+1)+'轮')):'未学';
     const tipTxt=(p&&p.firstLearnAt)?`第 ${(p.reviews||0)+1} 轮${over?'（已超出 3 天宽限）':''}`:'';
-    h+=`<div class="cell ${cls} ${due?'due':''}${over?' miss':''}" title="${esc(tipTxt)}" data-go="${lessonHref(n,cid)}" data-t="${(TITLES[n-1]||'').toLowerCase()}"><b>L${n}</b><span>${label}</span></div>`;
+    h+=`<div class="cell ${cls} ${due?'due':''}${over?' miss':''}${n===nextNo?' next':''}" title="${esc(tipTxt)}" data-go="${lessonHref(n,cid)}" data-t="${(TITLES[n-1]||'').toLowerCase()}"><b>L${n}</b><span>${label}</span></div>`;
   }
   return h;
+}
+function applyCellQuery(){
+  const inp=document.getElementById('cellQ'); if(!inp) return;
+  const q=inp.value.trim().toLowerCase();
+  document.querySelectorAll('#app .cell').forEach(c=>{
+    const t=(c.getAttribute('data-t')||'')+' '+c.textContent.toLowerCase();
+    c.style.display=(!q||t.includes(q))?'':'none';
+  });
 }
 document.addEventListener('click',e=>{
   const el=e.target.closest('[data-go]');
   if(el){ location.hash=el.getAttribute('data-go'); }
 });
 document.addEventListener('click',e=>{
-  if(e.target.id==='introGo'){ try{ localStorage.setItem(LS+'intro','1'); }catch(err){} const b=document.getElementById('introBox'); if(b) b.remove(); }
-});
-document.addEventListener('click',e=>{
-  if(e.target.closest('#homeOlBtn')||e.target.closest('#olBtn')){ if(window.dlOffline) window.dlOffline(); }
+  if(e.target.closest('#homeIntroBtn')){ introShow(); return; }
+  if(e.target.id==='introGo'){ introHide(true); return; }
+  const f=e.target.closest('[data-filter]');
+  if(f){ CUR.cellFilter=f.dataset.filter; renderHome(); return; }
 });
 document.addEventListener('input',e=>{
   if(e.target.id!=='cellQ') return;
-  const q=e.target.value.trim().toLowerCase();
-  document.querySelectorAll('#app .cell').forEach(c=>{
-    const t=(c.getAttribute('data-t')||'')+' '+c.textContent.toLowerCase();
-    c.style.display=(!q||t.includes(q))?'':'none';
-  });
+  CUR.cellQ=e.target.value.trim();
+  applyCellQuery();
 });
 
 /* ================= 课程页（精听/跟读/盲听/复述 + 复习模式） ================= */
@@ -1609,7 +1641,8 @@ document.addEventListener('click',async e=>{
   const act=el.dataset.act;
   /* 听单 / 播放页的动作不依赖已载入的课程：否则在 #/listen、#/player 上会被门禁整片挡掉 */
   const P4ACTS=['lbook','lview','lopen','packdl','plrtoggle','plrprev','plrnext','plrseek','plrfav',
-                'plrcache','plrloop','plrsub','plrmore','plrpick','plrqplay','plrqclear'];
+                'plrcache','plrloop','plrsub','plrmore','plrpick','plrqplay','plrqclear',
+                'tipq'];   /* tipq：教材页筛选行的排程说明，此时 CUR.data 可能为空 */
   const isP4=P4ACTS.indexOf(act)>=0;
   if(!CUR.data&&!isP4) return;
   const i=+el.dataset.i, p=isP4?null:prog(CUR.no), d=isP4?null:CUR.data;
@@ -2415,16 +2448,6 @@ function paintDl(id){
   if(cell&&document.body.contains(cell)&&cell.parentNode){ cell.outerHTML=renderStoreCard(c); }
   const row=document.getElementById('ol-'+id);          /* 「我的」页离线包那一行 */
   if(row&&document.body.contains(row)&&row.parentNode){ row.outerHTML=meOfflineRow(c); }
-  refreshOlUI();
-}
-
-function refreshOlUI(){
-  /* 只服务于课程首页那颗离线按钮（「我的」页的离线行由 paintDl 就地重绘） */
-  const cid=(typeof curCourse==='function')?curCourse():DEF_COURSE;
-  const s=dlGet(cid), hb=$('#homeOlBtn');
-  if(!hb) return;
-  const done=!!(s&&s.state==='done'), run=!!(s&&s.state==='run');
-  hb.textContent=done?'📥 更新离线包':(run?'📥 下载中 '+dlPct(cid)+'%':'📥 下载离线包');
 }
 window.dlOffline=function(){
   const cid=(typeof curCourse==='function')?curCourse():DEF_COURSE;
