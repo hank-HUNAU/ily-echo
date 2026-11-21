@@ -3,9 +3,12 @@
      el2-shell-vN —— 外壳（HTML/图标/清单），随版本号更换，旧版自动清理
      el2-content  —— 全部课程数据与音频，跨版本永久保留（课程下载/移除都作用在这一层）
    策略：页面/catalog 网络优先（保更新）；data/*.json 缓存优先+后台更新；音频图片缓存优先 */
-const VER = 'el2-shell-v3';
+const VER = 'el2-shell-v4';
 const CONTENT = 'el2-content';
+/* levels_nce2.json（听单难度分档 4.7KB）与 blind_options.json（盲听选项 57KB）
+   是轻量全局清单，放外壳层保证离线也能开听单；课文数据/音频仍在 el2-content */
 const CORE = ['./', './index.html', './login.html', './manifest.json', './catalog.json',
+  './data/levels_nce2.json', './blind_options.json',
   './apple-touch-icon.png', './icon-192.png', './icon-512.png',
   './covers/nce1_s.jpg', './covers/nce2_s.jpg'];
 

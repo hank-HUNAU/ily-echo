@@ -19,7 +19,15 @@
       "desc": "96 课 · 盲听 / 跟读 / 精听 / 复述 + 7 轮复习",
       "dataPat": "data/L{NN}.json",
       "audioPat": "audio/L{NN}.mp3",
-      "pad": 2
+      "pad": 2,
+      "levels": {
+        "mode": "perLesson",
+        "src": "quantile",
+        "label": "难度参考",
+        "file": "data/levels_nce2.json",
+        "list": ["A1", "A2", "B1"],
+        "note": "九层加权分三分位；难度参考非官方 CEFR，禁写「NCE2 = A1」"
+      }
     },
     {
       "id": "nce1",
@@ -49,7 +57,14 @@
       "desc": "12 单元 · 音频对齐与课件制作中",
       "dataPat": "tks/data/L{NN}.json",
       "audioPat": "tks/audio/L{NN}.mp3",
-      "pad": 2
+      "pad": 2,
+      "levels": {
+        "mode": "book",
+        "src": "publisher",
+        "label": "官方等级",
+        "list": ["A1"],
+        "note": "出版社锚点（TH!NK 分级），非本项目测定"
+      }
     },
     {
       "id": "tk1",
@@ -64,7 +79,14 @@
       "desc": "12 单元 · 音频对齐与课件制作中",
       "dataPat": "tk1/data/L{NN}.json",
       "audioPat": "tk1/audio/L{NN}.mp3",
-      "pad": 2
+      "pad": 2,
+      "levels": {
+        "mode": "book",
+        "src": "publisher",
+        "label": "官方等级",
+        "list": ["A2"],
+        "note": "出版社锚点（TH!NK 分级），非本项目测定"
+      }
     },
     {
       "id": "ref",

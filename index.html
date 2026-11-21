@@ -179,6 +179,7 @@ nav.tabs .fabbtn svg{width:26px;height:26px;margin:0;stroke:#fff}
 audio{width:100%}
 /* ===== 听单 / 播放页（P1 静态骨架）===== */
 .listen-page,.player-page{margin:calc(-14px - env(safe-area-inset-top,0px)) -14px 0;padding:0 0 calc(96px + env(safe-area-inset-bottom,0px));min-height:100vh;background:var(--bg)}
+.player-page{display:flex;flex-direction:column}
 .listen-page .lhead{padding:calc(14px + env(safe-area-inset-top,0px)) 18px 0;font-size:24px;color:var(--ink);letter-spacing:.5px}
 .lbooks{display:flex;gap:7px;overflow-x:auto;padding:11px 18px 0;scrollbar-width:none}
 .lbooks::-webkit-scrollbar{display:none}
@@ -186,6 +187,12 @@ audio{width:100%}
 .lcaps::-webkit-scrollbar{display:none}
 .lcap{flex:0 0 auto;font-size:12px;color:var(--sub);background:#fff;border:1px solid var(--line);border-radius:999px;padding:5px 13px}
 .lcap.on{font-weight:600;color:var(--focus);background:var(--brandSoft);border-color:var(--brandSoft)}
+.lcap,.lchip{font-family:inherit;cursor:pointer}
+.lchip{flex:0 0 auto;display:inline-flex;align-items:center;gap:4px;white-space:nowrap;font-size:12.5px;color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:999px;padding:6px 14px}
+.lchip.on{color:#fff;background:var(--brand);border-color:var(--brand);font-weight:600}
+.lchip.lock{color:#ADB5BD;border-color:#EDF0F2;cursor:default}
+.lchip svg{width:11px;height:11px}
+.lempty{font-size:13px;color:var(--sub);text-align:center;padding:14px 4px}
 .lcard{margin:0 16px;background:#fff;border:0.5px solid var(--line);border-radius:16px;padding:13px}
 .lcard .lplay{width:46px;height:46px;border-radius:50%;background:var(--brand);display:flex;align-items:center;justify-content:center;flex:0 0 46px}
 .lcard .lplay svg{width:20px;height:20px}
@@ -216,7 +223,7 @@ audio{width:100%}
 .ldl svg{width:15px;height:15px;color:var(--focus)}
 /* 播放页 */
 .player-page .ptop{display:flex;align-items:center;justify-content:space-between;padding:calc(6px + env(safe-area-inset-top,0px)) 12px 0}
-.ptop .pback,.ptop .pmore{width:44px;height:44px;display:flex;align-items:center;justify-content:center;color:var(--ink);text-decoration:none;position:relative}
+.ptop .pback,.ptop .pmore{width:44px;height:44px;display:flex;align-items:center;justify-content:center;color:var(--ink);text-decoration:none;position:relative;border:0;background:none;padding:0;font-family:inherit;cursor:pointer}
 .ptop svg{width:22px;height:22px}
 .ptop .pmore i{position:absolute;top:3px;right:3px;min-width:15px;height:15px;border-radius:8px;background:var(--brand);color:#fff;font-size:10px;display:flex;align-items:center;justify-content:center;padding:0 3px;font-style:normal}
 .ptitle{text-align:center;padding:2px 44px 6px}
@@ -224,7 +231,9 @@ audio{width:100%}
 .ptitle div{font-size:11.5px;color:var(--sub);margin-top:2px}
 .ptitle div span{color:var(--sub)}
 .ptitle div em{color:var(--focus);font-style:normal}
-.plyrics{position:relative;padding:22px 18px;display:flex;flex-direction:column;gap:15px;align-items:flex-start;min-height:260px;justify-content:center}
+.plyrics{position:relative;padding:22px 18px;display:flex;flex-direction:column;gap:15px;align-items:flex-start;min-height:260px;max-height:56vh;flex:1;overflow-y:auto;scrollbar-width:none;justify-content:flex-start;padding-bottom:44px}
+.plyrics::-webkit-scrollbar{display:none}
+.pline[data-si]{cursor:pointer}
 .pfade{position:absolute;left:0;right:0;height:36px;z-index:2;pointer-events:none}
 .pfade.top{top:0;background:linear-gradient(var(--bg),rgba(245,246,248,0))}
 .pfade.bot{bottom:0;background:linear-gradient(rgba(245,246,248,0),var(--bg))}
@@ -233,12 +242,23 @@ audio{width:100%}
 .pline.d2{font-size:18px;color:#CED4DA}
 .pline.now{font-size:23px;color:var(--ink);font-weight:600;line-height:1.45;border-left:3px solid var(--brand);padding-left:12px;margin-left:-3px}
 .pops{display:flex;justify-content:space-around;padding:8px 12px 0}
-.pops div{width:56px;display:flex;flex-direction:column;align-items:center;gap:3px;color:var(--focus)}
+.pops button{width:56px;display:flex;flex-direction:column;align-items:center;gap:3px;background:none;border:0;
+ font-family:inherit;cursor:pointer;padding:0;color:var(--sub)}
+.pops button.on{color:var(--focus)}
 .pops svg{width:22px;height:22px}
-.pops span{font-size:11px;color:var(--focus)}
+.pops span{font-size:11px;color:inherit}
 .pbar{display:flex;align-items:center;gap:10px;padding:12px 18px 0;font-size:11px;color:var(--sub);font-variant-numeric:tabular-nums}
 .pbar>div{flex:1;height:4px;background:#E3E5E8;border-radius:2px;position:relative}
-.pbar>div i{position:absolute;left:0;top:0;height:4px;width:63%;background:var(--brand);border-radius:2px}
+.pbar>div i{position:absolute;left:0;top:0;height:4px;background:var(--brand);border-radius:2px}
+.pbar>div b{position:absolute;top:-5px;width:14px;height:14px;border-radius:50%;background:var(--brand);border:2.5px solid var(--bg);margin-left:-7px}
+/* 无字幕＝黑胶唱片区 */
+.pdisc{flex:1;display:flex;align-items:center;justify-content:center;min-height:260px}
+.pvinyl{width:228px;height:228px;border-radius:50%;background:radial-gradient(circle at 50% 50%,#2B2B2B 0 28%,#1A1A1A 29% 100%);display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 1px #111,inset 0 0 0 2px #333}
+.pvinyl span{width:84px;height:84px;border-radius:50%;background:var(--brand);color:#fff;font-size:19px;font-weight:700;display:flex;align-items:center;justify-content:center}
+/* 更多面板：收藏复选进队列 */
+.pqueue{margin:6px 16px 0;background:#fff;border:0.5px solid var(--line);border-radius:14px;padding:12px 13px}
+.pchk{width:20px;height:20px;border-radius:50%;border:1.5px solid var(--line);flex:0 0 20px;display:flex;align-items:center;justify-content:center;font-size:12px;color:#fff}
+.pchk.on{background:var(--focus);border-color:var(--focus)}
 .pctl{display:flex;align-items:center;justify-content:center;gap:26px;padding:10px 20px 6px}
 .pmini{width:44px;height:44px;display:flex;align-items:center;justify-content:center;color:var(--brand)}
 .pmini svg{width:26px;height:26px}
@@ -501,7 +521,7 @@ if(window.__EL2_GATE__==='deny'){ /* 已被门禁拦下，跳过初始化 */ }
 else
 {
 const LS='el2_';
-const OFFSETS=[0.25,1,2,4,7,21,60];          // 7 轮复习（天）：末轮 60 天（11-20 拍板）
+const OFFSETS=[0.25,1,2,4,7,21,60];          // 7 轮复习（天）：6小时→1→2→4→7→21→60 天（11-21 定稿 60 天版）
 const STAGES=['盲听','精听','跟读','录音'];
 const $=s=>document.querySelector(s);
 const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -879,6 +899,7 @@ function nav(){ const h=location.hash||'#/home';
 async function router(){
   nav();
   const h=location.hash||'#/home';
+  if(LAST_HASH&&LAST_HASH.startsWith('#/player')&&!h.startsWith('#/player')) plrSave();
   if(h.startsWith('#/hard')||h.startsWith('#/cards')) scopeOnEnter();
   if(h.startsWith('#/lesson/')){
     const Q=hashQs();
@@ -1088,7 +1109,7 @@ function renderHome(){
   let h=`<div class="topbar">
     <h1 style="flex:1;min-width:0;display:flex;align-items:center;gap:8px;font-size:19px;overflow:hidden"><img src="${c.cover}" alt="" style="width:24px;height:32px;border-radius:6px;object-fit:cover;border:0.5px solid var(--line);background:#F1F3F5;flex:0 0 24px"><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(c.name)}</span> <span style="font-size:12px;color:var(--sub);font-weight:400;flex:0 0 auto">${esc(c.tag||'')}</span></h1>
     <a class="tbBack" href="#/home">‹ 返回</a></div>
-  <div class="sec"><h2>今天要处理 ${tipQ('sched','到期复习由系统自动排程：学完一课后，按 6小时 → 1天 → 2天 → 4天 → 7天 → 14天 → 28天 排 7 轮复习。')}</h2>`;
+  <div class="sec"><h2>今天要处理 ${tipQ('sched','到期复习由系统自动排程：学完一课后，按 6小时 → 1天 → 2天 → 4天 → 7天 → 21天 → 60天 排 7 轮复习。')}</h2>`;
   if(due.length){
     h+=due.map(d=>`<div class="item"><div class="tt"><div class="en">L${d.no} · 第 ${d.round} 轮</div>
       <div class="meta">${d.overdueDays>0?`<span class="late">已逾期 ${d.overdueDays} 天</span>`:'今日到期'}</div></div>
@@ -1264,9 +1285,10 @@ function renderStage(){
 }
 /* —— 精听：Anki 句卡 + 左右手势切卡（P2-2） —— */
 function stageIntensive(){
-  const p=prog(CUR.no), d=CUR.data, total=d.sentences.length;
-  if(CUR.intSi==null) CUR.intSi=p.si||0;
-  if(CUR.intSi>=total) CUR.intSi=0;
+  const p=prog(CUR.no), d=CUR.data;
+  /* sentences[0] 是题干/标题，不算课文句子：句卡从 1 开始，显示口径＝正文句数 */
+  const last=Math.max(1,d.sentences.length-1), body=Math.max(1,d.sentences.length-1);
+  if(CUR.intSi==null||CUR.intSi<1||CUR.intSi>last) CUR.intSi=(p.si>=1&&p.si<=last)?p.si:1;
   if(!CUR.lang) CUR.lang='bi';   /* 中/英/双语，与跟读共用 */
   const i=CUR.intSi, s=d.sentences[i];
   const sEN=(CUR.lang==='zh')?'':`<div class="ankiEn">${esc(s.en)}</div>`;
@@ -1274,11 +1296,11 @@ function stageIntensive(){
   const star=p.hard.includes(i)?' on':'';
   const heard=!!p.listened[i];
   /* 进度时间：优先用句子 t/t2，兜底展示总时长比例 */
-  const pct=Math.round((i+1)*100/total);
+  const pct=Math.round(i*100/body);
   const seg=(v,label)=>`<span class="${CUR.lang===v?'on':''}" data-act="intlang" data-v="${v}">${label}</span>`;
   return `<div class="int-wrap">
     <div class="int-card" id="intCard">
-      <div class="ankiTop"><span class="ankiTag">句卡 ${i+1} / ${total}</span>
+      <div class="ankiTop"><span class="ankiTag">句卡 ${i} / ${body}</span>
         <span class="ankiFav${star?' on':''}" data-act="star" data-i="${i}" title="收藏难句">★ 收藏</span></div>
       <div class="ankiBody">${heard?'':''}${sEN}${sZH}</div>
       <div class="ankiFoot"><span>点播放听本句</span><span>${pad((p.reviews||0)+1)} / ${pad(OFFSETS.length)} 轮</span></div>
@@ -1309,9 +1331,10 @@ function bindIntGesture(){
   },{passive:true});
 }
 function intStep(dir){
-  const total=CUR.data.sentences.length;
-  const ni=Math.max(0,Math.min(total-1,(CUR.intSi||0)+dir));
-  if(ni===CUR.intSi) return;
+  const last=Math.max(1,CUR.data.sentences.length-1);
+  const cur=(CUR.intSi>=1&&CUR.intSi<=last)?CUR.intSi:1;
+  const ni=Math.max(1,Math.min(last,cur+dir));
+  if(ni===cur) return;
   AU.pause(); CUR.intSi=ni;
   const p=prog(CUR.no); p.si=ni; saveProgress();
   renderStage();   /* 切卡后暂停并复位，不自动播放、不写 reviews */
@@ -1325,16 +1348,16 @@ function sentDetail(s){
 }
 /* —— 跟读 —— */
 function stageShadow(){
-  const p=prog(CUR.no), d=CUR.data, total=d.sentences.length;
-  if(CUR.shSi==null) CUR.shSi=p.si||0;
-  if(CUR.shSi>=total) CUR.shSi=0;
+  const p=prog(CUR.no), d=CUR.data;
+  /* 与精听同口径：sentences[0] 是题干，不进跟读正文 */
+  const total=Math.max(1,d.sentences.length-1);
+  if(CUR.shSi==null||CUR.shSi<1||CUR.shSi>total) CUR.shSi=(p.si>=1&&p.si<=total)?p.si:1;
   if(!CUR.lang) CUR.lang='bi';
   if(!CUR.loops || (CUR.loops!==1&&CUR.loops!==3)) CUR.loops=1;  /* 只 1↔3 两档 */
   const cur=CUR.shSi;
-  /* 可见行窗口：横屏5行 / 竖屏7行（CSS 控制实际高度，这里给足够行） */
-  const half=3;
   let rows='';
   d.sentences.forEach((s,i)=>{
+    if(i===0) return;                      /* 题干不入正文 */
     const now=i===cur, cls=now?'now':'dim';
     const en=(CUR.lang==='zh')?'':`<div class="en">${esc(s.en)}</div>`;
     const zh=(CUR.lang==='en')?'':`<div class="zh">${esc(s.zh)}</div>`;
@@ -1342,13 +1365,13 @@ function stageShadow(){
   });
   const segLang=['zh','en','bi'].map(v=>`<span class="${CUR.lang===v?'on':''}" data-act="intlang" data-v="${v}">${{zh:'中',en:'英',bi:'双语'}[v]}</span>`).join('');
   const segLoop=[1,3].map(n=>`<span class="${CUR.loops===n?'on':''}" data-act="loopsel" data-v="${n}">${n} 遍</span>`).join('');
-  const pct=Math.round((cur+1)*100/total);
+  const pct=Math.round(cur*100/total);
   return `<div class="shadow-wrap">
     <div class="kstage" id="kstage">${rows}</div>
     <div class="kplayer">
       <button class="kplay" data-act="shplay" aria-label="播放/暂停"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5l11 7-11 7z"/></svg></button>
       <div class="ktrack"><i style="width:${pct}%"></i><b style="left:${pct}%"></b></div>
-      <span class="ktime">${pad(cur+1)} / ${pad(total)}</span>
+      <span class="ktime">${pad(cur)} / ${pad(total)}</span>
     </div>
     <div class="ktool">
       <div class="seg">${segLang}</div>
@@ -1359,8 +1382,8 @@ function stageShadow(){
 }
 /* 聚焦到跟读某句（滚动容器居中 + 不自动播放） */
 function shFocus(i){
-  const total=CUR.data.sentences.length;
-  const ni=Math.max(0,Math.min(total-1,i));
+  const last=Math.max(1,CUR.data.sentences.length-1);
+  const ni=Math.max(1,Math.min(last,i));
   CUR.shSi=ni; const p=prog(CUR.no); p.si=ni; saveProgress();
   renderStage();
 }
@@ -1575,8 +1598,14 @@ function refreshStage(){ renderStage(); }
 
 document.addEventListener('click',async e=>{
   const el=e.target.closest('[data-act]');
-  if(!el||!CUR.data) return;
-  const act=el.dataset.act, i=+el.dataset.i, p=prog(CUR.no), d=CUR.data;
+  if(!el) return;
+  const act=el.dataset.act;
+  /* 听单 / 播放页的动作不依赖已载入的课程：否则在 #/listen、#/player 上会被门禁整片挡掉 */
+  const P4ACTS=['lbook','lview','lopen','packdl','plrtoggle','plrprev','plrnext','plrseek','plrfav',
+                'plrcache','plrloop','plrsub','plrmore','plrpick','plrqplay','plrqclear'];
+  const isP4=P4ACTS.indexOf(act)>=0;
+  if(!CUR.data&&!isP4) return;
+  const i=+el.dataset.i, p=isP4?null:prog(CUR.no), d=isP4?null:CUR.data;
   const cid=curCourse();
   const rev=CUR.mode==='rev';   /* P0 修复：rev 从未定义，plays 点击必抛 ReferenceError（自 f52a179 潜伏） */
   if(act==='plays'){
@@ -1668,7 +1697,7 @@ document.addEventListener('click',async e=>{
       const v=+el.dataset.v, p0=prog(CUR.no), st=revState(p0);
       /* 精听 → 跟读：必须走过全部句卡，才算本段有效提取 */
       if(v===1){
-        const total=CUR.data.sentences.length, seen=Object.keys(st.seen||{}).length;
+        const total=Math.max(1,CUR.data.sentences.length-1), seen=Object.keys(st.seen||{}).length;
         if(seen<total){ toast(`还有 ${total-seen} 句没看，滑完再进跟读`); return; }
         revMark(0);
       }
@@ -1741,6 +1770,23 @@ document.addEventListener('click',async e=>{
   else if(act==='revlater'){ CUR.rstep=null; CUR.revDoneShown=null; location.hash='#/c/'+curCourse(); }
   else if(act==='revclose'){ CUR.rstep=null; CUR.revDoneShown=null; location.hash='#/c/'+curCourse(); }
   else if(act==='revfin'){ finishReview(); }
+  /* —— 听单 / 播放页（P4） —— */
+  else if(act==='lbook'){ LBOOK=el.dataset.c; LVIEW='recent'; renderListen(); }
+  else if(act==='lview'){ LVIEW=el.dataset.v; renderListen(); }
+  else if(act==='lopen'){ location.hash='#/player?c='+el.dataset.c+'&n='+el.dataset.n; }
+  else if(act==='packdl'){ const cc=catCourse(el.dataset.c); if(cc) packDl(cc,el.dataset.lv); }
+  else if(act==='plrtoggle'){ plrToggle(); }
+  else if(act==='plrprev'){ plrStep(-1); }
+  else if(act==='plrnext'){ plrStep(1); }
+  else if(act==='plrseek'){ plrSeek(el,e.clientX); }
+  else if(act==='plrfav'){ favToggle(PLR.cid,PLR.no); renderPlayer(); }
+  else if(act==='plrcache'){ plrCacheAudio(); }
+  else if(act==='plrloop'){ PLR.loop=!PLR.loop; plrSave(); renderPlayer(); }
+  else if(act==='plrsub'){ PLR.sub=!PLR.sub; plrSave(); renderPlayer(); }
+  else if(act==='plrmore'){ plrMore(); }
+  else if(act==='plrpick'){ const k=el.dataset.k; if(PLR.picked[k]) delete PLR.picked[k]; else PLR.picked[k]=1; plrMore(true); }
+  else if(act==='plrqplay'){ plrQueuePlay(); }
+  else if(act==='plrqclear'){ PLR.picked={}; plrMore(true); }
   else if(act==='playall'){ playAll(); }
 });
 
@@ -1791,83 +1837,419 @@ function renderCards(){
   $('#app').innerHTML=h;
 }
 /* ================= 听单（泛听）· 屏 10 / 屏 11 =================
-   P1 静态骨架：课本横滑 + 三胶囊 + 正在听卡 + 离线音频包三行；
-   真实跨课本下载 / 播放 / 字幕滚动留 P4。此处仅呈现结构与绿系色板。 */
-const LISTEN_BOOKS=['新概念 2','TH!NK Starter','Think 1','RE F'];
-const LISTEN_PACKS=[
-  {lv:'A2',src:'pub',name:'Think 1',meta:'12 课 · 18:04 · 42 MB',state:'done'},
-  {lv:'A1',src:'pub',name:'TH!NK Starter',meta:'12 课 · 16:20 · 38 MB',state:'run',pct:47},
-  {lv:'A1',src:'ref',name:'新概念 2',meta:'32 课 · 41:12 · 26 MB',state:'idle'}
-];
-function renderListen(){
-  const bookChips=LISTEN_BOOKS.map((b,i)=>{
-    const lock=i===3, on=i===0;
-    const st=lock?'color:#ADB5BD;background:#fff;border-color:#EDF0F2'
-      :on?'color:#fff;background:var(--brand);border-color:var(--brand);font-weight:600'
-      :'color:var(--ink);background:#fff;border-color:var(--line)';
-    const lockIco=lock?'<svg style="width:11px;height:11px" viewBox="0 0 24 24" fill="none" stroke="#ADB5BD" stroke-width="2.2"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>':'';
-    return `<span style="display:inline-flex;align-items:center;gap:4px;white-space:nowrap;font-size:12.5px;border-radius:999px;padding:6px 14px;border:1px solid;${st}">${lockIco}${b}</span>`;
+   P4 真实化：课本横滑（ready 门禁）+ 三胶囊三视图 + 正在听卡 + 离线音频包（课本 × 等级）
+   + 全屏播放页（字幕逐句跟随 / 四操作 / 更多＝收藏复选×队列）。
+   包 id = `{cid}:{level}`，只含 mp3；el2_pack 只记进度，图标一律实查 el2-content。 */
+const FAVK='el2_fav', LPK='el2_listen', PACKK='el2_pack';
+let LVIEW='recent', LBOOK='nce2', PACK_DL={};
+
+/* —— 收藏（音频级，按 cid 分组防串课） —— */
+function favAll(){ try{ const a=JSON.parse(localStorage.getItem(FAVK)||'[]'); return Array.isArray(a)?a:[]; }catch(e){ return []; } }
+function favSave(a){ try{ localStorage.setItem(FAVK,JSON.stringify(a)); }catch(e){} }
+function favHas(cid,no){ return favAll().some(x=>x.cid===cid&&+x.no===+no); }
+function favToggle(cid,no){
+  const a=favAll(), i=a.findIndex(x=>x.cid===cid&&+x.no===+no);
+  if(i<0) a.unshift({cid:cid,no:+no,at:Date.now()}); else a.splice(i,1);
+  favSave(a); return i<0;
+}
+/* —— 聆听位置（正在听卡 / 播放页续播） —— */
+function listenGet(){ try{ return JSON.parse(localStorage.getItem(LPK)||'null'); }catch(e){ return null; } }
+function listenSet(v){ try{ if(v) localStorage.setItem(LPK,JSON.stringify(v)); else localStorage.removeItem(LPK); }catch(e){} }
+
+/* —— 离线音频包：id=`{cid}:{level}`，键空间与 el2_dl 不重叠 —— */
+function packMap(){ try{ return JSON.parse(localStorage.getItem(PACKK)||'{}'); }catch(e){ return {}; } }
+function packSet(id,v){ const m=packMap(); if(v===null) delete m[id]; else m[id]=v;
+  try{ localStorage.setItem(PACKK,JSON.stringify(m)); }catch(e){} }
+function packId(cid,level){ return cid+':'+level; }
+async function levelsOf(c){
+  if(!c||!c.levels) return null;
+  if(c.levels.__x) return c.levels.__x;
+  const L=Object.assign({},c.levels);
+  if(L.file){ try{ const r=await fetch(L.file,{cache:'force-cache'}); if(r&&r.ok) L.data=await r.json(); }catch(e){} }
+  L.list=(L.list||[]).map(x=>typeof x==='string'?{level:x,src:L.src||'publisher'}:x);
+  c.levels.__x=L; return L;
+}
+function packNoList(c,L,level){
+  if(L&&L.mode==='perLesson'){
+    const m=(L.data&&L.data.lessons)||{};
+    return Object.keys(m).map(Number).filter(n=>m[String(n)]===level).sort((a,b)=>a-b);
+  }
+  const n=+c.lessons||0, out=[]; for(let i=1;i<=n;i++) out.push(i); return out;
+}
+function lessonAudio(c,no){ return (c.audioPat||'audio/L{NN}.mp3').replace('{NN}',String(no).padStart(c.pad||2,'0')); }
+function lessonTitle(c,no){
+  if(c.id===DEF_COURSE&&TITLES[no-1]) return TITLES[no-1];
+  return 'L'+no;
+}
+/* 包信息（课数/时长/体积）与包内文件；派生：整本已下 → 包一律已下载 */
+async function packInfo(c,level){
+  const L=await levelsOf(c);
+  const nos=packNoList(c,L,level);
+  const pm=(L&&L.data&&L.data.packMeta&&L.data.packMeta[level])||null;
+  return {id:packId(c.id,level),cid:c.id,level:level,src:(L&&L.src)||'publisher',
+    nos:nos, files:nos.map(n=>lessonAudio(c,n)),
+    lessons:pm?pm.lessons:nos.length,
+    durSec:pm?pm.durSec:0, mb:pm?pm.mb:Math.round((c.sizeMB||0)*nos.length/Math.max(1,c.lessons||1)),
+    label:(L&&L.label)||'官方等级'};
+}
+async function packStat(c,level){
+  const P=await packInfo(c,level);
+  const d=dlGet(c.id);
+  if(c.ready&&d&&d.state==='done')
+    return Object.assign(P,{state:'done',pct:100,hit:P.files.length,derived:true});
+  let hit=0;
+  try{ const cc=await caches.open(CACHE_CONTENT);
+    for(const f of P.files){ if(await cc.match(f)) hit++; } }catch(e){}
+  const total=Math.max(1,P.files.length);
+  const rec=packMap()[P.id]||null;
+  if(P.files.length&&hit>=P.files.length) return Object.assign(P,{state:'done',pct:100,hit:hit});
+  if(rec&&rec.state==='run') return Object.assign(P,{state:'run',pct:rec.pct!=null?rec.pct:Math.round(hit*100/total),hit:hit});
+  if(rec&&rec.state==='fail') return Object.assign(P,{state:'fail',pct:Math.round(hit*100/total),hit:hit});
+  return Object.assign(P,{state:'idle',pct:Math.round(hit*100/total),hit:hit});
+}
+/* 单包下载：逐 mp3 落 el2-content，进度写 el2_pack，只就地刷这一行 */
+async function packDl(c,level){
+  const P=await packInfo(c,level);
+  if(PACK_DL[P.id]) return;
+  PACK_DL[P.id]=true;
+  let hit=0;
+  try{
+    const cc=await caches.open(CACHE_CONTENT);
+    packSet(P.id,{done:0,total:P.files.length,state:'run',pct:0});
+    refreshPackRow(P.id);
+    for(const f of P.files){
+      const m=await cc.match(f);
+      if(!m){ const r=await fetch(f); if(!r.ok) throw new Error('HTTP '+r.status); await cc.put(f,r); }
+      hit++;
+      const pct=Math.round(hit*100/Math.max(1,P.files.length));
+      packSet(P.id,{done:hit,total:P.files.length,state:hit>=P.files.length?'done':'run',pct:pct});
+      if(hit%2===0||hit===P.files.length) refreshPackRow(P.id);
+    }
+  }catch(e){
+    packSet(P.id,{done:hit,total:P.files.length,state:'fail',pct:Math.round(hit*100/Math.max(1,P.files.length))});
+    toast('音频包下载失败，点下载键重试');
+  }finally{ delete PACK_DL[P.id]; refreshPackRow(P.id); }
+}
+async function refreshPackRow(id){
+  const el=document.getElementById('pk-'+id.replace(':','_'));
+  if(!el) return;
+  const cid=id.split(':')[0], level=id.split(':')[1];
+  const c=catCourse(cid); if(!c) return;
+  const st=await packStat(c,level);
+  if(el&&el.parentNode) el.outerHTML=packRowHTML(st);
+}
+function fmtDur(sec){
+  sec=Math.round(sec||0);
+  const h=Math.floor(sec/3600), m=Math.floor(sec%3600/60), s=sec%60;
+  return h?`${h}:${pad(m)}:${pad(s)}`:`${m}:${pad(s)}`;
+}
+function packRowHTML(P){
+  const bad=P.src==='publisher'
+    ? `<div class="lbadge"><span>${P.level}</span></div>`
+    : `<div class="lbadge ref"><span>${P.level}</span><small>参考</small></div>`;
+  let right;
+  if(P.state==='done') right=`<span class="ldone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5 5L20 6"/></svg>已下载</span>`;
+  else if(P.state==='run') right=`<span class="lrun"><i><b style="width:${P.pct}%"></b></i>${P.pct}%</span>`;
+  else if(P.state==='fail') right=`<button class="ldl" data-act="packdl" data-c="${P.cid}" data-lv="${P.level}" title="下载失败，点此重试" style="border-color:var(--bad)"><svg viewBox="0 0 24 24" fill="none" stroke="var(--bad)" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v9M8 10l4 4 4-4"/></svg></button>`;
+  else right=`<button class="ldl" data-act="packdl" data-c="${P.cid}" data-lv="${P.level}" aria-label="下载这一包"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7 10l5 5 5-5M4 20h16"/></svg></button>`;
+  const c=catCourse(P.cid)||{name:P.cid};
+  return `<div class="lpack" id="pk-${P.id.replace(':','_')}"><div style="display:flex;align-items:center;gap:11px;padding:11px 13px;width:100%">
+    ${bad}<div style="flex:1;min-width:0">
+      <div style="font-size:13.5px;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(c.name)}</div>
+      <div style="font-size:11px;color:var(--sub);margin-top:1px">${P.lessons} 课 · ${fmtDur(P.durSec)} · ${P.mb} MB</div>
+    </div>${right}</div></div>`;
+}
+/* 全部可听包：只为 ready 且定义了 levels 的课程生成 */
+async function allPacks(){
+  const out=[];
+  for(const c of catList()){
+    if(!c.ready||!c.levels) continue;
+    const L=await levelsOf(c);
+    for(const lv of (L.list||[])) out.push(await packStat(c,lv.level));
+  }
+  return out;
+}
+/* —— 最近在听 / 正在听 —— */
+function recentListened(){
+  const out=[];
+  const cs=myCourses();
+  cs.forEach(cid=>{ const o=(PROG.courses||{})[cid]||{};
+    for(const k in o){ const p=o[k];
+      if(!p||!p.firstLearnAt) continue;
+      out.push({cid:cid,no:+k,at:Math.max(p.firstLearnAt||0,p.lastReviewAt||0)}); } });
+  out.sort((a,b)=>b.at-a.at);
+  return out;
+}
+function nowPlaying(){
+  const l=listenGet();
+  if(l&&l.cid&&l.no) return l;
+  const r=recentListened()[0];
+  if(!r) return null;
+  return {cid:r.cid,no:r.no,pos:0,dur:0,loop:true};
+}
+/* —— 屏 10：听单首页 —— */
+async function renderListen(){
+  const books=catList();
+  if(!books.some(b=>b.id===LBOOK&&b.ready)){
+    const first=books.filter(b=>b.ready)[0];
+    if(first) LBOOK=first.id;
+  }
+  const chips=books.map(b=>{
+    const on=b.id===LBOOK, lock=!b.ready;
+    const cls=lock?'lchip lock':(on?'lchip on':'lchip');
+    const ico=lock?'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>':'';
+    return `<button class="${cls}"${lock?' disabled aria-disabled="true"':` data-act="lbook" data-c="${b.id}"`}>${ico}<span>${esc(b.name)}</span></button>`;
   }).join('');
-  const filt=['最近在听','我的收藏 3','离线音频'].map((f,i)=>
-    `<span class="lcap${i===0?' on':''}">${f}</span>`).join('');
-  const packs=LISTEN_PACKS.map(p=>{
-    const badge=p.src==='ref'
-      ? `<div class="lbadge ref"><span>A1</span><small>参考</small></div>`
-      : `<div class="lbadge"><span>${p.lv}</span></div>`;
-    let right='';
-    if(p.state==='done') right=`<span class="ldone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5 5L20 6"/></svg>已下载</span>`;
-    else if(p.state==='run') right=`<span class="lrun"><i><b style="width:${p.pct}%"></b></i>${p.pct}%</span>`;
-    else right=`<span class="ldl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7 10l5 5 5-5M4 20h16"/></svg></span>`;
-    return `<div class="lpack"><div style="display:flex;align-items:center;gap:11px;padding:11px 13px">
-      ${badge}<div style="flex:1;min-width:0"><div style="font-size:13.5px;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${p.name}</div>
-      <div style="font-size:11px;color:var(--sub);margin-top:1px">${p.meta}</div></div>${right}</div></div>`;
-  }).join('<div class="lsep"></div>');
-  const h=`<div class="listen-page">
+  const favN=favAll().length;
+  const caps=[['recent','最近在听'],['fav','我的收藏'+(favN?' '+favN:'')],['packs','离线音频']]
+    .map(([k,t])=>`<button class="lcap${LVIEW===k?' on':''}" data-act="lview" data-v="${k}">${t}</button>`).join('');
+
+  let body='';
+  if(LVIEW==='recent'){
+    const np=nowPlaying();
+    if(np){
+      const c=catCourse(np.cid)||{};
+      if(!np.dur){ try{ const dd=await loadLesson(np.no,np.cid); np.dur=(dd&&dd.duration)||0; }catch(e){} }
+      const dur=np.dur||0, pos=np.pos||0;
+      const pct=dur?Math.round(pos*100/dur):0;
+      body+=`<div class="lcard" data-act="lopen" data-c="${np.cid}" data-n="${np.no}" style="cursor:pointer">
+        <div style="display:flex;align-items:center;gap:12px">
+          <div class="lplay"><svg viewBox="0 0 24 24" fill="#fff"><rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/></svg></div>
+          <div style="min-width:0;flex:1"><div class="lnow">正在听 · L${np.no}</div><div class="lttl">${esc(lessonTitle(c,np.no))}</div></div>
+          <div class="ltime">${fmtDur(pos)} / ${fmtDur(dur)}</div></div>
+        <div class="lbar"><i style="width:${pct}%"></i><b style="left:${pct}%"></b></div>
+        <div class="lmeta"><span>第 1 遍 · ${np.sub===false?'无字幕':'有字幕'}</span><span>循环 <em>${np.loop===false?'关':'开'}</em></span></div>
+      </div>`;
+    }else{
+      body+=`<div class="lcard"><div class="lempty">还没有听过课文，从下面选一本开始</div></div>`;
+    }
+    const packs=(await allPacks()).slice(0,3);
+    if(packs.length){
+      const totalMB=packs.reduce((a,p)=>a+p.mb,0);
+      body+=`<div class="lpad"><span>离线音频包 · 按课本 × 等级</span><span>共 ${totalMB} MB</span></div>
+      <div class="lpacks">${packs.map(packRowHTML).join('<div class="lsep"></div>')}</div>`;
+    }
+  }else if(LVIEW==='fav'){
+    const favs=favAll();
+    if(!favs.length){
+      body+=`<div class="lcard"><div class="lempty">还没有收藏的课文，播放页点爱心就收进来</div></div>`;
+    }else{
+      body+=`<div class="lpad"><span>我的收藏</span><span>${favs.length} 课</span></div>
+      <div class="lpacks">${favs.map(f=>{
+        const c=catCourse(f.cid)||{};
+        return `<div class="lpack" data-act="lopen" data-c="${f.cid}" data-n="${f.no}" style="cursor:pointer"><div style="display:flex;align-items:center;gap:11px;padding:11px 13px;width:100%">
+          <div class="lbadge"><span>${esc(c.short||c.id||'')}</span></div>
+          <div style="flex:1;min-width:0"><div style="font-size:13.5px;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(lessonTitle(c,f.no))} · L${f.no}</div>
+          <div style="font-size:11px;color:var(--sub);margin-top:1px">${esc(c.name||f.cid)}</div></div>
+          <svg viewBox="0 0 24 24" fill="var(--brand)" style="width:16px;height:16px;flex:0 0 16px"><path d="M12 21s-7-4.6-9.5-8.5C.6 9.5 2.4 6 5.7 6c2 0 3.4 1.1 4.3 2.6h4c.9-1.5 2.3-2.6 4.3-2.6 3.3 0 5.1 3.5 3.2 6.5C19 16.4 12 21 12 21z"/></svg></div></div>`;
+      }).join('<div class="lsep"></div>')}</div>`;
+    }
+  }else{
+    const packs=await allPacks();
+    const done=packs.filter(p=>p.state==='done');
+    const used=done.reduce((a,p)=>a+p.mb,0);
+    let free='';
+    try{ if(navigator.storage&&navigator.storage.estimate){
+      const ev=await navigator.storage.estimate();
+      const f=Math.round(((ev.quota||0)-(ev.usage||0))/1048576);
+      free=f>=1024?(f/1024).toFixed(1)+'GB':f+'MB';
+    } }catch(e){}
+    body+=`<div class="lpad"><span>已用 ${used} MB${free?' · 设备可用 '+free:''}</span><span>${packs.length} 个包</span></div>`;
+    body+=packs.length
+      ? `<div class="lpacks">${packs.map(packRowHTML).join('<div class="lsep"></div>')}</div>`
+      : `<div class="lcard"><div class="lempty">暂无可下载的音频包</div></div>`;
+  }
+  $('#app').innerHTML=`<div class="listen-page">
     <div class="lhead"><b>听单</b></div>
-    <div class="lbooks">${bookChips}</div>
-    <div class="lcaps">${filt}</div>
-    <div class="lcard">
-      <div style="display:flex;align-items:center;gap:12px">
-        <div class="lplay"><svg viewBox="0 0 24 24" fill="#fff"><rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/></svg></div>
-        <div style="min-width:0;flex:1"><div class="lnow">正在听 · L2</div><div class="lttl">Breakfast or Lunch?</div></div>
-        <div class="ltime">0:48 / 1:33</div></div>
-      <div class="lbar"><i></i><b></b></div>
-      <div class="lmeta"><span>第 1 遍 · 无字幕</span><span>循环 <em>开</em></span></div>
-    </div>
-    <div class="lpad"><span>离线音频包 · 按课本 × 等级</span><span>共 106 MB</span></div>
-    <div class="lpacks">${packs}</div>
+    <div class="lbooks">${chips}</div>
+    <div class="lcaps">${caps}</div>
+    ${body}
   </div>`;
-  $('#app').innerHTML=h;
 }
-function renderPlayer(){
-  const lines=[
-    ['A young man and a young woman were sitting behind me.','d1'],
-    ['They were talking loudly.','d2'],
-    ['I got very angry.','now'],
-    ['I could not hear the actors.','d2'],
-    ['I turned round.','d1']
-  ].map(([t,c])=>`<div class="pline ${c}">${t}</div>`).join('');
-  const h=`<div class="player-page">
+
+/* —— 屏 11：全屏播放页 —— */
+let PLR={cid:null,no:null,data:null,si:1,playing:false,loop:false,sub:true,pos:0,dur:0,raf:null,queue:[],picked:{}};
+window.PLR=PLR;
+function plrAudioSrc(){ const c=catCourse(PLR.cid)||{audioPat:'audio/L{NN}.mp3',pad:2}; return audioSrcOf(lessonAudio(c,PLR.no)); }
+function plrBody(){ const ss=(PLR.data&&PLR.data.sentences)||[]; return ss.slice(1); }
+function plrSiAt(t){
+  const b=plrBody(); if(!b.length) return 1;
+  let si=1;
+  for(let i=0;i<b.length;i++){ if((b[i].t||0)<=t) si=i+1; else break; }
+  return Math.min(si,b.length);
+}
+async function renderPlayer(){
+  const Q=hashQs();
+  const cid=Q.c||nowPlaying()&&nowPlaying().cid||DEF_COURSE;
+  const no=+Q.n||(nowPlaying()&&nowPlaying().no)||1;
+  if(PLR.cid!==cid||PLR.no!==no||!PLR.data){
+    PLR.cid=cid; PLR.no=no; PLR.data=await loadLesson(no,cid);
+    const l=listenGet();
+    PLR.pos=(l&&l.cid===cid&&l.no===no)?(l.pos||0):0;
+    PLR.loop=(l&&l.cid===cid&&l.no===no)?(l.loop!==false):true;
+    PLR.sub=(l&&l.cid===cid&&l.no===no)?(l.sub!==false):true;
+    PLR.si=PLR.pos?plrSiAt(PLR.pos):1;
+  }
+  const c=catCourse(cid)||{name:cid};
+  const L=await levelsOf(c);
+  const lvTxt=(()=>{
+    const lv=(L&&L.data&&L.data.lessons&&L.data.lessons[String(no)])||(L&&L.list&&L.list[0]&&L.list[0].level);
+    if(!lv) return '';
+    return L.src==='publisher'?`<em>${esc(lv)}</em>`:`<span>参考</span> <em>${esc(lv)}</em>`;
+  })();
+  const fav=favHas(cid,no);
+  let cached=false;
+  try{ const cc=await caches.open(CACHE_CONTENT); cached=!!(await cc.match(plrAudioSrc())); }catch(e){}
+  PLR.dur=PLR.dur||(PLR.data&&PLR.data.duration)||0;
+  const lines=plrBody().map((s,i)=>{
+    const k=i+1, d=Math.abs(k-PLR.si);
+    const cls=k===PLR.si?'now':(d<=1?'d2':'d1');
+    return `<div class="pline ${cls}" data-si="${k}">${esc(s.en)}</div>`;
+  }).join('');
+  const disc=`<div class="pdisc"><div class="pvinyl"><span>${pad(no)}</span></div></div>`;
+  $('#app').innerHTML=`<div class="player-page">
     <div class="ptop">
-      <a class="pback" href="#/listen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></a>
+      <a class="pback" href="#/listen" aria-label="收起"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></a>
       <span></span>
-      <a class="pmore" href="#/listen"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg><i>3</i></a>
+      <button class="pmore" data-act="plrmore" aria-label="更多">${Object.keys(PLR.picked).length?`<i>${Object.keys(PLR.picked).length}</i>`:''}<svg viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg></button>
     </div>
-    <div class="ptitle"><b>A Private Conversation</b><div>新概念 2 · L1 · <span>参考</span> <em>A1</em></div></div>
-    <div class="plyrics"><div class="pfade top"></div>${lines}<div class="pfade bot"></div></div>
+    <div class="ptitle"><b>${esc((PLR.data&&PLR.data.title)||('L'+no))}</b><div>${esc(c.name)} · L${no}${lvTxt?' · '+lvTxt:''}</div></div>
+    ${PLR.sub?`<div class="plyrics" id="plyrics"><div class="pfade top"></div>${lines}<div class="pfade bot"></div></div>`:disc}
     <div class="pops">
-      <div><svg viewBox="0 0 24 24" fill="var(--brand)"><path d="M12 21s-7-4.6-9.5-8.5C.6 9.5 2.4 6 5.7 6c2 0 3.4 1.1 4.3 2.6h4c.9-1.5 2.3-2.6 4.3-2.6 3.3 0 5.1 3.5 3.2 6.5C19 16.4 12 21 12 21z"/></svg><span>已收藏</span></div>
-      <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12M7 10l5 5 5-5M4 20h16"/></svg><span>下载</span></div>
-      <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>定时</span></div>
-      <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h10"/></svg><span>队列</span></div>
+      <button class="${fav?'on':'off'}" data-act="plrfav">${fav?'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7-4.6-9.5-8.5C.6 9.5 2.4 6 5.7 6c2 0 3.4 1.1 4.3 2.6h4c.9-1.5 2.3-2.6 4.3-2.6 3.3 0 5.1 3.5 3.2 6.5C19 16.4 12 21 12 21z"/></svg>':'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-4.6-9.5-8.5C.6 9.5 2.4 6 5.7 6c2 0 3.4 1.1 4.3 2.6h4c.9-1.5 2.3-2.6 4.3-2.6 3.3 0 5.1 3.5 3.2 6.5C19 16.4 12 21 12 21z"/></svg>'}<span>${fav?'已收藏':'收藏'}</span></button>
+      <button class="${cached?'on':'off'}" data-act="plrcache"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12M7 10l5 5 5-5M4 20h16"/></svg><span>已缓存</span></button>
+      <button class="${PLR.loop?'on':'off'}" data-act="plrloop"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11a8 8 0 1 0-2.3 5.7M20 5v6h-6"/></svg><span>单曲循环</span></button>
+      <button class="${PLR.sub?'on':'off'}" data-act="plrsub"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M7 12h2M11 12h2M15 12h2"/></svg><span>${PLR.sub?'有字幕':'无字幕'}</span></button>
     </div>
-    <div class="pbar"><span>00:48</span><div><i></i></div><span>01:16</span></div>
-    <div class="pctl"><div class="pmini"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 5h2v14H6zM20 5l-10 7 10 7z"/></svg></div>
-      <div class="pmain"><svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5l11 7-11 7z"/></svg></div>
-      <div class="pmini"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 5h2v14h-2zM4 5l10 7-10 7z"/></svg></div></div>
+    <div class="pbar"><span id="pnow">${fmtDur(PLR.pos)}</span><div data-act="plrseek"><i id="pfill" style="width:${PLR.dur?Math.round(PLR.pos*100/PLR.dur):0}%"></i><b id="pknob" style="left:${PLR.dur?Math.round(PLR.pos*100/PLR.dur):0}%"></b></div><span>${fmtDur(PLR.dur)}</span></div>
+    <div class="pctl">
+      <div class="pmini" data-act="plrprev"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 5h2v14H6zM20 5l-10 7 10 7z"/></svg></div>
+      <div class="pmain" data-act="plrtoggle"><svg viewBox="0 0 24 24" fill="#fff">${PLR.playing?'<rect x="7" y="5" width="4" height="14" rx="1"/><rect x="13" y="5" width="4" height="14" rx="1"/>':'<path d="M8 5l11 7-11 7z"/>'}</svg></div>
+      <div class="pmini" data-act="plrnext"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 5h2v14h-2zM4 5l10 7-10 7z"/></svg></div>
+    </div>
+    <div class="pqueue" id="plrqueue" hidden></div>
   </div>`;
-  $('#app').innerHTML=h;
+  plrScrollTo(PLR.si);
+  if(PLR.autoplay){ PLR.autoplay=false; PLR.pos=0; plrToggle(); return; }
+  if(PLR.playing) plrSync();
 }
+function plrScrollTo(si){
+  const box=document.getElementById('plyrics'); if(!box) return;
+  const el=box.querySelector('.pline.now'); if(!el) return;
+  try{ box.scrollTo({top:el.offsetTop-box.clientHeight/2+el.offsetHeight/2,behavior:'smooth'}); }catch(e){}
+}
+function plrToggle(){
+  if(!PLR.data) return;
+  if(AU.paused){ AU.src=plrAudioSrc(); AU.currentTime=PLR.pos||0; AU.play().catch(()=>{}); PLR.playing=true; plrSync(); }
+  else { AU.pause(); PLR.playing=false; plrSave(); }
+  renderPlayer();
+}
+function plrSync(){
+  if(PLR.raf) cancelAnimationFrame(PLR.raf);
+  const step=()=>{
+    if(!PLR.playing||AU.paused){ PLR.raf=null; return; }
+    const t=AU.currentTime||0;
+    PLR.pos=t;
+    const dur=AU.duration||PLR.dur||0;
+    if(dur&&Math.abs(dur-PLR.dur)>0.5) PLR.dur=dur;
+    const n=document.getElementById('pnow'), f=document.getElementById('pfill'), k=document.getElementById('pknob');
+    if(n) n.textContent=fmtDur(t);
+    const pct=dur?Math.round(t*100/dur):0;
+    if(f) f.style.width=pct+'%'; if(k) k.style.left=pct+'%';
+    const si=plrSiAt(t);
+    if(si!==PLR.si){
+      PLR.si=si;
+      const box=document.getElementById('plyrics');
+      if(box){
+        box.querySelectorAll('.pline').forEach(el=>{
+          const s=+el.dataset.si, d=Math.abs(s-si);
+          el.className='pline '+(s===si?'now':(d<=1?'d2':'d1'));
+        });
+        plrScrollTo(si);
+      }
+    }
+    PLR.raf=requestAnimationFrame(step);
+  };
+  PLR.raf=requestAnimationFrame(step);
+}
+function plrSave(){
+  if(!PLR.cid) return;
+  listenSet({cid:PLR.cid,no:PLR.no,pos:Math.round((PLR.pos||0)*10)/10,dur:PLR.dur||0,
+    loop:PLR.loop,sub:PLR.sub,at:Date.now()});
+}
+function plrSeek(el,x){
+  const bar=el.getBoundingClientRect();
+  const r=Math.max(0,Math.min(1,(x-bar.left)/bar.width));
+  if(!PLR.dur) return;
+  PLR.pos=r*PLR.dur;
+  if(AU.src){ AU.currentTime=PLR.pos; }
+  renderPlayer();
+}
+function plrBadge(){
+  const b=document.querySelector('.pmore'); if(!b) return;
+  const n=Object.keys(PLR.picked).length;
+  let i=b.querySelector('i');
+  if(n){ if(!i){ i=document.createElement('i'); b.insertBefore(i,b.firstChild); } i.textContent=n; }
+  else if(i) i.remove();
+}
+function plrMore(keep){
+  const box=document.getElementById('plrqueue'); if(!box) return;
+  plrBadge();
+  if(!box.hidden&&!keep){ box.hidden=true; box.innerHTML=''; return; }
+  const favs=favAll();
+  box.hidden=false;
+  box.innerHTML=`<div class="lpad" style="padding:0 0 6px"><span>我的收藏 · 复选进队列</span><span>${Object.keys(PLR.picked).length} 首</span></div>
+    ${favs.length?favs.map(f=>{
+      const k=f.cid+':'+f.no, on=!!PLR.picked[k];
+      const c=catCourse(f.cid)||{};
+      return `<div class="lpack" data-act="plrpick" data-k="${k}" data-c="${f.cid}" data-n="${f.no}" style="cursor:pointer"><div style="display:flex;align-items:center;gap:11px;padding:10px 4px;width:100%">
+        <span class="pchk${on?' on':''}">${on?'✓':''}</span>
+        <div style="flex:1;min-width:0"><div style="font-size:13px;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(lessonTitle(c,f.no))} · L${f.no}</div>
+        <div style="font-size:11px;color:var(--sub)">${esc(c.name||f.cid)}</div></div></div></div>`;
+    }).join(''):'<div class="lempty" style="padding:8px 0">还没有收藏</div>'}
+    <div style="display:flex;gap:8px;margin-top:10px"><button class="btn sm g" data-act="plrqplay" style="flex:1">按队列播放</button>
+    <button class="btn sm" data-act="plrqclear" style="flex:1">清空</button></div>`;
+}
+/* 上一课/下一课（本册内，越界不动） */
+function plrStep(d){
+  const c=catCourse(PLR.cid); if(!c) return;
+  const n=PLR.no+d;
+  if(n<1||n>(c.lessons||0)) return;
+  AU.pause(); PLR.playing=false; PLR.pos=0; plrSave();
+  location.hash='#/player?c='+PLR.cid+'&n='+n;
+}
+/* 本课音频落缓存（已缓存则只提示） */
+async function plrCacheAudio(){
+  const src=plrAudioSrc();
+  try{
+    const cc=await caches.open(CACHE_CONTENT);
+    if(await cc.match(src)){ toast('本课音频已在本机'); return; }
+    const r=await fetch(src); if(!r.ok) throw new Error('HTTP '+r.status);
+    await cc.put(src,r); toast('本课音频已缓存'); renderPlayer();
+  }catch(e){ toast('缓存失败，请稍后重试'); }
+}
+/* 收藏复选 → 队列（只改本次播放，不回写 el2_fav） */
+function plrQueuePlay(){
+  const keys=Object.keys(PLR.picked);
+  if(!keys.length){ toast('先勾选要听的课文'); return; }
+  PLR.queue=keys.map(k=>{ const a=k.split(':'); return {cid:a[0],no:+a[1]}; });
+  PLR.picked={};
+  const f=PLR.queue[0]; PLR.autoplay=true;
+  location.hash='#/player?c='+f.cid+'&n='+f.no;
+}
+/* 单曲循环 / 队列续播 */
+AU.addEventListener('ended',()=>{
+  if(!(location.hash||'').startsWith('#/player')) return;
+  if(PLR.loop){ try{ AU.currentTime=0; AU.play(); }catch(e){} return; }
+  if(PLR.queue&&PLR.queue.length>1){
+    PLR.queue.shift();
+    const n=PLR.queue[0]; PLR.autoplay=true;
+    location.hash='#/player?c='+n.cid+'&n='+n.no;
+    return;
+  }
+  PLR.playing=false; plrSave(); renderPlayer();
+});
+
 /* ================= 统计 ================= */
 function ringSvg(id,pct,color,label){
   const C=2*Math.PI*46;
