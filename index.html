@@ -1119,7 +1119,6 @@ function renderCourseSoon(cid){
 }
 /* 教材页 = 一本书的课表（2026-11-21 IA 定案）：
    今日任务归「我的课程」tab；本页只留跨课表的接续入口与待复习筛选，新手指引改浮层不占正文 */
-const SCHED_TIP='到期复习由系统自动排程：学完一课后，按 6小时 → 1天 → 2天 → 4天 → 7天 → 21天 → 60天 排 7 轮复习。';
 const CELL_FILTERS=[['all','全部'],['due','待复习'],['new','未学'],['doing','学习中'],['done','通关']];
 function introMarkup(){
   return `<div class="introMask" id="introMask" hidden><div class="introSheet">
@@ -1160,7 +1159,7 @@ function renderHome(){
       <button class="btn sm" data-go="${lessonHref(nextNo,cid)}">继续</button>
     </div>
   </div>
-  <div class="hchips cfilter">${chips}${tipQ('sched',SCHED_TIP)}</div>
+  <div class="hchips cfilter">${chips}</div>
   <input id="cellQ" placeholder="搜索课号或标题（如 12 / dolphin）" autocomplete="off" value="${esc(CUR.cellQ||'')}" style="width:calc(100% - 28px);margin:6px 14px 10px;height:46px;border:1.5px solid var(--line);border-radius:12px;padding:0 14px;font-size:16px;outline:none;background:#FBFCFD">
   <div class="grid">${cells()}</div>
   <div class="foot">上滑看全部 ${total} 课 · 红点＝今日到期</div>
@@ -1642,7 +1641,7 @@ document.addEventListener('click',async e=>{
   /* 听单 / 播放页的动作不依赖已载入的课程：否则在 #/listen、#/player 上会被门禁整片挡掉 */
   const P4ACTS=['lbook','lview','lopen','packdl','plrtoggle','plrprev','plrnext','plrseek','plrfav',
                 'plrcache','plrloop','plrsub','plrmore','plrpick','plrqplay','plrqclear',
-                'tipq'];   /* tipq：教材页筛选行的排程说明，此时 CUR.data 可能为空 */
+                'tipq'];   /* tipq：难句/卡片/我的页的说明，CUR.data 为空时也要能点开 */
   const isP4=P4ACTS.indexOf(act)>=0;
   if(!CUR.data&&!isP4) return;
   const i=+el.dataset.i, p=isP4?null:prog(CUR.no), d=isP4?null:CUR.data;
