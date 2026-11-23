@@ -540,7 +540,7 @@ else
 {
 const LS='el2_';
 const OFFSETS=[0.25,1,2,4,7,21,60];          // 7 轮复习（天）：6小时→1→2→4→7→21→60 天（11-21 定稿 60 天版）
-const STAGES=['盲听','精听','跟读','录音'];
+const STAGES=['盲听','精听','跟读'];      /* 11-23 用户定：删录音段，三段 + 学习完成卡 */
 const $=s=>document.querySelector(s);
 const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const pad=n=>(n<10?'0':'')+n;
@@ -609,15 +609,15 @@ function progOf(cid){
 }
 function prog(no,cid){ const o=progOf(cid), k=String(no);
   if(!o[k]) o[k]=blankProg(); return o[k]; }
-/* ===== 复习 7 轮：本轮三段有效提取（v4.2 屏 7/8） =====
+/* ===== 复习 7 轮：本轮两段有效提取（11-23 删录音段后） =====
    revDone 只对「当前轮」有效，换轮自动重置；seen 记录精听已走过的句卡，跨会话保留。
-   三段齐了才 reviews+1 —— 不允许「点一次就记账」。 */
-const REV_STEPS=['精听','跟读','录音'];
+   两段齐了才 reviews+1 —— 不允许「点一次就记账」。 */
+const REV_STEPS=['精听','跟读'];           /* 11-23：复习随首学改为两段 */
 const REV_GRACE_MS=3*864e5;                    /* 3 天宽限内补做不算漏 */
 function revState(p){
   const r=(p.reviews||0)+1;
-  if(!p.revDone||typeof p.revDone!=='object'||p.revDone.r!==r) p.revDone={r:r,s:[false,false,false],seen:{}};
-  if(!Array.isArray(p.revDone.s)||p.revDone.s.length!==3) p.revDone.s=[false,false,false];
+  if(!p.revDone||typeof p.revDone!=='object'||p.revDone.r!==r) p.revDone={r:r,s:[false,false],seen:{}};
+  if(!Array.isArray(p.revDone.s)||p.revDone.s.length!==REV_STEPS.length) p.revDone.s=[false,false];
   if(!p.revDone.seen||typeof p.revDone.seen!=='object') p.revDone.seen={};
   return p.revDone;
 }
@@ -644,7 +644,7 @@ function finishReview(){
   saveProgress();
   syncEnqueue('review',0,null);
   CUR.revDoneShown={round:p.reviews,s:snap,late:late};
-  CUR.rec=null; CUR.rstep=null;               /* 保留 CUR.blob：屏 8 的「分享给家人」要用 */
+  CUR.rstep=null;                             /* 11-23：录音段已删，屏 8 不再有分享录音 */
   renderLesson();
   return true;
 }
@@ -856,7 +856,7 @@ function tipQ(key,text){
 /* ===== 课程清单：catalog.json 是唯一运营入口（上架新课不用发版）；本地兜底保证离线首启可用 ===== */
 const COURSES=[
  {id:'nce2',name:'新概念英语 2',short:'N2',tag:'NCE2 Loop',cover:'covers/nce2_s.jpg',lessons:96,ready:true,default:true,sizeMB:78,
-  desc:'96 课 · 盲听 / 精听 / 跟读 / 录音 + 7 轮复习',dataPat:'data/L{NN}.json',audioPat:'audio/L{NN}.mp3',pad:2},
+  desc:'96 课 · 盲听 / 精听 / 跟读 + 7 轮复习',dataPat:'data/L{NN}.json',audioPat:'audio/L{NN}.mp3',pad:2},
  {id:'nce1',name:'新概念英语 1',short:'N1',tag:'NCE1 Loop',cover:'covers/nce1_s.jpg',lessons:144,ready:false,default:false,sizeMB:0,
   desc:'144 课 · 音频对齐与课件制作中',dataPat:'nce1/data/L{NN}.json',audioPat:'nce1/audio/L{NN}.mp3',pad:2},
  {id:'tks',name:'Think Starter',short:'TKS',tag:'Cambridge TH!NK',cover:'covers/tks_s.jpg',lessons:12,ready:false,default:false,sizeMB:0,
@@ -1126,7 +1126,7 @@ function introMarkup(){
     <div class="rev-ttl" style="text-align:center">怎么用？三步就上手</div>
     <div class="item"><div class="tt"><div class="en">① 盲听整课</div><div class="meta">先读题预测，不看字幕完整听一遍，听大意</div></div></div>
     <div class="item"><div class="tt"><div class="en">② 精听 → 跟读</div><div class="meta">点 ▶ 逐句抠懂每句，难句点 ★ 收藏；再逐句跟读</div></div></div>
-    <div class="item"><div class="tt"><div class="en">③ 录音 → 等 7 轮复习</div><div class="meta">全篇中文提示下脱稿背诵录音；系统自动排 7 轮复习提醒（红点提示）</div></div></div>
+    <div class="item"><div class="tt"><div class="en">③ 读完 → 等 7 轮复习</div><div class="meta">跟读完成后系统自动排 7 轮复习提醒（红点提示）</div></div></div>
     <button class="btn" id="introGo" style="width:100%;margin-top:8px">我知道了，开始学习</button>
   </div></div>`;
 }
@@ -1233,10 +1233,10 @@ function renderLesson(){
     if(CUR.revDoneShown) return renderRevDone();      /* 屏 8：完成本轮 */
     if(CUR.rstep==null) return renderRevEntry(p,d);   /* 屏 7：到期入口 */
   }
-  const steps=rev?REV_STEPS:STAGES;                   /* 复习只跑后三段，盲听不重跑 */
+  const steps=rev?REV_STEPS:STAGES;                   /* 复习只跑后两段，盲听不重跑 */
   const cur=rev?CUR.rstep:(p.stage??0);
   let h=`<div class="topbar">
-    <h1 style="flex:1;min-width:0;font-size:19px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">L${d.no} · ${esc(d.title)}</h1>
+    <h1 style="flex:1;min-width:0;font-size:19px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${(!rev&&cur>=STAGES.length)?'本课完成':`L${d.no} · ${esc(d.title)}`}</h1>
     <a class="tbBack" href="#/c/${curCourse()}">‹ 返回</a></div>
   <div class="tip">${esc(d.titleZh)} · ${d.sentences.length} 句 ${rev?`· 第 ${(p.reviews||0)+1} 轮`:''}</div>
   <div class="stepper">${steps.map((s,i)=>{ const k=rev?i+1:i; return `<div class="st s${k} ${i===cur?'on':''}" data-act="jump" data-v="${i}">${s}</div>`; }).join('')}</div>
@@ -1255,7 +1255,7 @@ function renderRevEntry(p,d){
   <div class="rev-entry">
     <div class="rev-ttl">第 ${round} 轮 · 该复习了</div>
     <div class="rev-card">
-      <div class="rev-lab">本轮三段</div>
+      <div class="rev-lab">本轮 ${REV_STEPS.length} 段</div>
       <div class="rev-pills">${REV_STEPS.map(s=>`<span class="pill">${s}</span>`).join('')}</div>
       <div class="rev-blind"><span class="pill mute">盲听 ✓ 已完成</span></div>
     </div>
@@ -1293,7 +1293,6 @@ function renderRevDone(){
     ${V.late?`<div class="rev-note" style="text-align:center;color:var(--bad)">已超出 3 天宽限，本轮记为补做</div>`:''}
     <div class="rev-acts">
       <button class="fbtn" data-act="revclose">回到课程</button>
-      <button class="fbtn ghost sm" data-act="recshare">分享给家人</button>
     </div>
   </div>`;
 }
@@ -1302,10 +1301,13 @@ function renderStage(){
   const el=$('#stage');
   const step=rev?CUR.rstep:p.stage;
   if(rev){
-    /* 复习三段：精听 → 跟读 → 录音（无盲听、无难句补练） */
-    el.innerHTML=[stageIntensive,stageShadow,stageRetell][step]();
+    /* 复习两段：精听 → 跟读（无盲听、无难句补练） */
+    el.innerHTML=[stageIntensive,stageShadow][step]();
+  }else if(step>=STAGES.length){
+    el.innerHTML=studyDoneCard();                /* 学习完成卡：三段走完的终点 */
+    return;
   }else{
-    el.innerHTML=[stageBlind,stageIntensive,stageShadow,stageRetell][step]();
+    el.innerHTML=[stageBlind,stageIntensive,stageShadow][step]();
   }
   /* 盲听首学：渲染后自动启动无字播放（同一 phase 只启动一次） */
   if(!rev && step===0 && CUR.blind && CUR.blind.phase==='playing' && !CUR.blindStarted){
@@ -1319,10 +1321,9 @@ function renderStage(){
       if(!st.seen[CUR.intSi]){ st.seen[CUR.intSi]=1; saveProgress(); }
     }
   }
-  /* 跟读 / 录音：把焦点行滚到容器中部 */
+  /* 跟读：把焦点行滚到容器中部（录音段已删） */
   const isShadow=(!rev&&step===2)||(rev&&step===1);
-  const isRec=(!rev&&step===3)||(rev&&step===2);
-  if(isShadow||isRec){
+  if(isShadow){
     const ks=document.getElementById('kstage'), now=ks&&ks.querySelector('.krow.now');
     if(ks&&now){ try{ ks.scrollTop=now.offsetTop-ks.clientHeight/2+now.offsetHeight/2; }catch(e){} }
   }
@@ -1482,129 +1483,29 @@ window.el2BlindDone=function(){
   B.phase='question'; CUR.blindStarted=false; renderStage();
 };
 /* —— 录音：全篇模式（仅中文）· 断点录制 · 完成卡（屏 5/6） —— */
-function stageRetell(){
+/* —— 学习完成卡（11-23 定案）：三段走完的终点，不再是「第四段」 —— */
+function studyDoneCard(){
   const p=prog(CUR.no), d=CUR.data;
-  const body=d.sentences.slice(1);        /* 跳过第 0 句（题干/标题），只滚课文正文 */
-  const total=body.length;
-  if(!CUR.rec) CUR.rec={state:'idle',baseEl:0,segStart:0,cur:0,totalMs:0};
-  const R=CUR.rec;
-  if(R.state==='done') return recDoneCard();
-  const cur=Math.min(R.cur||0,total-1);
-  const rows=body.map((s,i)=>{
-    const done=i<cur, now=i===cur, cls=now?'now':(done?'':'dim');
-    return `<div class="krow ${cls} rec-row${done?' done':''}" data-act="recrow" data-i="${i}"><div class="zh">${esc(s.zh)}</div></div>`;
-  }).join('');
-  const rsegs=[...Array(total)].map((_,i)=>{
-    const c=i<cur?'done':(i===cur&&R.state==='recording'?'now':'');
-    return `<span class="rseg ${c}"></span>`;
-  }).join('');
-  const stateLbl=R.state==='recording'?'● 录制中':R.state==='paused'?'已暂停':'未开始';
-  let recHintSeen=false;
-  try{ recHintSeen=!!localStorage.getItem(LS+'recHint'); }catch(e){}
-  const stateOn=R.state==='recording'?' on':'';
-  const pauseLbl=R.state==='paused'?'继续':'暂停';
-  const el=R.baseEl+(R.state==='recording'?(Date.now()-R.segStart)/1000:0);
-  return `<div class="shadow-wrap rec-wrap">
-    <div class="khead2"><span>背诵 · 全篇 · 仅中文</span><a href="#/c/${curCourse()}">‹ 退出</a></div>
-    <div class="kstage" id="kstage">${rows}</div>
-    <div class="ktool">
-      <span class="pill">第 ${cur+1} / ${total} 句</span>
-      <span class="pill rec-state${stateOn}">${stateLbl}</span>
+  const next=p.reviews>=OFFSETS.length
+    ? '7 轮复习已全部完成，本课通关'
+    : `首轮复习：约 6 小时后（${fmtDate(isoOf(nextDue(p)))}）`;
+  return `<div class="shadow-wrap rec-done">
+    <div class="khead2"><span>本课完成</span><a href="#/c/${curCourse()}">‹ 退出</a></div>
+    <div class="reccard">
+      <div class="rct">学习完成</div>
+      <div class="rcs">第 ${d.no} 课 · ${esc(d.title)}</div>
+      <div class="rcrow"><span>已完成</span><b>盲听 · 精听 · 跟读</b></div>
+      <div class="rcrow"><span>复习安排</span><b>${next}</b></div>
     </div>
-    <div class="rec-prog">
-      <div class="rsegs">${rsegs}</div>
-      <div class="rec-time"><span class="rec-time-now">${fmtSec(el)}</span><span>${R.state==='paused'?'已录片段保留':''}</span></div>
+    <div class="rcacts">
+      <button class="fbtn" data-act="doneback">完成，返回课程</button>
     </div>
-    <div class="rec-ctl">
-      <button class="fbtn sm" data-act="recpause" ${R.state==='idle'?'disabled':''}>${pauseLbl}</button>
-      <button class="rec-big${R.state==='recording'?' on':''}" data-act="rectoggle" aria-label="录音">${R.state==='recording'?'■':'●'}</button>
-      <button class="fbtn sm" data-act="recfinish" ${(R.state==='idle'&&!R.baseEl)?'disabled':''}>完成录音</button>
-    </div>
-    ${recHintSeen?'':`<div class="rec-hint" id="recFirstHint">断点录制可暂停继续，最后合成完整录音</div>`}
-    ${R.error?`<div class="rec-hint" style="color:var(--bad)">录音不可用：${esc(R.error)}</div>
-      <div style="text-align:center;padding-bottom:8px"><button class="fbtn sm" data-act="recback">跳过录音，直接完成</button></div>`:''}
   </div>`;
 }
 function fmtSec(sec){
   sec=Math.max(0,Math.round(sec||0));
   const m=Math.floor(sec/60), s=sec%60;
   return (m>0?m+':'+pad(s):'00:'+pad(s));
-}
-function recDoneCard(){
-  const p=prog(CUR.no), d=CUR.data, rev=CUR.mode==='rev';
-  const dur=Math.round((CUR.rec.totalMs||0)/1000);
-  const durTxt=dur>=60?Math.floor(dur/60)+' 分 '+(dur%60)+' 秒':dur+' 秒';
-  return `<div class="shadow-wrap rec-done">
-    <div class="khead2"><span>本课完成</span><a href="#/c/${curCourse()}">‹ 退出</a></div>
-    <div class="reccard">
-      <div class="rct">录音完成</div>
-      <div class="rcs">第 ${d.no} 课 · ${esc(d.title)}</div>
-      <div class="rcrow"><span>录音方式</span><b>全篇模式（断点录制）</b></div>
-      <div class="rcrow"><span>用时</span><b>${durTxt}</b></div>
-    </div>
-    <div class="rcacts">
-      <button class="fbtn" data-act="recshare">分享到微信群</button>
-      <button class="fbtn ghost" data-act="recback">${rev?`完成第 ${p.reviews+1} 轮`:'完成，返回课程'}</button>
-    </div>
-  </div>`;
-}
-/* 录音控制：MediaRecorder pause/resume 保证最后一条完整文件 */
-let RECS=null;
-async function recBegin(){
-  const R=CUR.rec;
-  try{
-    if(!REC){
-      RECS=await navigator.mediaDevices.getUserMedia({audio:true});
-      RECCHUNKS=[]; REC=new MediaRecorder(RECS);
-      REC.ondataavailable=ev=>{ if(ev.data&&ev.data.size) RECCHUNKS.push(ev.data); };
-      REC.onstop=()=>{
-        try{ RECS.getTracks().forEach(t=>t.stop()); }catch(e){}
-        CUR.blob=new Blob(RECCHUNKS,{type:REC.mimeType||'audio/webm'});
-        try{ recSave(`${curCourse()}_${CUR.no}_recall`,CUR.blob); }catch(e){}
-        STATS.recN=(STATS.recN||0)+1; saveStats();
-        R.state='done'; R.totalMs=Math.round(R.baseEl*1000);
-        REC=null; RECS=null;
-        clearInterval(window.__recT);
-        if(CUR.mode==='rev'){ revMark(2); finishReview(); return; }
-        renderStage();
-      };
-      REC.start();
-    }else if(REC.state==='paused'){ REC.resume(); }
-    R.segStart=Date.now(); R.state='recording';
-    clearInterval(window.__recT); window.__recT=setInterval(recTick,300);
-    renderStage();
-  }catch(err){
-    CUR.rec.error=String(err&&err.message||err);
-    toast('麦克风不可用，可跳过录音直接完成');
-    renderStage();
-  }
-}
-function recHintMark(){
-  try{ if(localStorage.getItem(LS+'recHint')) return; localStorage.setItem(LS+'recHint','1'); }catch(e){}
-  const h=document.getElementById('recFirstHint'); if(h) h.remove();
-}
-function recPause(){
-  const R=CUR.rec;
-  if(REC&&REC.state==='recording'){
-    try{ REC.pause(); }catch(e){}
-    R.baseEl+=(Date.now()-R.segStart)/1000; R.state='paused';
-    clearInterval(window.__recT); renderStage();
-  }else if(R.state==='paused'){ recBegin(); }
-}
-function recFinish(){
-  const R=CUR.rec;
-  if(!REC) return;
-  if(R.state==='recording') R.baseEl+=(Date.now()-R.segStart)/1000;
-  try{ REC.stop(); }catch(e){}
-}
-function recTick(){
-  const R=CUR.rec;
-  if(!R||R.state!=='recording'||!CUR.data) return;
-  const el=R.baseEl+(Date.now()-R.segStart)/1000;
-  const ss=CUR.data.sentences.slice(1); let ci=0;
-  for(let i=0;i<ss.length;i++){ if((ss[i].t||0)<=el+0.3) ci=i; else break; }
-  if(ci!==R.cur){ R.cur=ci; renderStage(); }
-  else{ const t=document.querySelector('.rec-time-now'); if(t) t.textContent=fmtSec(el); }
 }
 function finBlock(){
   const p=prog(CUR.no), rev=CUR.mode==='rev';
@@ -1745,37 +1646,19 @@ document.addEventListener('click',async e=>{
         if(seen<total){ toast(`还有 ${total-seen} 句没看，滑完再进跟读`); return; }
         revMark(0);
       }
-      /* 跟读 → 录音：点「读完了」即本段有效提取 */
-      if(v===2) revMark(1);
+      /* 跟读读完 → 两段齐，直接进入本轮完成卡（录音段已删） */
+      if(v===2){ revMark(1); finishReview(); return; }
       CUR.rstep=v;
     }else{
-      p.stage=+el.dataset.v; p.si=CUR.si??p.si; saveProgress();
+      p.stage=+el.dataset.v; p.si=CUR.si??p.si;
+      if(+el.dataset.v>=STAGES.length) p.firstLearnAt=p.firstLearnAt||Date.now();
+      saveProgress();
     }
-    CUR.blob=null; CUR.grade=''; CUR.loopsLeft=null; CUR.rec=null; renderLesson();
+    CUR.grade=''; CUR.loopsLeft=null; renderLesson();
   }
-  else if(act==='rectoggle'){ recHintMark(); const R=CUR.rec; if(!R) return; if(R.state==='recording') recPause(); else recBegin(); }
-  else if(act==='recpause'){ recHintMark(); recPause(); }
-  else if(act==='recfinish'){ recHintMark(); recFinish(); }
-  else if(act==='recrow'){ const R=CUR.rec; if(R&&R.state!=='done'){ R.cur=+el.dataset.i; renderStage(); } }
-  else if(act==='recback'){
-    recHintMark();
-    if(CUR.mode==='rev'){ revMark(2); finishReview(); return; }
-    p.firstLearnAt=p.firstLearnAt||Date.now(); p.stage=3; saveProgress();
-    CUR.rec=null; CUR.blob=null; location.hash='#/c/'+curCourse();
-  }
-  else if(act==='recshare'){
-    (async()=>{
-      const blob=CUR.blob;
-      if(!blob){ toast('还没有录音'); return; }
-      const name=`L${CUR.no}-${(CUR.data&&CUR.data.titleFile)||'recall'}.webm`;
-      try{
-        const file=new File([blob],name,{type:blob.type||'audio/webm'});
-        if(navigator.canShare&&navigator.canShare({files:[file]})){
-          await navigator.share({files:[file],title:'NCE2 L'+CUR.no,text:'我的背诵录音'});
-          toast('已打开分享');
-        }else{ toast('当前环境不支持直接分享，请用系统分享或微信转发'); }
-      }catch(e){ if(!e||e.name!=='AbortError') toast('分享未完成'); }
-    })();
+  else if(act==='doneback'){
+    p.firstLearnAt=p.firstLearnAt||Date.now(); p.stage=STAGES.length; saveProgress();
+    location.hash='#/c/'+curCourse();
   }
   else if(act==='jump'){
     /* 四段条只读：设计稿 11-17 定稿，不可点自由切换 */
@@ -2357,8 +2240,7 @@ function renderMe(){
         <div style="font-size:12px;color:var(--sub)">${x.label}</div></div>`).join('')}
     </div>
     <div class="item" style="margin-top:10px"><div class="tt">累计收听</div><b>${mins} 分钟</b></div>
-    <div class="item"><div class="tt">跟读句子次数</div><b>${STATS.shadowN||0}</b></div>
-    <div class="item"><div class="tt">录音次数</div><b>${STATS.recN||0}</b></div></div>`;
+    <div class="item"><div class="tt">跟读句子次数</div><b>${STATS.shadowN||0}</b></div></div>`;
   /* ④ 离线包：按「我的课程」逐门列，操作就地完成 */
   h+=`<div class="sec"><h2>离线包 ${tipQ('ofl','下载后断网也能学。在课程库里点「移除」只释放文件，学习进度与难句本都会保留。')}</h2>
     ${my.map(id=>catCourse(id)).filter(c=>c&&c.ready).map(meOfflineRow).join('')||'<div class="empty">还没有可下载的课程</div>'}
