@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>四段流程 · 单课 UI 设计稿 v4.2（盲听 / 精听 / 跟读 / 录音输出 + 听单）</title>
+<style>
+:root{--ink:#263039;--sub:#5C6773;--line:#E2E6EB;--bg:#F4F6F8;--card:#FFFFFF;
+ --focus:#0B8A5F;--focusDeep:#08704D;--brand:#10B981;--brandSoft:#E6F7F0;--amber:#C08A3E;--amberInk:#8A5E22;--mask:#C9D0D8;--dl:#0B8A5F;--bad:#B04A43}
+*{box-sizing:border-box}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Noto Sans SC","Microsoft YaHei",sans-serif;background:#EBEDF0;color:var(--ink);font-size:15px;line-height:1.6;padding:28px 24px 60px}
+.pagehead{max-width:1560px;margin:0 auto 6px}
+.pagehead h1{font-size:24px;margin:0 0 4px}
+.pagehead .sub{color:var(--sub);font-size:14px;margin-bottom:14px}
+.flowbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px 16px;margin-bottom:18px;max-width:1560px;margin-left:auto;margin-right:auto}
+.fchip{border-radius:999px;padding:6px 14px;font-size:14px;font-weight:600;color:#fff;background:var(--focus)}
+.fchip.rev{background:#F1F3F5;color:var(--sub);font-weight:500}
+.farrow{color:var(--sub);font-weight:700}
+.flowbar .note{font-size:12.5px;color:var(--sub);margin-left:auto}
+.decisions,.palette,.iconspec{max-width:1560px;margin:0 auto 18px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+.decisions .ph,.palette .ph,.iconspec .ph{font-size:15px;font-weight:700;margin-bottom:4px}
+.decisions .ph span,.palette .ph span,.iconspec .ph span{font-weight:400;color:var(--sub);font-size:13px;margin-left:10px}
+.decisions ol{margin:6px 0 0;padding-left:20px;font-size:13px;line-height:1.8}
+.decisions li b{color:var(--focusDeep)}
+.decisions code,.spec code,.anno code{color:var(--focusDeep)}
+.palette .desc,.iconspec .desc{font-size:12.5px;color:var(--sub);margin:0 0 8px}
+.swatches{display:flex;gap:8px;flex-wrap:wrap}
+.sw{width:126px;border:1px solid var(--line);border-radius:10px;padding:8px;font-size:11.5px;color:var(--sub)}
+.sw i{display:block;height:26px;border-radius:6px;margin-bottom:5px}
+.sw b{display:block;color:var(--ink);font-size:12.5px}
+.iconsamp{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
+.iconsamp .u{width:60px;border:1px solid var(--line);border-radius:10px;padding:8px 3px 6px;text-align:center;font-size:11px;color:var(--sub)}
+.iconsamp .u svg{display:block;margin:0 auto 4px;color:var(--focus)}
+.licon{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.spec{display:flex;gap:14px;flex-wrap:wrap;max-width:1560px;margin:0 auto 20px}
+.spec .card{flex:1 1 320px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px 16px}
+.spec .card h3{font-size:14px;margin:0 0 6px;font-weight:600}
+.spec ul{margin:0;padding-left:18px;font-size:12.5px;line-height:1.85;color:var(--sub)}
+.grouphead{max-width:1560px;margin:26px auto 14px;padding:10px 16px;background:#fff;border:1px solid var(--line);border-left:5px solid var(--focus);border-radius:10px;font-size:16px;font-weight:700;display:flex;align-items:center;gap:10px}
+.grouphead span{font-size:13px;font-weight:400;color:var(--sub)}
+.shots{display:flex;gap:26px;align-items:flex-start;flex-wrap:wrap;max-width:1560px;margin:0 auto}
+.shot{width:390px;flex:0 0 390px}
+.shot.wide{width:800px;flex:0 0 800px}
+.lab{font-size:15px;font-weight:700;margin:0 0 8px;display:flex;align-items:center;gap:8px}
+.lab .n{width:26px;height:26px;border-radius:50%;background:var(--ink);color:#fff;font-size:13px;display:inline-flex;align-items:center;justify-content:center;flex:0 0 26px}
+.phone{background:#fff;border-radius:38px;border:8px solid #212529;overflow:hidden;height:780px;display:flex;flex-direction:column;position:relative}
+.phone.land{width:100%;height:390px;border-radius:30px}
+.status{flex:0 0 auto;padding:9px 22px 0;display:flex;justify-content:space-between;align-items:center;font-size:12.5px;font-weight:600;color:var(--ink)}
+.phone.land .status{padding:6px 20px 0}
+/* 横屏可用高仅 230px，5 行需压行距，否则居中溢出会裁掉首行 */
+.phone.land .krow{padding:2px 18px}
+.phone.land .krow .en{line-height:1.32}
+.phone.land .krow .zh{margin-top:0}
+.status .cam{width:90px;height:22px;background:#212529;border-radius:999px}
+.scr{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden;position:relative;background:var(--bg)}
+.body{flex:1;min-height:0;display:flex;flex-direction:column;overflow:hidden}
+.anno{background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 14px;margin-top:12px;font-size:12.5px}
+.hscroll{overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.hscroll::-webkit-scrollbar{display:none}
+.anno b.t{display:block;font-size:13.5px;margin-bottom:4px}
+.anno ul{margin:4px 0 0;padding-left:18px}
+.anno li{margin:3px 0}
+.foot{max-width:1560px;margin:34px auto 0;color:var(--sub);font-size:12.5px;text-align:center}
+.khead{display:flex;justify-content:space-between;align-items:center;padding:6px 20px 2px;color:var(--sub);font-size:12.5px;flex:0 0 auto}
+.title{font-size:20px;font-weight:700;text-align:center;margin:6px 0 2px}
+.subtle{font-size:12.5px;color:var(--sub);text-align:center;line-height:1.6}
+.hint{font-size:12.5px;color:var(--sub);text-align:center}
+.big{font-family:Georgia,"Times New Roman",serif;font-size:21px;line-height:1.55;color:var(--ink)}
+.zhline{font-size:14px;color:var(--sub);line-height:1.6}
+.fbtn{display:flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:16px;font-family:inherit;font-size:16px;font-weight:600;min-height:54px;background:var(--focus);color:#fff}
+.fbtn.ghost{background:transparent;color:var(--sub);font-size:14px;font-weight:500;border:1.5px solid var(--line)}
+.fbtn.sm{min-height:44px;font-size:13.5px;border-radius:12px}
+.opt{display:flex;align-items:center;gap:10px;width:100%;border:1.5px solid var(--line);background:#fff;border-radius:14px;padding:11px 12px;font-size:14.5px;text-align:left;color:var(--ink)}
+.opt b{flex:0 0 24px;height:24px;border-radius:50%;background:#F1F3F5;color:var(--sub);font-size:12px;display:flex;align-items:center;justify-content:center}
+.seg{display:flex;gap:3px;background:#F1F3F5;border-radius:999px;padding:3px}
+.seg span{padding:5px 11px;border-radius:999px;font-size:12px;color:var(--sub);white-space:nowrap}
+.seg span.on{background:#fff;color:var(--focusDeep);font-weight:600}
+.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px 14px}
+.ankiCard{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 16px;display:flex;flex:1;flex-direction:column;min-height:0;touch-action:pan-y;user-select:none}
+.ankiTop{display:flex;justify-content:space-between;align-items:center;font-size:11.5px;color:var(--sub)}
+.ankiTag{background:var(--brandSoft);color:var(--focusDeep);border-radius:999px;padding:3px 9px;font-weight:600}
+.ankiFoot{display:flex;justify-content:space-between;font-size:11px;color:var(--sub);border-top:1px solid var(--line);padding-top:8px;margin-top:8px}
+.wave{display:flex;align-items:center;justify-content:center;gap:5px;height:76px}
+.wave i{width:5px;border-radius:3px;background:var(--focus);opacity:.75}
+.flownav{display:flex;align-items:center;justify-content:center;gap:3px;padding:7px 8px 9px;border-bottom:1px solid var(--line);background:transparent;flex:0 0 auto}
+.fn{display:flex;flex-direction:column;align-items:center;gap:2px;width:58px;font-size:10.5px;color:var(--sub)}
+.fni{width:22px;height:22px;border-radius:50%;border:1.5px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:10px;font-style:normal;font-weight:600}
+.fn.on{color:var(--focusDeep)}
+.fn.on .fni{border-color:var(--focus);background:#EDF1F4;color:var(--focusDeep)}
+.fn.done .fni{background:var(--focus);border-color:var(--focus);color:#fff}
+.fnar{color:var(--line);font-size:11px}
+.kstage{flex:1;min-height:0;display:flex;flex-direction:column;justify-content:center;overflow:hidden}
+.krow{padding:5px 18px;text-align:center}
+.krow .en{font-family:Georgia,"Times New Roman",serif;font-size:16px;line-height:1.4;color:var(--ink)}
+.krow .zh{font-size:12px;color:var(--sub);margin-top:2px}
+.krow.dim{opacity:.32}
+.krow.now .en{font-size:21px;font-weight:700}
+.ktool{display:flex;align-items:center;justify-content:flex-start;gap:10px;padding:8px 12px;border-top:1px solid var(--line);background:#fff;flex:0 0 auto}
+/* 工具条内三件同族：语言 seg / 遍数 seg / 主按钮，统一 34px 高、统一全圆；选择器成组靠左，主按钮靠右 */
+.ktool .seg{padding:3px}
+.ktool .seg span{padding:7px 10px;font-size:12px;line-height:1.2}
+.ktool .fbtn.sm{min-height:34px;min-width:0;border-radius:999px;font-size:13px;font-weight:600;padding:0 15px;flex:0 0 auto;margin-left:auto}
+.cmp{background:#fff;border:1px solid var(--line);border-radius:14px;padding:11px 13px;margin:0 16px}
+.cmp .lbl{font-size:11px;color:var(--sub)}
+.cmp .txt{font-family:Georgia,"Times New Roman",serif;font-size:17px;color:var(--ink);margin-top:3px;line-height:1.5}
+.cmp .txt.zh{font-family:inherit;font-size:14px;color:var(--sub)}
+.diff{font-family:Georgia,"Times New Roman",serif;font-size:17px;line-height:2;color:var(--ink)}
+.diff .bad{color:var(--bad);background:#FCEBEB;border-radius:4px;padding:1px 3px}
+.diff .miss{color:var(--bad);border-bottom:1.5px dashed var(--bad)}
+.pill{display:inline-flex;align-items:center;gap:5px;border-radius:999px;padding:4px 10px;font-size:11.5px;background:#EDF1F4;color:var(--focusDeep)}
+.pill.warn{background:#FCEBEB;color:var(--bad)}
+.choicecard{flex:1;background:#fff;border:1.5px solid var(--line);border-radius:16px;padding:16px 12px;text-align:center}
+.choicecard b{display:block;font-size:16px;margin:8px 0 3px}
+.choicecard span{display:block;font-size:12px;color:var(--sub);line-height:1.5}
+.chips{display:flex;gap:6px;justify-content:center;flex-wrap:wrap}
+.chips .c{border:1px solid var(--line);border-radius:999px;background:#fff;color:var(--focusDeep);font-size:12.5px;padding:5px 11px}
+.rnd{display:flex;align-items:center;margin:12px 16px 4px}
+.rnd .dot{width:26px;height:26px;border-radius:50%;background:#E9ECEF;color:var(--sub);font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center;flex:0 0 26px}
+.rnd .dot.now{background:var(--focus);color:#fff}
+.rnd .dot.done{background:#EDF1F4;color:var(--focusDeep)}
+.rnd .ln{flex:1;height:2px;background:#E9ECEF}
+.rndlab{display:flex;justify-content:space-between;margin:0 16px;font-size:10.5px;color:var(--sub)}
+.storeGrid{display:grid;grid-template-columns:1fr 1fr;gap:18px 12px;padding:12px 16px 8px}
+.coCard{min-width:0}
+.cover{position:relative;display:block;width:104px;height:148px;margin:2px auto 0;border-radius:4px 8px 8px 4px;background:#E9ECEF}
+.cover::before{content:"";position:absolute;left:0;top:0;bottom:0;z-index:2;width:10px;border-radius:4px 0 0 4px;background:rgba(0,0,0,.20);border-right:1px solid rgba(255,255,255,.25)}
+.cover::after{content:"";position:absolute;right:-6px;top:6px;bottom:6px;width:6px;border-radius:0 3px 3px 0;background:#F8F9FA;border-left:1px solid #DEE2E6;border-right:1px solid #E9ECEF}
+.cover img{position:relative;z-index:1;width:100%;height:100%;object-fit:cover;display:block;border-radius:4px 8px 8px 4px}
+.cover.undl img{filter:brightness(.9)}
+.cover.dling img{filter:brightness(.78)}
+.dlbadge{position:absolute;right:6px;top:6px;z-index:2;width:26px;height:26px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;color:var(--focus)}
+.dlbadge.ok{color:var(--dl)}
+.dlbadge svg{width:16px;height:16px}
+.pring2{position:absolute;left:50%;top:50%;z-index:2;width:56px;height:56px;margin:-28px 0 0 -28px}
+.ppct2{position:absolute;left:0;right:0;top:50%;z-index:3;margin-top:-9px;text-align:center;color:#fff;font-size:12px;font-weight:700}
+.coName{font-size:12.5px;margin-top:9px;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.stfoot{display:flex;justify-content:space-between;padding:2px 16px;font-size:11.5px;color:var(--sub)}
+</style>
+</head>
+<body>
+
+<div class="pagehead">
+  <h1>四段流程 · 单课 UI 设计稿 v4.2（盲听 / 精听 / 跟读 / 录音输出 + 听单）</h1>
+  <div class="sub">v4.0 冻结规格 2026-11-07｜v4.2 增补 2026-11-09：听单 tab（泛听）合入 + 全稿说明性文字 21→1｜示例 L01 · A Private Conversation｜全页面统一「冷灰 + 品牌绿」色板（11-17 用户改定）｜线性极简图标｜11 屏分 4 组｜<b>11-19 听单升级：跨课本 × CEFR 等级音频包独立下载</b>｜仅评审用</div>
+</div>
+
+<div class="flowbar">
+  <span class="fchip">盲听</span><span class="farrow">→</span>
+  <span class="fchip">精听</span><span class="farrow">→</span>
+  <span class="fchip">跟读</span><span class="farrow">→</span>
+  <span class="fchip">录音</span><span class="farrow">→</span>
+  <span class="fchip rev">7 轮循环：精听 → 跟读 → 录音（盲听不重跑）</span>
+  <span class="note">只读四段进度条 · 自动推进 · 一屏一动作</span>
+</div>
+
+<div class="decisions">
+  <div class="ph">v4.0 冻结规格 <span>共 10 条，逐条可核对；Q1–Q8 与 P1–P4 均按建议默认</span></div>
+  <ol>
+    <li><b>删「预习」层级</b>：不再有预习/复习两套分类，只有一条四段流程。盲听＝无字听 1 遍 → 选答案；答对直接进精听，答错自动再听 1 遍并重选，第 2 次仍错则显示答案后进精听；不写分数、不进复习循环。</li>
+    <li><b>盲听不计入复习循环、计入统计</b>：写 <code>blindDone</code> + <code>STATS.blindN / blindSec</code>；不写 <code>reviews</code>、不触发 <code>dueAt</code>。7 轮循环只跑后三段。</li>
+    <li><b>精听 → 跟读</b>：功能顺序按 S2 → S1；规格文档重编为「①精听 ②跟读」，屏号只作设计稿内部标签，<b>不出现在儿童界面</b>。</li>
+    <li><b>精听</b>：一屏一句、逐句跟读、统一「中 / 英 / 双语」3 档、★ 收藏计入句子卡片（复用现版 <code>index.html:907-917</code>）。不录音、不打分。</li>
+    <li><b>跟读</b>：用 S1 带字滚动页作全文容器，横屏主态 / 竖屏备态；遍数在 <b>1 遍 ↔ 3 遍</b>两档间直选（只此两档，不引入 2 遍），覆盖 v3.4「自动 2 遍」；三档语言切换；<b>两组控件同为分段选择器</b>（11-19 统一）；S3「按住说打分」弃用。</li>
+    <li><b>录音（合并原「测试」与「背诵/复述」）</b>：只保留<b>全篇模式（背诵）</b>——沿用跟读全文滚动容器，<b>仅显示中文</b>；录音支持<b>断点录制</b>，最后合成一条完整录音。录音结束后进完成卡，并可「分享到微信群」。</li>
+    <li><b>录音边界</b>：本期<b>不做语音识别、不做发音评分</b>；录音只留本机，不进 <code>el2_events</code>。微信分享只做一键唤起系统分享面板 / 微信会话，<b>不能直达指定群</b>，不叫打卡、不绑奖励。</li>
+    <li><b>分享出口</b>：录音完成后给「分享到微信群」按钮；实现为一键唤起系统分享面板或微信会话界面，群由用户自行选择；分享成功/取消都进完成卡，不二次弹窗、不绑定奖励。</li>
+    <li><b>进度条降级（11-17 拍板定稿）</b>：四段关卡条由「可点自由切换」改为<b>只读进度指示</b>，落实「目标清晰、流程简单」；横屏屏 3 保留「轻点浮出 3 秒」，不再作为待选项。</li>
+  </ol>
+</div>
+
+<div class="decisions">
+  <div class="ph">v4.2 增补冻结规格 <span>2026-11-09 用户拍板｜共 7 条（第 7 条 11-17 追加）</span></div>
+  <ol>
+    <li><b>听单 tab（泛听）合入</b>：底部导航改<b>五 tab</b>——课程 / 难句 / <b>听单（居中）</b> / 卡片 / 我的；听单位＝<b>凸起圆钮</b>（绿 <code>#10B981</code>、直径 56、凸出 16、白色描边环 4px、白色线性耳机 26px、<b>无文字</b>、常亮无选中态），落地＝<code>TABS</code> 中间插 <code>['#/listen','',耳机svg]</code> + <code>nav()</code> 特判渲染 <code>class="fab"</code> + <code>.fabbtn</code> CSS，<code>nav.tabs a{flex:1}</code> 弹性等分零改动。</li>
+    <li><b>听单形态＝列表式</b>：首页＝状态栏 +「听单」（<b>标题行右上不留入口</b>）+ <b>课本横滑选择器</b> + 三筛选胶囊（最近在听 / 我的收藏 3 / <b>离线音频</b>）+ 正在听卡 + <b>离线音频包列表</b>（每行＝等级徽标 + 课本 + 课数/时长/体积 + 独立下载键）；播放页＝顶栏（返回 + 更多＝收藏复选 + 播放队列）/ 唱片·字幕切换 / 四操作；底部只留上一句/播放/下一句（11-18 拍板）。<b>11-19 升级：听单支持独立下载其他课本 CEFR 等级音频</b>——聚合＝课本 × 等级两层，包 id <code>{cid}:{level}</code>、<b>只含 mp3 不含 data</b>；新增 <code>el2_pack</code> 键与 <code>el2_dl</code> 键空间隔离，图标一律实查 <code>el2-content</code>；<code>levelSrc</code> 分离 <code>publisher</code>（TH!NK 官方锚点）与 <code>quantile</code>（NCE2 难度参考，只进「参考」档，禁「NCE2 = A1」表述）。</li>
+    <li><b>零封面图</b>：课文级本无配图，听单组<b>任何位置不引 <code>covers/*.jpg</code></b>——正在听/收藏行用圆形播放键、黑胶中心用绿底文字标签，从根上避开图片渲染问题。</li>
+    <li><b>全页面色板＝冷灰 + 品牌绿</b>（用户「不要米黄色」）：底 <code>#F5F6F8</code> / 描线 <code>#E9ECEF</code> / 墨 <code>#212529</code> / 次要 <code>#6C757D</code> / 唱片 <code>#1A1A1A</code> / 绿填充 <code>#10B981</code> / 绿文字 <code>#0B8A5F</code> / 绿浅底 <code>#E6F7F0</code>；橙 <code>#E8590C</code> 并入绿系。<b>11-17 改定：学习四段与听单统一用「冷灰 + 品牌绿」，不再分区换板；功能填充/小字用深绿 <code>#0B8A5F</code>，品牌绿 <code>#10B981</code> 只做色块与浅底。</b></li>
+    <li><b>说明性文字 21→1</b>：全稿逐屏清点出 21 处「怎么做/这是什么机制」类说明句，删 20 处（界面行为自明、或属设计注解误入界面），仅保留 1 处<b>首用提示</b>（仅首次显示、之后消失）：屏 5「断点录制可暂停继续，最后合成完整录音」。课程中心「点封面…长按移除」为隐藏手势提示，不在儿童界面清理范围，保留。</li>
+    <li><b>难度标签命名「难度参考」</b>：实测「命中最高层」96 课全为 A1_Starters 无区分度，改用九层加权分（A1_Starters=1…CAE=7）按分位分档（前 1/3 A1、中 1/3 A2、后 1/3 B1），<b>不称 CEFR 认证</b>；跨书（NCE1→NCE2→RE F）才是分级主战场。</li>
+    <li><b>四段条上移 + 底部播放条（11-17 拍板）</b>：四段只读进度条由屏底移到<b>顶栏下方</b>（6 屏；横屏屏 3 例外，保留「轻点浮出 3 秒」）；底部播放条仅<b>精听 / 跟读竖屏</b> 2 屏保留——进度 <code>00:48 / 01:16</code> + 上一句 / 播放 / 下一句三键，<b>无播放队列键</b>，配色全页面统一「冷灰 + 品牌绿」；屏内「听这句 / 听原句 / 跟读一次 / 下一句」让位底部条。录音关改用断点录制控件，不再放播放条。</li>
+  </ol>
+</div>
+
+<div class="spec">
+  <div class="card">
+    <h3>数据层与统计口径</h3>
+    <ul>
+      <li>盲听：<code>blindDone</code> + <code>STATS.blindN / blindSec</code>；本机只记作答次数与分支结果用于跳转，<b>不写 <code>reviews</code>、不触发 <code>dueAt</code></b>，对错内容不进云同步。</li>
+      <li>7 轮：循环只作用于精听 / 跟读 / 录音三段；<code>revfin</code> 改「有效提取」+ 3 天宽限 + 多轮到期合并。</li>
+      <li>时间轴参数<b>本稿不擅自改</b>：现版 28 天 / 建议 60 天，待单独拍板（屏 12–13 只画轮次位图）。</li>
+      <li>句子收藏 <code>hard[]</code> 加 <code>src:'auto'|'manual'</code>；HARDF 方案 C 的课程范围跟随逻辑不变。</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h3>合规边界（硬红线）</h3>
+    <ul>
+      <li>录音文件<b>只留本机</b>，不进 <code>el2_events</code> 云同步、不与奖励绑定；分享只带完成信息，不带录音原文。</li>
+      <li>识别走端侧；若改云端 ASR 须另走监护人明示同意、最小必要、不留存音频。</li>
+      <li>分享卡字段只带「课号 / 用时 / 完成项」，<b>不带日期与时刻</b>；按钮「分享给家人」，不叫打卡、不诱导分享（微信外链规范 2.1.1 / 2.1.2）。本机完成卡可显示日期，但不出设备。</li>
+      <li>未成年人视频默认只留本机；背诵录后沿用 v3.4 第 7 屏，不重复画。</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h3>复用现成资产（零新增页面）</h3>
+    <ul>
+      <li>盲听页 <code>index.html:968-974</code>；逐句精听 + ★ <code>:907-917</code>；跟读 <code>:937-957</code>；复述 <code>:989</code>。</li>
+      <li>音频 <code>audio/L01.mp3</code>（76.24s）；L01 第 0 句 <code>i=0, t=12.8–18.13, meta:true</code> 为现成英文题干；句级 <code>t / t2</code> 全课可用。</li>
+      <li><code>question.en / zh</code>（<code>data/L01.json:7-10</code>）提供题干与中文提示；句级 <code>t / t2</code> 与 <code>i=0</code> 英文题干全课可用。<b>唯一新增的是 3 个英文选项文案</b>（v3.4 只有 2 个中文选项），不新增数据文件、不新增字段。</li>
+      <li>色板 / 图标 / 手机骨架 / 课程中心封面四态全部沿用 v3.4 定案。</li>
+      <li><b>听单落地依赖（v4.2 新增）</b>：收藏键 <code>el2_fav</code>（设备级，同 <code>el2_mycourses</code> 口径）；正在听卡数据复用 <code>el2_progress</code> + <code>data/L*.json</code> 的 <code>duration</code>；难度标签用九层加权分位（见增补规格 6）；<b>二期</b>再做榜单聚合与跨课程推荐（NCE1/RE 数据就绪后）。</li>
+    </ul>
+  </div>
+</div>
+
+<div class="palette">
+  <div class="ph">色板：全页面统一「冷灰 + 品牌绿」 <span>11-17 用户改定｜学习四段与听单不再分板｜WCAG 2.2 实算见标注</span></div>
+  <div class="desc">功能填充与绿色小字用深绿 <code>#0B8A5F</code>（4.36:1），品牌绿 <code>#10B981</code> 只做色块与浅底，避免白字对比不足；真实课本封面保持彩色，不套功能色；红色 <code>#B04A43</code> 仅用于词级 diff 状态；顶部四段条背景透明，直接借用页面冷灰底。</div>
+  <div class="swatches">
+    <div class="sw"><i style="background:#F4F6F8"></i><b>画布</b>#F4F6F8</div>
+    <div class="sw"><i style="background:#FFFFFF"></i><b>卡片</b>#FFFFFF</div>
+    <div class="sw"><i style="background:#263039"></i><b>原文</b>#263039 · 12.39:1</div>
+    <div class="sw"><i style="background:#5C6773"></i><b>译文</b>#5C6773 · 5.32:1</div>
+    <div class="sw"><i style="background:#E2E6EB"></i><b>冷灰线</b>#E2E6EB</div>
+    <div class="sw" style="border-color:#10B981"><i style="background:#10B981"></i><b>品牌绿</b>#10B981（只做色块/浅底）</div>
+    <div class="sw" style="border-color:#10B981"><i style="background:#0B8A5F"></i><b>功能深绿</b>#0B8A5F · 4.36:1</div>
+    <div class="sw" style="border-color:#10B981"><i style="background:#08704D"></i><b>深绿加深</b>#08704D · 6.05:1</div>
+    <div class="sw" style="border-color:#10B981"><i style="background:#E6F7F0"></i><b>绿浅底</b>#E6F7F0</div>
+    <div class="sw" style="border-color:#10B981"><i style="background:#1A1A1A"></i><b>唱片</b>#1A1A1A（听单）</div>
+    <div class="sw"><i style="background:#B04A43"></i><b>错词标记</b>#B04A43</div>
+  </div>
+</div>
+
+<div class="iconspec">
+  <div class="ph">图标规范沿用 v3.4「线性极简」 <span>24px 网格 / 2px 描边 / 主体占格 60–75% / 单色 / 无填充阴影渐变｜彩色 emoji 不作功能图标</span></div>
+  <div class="desc">本稿新增控件（语言/遍数两组分段、麦克风、词级对照、自动收藏）全部用文字型控件或同套件线性 SVG，不引入第二套风格。<b>11-19 追加：跟读两屏工具条三件（语言切换 / 遍数切换 / 读完了）统一为同族分段 + 同族主按钮</b>——语言与遍数本是同一种操作（N 档选一），故共用同一个 <code>.seg</code>：灰底容器 <code>#F1F3F5</code>、白底选中块、深绿选中字，只有段数不同（3 段 / 2 段）；「读完了」为全圆绿色实心，与分段同为 34px 高。</div>
+  <div class="iconsamp">
+    <div class="u"><svg class="licon" viewBox="0 0 24 24"><path d="M4 9v6M8 6v12M12 3v18M16 6v12M20 9v6"/></svg>听</div>
+    <div class="u"><svg class="licon" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>录音</div>
+    <div class="u"><svg class="licon" viewBox="0 0 24 24"><path d="M20 11a8 8 0 1 0-2.3 5.7M20 5v6h-6"/></svg>循环</div>
+    <div class="u"><svg class="licon" viewBox="0 0 24 24"><path d="M8 5l11 7-11 7z"/></svg>播放</div>
+    <div class="u"><svg class="licon" viewBox="0 0 24 24"><rect x="2" y="6" width="14" height="12" rx="2"/><path d="M16 10l6-3v10l-6-3z"/></svg>录像</div>
+    <div class="u"><svg class="licon" viewBox="0 0 24 24"><path d="M12 3l2.7 5.6 6.3.9-4.5 4.4 1 6.1-5.5-2.9-5.5 2.9 1-6.1L3 9.5l6.3-.9z"/></svg>收藏</div>
+    <div class="u"><svg class="licon" viewBox="0 0 24 24"><path d="M4 12l5 5L20 6"/></svg>完成</div>
+    <div class="u"><svg class="licon" viewBox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5M4 20h16"/></svg>保存</div>
+  </div>
+</div>
+
+<div class="grouphead">组 1 · 首学四段 <span>6 屏｜录音关仅全篇中文断点录制</span></div>
+<div class="shots">
+
+<div class="shot">
+  <div class="lab"><span class="n">1</span>盲听 · 听 1 遍后选答案 —— 无字播完自动出题</div>
+  <div class="phone">
+    <div class="scr">
+      <div class="status"><span>9:41</span><span class="cam"></span><svg class="licon" style="width:22px;height:22px" viewBox="0 0 24 24"><rect x="2" y="8" width="17" height="9" rx="2"/><path d="M21 11v3"/></svg></div>
+      <div class="khead"><span>L1 · 私人谈话</span><span>‹ 退出</span></div>
+      <div class="flownav">
+        <span class="fn on"><i class="fni">1</i>盲听</span><span class="fnar">·</span>
+        <span class="fn"><i class="fni">2</i>精听</span><span class="fnar">·</span>
+        <span class="fn"><i class="fni">3</i>跟读</span><span class="fnar">·</span>
+        <span class="fn"><i class="fni">4</i>录音</span>
+      </div>
+      <div class="body" style="padding:14px 18px 8px;justify-content:center;gap:12px">
+        <div class="big" style="font-size:18px;margin:0">Why did the writer complain?</div>
+        <div style="display:flex;flex-direction:column;gap:9px">
+          <div class="opt"><b>A</b>People behind him talked loudly.</div>
+          <div class="opt"><b>B</b>The play was too long.</div>
+          <div class="opt"><b>C</b>He could not find his seat.</div>
+        </div>
+        <button class="fbtn ghost sm" style="margin-top:8px;align-self:center">显示中文提示</button>
+      </div>
+    </div>
+  </div>
+  <div class="anno"><b class="t">规格（11-18 拍板：答对直入 / 答错重听 / 再错揭底）</b>
+    <ul>
+      <li><b>进入即无字播 1 遍</b>：自动播放 <code>audio/L01.mp3</code>（76.24s），<b>无播放键</b>；期间不显示题干、选项、译文、答案，播完自动出题。</li>
+      <li><b>判定分支</b>：点选项即判定，<b>不设提交按钮、不显示分支提示与状态胶囊</b>；① 答对 → 直接进入精听；② 答错 → 自动再听 1 遍并回到同一题重选；③ 第 2 次仍错 → 直接显示正确答案，再点「进入精听」。过程全部自动，儿童界面只留题干、3 选项与中文提示。</li>
+      <li>题干沿用 v3.4 简化式 <code>"Why did the writer complain?"</code>（源 <code>data/L01.json</code> 的 <code>question.en</code>）；3 个英文选项按 <code>i=2–8</code> 构造——正确项 A 出自 <code>i=6</code> + <code>i=5</code>，干扰项 B/C 与 <code>i=3</code>/<code>i=2</code> 相斥。</li>
+      <li>中文提示取自 <code>question.zh</code> + 选项译文，一次一层展开、默认不常驻。</li>
+      <li><b>不写分数、不记对错内容</b>：本机只记 <code>blindDone</code> + <code>STATS.blindN / blindSec</code> 与作答次数；<b>不写 <code>reviews</code></b>、不触发 <code>dueAt</code>。第二次答错后的揭底是教学提示，不计分。盲听只在首学做一次，7 轮不重跑。</li>
+    </ul>
+  </div>
+</div>
+
+<div class="shot">
+  <div class="lab"><span class="n">2</span>精听 · 逐句 —— Anki 句卡 / 卡片右上角收藏</div>
+  <div class="phone">
+    <div class="scr">
+      <div class="status"><span>9:41</span><span class="cam"></span><svg class="licon" style="width:22px;height:22px" viewBox="0 0 24 24"><rect x="2" y="8" width="17" height="9" rx="2"/><path d="M21 11v3"/></svg></div>
+      <div class="khead"><span>精听 · 第 12 / 17 句</span><span>‹ 退出</span></div>
+      <div class="flownav">
+        <span class="fn done"><i class="fni">✓</i>盲听</span><span class="fnar">·</span>
+        <span class="fn on"><i class="fni">2</i>精听</span><span class="fnar">·</span>
+        <span class="fn"><i class="fni">3</i>跟读</span><span class="fnar">·</span>
+        <span class="fn"><i class="fni">4</i>录音</span>
+      </div>
+      <div class="body" style="padding:10px 18px 8px">
+        <div class="ankiCard">
+          <div class="ankiTop"><span class="ankiTag">句卡 12 / 17</span><span style="color:var(--amberInk);font-size:14px;font-weight:600">★ 收藏</span></div>
+          <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:10px;text-align:center">
+            <div class="big">In the end I could not bear it.</div>
+            <div class="zhline">最后，我实在无法忍受。</div>
+          </div>
+          <div class="ankiFoot"><span>点播放听本句</span><span>01 / 07 轮</span></div>
+        </div>
+      </div>
+      <div style="padding:0 24px;border-top:1px solid var(--line);background:#fff">
+        <div style="display:flex;align-items:center;justify-content:flex-end;padding:4px 0 2px">
+          <div class="seg"><span>中</span><span>英</span><span class="on">双语</span></div>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:11px;color:#6C757D;font-variant-numeric:tabular-nums;padding-top:6px"><span>00:48</span><span>01:16</span></div>
+        <div style="height:18px;display:flex;align-items:center">
+          <div style="width:100%;height:4px;background:#E3E5E8;border-radius:2px;position:relative">
+            <div style="position:absolute;left:0;top:0;height:4px;width:63%;background:var(--focus);border-radius:2px"></div>
+            <div style="position:absolute;left:63%;top:-5px;width:14px;height:14px;border-radius:50%;background:var(--focus);border:2.5px solid #fff;margin-left:-7px"></div>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:center;gap:26px;padding:4px 20px 10px;background:#fff;flex:0 0 auto">
+        <div style="width:44px;height:44px;display:flex;align-items:center;justify-content:center"><svg style="width:26px;height:26px" viewBox="0 0 24 24" fill="var(--focus)"><path d="M6 5h2v14H6zM20 5l-10 7 10 7z"/></svg></div>
+        <div style="width:56px;height:56px;border-radius:50%;background:var(--focus);display:flex;align-items:center;justify-content:center"><svg style="width:24px;height:24px" viewBox="0 0 24 24" fill="#FFFFFF"><path d="M8 5l11 7-11 7z"/></svg></div>
+        <div style="width:44px;height:44px;display:flex;align-items:center;justify-content:center"><svg style="width:26px;height:26px" viewBox="0 0 24 24" fill="var(--focus)"><path d="M16 5h2v14h-2zM4 5l10 7-10 7z"/></svg></div>
+      </div>
+    </div>
+  </div>
+  <div class="anno"><b class="t">规格（屏 2 起为 7 轮循环起点）</b>
+    <ul>
+      <li>复用现版逐句精听 + ★ 收藏 → 卡片页，零新增数据；<b>★ 收藏放在 Anki 句卡右上角</b>，原「例句」二字取消，顶栏不再重复放收藏。</li>
+      <li>三档统一「中 / 英 / 双语」（Q6）<b>上移到播放条上方并右对齐</b>，默认「双语」，与跟读屏共用状态；句卡内不再放语言切换。<b>删去无功能的「显示」标签</b>（三档自明）；<b>精听不放「遍数」</b>——遍数是跟读段的 1↔3 遍朗读次数，精听逐句只按播放键重听。</li>
+      <li>句子改为 <b>Anki 句卡</b>（白卡 + 中性描边 + 句序/轮次），卡片只负责呈现；「跟读一次」「下一句」删除，播放/切换统一走底部条。</li>
+      <li><b>左右手势切卡</b>：卡片区左滑下一句、右滑上一句；仅横向位移超过阈值时生效，底部上一句/下一句保留为兜底；切卡后暂停音频并复位到新句 <code>t/t2</code>，不自动播放、不写 <code>reviews</code>。</li>
+      <li>「精听」是环节名，动作是逐句跟读；屏号 S2 只作设计稿标签，<b>儿童界面不出现 S1/S2 编号</b>。</li>
+    </ul>
+  </div>
+</div>
+
+<div class="shot wide">
+  <div class="lab"><span class="n">3</span>跟读 · 全文横屏主态 —— S1 滚动容器 + ↻ 1↔3 + 三档切换</div>
+  <div class="phone land">
+    <div class="scr">
+      <div class="status"><span>9:41</span><span class="cam"></span><svg class="licon" style="width:22px;height:22px" viewBox="0 0 24 24"><rect x="2" y="8" width="17" height="9" rx="2"/><path d="M21 11v3"/></svg></div>
+      <div class="khead"><span>跟读 · 全篇</span><span>‹ 退出</span></div>
+      <div class="kstage">
+        <div class="krow dim"><div class="en">They were talking loudly.</div><div class="zh">他们正在大声地说着话。</div></div>
+        <div class="krow dim"><div class="en">I got very angry.</div><div class="zh">我非常生气。</div></div>
+        <div class="krow now"><div class="en">I could not hear the actors.</div><div class="zh">我听不见演员在说什么。</div></div>
+        <div class="krow dim"><div class="en">I turned round.</div><div class="zh">我回过头去。</div></div>
+        <div class="krow dim"><div class="en">I looked at the man and the woman angrily.</div><div class="zh">我怒视着那一男一女。</div></div>
+      </div>
+      <div style="padding:6px 18px 2px;border-top:1px solid var(--line);background:#fff">
+        <div style="display:flex;align-items:center;gap:10px">
+          <div style="width:28px;height:28px;border-radius:50%;background:var(--focus);display:flex;align-items:center;justify-content:center;flex:0 0 28px"><svg style="width:14px;height:14px" viewBox="0 0 24 24" fill="#FFFFFF"><path d="M8 5l11 7-11 7z"/></svg></div>
+          <div style="flex:1;height:4px;background:#E3E5E8;border-radius:2px;position:relative">
+            <div style="position:absolute;left:0;top:0;height:4px;width:46%;background:var(--focus);border-radius:2px"></div>
+            <div style="position:absolute;left:46%;top:-4px;width:12px;height:12px;border-radius:50%;background:var(--focus);border:2px solid #fff;margin-left:-6px"></div>
+          </div>
+          <span style="font-size:11px;color:#6C757D;font-variant-numeric:tabular-nums">00:38 / 01:16</span>
+        </div>
+      </div>
+      <div class="ktool">
+        <div class="seg"><span>中</span><span>英</span><span class="on">双语</span></div>
+        <div class="seg"><span class="on">1 遍</span><span>3 遍</span></div>
+        <button class="fbtn sm">读完了 →</button>
+      </div>
+    </div>
+  </div>
+  <div class="anno"><b class="t">规格</b>
+    <ul>
+      <li><b>S1 带字滚动页作全文容器</b>（Q2）：焦点行加粗 21px，其余行虚化至 32% 不高亮；行数 <code>N=min(7, 奇数(floor(可用高/行高)))</code>，横屏 5 行。<b>横屏可用高仅 230px，5 行须压行距</b>——<code>padding:2px 18px</code>、<code>line-height:1.32</code>、译文 <code>margin-top:0</code>；沿用默认的 5px/1.4 会使内容达 252px、居中后上下各裁 11px，<b>首行英文会被整行吃掉</b>（11-19 修正）。竖屏 7 行用默认行距，不受影响。</li>
+      <li><b>遍数＝分段直选（11-19 改）</b>：原「↻ 1 遍　点切 3 遍」只读胶囊改为<b>两段分段选择器</b>「1 遍 | 3 遍」，与左侧语言分段完全同构。理由：语言切换（3 档选一）与遍数切换（2 档选一）是<b>同一种操作</b>，做成两种控件即风格分裂；直选只需 1 次点击，与循环按钮等价但当前档一目了然。档位仍只有 1 和 3，不改 Q5 拍板、不引入「2 遍」。S3「按住说，松手就打分」<b>弃用</b>，本段不录音、不打分（P3）。</li>
+      <li><b>工具条三件同族（11-19 统一）</b>：<code>.ktool</code> 内 语言 seg / 遍数 seg / 「读完了」统一 <b>34px 高、全圆角</b>；布局改 <b>选择器成组靠左 + 主按钮靠右</b>（原三件 <code>space-between</code> 在 784 宽横屏上被拉开到各 240px 空隙）。按钮去两屏 inline <code>min-width</code>（原 120 / 104 不一致），改由内容撑开 + <code>margin-left:auto</code> 归右。落地只用一条 CSS 规则即可同时覆盖横竖屏，无需两套。</li>
+      <li><b>播放器放在容器内</b>：横屏只保留紧凑「播放/暂停 + 进度」，不放上一句/下一句；竖屏保留完整三键。语言切换与 ↻ 遍数仍在工具条；只读四段进度条在横屏轻点浮出 3 秒。</li>
+      <li>「读完了」＝完成跟读段进入录音关，<b>不自动开始录音、不评分</b>；竖屏备态同样保留该出口。</li>
+    </ul>
+  </div>
+</div>
+
+<div class="shot">
+  <div class="lab"><span class="n">4</span>跟读 · 全文竖屏备态 —— 行数自适应 + 只读进度条</div>
+  <div class="phone">
+    <div class="scr">
+      <div class="status"><span>9:41</span><span class="cam"></span><svg class="licon" style="width:22px;height:22px" viewBox="0 0 24 24"><rect x="2" y="8" width="17" height="9" rx="2"/><path d="M21 11v3"/></svg></div>
+      <div class="khead"><span>跟读 · 全篇</span><span>‹ 退出</span></div>
+      <div class="flownav">
+        <span class="fn done"><i class="fni">✓</i>盲听</span><span class="fnar">·</span>
+        <span class="fn done"><i class="fni">✓</i>精听</span><span class="fnar">·</span>
+        <span class="fn on"><i class="fni">3</i>跟读</span><span class="fnar">·</span>
+        <span class="fn"><i class="fni">4</i>录音</span>
+      </div>
+      <div class="kstage">
+        <div class="krow dim"><div class="en">They were talking loudly.</div></div>
+        <div class="krow dim"><div class="en">I got very angry.</div></div>
+        <div class="krow dim"><div class="en">I could not hear the actors.</div></div>
+        <div class="krow now"><div class="en">I turned round.</div><div class="zh">我回过头去。</div></div>
+        <div class="krow dim"><div class="en">I looked at the man and the woman angrily.</div></div>
+        <div class="krow dim"><div class="en">They did not pay any attention.</div></div>
+        <div class="krow dim"><div class="en">In the end I could not bear it.</div></div>
+      </div>
+      <div class="ktool">
+        <div class="seg"><span>中</span><span>英</span><span class="on">双语</span></div>
+        <div class="seg"><span>1 遍</span><span class="on">3 遍</span></div>
+        <button class="fbtn sm">读完了 →</button>
+      </div>
+      <div style="padding:0 24px;border-top:1px solid var(--line);background:#fff">
+        <div style="display:flex;justify-content:space-between;font-size:11px;color:#6C757D;font-variant-numeric:tabular-nums;padding-top:6px"><span>00:48</span><span>01:16</span></div>
+        <div style="height:18px;display:flex;align-items:center">
+          <div style="width:100%;height:4px;background:#E3E5E8;border-radius:2px;position:relative">
+            <div style="position:absolute;left:0;top:0;height:4px;width:63%;background:var(--focus);border-radius:2px"></div>
+            <div style="position:absolute;left:63%;top:-5px;width:14px;height:14px;border-radius:50%;background:var(--focus);border:2.5px solid #fff;margin-left:-7px"></div>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:center;gap:26px;padding:4px 20px 10px;background:#fff;flex:0 0 auto">
+        <div style="width:44px;height:44px;display:flex;align-items:center;justify-content:center"><svg style="width:26px;height:26px" viewBox="0 0 24 24" fill="var(--focus)"><path d="M6 5h2v14H6zM20 5l-10 7 10 7z"/></svg></div>
+        <div style="width:56px;height:56px;border-radius:50%;background:var(--focus);display:flex;align-items:center;justify-content:center"><svg style="width:24px;height:24px" viewBox="0 0 24 24" fill="#FFFFFF"><path d="M8 5l11 7-11 7z"/></svg></div>
+        <div style="width:44px;height:44px;display:flex;align-items:center;justify-content:center"><svg style="width:26px;height:26px" viewBox="0 0 24 24" fill="var(--focus)"><path d="M16 5h2v14h-2zM4 5l10 7-10 7z"/></svg></div>
+      </div>
+    </div>
+  </div>
+  <div class="anno"><b class="t">规格</b>
+    <ul>
+      <li>竖屏 7 行自适应，与横屏同一容器；译文按三档开关显示，默认「双语」；<b>备态与主态同功能</b>——工具条同样保留「读完了 →」，底部完整播放条不删。<b>工具条三件与横屏完全同构（11-19 统一）</b>：语言 seg（中/英/双语）+ 遍数 seg（1 遍/3 遍）+ 全圆绿色「读完了 →」，同为 34px 高；两屏差异只在 <b>选中档</b>（横屏示范第 1 遍、竖屏示范第 3 遍）与容器宽度，<b>不另设样式</b>。顶部「第 n / 3 遍」已从状态栏与 <code>.khead</code> 移除——遍数只由工具条 seg 表达，避免同一状态两处显示。</li>
+      <li><b>四段条降级为只读进度指示（11-17 拍板定稿）</b>：不再可点自由切换（v3.4 的 StageNav + 软引导 + <code>done[]</code> 一并简化），儿童只看到「走到哪了」；横屏屏 3 保留「轻点浮出 3 秒」。</li>
+    </ul>
+  </div>
+</div>
+
+
+<div class="shot">
+  <div class="lab"><span class="n">5</span>录音 · 全篇模式 —— 跟读式中文滚动 / 断点录制 / 完整分享</div>
+  <div class="phone">
+    <div class="scr">
+      <div class="status"><span>9:41</span><span class="cam"></span><svg class="licon" style="width:22px;height:22px" viewBox="0 0 24 24"><rect x="2" y="8" width="17" height="9" rx="2"/><path d="M21 11v3"/></svg></div>
+      <div class="khead"><span>背诵 · 全篇 · 仅中文</span><span>‹ 退出</span></div>
+      <div class="flownav">
+        <span class="fn done"><i class="fni">✓</i>盲听</span><span class="fnar">·</span>
+        <span class="fn done"><i class="fni">✓</i>精听</span><span class="fnar">·</span>
+        <span class="fn done"><i class="fni">✓</i>跟读</span><span class="fnar">·</span>
+        <span class="fn on"><i class="fni">4</i>录音</span>
+      </div>
+      <div class="kstage">
+        <div class="krow dim"><div class="zh">上星期我去了剧院。</div></div>
+        <div class="krow dim"><div class="zh">我座位后面坐着两个人。</div></div>
+        <div class="krow dim"><div class="zh">他们在大声说话。</div></div>
+        <div class="krow now"><div class="zh" style="font-size:18px;color:var(--ink);font-weight:600">我很生气。</div></div>
+        <div class="krow dim"><div class="zh">我听不见演员的话。</div></div>
+        <div class="krow dim"><div class="zh">我回过头去。</div></div>
+        <div class="krow dim"><div class="zh">我生气地看着那一男一女。</div></div>
+      </div>
+      <div class="ktool">
+        <span class="pill">第 4 / 7 句</span>
+        <span class="pill" style="background:#E6F7F0;color:#0B8A5F">● 录制中</span>
+      </div>
+      <div style="padding:8px 18px 6px;border-top:1px solid var(--line);background:#fff">
+        <div style="display:flex;gap:4px">
+          <span style="flex:1;height:5px;border-radius:3px;background:var(--focus)"></span>
+          <span style="flex:1;height:5px;border-radius:3px;background:var(--focus)"></span>
+          <span style="flex:1;height:5px;border-radius:3px;background:var(--focus)"></span>
+          <span style="flex:1;height:5px;border-radius:3px;background:var(--focus)"></span>
+          <span style="flex:1;height:5px;border-radius:3px;background:var(--brand)"></span>
+          <span style="flex:1;height:5px;border-radius:3px;background:#E3E5E8"></span>
+          <span style="flex:1;height:5px;border-radius:3px;background:#E3E5E8"></span>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:11px;color:#6C757D;font-variant-numeric:tabular-nums;margin-top:6px"><span>00:38 / 01:16</span><span>已录片段保留</span></div>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:center;gap:18px;padding:6px 20px 10px;background:#fff;flex:0 0 auto">
+        <button class="fbtn ghost sm" style="min-width:88px">暂停</button>
+        <div style="width:56px;height:56px;border-radius:50%;background:var(--focus);display:flex;align-items:center;justify-content:center"><svg style="width:24px;height:24px" viewBox="0 0 24 24" fill="#FFFFFF"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></div>
+        <button class="fbtn ghost sm" style="min-width:88px;border-color:var(--focus);color:var(--focusDeep)">完成录音</button>
+      </div>
+    </div>
+  </div>
+  <div class="anno"><b class="t">规格</b>
+    <ul>
+      <li>全篇模式沿用跟读的<b>全文滚动容器</b>，但<b>只显示中文提示句</b>，不显示英文原句、不弹符号、不做逐句识别。</li>
+      <li><b>句子级分段进度</b>：深绿＝已录句，亮绿＝当前句，灰＝未录句；比「断点 2 处」更像儿童可读的进度提示。</li>
+      <li><b>断点录制</b>：暂停后按钮变「继续」，从当前句接着录，已录片段不丢；「完成录音」按顺序合成<b>一条完整录音</b>再进分享卡。</li>
+      <li>「断点录制可暂停继续，最后合成完整录音」为首用提示，仅首次显示；录音只留本机。</li>
+    </ul>
+  </div>
+</div>
+
+<div class="shot">
+  <div class="lab"><span class="n">6</span>录音完成 · 分享到微信群 —— 同一张完成卡</div>
+  <div class="phone">
+    <div class="scr">
+      <div class="status"><span>9:41</span><span class="cam"></span><svg class="licon" style="width:22px;height:22px" viewBox="0 0 24 24"><rect x="2" y="8" width="17" height="9" rx="2"/><path d="M21 11v3"/></svg></div>
+      <div class="khead"><span>本课完成</span><span>‹ 退出</span></div>
+      <div class="flownav">
+        <span class="fn done"><i class="fni">✓</i>盲听</span><span class="fnar">·</span>
+        <span class="fn done"><i class="fni">✓</i>精听</span><span class="fnar">·</span>
+        <span class="fn done"><i class="fni">✓</i>跟读</span><span class="fnar">·</span>
+        <span class="fn done"><i class="fni">✓</i>录音</span>
+      </div>
+      <div class="body" style="padding:14px 18px 10px">
+        <div class="card" style="margin-top:14px">
+          <div class="title" style="margin:0">录音完成</div>
+          <div class="subtle" style="margin-top:6px">第 1 课 · A Private Conversation</div>
+          <div style="display:flex;justify-content:space-between;margin-top:16px;font-size:13px;color:var(--sub)"><span>录音方式</span><b style="color:var(--ink)">全篇模式（断点录制）</b></div>
+          <div style="display:flex;justify-content:space-between;margin-top:8px;font-size:13px;color:var(--sub)"><span>用时</span><b style="color:var(--ink)">3 分 20 秒</b></div>
+        </div>
+        <div style="margin-top:auto;display:flex;flex-direction:column;gap:9px">
+          <button class="fbtn">分享到微信群</button>
+          <button class="fbtn ghost sm">完成，返回课程</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="anno"><b class="t">规格（唯一完成卡）</b>
+    <ul>
+      <li>全篇模式进这张卡；不另设「逐句完成卡」「测试完成卡」。</li>
+      <li>「分享到微信群」＝一键唤起系统分享面板或微信会话界面，群由用户自己选；<b>不能直达指定群</b>，不叫打卡、不绑奖励。</li>
+      <li>分享成功 / 取消都进完成；录音文件只留本机，不进 <code>el2_events</code>。</li>
+    </ul>
+  </div>
+</div>
+
+</div>
+
+<div class="grouphead">组 2 · 复习 7 轮 <span>2 屏｜本轮从精听开始，盲听不重跑｜循环只跑后三段</span></div>
+<div class="shots">
+
+<div class="shot">
+  <div class="lab"><span class="n">7</span>到期入口 —— 第 2 轮 · 三段进度（无盲听）</div>
+  <div class="phone">
+    <div class="scr">
+      <div class="status"><span>9:41</span><span class="cam"></span><svg class="licon" style="width:22px;height:22px" viewBox="0 0 24 24"><rect x="2" y="8" width="17" height="9" rx="2"/><path d="M21 11v3"/></svg></div>
+      <div class="khead"><span>L1 · 私人谈话</span><span>‹ 退出</span></div>
+      <div class="body" style="padding:14px 18px 10px">
+        <div class="title" style="margin-top:16px">第 2 轮 · 该复习了</div>
+        <div class="card" style="padding:14px;margin-top:20px">
+          <div style="font-size:12.5px;color:var(--sub);margin-bottom:12px">本轮三段</div>
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <span class="pill">精听</span><span class="pill">跟读</span><span class="pill">录音</span>
+          </div>
+          <div style="display:flex;justify-content:flex-start;margin-top:12px">
+            <span class="pill" style="background:#EDF1F4;color:var(--sub)">盲听 ✓ 已完成</span>
+          </div>
+        </div>
+        <div style="margin-top:auto;display:flex;flex-direction:column;gap:9px">
+          <button class="fbtn">开始本轮</button>
+          <button class="fbtn ghost sm">晚点再做（3 天内补做不算漏）</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="anno"><b class="t">规格（Q1 / ③-A 按建议默认）</b>
+    <ul>
+      <li>删「预习」层级后，<b>盲听只在首学做一次</b>；<code>dueAt</code> 到期后直接进精听，7 轮循环只跑后三段。</li>
+      <li>3 天宽限内补做不算漏；多轮同时到期合并成一轮完成、不重复计数。</li>
+      <li>时间轴参数（现版 <code>OFFSETS=[0.25,1,2,4,7,14,28]</code> / 建议 60 天）<b>本稿不改</b>，待单独拍板。</li>
+    </ul>
+  </div>
+</div>
+
+<div class="shot">
+  <div class="lab"><span class="n">8</span>完成本轮 —— 7 轮时间轴 / 有效提取判定</div>
+  <div class="phone">
+    <div class="scr">
+      <div class="status"><span>9:41</span><span class="cam"></span><svg class="licon" style="width:22px;height:22px" viewBox="0 0 24 24"><rect x="2" y="8" width="17" height="9" rx="2"/><path d="M21 11v3"/></svg></div>
+      <div class="khead"><span>第 2 轮完成</span><span>‹ 退出</span></div>
+      <div class="body" style="padding:14px 0 10px">
+        <div class="title" style="margin-top:14px">本轮完成</div>
+        <div class="rnd" style="margin-top:18px">
+          <span class="dot done">✓</span><span class="ln"></span><span class="dot now">2</span><span class="ln"></span>
+          <span class="dot">3</span><span class="ln"></span><span class="dot">4</span><span class="ln"></span>
+          <span class="dot">5</span><span class="ln"></span><span class="dot">6</span><span class="ln"></span><span class="dot">7</span>
+        </div>
+        <div class="rndlab"><span>首学</span><span>第 2 轮</span><span>通关</span></div>
+        <div class="card" style="margin:22px 16px 0;padding:12px 14px">
+          <div style="font-size:12.5px;color:var(--sub)">本轮做了什么</div>
+          <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:9px">
+            <span class="pill">精听 ✓</span><span class="pill">跟读 ✓</span><span class="pill">录音 ✓</span>
+          </div>
+        </div>
+        <div style="margin:auto 16px 4px;display:flex;flex-direction:column;gap:9px">
+          <button class="fbtn">回到课程</button>
+          <button class="fbtn ghost sm">分享给家人</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="anno"><b class="t">规格</b>
+    <ul>
+      <li><code>revfin</code> 由「点一次 <code>reviews+1</code>」改为「<b>三段有效提取完成</b>」；写 <code>revDone[i]</code> 后才计数。</li>
+      <li>超过窗口未完成标「未通关」而非静默清零；7 次有效提取后通关。</li>
+      <li>时间轴只画轮次位图，不显示「艾宾浩斯曲线」等字样；对外文案写「按间隔复习安排 7 轮」。</li>
+    </ul>
+  </div>
+</div>
+
+</div>
+
+<div class="grouphead">组 3 · 课程中心 <span>1 屏｜v3.3/v3.4 定案规格，本稿原样沿用</span></div>
+<div class="shots">
+
+<div class="shot">
+  <div class="lab"><span class="n">9</span>课程中心 · 课本下载 —— 彩色封面四态 + 绿环进度</div>
+  <div class="phone">
+    <div class="scr">
+      <div class="status"><span>9:41</span><span class="cam"></span><svg class="licon" style="width:22px;height:22px" viewBox="0 0 24 24"><rect x="2" y="8" width="17" height="9" rx="2"/><path d="M21 11v3"/></svg></div>
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 18px 2px"><b style="font-size:19px">课程库</b><span style="font-size:13px;color:var(--focus);font-weight:600">＋ 选择课程</span></div>
+      <div style="font-size:12px;color:var(--sub);padding:0 18px 4px">点封面：添加并自动下载 · 下载中再点暂停 · 长按移除</div>
+      <div class="storeGrid">
+        <div class="coCard"><span class="cover"><img src="covers/nce2.jpg" alt="新概念英语 2"><span class="dlbadge ok"><svg class="licon" viewBox="0 0 24 24"><path d="M4 12l5 5L20 6"/></svg></span></span><div class="coName">新概念英语 2</div></div>
+        <div class="coCard"><span class="cover dling"><img src="covers/nce1.jpg" alt="新概念英语 1">
+          <svg class="pring2" viewBox="0 0 64 64"><circle cx="32" cy="32" r="26" fill="none" stroke="rgba(255,255,255,.65)" stroke-width="6"/><circle cx="32" cy="32" r="26" fill="none" stroke="var(--dl)" stroke-width="6" stroke-linecap="round" stroke-dasharray="163.4" stroke-dashoffset="62.1" transform="rotate(-90 32 32)"/></svg><b class="ppct2">62%</b>
+        </span><div class="coName">新概念英语 1</div></div>
+        <div class="coCard"><span class="cover undl"><img src="covers/tks.jpg" alt="Think Starter"><span class="dlbadge"><svg class="licon" viewBox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5M4 20h16"/></svg></span></span><div class="coName">Think Starter</div></div>
+        <div class="coCard"><span class="cover undl"><img src="covers/tk1.jpg" alt="Think 1"><span class="dlbadge"><svg class="licon" viewBox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5M4 20h16"/></svg></span></span><div class="coName">Think 1</div></div>
+      </div>
+      <div class="stfoot"><span>已下载 1 门 · 下载中 1 门 · 待下载 4 门</span><span>约 78MB</span></div>
+      <div style="margin:auto 16px 18px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:8px 12px;font-size:12px;color:var(--sub);line-height:1.7">
+        <b style="color:var(--ink)">封面四态（全部彩色）</b><br>
+        · 待下载：彩色 + 右上线性下载角标<br>· 下载中：彩色 + 中央绿环 %<br>· 已下载：彩色点亮 + 绿勾<br>· 失败：彩色 + 红环 !（点封面重试）
+      </div>
+    </div>
+  </div>
+  <div class="anno"><b class="t">规格（沿用，不在本轮改动范围）</b>
+    <ul>
+      <li>真实封面保持<b>彩色单本书样式</b>（正面 + 书脊 + 页边），不灰度化、不做方形缩略图；待下载压 10%、下载中压 22%；绿环 <code>#0B8A5F</code>（4.36:1）。</li>
+      <li>规模提醒：当前 <b>6 门 / 目标约 10 门</b>；<b>课程库布局改版本期不做（11-20 定案）</b>——6 门平铺图标墙够用，<b>分段大卡</b>（按教材 / Cambridge / 阅读分组、组内横向大卡）留待目标 10 门时再议，不进本期落码清单。</li>
+      <li><b>代码待同步</b>：App 现状仍是灰度 dim + 旧绿环（<code>index.html:103-104 / 749</code>）；设计稿为定稿规格。</li>
+    </ul>
+  </div>
+</div>
+
+</div>
+
+<div class="grouphead">组 4 · 听单（泛听） <span>2 屏｜五 tab 居中凸起圆钮｜冷灰 + 品牌绿色板（11-17 起与学习四段统一）｜零封面图｜11-19 起<b>跨课本 × CEFR 等级音频包独立下载</b></span></div>
+<div class="shots">
+
+<div class="shot">
+  <div class="lab"><span class="n">10</span>听单首页 —— 课本横滑 / 三筛选胶囊 / 正在听卡 / 离线音频包（课本 × 等级）/ 凸起圆钮</div>
+  <div class="phone">
+    <div class="scr" style="background:#F5F6F8">
+      <div class="status" style="color:#212529"><span>9:41</span><span class="cam"></span><svg class="licon" style="width:22px;height:22px" viewBox="0 0 24 24"><rect x="2" y="8" width="17" height="9" rx="2"/><path d="M21 11v3"/></svg></div>
+      <div style="padding:12px 18px 0;display:flex;align-items:baseline;justify-content:space-between">
+        <b style="font-size:24px;color:#212529;letter-spacing:.5px">听单</b>
+      </div>
+
+      <div class="hscroll" style="display:flex;gap:7px;padding:11px 18px 0">
+        <span style="font-size:12.5px;font-weight:600;color:#FFFFFF;background:#10B981;border-radius:999px;padding:6px 14px;white-space:nowrap">新概念 2</span>
+        <span style="font-size:12.5px;color:#212529;background:#FFFFFF;border:1px solid #E9ECEF;border-radius:999px;padding:6px 14px;white-space:nowrap">TH!NK Starter</span>
+        <span style="font-size:12.5px;color:#212529;background:#FFFFFF;border:1px solid #E9ECEF;border-radius:999px;padding:6px 14px;white-space:nowrap">Think 1</span>
+        <span style="font-size:12.5px;color:#ADB5BD;background:#FFFFFF;border:1px solid #EDF0F2;border-radius:999px;padding:6px 14px;white-space:nowrap;display:flex;align-items:center;gap:4px">
+          <svg style="width:11px;height:11px" viewBox="0 0 24 24" fill="none" stroke="#ADB5BD" stroke-width="2.2" stroke-linecap="round"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>RE F
+        </span>
+      </div>
+
+      <div style="display:flex;gap:6px;padding:10px 18px 12px">
+        <span style="font-size:12px;font-weight:600;color:#0B8A5F;background:#E6F7F0;border-radius:999px;padding:5px 13px">最近在听</span>
+        <span style="font-size:12px;color:#6C757D;background:#FFFFFF;border:1px solid #E9ECEF;border-radius:999px;padding:5px 13px">我的收藏 3</span>
+        <span style="font-size:12px;color:#6C757D;background:#FFFFFF;border:1px solid #E9ECEF;border-radius:999px;padding:5px 13px">离线音频</span>
+      </div>
+
+      <div style="margin:0 16px;background:#FFFFFF;border-radius:16px;padding:13px;border:0.5px solid #E9ECEF">
+        <div style="display:flex;align-items:center;gap:12px">
+          <div style="width:46px;height:46px;border-radius:50%;background:#10B981;display:flex;align-items:center;justify-content:center;flex:0 0 46px">
+            <svg style="width:20px;height:20px" viewBox="0 0 24 24" fill="#FFFFFF"><rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/></svg>
+          </div>
+          <div style="min-width:0;flex:1">
+            <div style="font-size:11px;color:#0B8A5F;font-weight:600;letter-spacing:.4px">正在听 · L2</div>
+            <div style="font-size:15px;font-weight:600;color:#212529;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:1px">Breakfast or Lunch?</div>
+          </div>
+          <div style="font-size:11.5px;color:#6C757D;font-variant-numeric:tabular-nums">0:48 / 1:33</div>
+        </div>
+        <div style="height:3px;background:#EDF0F2;border-radius:2px;margin-top:11px;position:relative">
+          <div style="position:absolute;left:0;top:0;height:3px;width:52%;background:#10B981;border-radius:2px"></div>
+          <div style="position:absolute;left:52%;top:-3px;width:9px;height:9px;border-radius:50%;background:#10B981;margin-left:-4px"></div>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px;font-size:11.5px;color:#6C757D">
+          <span>第 1 遍 · 无字幕</span><span>循环 <span style="color:#0B8A5F">开</span></span>
+        </div>
+      </div>
+
+      <div style="padding:14px 18px 7px;display:flex;align-items:baseline;justify-content:space-between">
+        <span style="font-size:11.5px;font-weight:600;color:#6C757D;letter-spacing:.4px">离线音频包 · 按课本 × 等级</span>
+        <span style="font-size:11px;color:#6C757D;font-variant-numeric:tabular-nums">共 106 MB</span>
+      </div>
+      <div style="margin:0 16px;background:#FFFFFF;border-radius:16px;border:0.5px solid #E9ECEF;overflow:hidden">
+        <div style="display:flex;align-items:center;gap:11px;padding:11px 13px">
+          <div style="width:42px;height:42px;border-radius:11px;background:#E6F7F0;display:flex;flex-direction:column;align-items:center;justify-content:center;flex:0 0 42px">
+            <span style="font-size:14px;font-weight:700;color:#0B8A5F;letter-spacing:.3px;line-height:1.1">A2</span>
+            
+          </div>
+          <div style="flex:1;min-width:0">
+            <div style="font-size:13.5px;color:#212529;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Think 1</div>
+            <div style="font-size:11px;color:#6C757D;margin-top:1px">12 课 · 18:04 · 42 MB</div>
+          </div>
+          <div style="display:flex;align-items:center;gap:5px;flex:0 0 auto"><svg style="width:13px;height:13px" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5 5L20 6"/></svg><span style="font-size:11px;color:#0B8A5F">已下载</span></div>
+        </div>
+        <div style="height:0.5px;background:#E9ECEF;margin-left:66px"></div>
+        <div style="display:flex;align-items:center;gap:11px;padding:11px 13px">
+          <div style="width:42px;height:42px;border-radius:11px;background:#E6F7F0;display:flex;flex-direction:column;align-items:center;justify-content:center;flex:0 0 42px">
+            <span style="font-size:14px;font-weight:700;color:#0B8A5F;letter-spacing:.3px;line-height:1.1">A1</span>
+            
+          </div>
+          <div style="flex:1;min-width:0">
+            <div style="font-size:13.5px;color:#212529;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">TH!NK Starter</div>
+            <div style="font-size:11px;color:#6C757D;margin-top:1px">12 课 · 16:20 · 38 MB</div>
+          </div>
+          <div style="display:flex;align-items:center;gap:6px;flex:0 0 auto">
+            <div style="width:34px;height:3px;background:#EDF0F2;border-radius:2px;position:relative">
+              <div style="position:absolute;left:0;top:0;height:3px;width:47%;background:#10B981;border-radius:2px"></div>
+            </div>
+            <span style="font-size:11px;color:#0B8A5F;font-variant-numeric:tabular-nums">47%</span>
+          </div>
+        </div>
+        <div style="height:0.5px;background:#E9ECEF;margin-left:66px"></div>
+        <div style="display:flex;align-items:center;gap:11px;padding:11px 13px">
+          <div style="width:42px;height:42px;border-radius:11px;background:#F1F3F5;display:flex;flex-direction:column;align-items:center;justify-content:center;flex:0 0 42px">
+            <span style="font-size:14px;font-weight:700;color:#6C757D;letter-spacing:.3px;line-height:1.1">A1</span>
+            <span style="font-size:8.5px;color:#6C757D;line-height:1.2">参考</span>
+          </div>
+          <div style="flex:1;min-width:0">
+            <div style="font-size:13.5px;color:#212529;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">新概念 2</div>
+            <div style="font-size:11px;color:#6C757D;margin-top:1px">32 课 · 41:12 · 26 MB</div>
+          </div>
+          <div style="width:30px;height:30px;border-radius:50%;border:1px solid #E9ECEF;display:flex;align-items:center;justify-content:center;flex:0 0 30px">
+            <svg style="width:15px;height:15px" viewBox="0 0 24 24" fill="none" stroke="#0B8A5F" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7 10l5 5 5-5M4 20h16"/></svg>
+          </div>
+        </div>
+      </div>
+
+      <div style="position:absolute;left:0;right:0;bottom:0;background:#FFFFFF;border-top:1px solid #E9ECEF;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));height:62px;padding-bottom:6px">
+        <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-size:11px;color:#6C757D"><svg class="licon" style="width:24px;height:24px" viewBox="0 0 24 24"><path d="M4 11l8-7 8 7v9a1 1 0 0 1-1 1h-5v-6h-4v6H5a1 1 0 0 1-1-1z"/></svg>课程</div>
+        <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-size:11px;color:#6C757D"><svg class="licon" style="width:24px;height:24px" viewBox="0 0 24 24"><path d="M6 3h12a1 1 0 0 1 1 1v17l-7-4-7 4V4a1 1 0 0 1 1-1z"/></svg>难句</div>
+        <div></div>
+        <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-size:11px;color:#6C757D"><svg class="licon" style="width:24px;height:24px" viewBox="0 0 24 24"><path d="M8 3h9a2 2 0 0 1 2 2v11"/><rect x="3" y="7" width="14" height="14" rx="2"/></svg>卡片</div>
+        <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-size:11px;color:#6C757D"><svg class="licon" style="width:24px;height:24px" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5"/></svg>我的</div>
+        <div style="position:absolute;left:50%;top:-16px;transform:translateX(-50%);width:56px;height:56px;border-radius:50%;background:#10B981;border:4px solid #FFFFFF;display:flex;align-items:center;justify-content:center">
+          <svg style="width:26px;height:26px" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15v-3a8 8 0 0 1 16 0v3"/><path d="M4 15h3v5H5.5A1.5 1.5 0 0 1 4 18.5z"/><path d="M20 15h-3v5h1.5A1.5 1.5 0 0 0 20 18.5z"/></svg>
+        </div>
+        <div style="position:absolute;left:50%;transform:translateX(-50%);bottom:5px;width:110px;height:4px;border-radius:2px;background:#212529;opacity:.18"></div>
+      </div>
+    </div>
+  </div>
+  <div class="anno"><b class="t">规格（v4.2 增补规格 1–4 + 11-17 / 11-19 拍板）</b>
+    <ul>
+      <li><b>命名（11-17 / 11-18 拍板）</b>：筛选胶囊「我收藏的 4」改为<b>「我的收藏」</b>，「最近在学」改为<b>「最近在听」</b>。</li>
+      <li><b>跨课本升级（11-19 拍板）</b>：听单从「只有 NCE2」升级为<b>跨课本泛听</b>。原「全部 96」胶囊改为<b>「离线音频」</b>——「全部 96」属单课本口径，跨课本后失去意义。</li>
+      <li><b>标题行右上不放入口（11-19 定案，纠偏）</b>：原「全部课程」删除；当日曾拟的<b>「管理」一并删除</b>——它本是「为了给标题行右侧填空而造的词」，既无对应屏、也未定义去向。同批删除屏 10 底部<b>「查看全部音频包」</b>行（同样只有文案、无页面）。<b>规约：听单是消费界面，不挂维护动作</b>；大标题左对齐、右侧留空即为完整布局，<b>不为填空而造入口</b>。</li>
+      <li><b>三颗胶囊＝三个视图（11-19 明确）</b>：① <b>最近在听</b>＝跨课本、按 <code>el2_progress</code> 进度倒序；② <b>我的收藏</b>＝<code>el2_fav</code> 按 <code>cid</code> 分组（防串课）；③ <b>离线音频</b>＝<b>完整音频包列表</b>，即原「查看全部」的去处——不限当前课本、不受首页 3 行预览限制，顶部一行显示<b>占用总量 + 设备可用空间</b>。该视图内<b>只提供浏览与下载</b>，不提供移除。</li>
+      <li><b>移除 / 清理的唯一主场＝「我的」页离线包区块</b>（11-19 定案）：复用 <code>index.html:1174-1187</code> 的 <code>meOfflineRow()</code> 扩展为按「课本 · 等级」包展示（现为课程级），保留其状态四态与按钮体系；<code>rmCourse()</code> 的清理逻辑复用。<b>本稿不画「我的」页</b>，此处只作归属约定，避免听单与管理两处重复。</li>
+      <li><b>课本选择器＝横向滑动胶囊</b>（新增，标题行下第一行）：<code>新概念 2</code>（选中：绿底白字）/ <code>TH!NK Starter</code> / <code>Think 1</code> / <code>RE F</code>（<b>置灰＋锁图标</b>）。就绪态取 <code>catalog.json</code> 的 <code>ready</code>；<b><code>ready:false</code> 一律置灰锁定、不可点</b>，不写「即将上线」字样（守说明性文字规约）。溢出靠横滑，不换行。</li>
+      <li><b>离线音频包＝纵向列表</b>（新增，替代原「我的收藏」列表块；收藏列表改由图二胶囊「我的收藏 3」承载，本屏只留入口）。行结构：左 42×42 圆角徽标＝<b>等级</b>／中间＝课本名＋`课数 · 时长 · 体积`／右＝<b>独立下载键</b>。徽标底色区分来源：<b>绿底 <code>#E6F7F0</code>＋深绿字＝官方等级</b>；<b>灰底 <code>#F1F3F5</code>＋灰字＋小字「参考」＝难度参考档</b>。</li>
+      <li><b>三种状态（稿中三行各示范一种）</b>：绿勾＋「已下载」＝<code>state:'done'</code>；细进度条＋百分比＝<code>state:'run'</code>（47% 为稿中示意）；圆形描边下载键＝未下载，<b>点它即单独下载这一包</b>。下载键只出现在右侧，不与行点击冲突（行点击＝进入该包列表）。</li>
+      <li><b>聚合口径＝课本 × 等级两层</b>（11-19 拍板）：包 id 为 <code>{cid}:{level}</code>，例 <code>tk1:A2</code>、<code>nce2:A1</code>。档内文件＝该课本中等级等于该档的课的 <code>audioPat</code>，<b>只含 mp3、不含 data</b>（听单只需音频；课文标题/时长由已下 data 或在线拉取提供）。<code>catalog.json</code> 每门课增补 <code>levels:{mode:'book'|'perLesson', list:[...]}</code>——TH!NK 一册一等级用 <code>book</code>，NCE2 96 课跨档用 <code>perLesson</code>；老字段一律不动，向后兼容。</li>
+      <li><b>CEFR 口径分离（合规硬规约）</b>：<code>levelSrc:'publisher'</code>（TH!NK 出版社锚点 Starter A1 / L1 A2 / L2 B1 / L3 B1+ / L4 B2 / L5 C1）→ 进正式等级筛选；<code>levelSrc:'quantile'</code>（NCE2 九层加权分位＝<b>难度参考</b>，非官方等级）→ <b>只进「参考」档，不与同名等级混装</b>。理由：NCE2 无官方 CEFR，混排即造成两种 A1 口径同屏。<b>禁止出现「NCE2 = A1」表述</b>。</li>
+      <li><b>缓存键分层（不与全书下载互压）</b>：目录仍用单层 <code>el2-content</code>（跨版本永久保留，路径靠各课本 <code>audioPat</code> 前缀天然隔离）；<b>新增 <code>el2_pack</code></b>＝<code>{'tk1:A2':{done,total,state}}</code>，与 <code>el2_dl</code> 的 <code>{'nce2':{...}}</code> 键空间不重叠。图标判定<b>一律实查</b> <code>caches.match('el2-content', file)</code>，<code>el2_pack</code> 只记进度——避免「有记录无文件」（<code>rmCourse</code> 清过）或「有文件无记录」（在线访问已落缓存）。</li>
+      <li><b>派生规则</b>：若 <code>dlGet(cid).state==='done'</code>（整本已下），则该课本所有包一律显示「已下载」，<b>不允许出现「全书已下、单包未下」的自相矛盾态</b>；反向不成立（下过某包 ≠ 整本就绪）。</li>
+      <li><b>本页只呈现信息、不承担播放</b>：副标「收藏喜欢的课文，随时听」已删；<b>行内不放播放键</b>、<b>不改用课程图片</b>（守听单组「零封面图」规约）；正在听卡只显示进度/状态，播放动作进入全屏播放页。</li>
+      <li>凸起圆钮：直径 56、凸出 16、描边环 4px 白、耳机 26px、无文字、常亮；落地见增补规格 1 的 <code>TABS / nav() / .fabbtn</code> 三处改造。</li>
+      <li>正在听卡数据：复用 <code>el2_progress</code> + <code>data/L*.json</code> 的 <code>duration</code>（L2 1:33 为真实值）；收藏＝<code>el2_fav</code>（设备级，<b>需按 <code>cid</code> 分组防串课</b>）。</li>
+      <li>行内等级徽标「A1」在课文详情处＝九层加权分位分档（增补规格 6），命名「难度参考」；本页音频包徽标按上条 CEFR 口径分离处理。</li>
+      <li>时长榜一期「即将上线」占位；搜索框一期砍；「今日推荐」Banner 已删（2026-11-09 迭代记录）。</li>
+    </ul>
+  </div>
+</div>
+
+<div class="shot">
+  <div class="lab"><span class="n">11</span>听单 · 全屏播放页 —— 顶栏返回+更多（收藏复选/队列） / 字幕切换 / 四操作</div>
+  <div class="phone">
+    <div class="scr" style="background:#F5F6F8">
+      <div class="status" style="color:#212529"><span>9:41</span><span class="cam"></span><svg class="licon" style="width:22px;height:22px" viewBox="0 0 24 24"><rect x="2" y="8" width="17" height="9" rx="2"/><path d="M21 11v3"/></svg></div>
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:6px 12px 0">
+        <div style="width:44px;height:44px;display:flex;align-items:center;justify-content:center"><svg class="licon" style="width:22px;height:22px" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></div>
+        <span></span>
+        <div style="width:44px;height:44px;display:flex;align-items:center;justify-content:center;position:relative"><svg class="licon" style="width:22px;height:22px" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg><span style="position:absolute;top:3px;right:3px;min-width:15px;height:15px;border-radius:8px;background:#10B981;color:#FFFFFF;font-size:10px;display:flex;align-items:center;justify-content:center;padding:0 3px">3</span></div>
+      </div>
+      <div style="flex:0 0 auto;text-align:center;padding:2px 44px 6px">
+        <div style="font-size:18px;font-weight:600;color:#212529;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">A Private Conversation</div>
+        <div style="font-size:11.5px;color:#6C757D;margin-top:2px">新概念 2 · L1 · <span>参考</span> <span style="color:#0B8A5F">A1</span></div>
+      </div>
+      <div style="flex:1;display:flex;flex-direction:column;justify-content:center;min-height:0;position:relative">
+        <div style="position:absolute;left:0;right:0;top:0;height:36px;background:linear-gradient(#F5F6F8,rgba(245,246,248,0));z-index:2"></div>
+        <div style="position:absolute;left:0;right:0;bottom:0;height:36px;background:linear-gradient(rgba(245,246,248,0),#F5F6F8);z-index:2"></div>
+        <div style="padding:22px 18px;display:flex;flex-direction:column;gap:15px;align-items:flex-start">
+          <div style="font-size:15px;color:#B7BDC4;line-height:1.5">A young man and a young woman were sitting behind me.</div>
+          <div style="font-size:18px;color:#CED4DA;line-height:1.5">They were talking loudly.</div>
+          <div style="font-size:23px;color:#212529;font-weight:600;line-height:1.45;border-left:3px solid #10B981;padding-left:12px;margin-left:-3px">I got very angry.</div>
+          <div style="font-size:18px;color:#CED4DA;line-height:1.5">I could not hear the actors.</div>
+          <div style="font-size:15px;color:#B7BDC4;line-height:1.5">I turned round.</div>
+        </div>
+      </div>
+        <div style="display:flex;justify-content:space-between;padding:8px 12px 0">
+          <div style="width:56px;height:56px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px">
+            <svg style="width:22px;height:22px" viewBox="0 0 24 24" fill="#10B981" stroke="#10B981" stroke-width="1.6" stroke-linejoin="round"><path d="M12 21s-7-4.6-9.5-8.5C.6 9.5 2.4 6 5.7 6c2 0 3.4 1.1 4.3 2.6h4c.9-1.5 2.3-2.6 4.3-2.6 3.3 0 5.1 3.5 3.2 6.5C19 16.4 12 21 12 21z"/></svg>
+            <span style="font-size:11px;color:#0B8A5F">已收藏</span></div>
+          <div style="width:56px;height:56px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px">
+            <svg class="licon" style="width:22px;height:22px" viewBox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5M4 20h16"/></svg>
+            <span style="font-size:11px;color:#6C757D">已缓存</span></div>
+          <div style="width:56px;height:56px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px">
+            <svg class="licon" style="width:22px;height:22px" viewBox="0 0 24 24"><path d="M20 11a8 8 0 1 0-2.3 5.7M20 5v6h-6"/></svg>
+            <span style="font-size:11px;color:#6C757D">单曲循环</span></div>
+          <div style="width:56px;height:56px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px">
+            <svg style="width:22px;height:22px" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M7 12h2M11 12h2M15 12h2"/></svg>
+            <span style="font-size:11px;color:#0B8A5F">有字幕</span></div>
+        </div>
+      </div>
+      <div style="padding:0 24px">
+        <div style="display:flex;justify-content:space-between;font-size:11px;color:#6C757D;font-variant-numeric:tabular-nums;margin-bottom:2px"><span>00:48</span><span>01:16</span></div>
+        <div style="height:20px;display:flex;align-items:center">
+          <div style="width:100%;height:4px;background:#E3E5E8;border-radius:2px;position:relative">
+            <div style="position:absolute;left:0;top:0;height:4px;width:63%;background:#212529;border-radius:2px"></div>
+            <div style="position:absolute;left:63%;top:-5px;width:14px;height:14px;border-radius:50%;background:#10B981;border:2.5px solid #F5F6F8;margin-left:-7px"></div>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:6px 20px 8px">
+        <div style="width:44px;height:44px"></div>
+        <div style="width:44px;height:44px;display:flex;align-items:center;justify-content:center"><svg style="width:26px;height:26px" viewBox="0 0 24 24" fill="#212529"><path d="M6 5h2v14H6zM20 5l-10 7 10 7z"/></svg></div>
+        <div style="width:60px;height:60px;border-radius:50%;background:#10B981;display:flex;align-items:center;justify-content:center"><svg style="width:24px;height:24px" viewBox="0 0 24 24" fill="#FFFFFF"><path d="M8 5l11 7-11 7z"/></svg></div>
+        <div style="width:44px;height:44px;display:flex;align-items:center;justify-content:center"><svg style="width:26px;height:26px" viewBox="0 0 24 24" fill="#212529"><path d="M16 5h2v14h-2zM4 5l10 7-10 7z"/></svg></div>
+        <div style="width:44px;height:44px"></div>
+      </div>
+      <div style="height:20px;display:flex;align-items:center;justify-content:center;flex:0 0 auto;padding-bottom:6px">
+        <span style="width:134px;height:5px;border-radius:3px;background:#212529;opacity:.85"></span>
+      </div>
+    </div>
+  </div>
+  <div class="anno"><b class="t">规格（黑胶 v2 定案 + v4.2 统一）</b>
+    <ul>
+      <li><b>顶栏（11-17 / 11-18 拍板）</b>：删三段 tab（推荐/课文/详情），只留返回键 + 更多键；「更多」同时承载<b>我的收藏复选</b>与<b>播放队列</b>，点开可复选课文、查看并调整本次播放顺序；角标「3」＝已勾选项数（稿示例）。返回键位置不动。</li>
+      <li><b>字幕视图（11-17 拍板）</b>：四操作「无字幕」点击切「有字幕」——唱片区改为<b>字幕逐句视图</b>：当前播放句加粗放大 + 左侧绿色竖条高亮，上下文句按远近渐淡（#212529→#CED4DA→#B7BDC4），上下 36px 渐隐遮罩；播放时自动向上滚动跟随当前句，切回「无字幕」恢复黑胶唱片。句级定位复用 <code>t/t2</code>。</li>
+      <li><b>更多合并选集与队列（11-18 拍板）</b>：「更多」同时承载收藏复选与播放队列——复选收藏 → 灌入队列作为播放序列；队列内调序/移除<b>只改本次播放、不回写 <code>el2_fav</code></b>。<b>底部三横线键删除</b>，改 44px 空占位保持播放键居中；勾选项数与队列条数仍为两个独立计数。</li>
+      <li>四操作「已收藏」从橙 <code>#E8590C</code> 并入绿系（<code>#10B981</code> 实心 + <code>#0B8A5F</code> 文字）；「已缓存」为下载状态指示。</li>
+      <li><b>去重（2026-11-17 拍板）</b>：收藏只保留四操作的爱心「已收藏」，删标题行星形「收藏」胶囊；循环只保留四操作「单曲循环」，删底部五键的循环键（该位留 44px 空占位，保持播放键居中）。</li>
+      <li>进度 <code>00:48 / 01:16</code> 取 L01 真实 duration 76.24s；顶栏「正在播放」小标与元数据行均已删（v4.2 / 11-18 文案规约）；<b>曲名从底部控制区上移到顶栏下方</b>，只留一行，底部不再为标题占位。</li>
+      <li><b>来源行（11-19 新增）</b>：跨课本后曲名下方补一行来源 <code>新概念 2 · L1 · 参考 A1</code>（课本 · 课次 · 等级），否则用户无法判断在听哪本书。等级口径同屏 10：<b>TH!NK 显示裸等级（A2），NCE2 显示「参考 A1」</b>；本行 11.5px / <code>#6C757D</code>，等级部分用深绿 <code>#0B8A5F</code>。<b>仅一行，不加说明句</b>。</li>
+    </ul>
+  </div>
+</div>
+
+</div>
+
+<div class="foot">四段流程设计稿 v4.2 · 仅评审用 · 11 屏 / 4 组（首学 6 + 复习 2 + 课程中心 1 + 听单 2）· 全页面统一冷灰 + 品牌绿（11-17 用户改定）· 线性极简图标（24px 网格 / 2px 描边 / 单色）· 扁平规约：纯色块、无渐变、无投影 · 说明性文字 21→1（仅留首用提示）· <b>11-19 听单升级：课本 × 等级两层聚合，音频包 id=</b><code>{cid}:{level}</code><b>、只含 mp3、新增 </b><code>el2_pack</code><b> 键与 </b><code>el2_dl</code><b> 隔离；</b><code>levelSrc</code><b> 分离官方锚点与难度参考，禁「NCE2 = A1」表述</b> · 数据取自 L01 正典，课程中心封面取自 covers/ 真实教材图、听单组零封面图 · 本稿未动 App 代码；v4.0 原样保留为历史版本</div>
+
+<script>
+(function(){
+  var card = document.querySelector('.ankiCard');
+  if (!card) return;
+  var en = card.querySelector('.big');
+  var zh = card.querySelector('.zhline');
+  var tag = card.querySelector('.ankiTag');
+  if (!en || !zh || !tag) return;
+  var rows = [
+    ['In the end I could not bear it.', '最后，我实在无法忍受。', 12],
+    ['I turned round.', '我回过头去。', 13],
+    ['I looked at the man and the woman angrily.', '我怒视着那一男一女。', 14]
+  ];
+  var idx = 0, sx = 0, sy = 0, down = false;
+  card.addEventListener('pointerdown', function(e){ down = true; sx = e.clientX; sy = e.clientY; });
+  card.addEventListener('pointerup', function(e){
+    if (!down) return;
+    down = false;
+    var dx = e.clientX - sx, dy = e.clientY - sy;
+    if (Math.abs(dx) < 40 || Math.abs(dx) < Math.abs(dy)) return;
+    idx = (idx + (dx < 0 ? 1 : rows.length - 1)) % rows.length;
+    en.textContent = rows[idx][0];
+    zh.textContent = rows[idx][1];
+    tag.textContent = '句卡 ' + rows[idx][2] + ' / 17';
+  });
+  card.addEventListener('pointercancel', function(){ down = false; });
+})();
+</script>
+</body>
+</html>
