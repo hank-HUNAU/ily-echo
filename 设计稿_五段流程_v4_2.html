@@ -249,7 +249,7 @@ body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang 
 <div class="shots">
 
 <div class="shot">
-  <div class="lab"><span class="n">1</span>盲听 · 听 1 遍后选答案 —— 无字播完自动出题</div>
+  <div class="lab"><span class="n">1</span>盲听 · 题目常驻 + 听 1 遍 —— 点选即判定（11-25 改）</div>
   <div class="phone">
     <div class="scr">
       <div class="status"><span>9:41</span><span class="cam"></span><svg class="licon" style="width:22px;height:22px" viewBox="0 0 24 24"><rect x="2" y="8" width="17" height="9" rx="2"/><path d="M21 11v3"/></svg></div>
@@ -271,9 +271,9 @@ body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang 
       </div>
     </div>
   </div>
-  <div class="anno"><b class="t">规格（11-18 拍板：答对直入 / 答错重听 / 再错揭底）</b>
+  <div class="anno"><b class="t">规格（11-18 拍板判定三分支；11-25 改：题目常驻，进入即显示）</b>
     <ul>
-      <li><b>进入即无字播 1 遍</b>：自动播放 <code>audio/L01.mp3</code>（76.24s），<b>无播放键</b>；期间不显示题干、选项、译文、答案，播完自动出题。</li>
+      <li><b>进入即显示题干 + 3 选项</b>；音频同步自动播 1 遍 <code>audio/L01.mp3</code>（76.24s），<b>无播放键</b>。中文提示默认不展开，点一层出一层的译文。</li>
       <li><b>判定分支</b>：点选项即判定，<b>不设提交按钮、不显示分支提示与状态胶囊</b>；① 答对 → 直接进入精听；② 答错 → 自动再听 1 遍并回到同一题重选；③ 第 2 次仍错 → 直接显示正确答案，再点「进入精听」。过程全部自动，儿童界面只留题干、3 选项与中文提示。</li>
       <li>题干沿用 v3.4 简化式 <code>"Why did the writer complain?"</code>（源 <code>data/L01.json</code> 的 <code>question.en</code>）；3 个英文选项按 <code>i=2–8</code> 构造——正确项 A 出自 <code>i=6</code> + <code>i=5</code>，干扰项 B/C 与 <code>i=3</code>/<code>i=2</code> 相斥。</li>
       <li>中文提示取自 <code>question.zh</code> + 选项译文，一次一层展开、默认不常驻。</li>

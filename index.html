@@ -1438,16 +1438,8 @@ function stageBlind(){
   const p=prog(CUR.no), d=CUR.data;
   if(!CUR.blind) CUR.blind={tries:0,showAnswer:false,phase:'playing',picked:-1};
   const B=CUR.blind;
-  /* 进入即无字播 1 遍：只给一个大号聆听提示，不显示题干/选项/字幕/答案 */
-  if(B.phase==='playing'){
-    return `<div class="blind-wrap">
-      <div class="blind-listen">
-        <div class="blind-ear"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15v-3a8 8 0 0 1 16 0v3"/><path d="M4 15h3v5H5.5A1.5 1.5 0 0 1 4 18.5z"/><path d="M20 15h-3v5h1.5A1.5 1.5 0 0 0 20 18.5z"/></svg></div>
-        <div class="blind-ttl">仔细听</div>
-      </div>
-    </div>`;
-  }
-  /* 出题态：题干 + 3 选项；答错重听后回到同一题 */
+  /* 11-25 用户定案：题干 + 3 选项进入即显示，音频同步播 1 遍；点选即判定 */
+
   return `<div class="blind-wrap" id="blindQuiz">
     <div class="blind-q">${esc((d.question&&d.question.en)||'')}</div>
     <div class="blind-opts" id="blindOpts">
@@ -1465,11 +1457,12 @@ function stageBlind(){
        <div class="blind-hint" id="blindHint" style="display:none">${esc((d.question&&d.question.zh)||'')}</div>`}
   </div>`;
 }
-/* 异步启动盲听播放：加载选项 → 无字播全文 → 播完出题 */
+/* 异步启动盲听播放：加载选项 → 立即重绘出题目 → 同步播 1 遍 → 播完进统一回调 */
 async function blindStart(){
   const B=CUR.blind;
   const opts=await loadBlindOpt();
   CUR.blindOpt=opts[String(CUR.no)]||null;
+  renderStage();   /* 选项就绪即刻显示题目（此前是播完才出题） */
   /* 无选项兜底：仍可听，播完直接进精听提示 */
   const t0=Date.now();
   playAll(()=>{

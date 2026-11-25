@@ -25,9 +25,10 @@ with sync_playwright() as pw:
     a = p.evaluate("""() => ({sub:!!document.querySelector('.blind-sub'),
       replay:!!document.getElementById('blindReplay'),
       tip:[...document.querySelectorAll('.tip')].map(x=>x.textContent.trim()),
+      opts:document.querySelectorAll('.blind-opt').length,
       title:document.querySelector('.blind-ttl')&&document.querySelector('.blind-ttl').textContent})""")
-    print("  播放态:", a)
-    assert not a["sub"] and not a["replay"]
+    print("  进入态:", a)
+    assert not a["sub"] and not a["replay"] and a["opts"] == 3
     assert all("盲听只在首次" not in t for t in a["tip"])
     p.evaluate("window.el2BlindDone()"); p.wait_for_timeout(400)
     q = p.evaluate("""() => ({tip:[...document.querySelectorAll('.tip')].map(x=>x.textContent.trim()),

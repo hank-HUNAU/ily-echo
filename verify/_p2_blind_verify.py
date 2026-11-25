@@ -29,7 +29,9 @@ with sync_playwright() as pw:
     fresh(page)
     t = page.locator("#app").inner_text()
     html = page.locator("#app").inner_html()
-    print("① 聆听态:", "仔细听" in t, "| 无选项:", "blind-opt" not in html, "| 无说明句:", "正在播放全文" not in t)
+    n0 = page.locator(".blind-opt").count()
+    print("① 进入即题目:", "Why did the writer complain" in t, "| 选项数:", n0, "| 无说明句:", "正在播放全文" not in t)
+    assert n0 == 3 and "Why did the writer complain" in t
     page.screenshot(path=str(OUT/"p2_blind_listening.png"))
 
     # 用页面注入触发出题（CUR 在函数块内，但 renderStage 通过 window 钩子不可用；
@@ -68,7 +70,11 @@ with sync_playwright() as pw:
     opts.nth(clicked).click()
     page.wait_for_timeout(500)
     t4=page.locator("#app").inner_text()
-    print("④ 答错1次 → 重听:", "仔细听" in t4 or "再听一遍" in t4, "| 未进精听:", "逐句精听" not in t4)
+    # 11-25 题目常驻：重听不再显示「仔细听」提示，改判「题目仍在 + 选中态已清 + 未进精听」
+    still = page.locator(".blind-opt").count() == 3
+    cleared = page.locator(".blind-opt.wrong").count() == 0
+    print("④ 答错1次 → 重听:", still and cleared, "(题目仍在", still, "/ 选中已清", cleared, ")", "| 未进精听:", "逐句精听" not in t4)
+    assert still and cleared
 
     # ⑤ 第二次答错 → 揭底（重听结束后再 dispatch ended 回出题态）
     page.evaluate("window.el2BlindDone()")

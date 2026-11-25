@@ -1650,11 +1650,7 @@ function stageBlind(){
   const d=CUR.data;
   if(!CUR.blind) CUR.blind={tries:0,showAnswer:false,phase:'playing',picked:-1};
   const B=CUR.blind, O=CUR.blindOpt;
-  /* 播的期间只留一个聆听提示：不显示题干、选项、译文、答案（无说明句） */
-  if(B.phase==='playing'){
-    return `<div class="body" style="padding:14px 18px 8px;justify-content:center;gap:12px">
-      <div class="big" style="font-size:22px;margin:0">仔细听</div></div>`;
-  }
+  /* 11-25 用户定案：题干 + 3 选项进入即显示，音频同步播 1 遍；点选即判定 */
   const opts=(O&&O.options)||[];
   const optHtml=opts.map((o,i)=>{
     let cls='opt';
@@ -1682,6 +1678,7 @@ async function blindStart(){
   const B=CUR.blind;
   const opts=await loadBlindOpt();
   CUR.blindOpt=opts[String(CUR.no)]||null;
+  renderStage();   /* 选项就绪即刻显示题目（此前是播完才出题） */
   /* 无选项兜底：仍可听，播完直接进精听提示 */
   const t0=Date.now();
   playAll(()=>{

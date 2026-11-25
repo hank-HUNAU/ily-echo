@@ -59,7 +59,8 @@ with sync_playwright() as pw:
     chk("A5 盲听段为当前", "on" in (fn.nth(0).get_attribute("class") or ""),
         fn.nth(0).get_attribute("class"))
     t = p.locator("#stage").inner_text()
-    chk("A6 聆听态只有「仔细听」", "仔细听" in t and "先听" not in t, t.replace("\n", " | "))
+    chk("A6 进入即显示题干 + 3 选项", "Why did the writer complain" in t
+        and p.locator(".opt").count() == 3, t.replace("\n", " | ")[:100])
     p.screenshot(path=str(OUT / "s1_blind_listen.png"))
 
     # ── 屏 1 出题态（headless 无真人音频，走统一入口推进） ──
