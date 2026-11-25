@@ -1,0 +1,2731 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-page-node-id="NN1MEqJjX7AnX1QWnOB9fz">
+<head data-page-node-id="hpFC2mYjItPHyQ1LMtzS5X">
+<meta charset="utf-8" data-page-node-id="qQhZAkRop4bIHsrFjgoiia">
+<!-- v42：本地以 ily-echo/ 为服务根用 ../；Pages 项目站点资源在 /ily-echo/ 下 -->
+<script>document.write('<base href="'+(/github\.io$/.test(location.hostname)?'/ily-echo/':'../')+'">')</script>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content" data-page-node-id="RwTB9C7Di0bRJd2zBVwFaX">
+<link rel="icon" href="data:," data-page-node-id="SDwc2lnAZb60jkKScZy6FQ">
+<meta name="apple-mobile-web-app-capable" content="yes" data-page-node-id="KSPpqgUyHnFYjJokylOCgJ">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" data-page-node-id="FwoFYq5pknDgw5Mx2AFRdH">
+<meta name="apple-mobile-web-app-title" content="NCE2 Loop" data-page-node-id="PuNEL1jRZd1oMxPE5uq3ab">
+<link rel="apple-touch-icon" href="apple-touch-icon.png" data-page-node-id="kYBv1nc5xsptTDZj0m4XZH">
+<link rel="apple-touch-startup-image" media="(device-width:1024px) and (device-height:1366px) and (-webkit-device-pixel-ratio:2) and (orientation:portrait)" href="splash-2048x2732.png" data-page-node-id="vGjqvELJny8lenClm3IGwd">
+<link rel="apple-touch-startup-image" media="(device-width:1024px) and (device-height:1366px) and (-webkit-device-pixel-ratio:2) and (orientation:landscape)" href="splash-2732x2048.png" data-page-node-id="AE1vf5sUuVCtXk6NkLafE9">
+<link rel="apple-touch-startup-image" media="(device-width:430px) and (device-height:932px) and (-webkit-device-pixel-ratio:3) and (orientation:portrait)" href="splash-1290x2796.png" data-page-node-id="xTFKRCdXbCAB6uuDnEgiaO">
+<link rel="apple-touch-startup-image" media="(device-width:430px) and (device-height:932px) and (-webkit-device-pixel-ratio:3) and (orientation:landscape)" href="splash-2796x1290.png" data-page-node-id="KHBJNiptWdvaKNYxc60TAN">
+<link rel="apple-touch-startup-image" href="splash-1290x2796.png" data-page-node-id="xOhwNkt797JyyB4YvqFOIX">
+<link rel="manifest" href="manifest.json" data-page-node-id="VETCe5cWyEKmuas79dWXEE">
+<meta name="theme-color" content="#0B8A5F" data-page-node-id="QABikQRNN5QRvFne7W3FdA">
+    <title>ily Echo · 精听跟读复习</title>
+<style>
+:root{--ink:#212529;--sub:#6C757D;--line:#E9ECEF;--card:#fff;--bg:#F5F6F8;
+ --focus:#0B8A5F;--brand:#10B981;--brandSoft:#E6F7F0;--bad:#B04A43;
+ /* 兼容旧别名 → 收敛到绿系 */
+ --acc:var(--focus);--accBtn:var(--focus);--ok:var(--brand);--badOld:#E03131;
+ --stage1:var(--brand);--stage2:var(--focus);--stage3:var(--brand);--stage4:var(--focus)}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+/* ===== 全站隐藏滚动条（APP 视感，2026-11-21 定）=====
+   只去掉轨道/滑块，滚动能力完整保留：触摸拖动、滚轮、键盘 PageDown、拖拽进度条照常。
+   scrollbar-width（Firefox / 新 Chromium）+ ::-webkit-scrollbar（Safari / 旧 Chromium）双写。 */
+*{scrollbar-width:none;-ms-overflow-style:none}
+*::-webkit-scrollbar{width:0;height:0;display:none}
+/* 内层滚动容器：iOS 惯性滚动（滚动条已隐藏，不额外加 overscroll-behavior，避免内层不再把惯性交给页面） */
+.plyrics,.kstage,.card .b,.hchips,.lbooks,.lcaps{-webkit-overflow-scrolling:touch}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Noto Sans SC","Microsoft YaHei",sans-serif;
+ background:var(--bg);color:var(--ink);font-size:16px;line-height:1.6;font-variant-numeric:tabular-nums;touch-action:manipulation;padding-bottom:calc(88px + env(safe-area-inset-bottom,0px))}
+.wrap{max-width:880px;margin:0 auto;padding:calc(14px + env(safe-area-inset-top,0px)) calc(14px + env(safe-area-inset-right,0px)) 20px calc(14px + env(safe-area-inset-left,0px))}
+h1{font-size:24px;margin:0}
+h2{font-size:18px;margin:0 0 10px}
+.sec{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 16px;margin-top:14px;touch-action:pan-y}
+.tip{color:var(--sub);font-size:15px;margin:0 0 10px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;border:0;border-radius:12px;
+ padding:12px 20px;font-size:15px;font-family:inherit;cursor:pointer;background:var(--accBtn);color:#fff;min-height:52px}
+.btn.g{background:#F1F3F5;color:var(--ink);border:1px solid var(--line)}
+.btn.ok{background:var(--ok)} .btn.rd{background:var(--bad)}
+.btn.sm{padding:7px 12px;min-height:50px;font-size:14px;border-radius:9px}
+.btn:disabled{opacity:.45;cursor:default}
+.btn .ic{width:20px;height:20px;display:block}
+/* 轻提示 toast */
+#el2toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(96px + env(safe-area-inset-bottom,0px));z-index:900;background:rgba(33,37,41,.92);color:#fff;font-size:14px;padding:10px 18px;border-radius:999px;max-width:86vw;pointer-events:none;opacity:0;transition:opacity .25s}
+#el2toast.on{opacity:1}
+.pill{display:inline-block;border-radius:999px;padding:2px 10px;font-size:13px;background:var(--brandSoft);color:var(--focus)}
+.tag{display:inline-block;border-radius:6px;padding:0 6px;font-size:13px;background:var(--brandSoft);color:var(--focus);margin-right:4px}
+.tag.w{background:#E6F7F0;color:#0B8A5F}.tag.v{background:#E6F7F0;color:#0B8A5F}.tag.d{background:#FFF4E6;color:#8A5E22}
+.item{display:flex;align-items:center;gap:10px;padding:12px 2px;border-bottom:1px dashed var(--line)}
+.item:last-child{border-bottom:0}
+.item .tt{flex:1;min-width:0}
+.item .meta{font-size:14px;color:var(--sub)}
+.play{flex:0 0 52px;width:52px;height:52px;border-radius:50%;border:0;background:var(--accBtn);color:#fff;font-size:15px;cursor:pointer}
+.play.on{background:var(--bad)}
+.ck{width:22px;height:22px;accent-color:var(--ok)}
+.late{color:var(--bad);font-weight:600}
+.empty{color:var(--sub);text-align:center;padding:10px 0;font-size:14px}
+/* 课程网格 */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(72px,1fr));gap:8px}
+.cell{border:1px solid var(--line);border-radius:12px;background:#fff;text-align:center;padding:8px 2px;cursor:pointer;position:relative}
+.cell b{font-size:16px;display:block}
+.cell span{font-size:12px;color:var(--sub);display:block}
+.cell.done{border-color:var(--ok);background:#F0FFF9}
+.cell.doing{border-color:var(--brand);background:var(--brandSoft)}
+.cell.due::after{content:"";position:absolute;top:6px;right:6px;width:8px;height:8px;border-radius:50%;background:var(--bad)}
+.cell.miss span{color:var(--bad)}
+/* 底部导航 */
+nav.tabs{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--line);
+ display:flex;z-index:30;padding-bottom:calc(20px + env(safe-area-inset-bottom,0px))}
+nav.tabs a{flex:1;text-align:center;padding:9px 0 8px;font-size:14px;color:var(--sub);text-decoration:none;min-height:56px}
+nav.tabs a{position:relative}
+nav.tabs a .bdg{position:absolute;top:6px;left:calc(50% + 4px);width:9px;height:9px;border-radius:50%;background:#E03131;border:1.5px solid #fff}
+nav.tabs a svg{width:26px;height:26px;display:block;margin:0 auto 2px}
+nav.tabs a.on{color:var(--focus)}
+/* 五 tab：居中听单＝凸起圆钮（56px、凸出16、白描边环4、常亮无选中态） */
+nav.tabs .fab{flex:1;position:relative;pointer-events:none}
+nav.tabs .fabbtn{position:absolute;left:50%;top:-16px;transform:translateX(-50%);width:56px;height:56px;border-radius:50%;
+ background:var(--brand);border:4px solid #fff;display:flex;align-items:center;justify-content:center;pointer-events:auto;cursor:pointer}
+nav.tabs .fabbtn svg{width:26px;height:26px;margin:0;stroke:#fff}
+/* 句子列表 */
+.sent{display:flex;align-items:flex-start;gap:10px;padding:12px 4px;border-bottom:1px dashed var(--line)}
+.sent.cur{background:var(--brandSoft);border-radius:10px}
+.sent .en{font-family:Georgia,"Times New Roman",serif;font-size:18px;line-height:1.7}
+.sent .zh{color:var(--sub);font-size:17px;line-height:1.65}
+.sent .idx{flex:0 0 26px;color:var(--sub);font-size:14px;padding-top:3px}
+.item .tt .en{font-family:Georgia,"Times New Roman",serif;font-size:18px;line-height:1.55}
+.star{background:none;border:0;font-size:28px;color:#CED4DA;cursor:pointer;padding:0;width:50px;height:50px;flex:0 0 50px;display:inline-flex;align-items:center;justify-content:center}
+.star.on{color:var(--focus)}
+.detail{background:var(--brandSoft);border-radius:12px;padding:10px 12px;margin:6px 0;font-size:15px;color:var(--focus)}
+.detail .ch{display:inline-block;background:#fff;border:1px solid var(--line);border-radius:8px;padding:3px 9px;margin:2px 3px;font-size:14px}
+.detail .ch i{font-style:normal;color:var(--sub);font-size:12px;margin-left:4px}
+.blur{filter:blur(7px);transition:filter .3s;user-select:none}
+/* 阶段条 */
+.stepper{display:flex;gap:6px;margin:12px 0}
+.tipq{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;border:1.5px solid var(--line);background:#fff;color:var(--sub);font-size:13px;font-weight:700;cursor:pointer;vertical-align:middle;flex:0 0 26px}
+.tipd .tip{background:#F8F9FC;border:1px solid var(--line);border-radius:10px;padding:8px 12px;margin-top:6px}
+.bk2{width:56px;height:74px;border-radius:10px;object-fit:cover;display:block;flex:0 0 56px;border:0.5px solid var(--color-border-tertiary, #E9ECEF);background:#F1F3F5}
+.blurred{filter:blur(9px);user-select:none;pointer-events:none;transition:filter .25s}
+/* 课程中心 / 课程库 */
+/* 顶栏：所有页面统一——吸顶、压住刘海安全区、内容从其下方滚过 */
+.topbar{position:sticky;top:0;z-index:40;display:flex;align-items:center;justify-content:space-between;gap:10px;
+ margin:calc(-14px - env(safe-area-inset-top,0px)) calc(-14px - env(safe-area-inset-right,0px)) 6px calc(-14px - env(safe-area-inset-left,0px));
+ padding:calc(14px + env(safe-area-inset-top,0px)) calc(14px + env(safe-area-inset-right,0px)) 10px calc(14px + env(safe-area-inset-left,0px));
+ background:var(--bg);border-bottom:1px solid var(--line)}
+.tbBack{flex:0 0 auto;min-width:52px;text-align:right;color:var(--accBtn);font-weight:600;text-decoration:none;font-size:15px;white-space:nowrap;padding:6px 0 6px 10px}
+.ttitle{flex:1;min-width:0;font-size:18px;font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.topbar h1{font-size:22px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.hbtn{border:1.5px solid var(--acc);color:var(--accBtn);background:#fff;border-radius:999px;padding:0 16px;height:46px;font-size:15px;font-family:inherit;cursor:pointer;white-space:nowrap}
+.coGrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.coCard{border:1px solid var(--line);border-radius:14px;background:#fff;padding:12px 10px 11px;text-align:center;position:relative;
+ -webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+/* 封面即状态（v4.2 屏 9）：全部彩色，不灰度化 —— dim 待下载压 10% / prog 下载中压 22% / lit 点亮 / fail 彩色+红环 */
+.cover{position:relative;display:block;width:66px;height:88px;margin:0 auto 8px;border-radius:11px;overflow:hidden;background:#F1F3F5}
+.cover .bkc{width:100%;height:100%;border-radius:11px;object-fit:cover;display:block;border:0.5px solid var(--line);background:#F1F3F5}
+.cover.dim .bkc{filter:brightness(.9)}
+.cover.prog .bkc{filter:brightness(.78)}
+.cover.lit .bkc{filter:none}
+.cover.fail .bkc{filter:brightness(.86) saturate(.85)}
+.cover.soon .bkc{filter:brightness(.94) saturate(.9)}
+.pring{position:absolute;inset:0;margin:auto;width:56px;height:56px;filter:drop-shadow(0 1px 4px rgba(0,0,0,.35))}
+.pring .arc{transition:stroke-dashoffset .4s}
+.cover.prog .pring{animation:ppulse 1.6s ease-in-out infinite}
+@keyframes ppulse{0%,100%{transform:scale(1)}50%{transform:scale(1.07)}}
+.ppct{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.55);font-style:normal}
+.ppct.rd{font-size:20px;color:var(--bad);text-shadow:0 1px 3px rgba(255,255,255,.7)}
+.cover.fail .pring{animation:none}
+/* 角标：待下载=线性下载箭头 / 已下载=品牌绿勾 */
+.dlbadge{position:absolute;top:4px;right:4px;width:20px;height:20px;border-radius:50%;background:rgba(255,255,255,.95);
+ box-shadow:0 1px 3px rgba(0,0,0,.18);display:flex;align-items:center;justify-content:center;color:var(--sub)}
+.dlbadge svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.dlbadge.ok{background:var(--focus);color:#fff}
+.coCard.off .coName{color:var(--sub)}
+.stfoot{display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--sub);padding:12px 4px 2px}
+.coName{font-size:15px;font-weight:600;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* 书名类文本一律单行：窄屏收缩省略，绝不跨行 */
+.oneline{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* 难句/卡片 的课程筛选 */
+.hchips{display:flex;gap:8px;overflow-x:auto;padding:2px 0 10px;scrollbar-width:none}
+.hchips::-webkit-scrollbar{display:none}
+/* 教材页：筛选胶囊 / 当前课高亮 / 首用引导浮层 */
+.cfilter{padding:8px 14px 0;gap:6px}
+.fchip{display:inline-block;white-space:nowrap;border-radius:999px;padding:5px 10px;font-size:13px;background:#F1F3F5;color:var(--sub);border:1px solid var(--line);cursor:pointer}
+.fchip.on{background:var(--brandSoft);color:var(--focus);border-color:var(--focus)}
+.fchip.due{color:var(--bad);border-color:#EFC4C0;background:#FFF5F4}
+.cell.next{border-color:var(--focus);box-shadow:inset 0 0 0 1px var(--focus)}
+.cell.next span{color:var(--focus);font-weight:600}
+.introMask{position:fixed;inset:0;z-index:800;background:rgba(33,37,41,.45);display:flex;align-items:flex-end;justify-content:center}
+.introMask[hidden]{display:none}
+.introSheet{width:100%;max-width:560px;background:#fff;border-radius:20px 20px 0 0;padding:20px 18px calc(26px + env(safe-area-inset-bottom,0px));max-height:80vh;overflow-y:auto}
+.introSheet .item{padding:10px 2px}
+.hchip{flex:0 0 auto;min-height:44px;border:1.5px solid var(--line);background:#fff;color:var(--sub);border-radius:999px;padding:0 14px;font-size:14.5px;font-family:inherit;cursor:pointer}
+.hchip.on{border-color:var(--acc);background:var(--acc);color:#fff}
+.hchip i{font-style:normal;font-size:13px;opacity:.8;margin-left:3px}
+.cap{font-size:12.5px;color:var(--sub);margin-top:10px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.cap b{width:7px;height:7px;border-radius:50%;background:var(--ok);display:inline-block;flex:0 0 7px}
+.cap b.no{background:#CED4DA}
+.codeRow{display:flex;gap:8px}
+.codeRow input{flex:1;min-width:0;height:50px;border:1.5px solid var(--line);border-radius:12px;padding:0 14px;font-size:16px;outline:none;background:#FBFCFD;text-transform:uppercase}
+.stepper .st{flex:1;text-align:center;font-size:15px;padding:11px 2px;border-radius:10px;background:#F1F3F5;color:var(--sub)}
+.stepper .st.on{color:#fff;font-weight:600}
+.stepper .st.ok{background:#E6FCF5;color:#087F5B}
+.stepper .st.s0.on{background:var(--stage1)}.stepper .st.s1.on{background:var(--stage2)}
+.stepper .st.s2.on{background:var(--stage3)}.stepper .st.s3.on{background:var(--stage4)}
+/* 跟读台 */
+.shadow{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;margin-top:12px}
+.shadow .big{font-size:19px;font-family:Georgia,serif;margin:8px 0}
+.shadow .cnt{display:flex;gap:6px;align-items:center;margin:10px 0;flex-wrap:wrap}
+.rec{width:64px;height:64px;border-radius:50%;border:0;background:var(--rd,#E03131);color:#fff;font-size:24px;cursor:pointer}
+.rec.recording{animation:pulse 1s infinite}
+@keyframes pulse{50%{opacity:.55}}
+.ab{display:flex;gap:8px;margin:10px 0}
+.stars{font-size:24px;cursor:pointer;user-select:none;letter-spacing:4px}
+.stars i{font-style:normal;color:#CED4DA}.stars i.on{color:var(--focus)}
+.grade{font-size:14px;margin-top:6px}
+.bar{height:8px;border-radius:999px;background:#EDF2F7;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--ok)}
+.card{perspective:900px;min-height:190px;margin:10px 0}
+.card .in{position:relative;width:100%;transform-style:preserve-3d;transition:transform .45s;cursor:pointer}
+.card.flip .in{transform:rotateY(180deg)}
+.card .f,.card .b{backface-visibility:hidden;border-radius:16px;border:1px solid var(--line);
+ display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px;text-align:center}
+.card .f{position:relative;background:#fff;min-height:190px}
+.card .b{position:absolute;inset:0;background:var(--brandSoft);transform:rotateY(180deg);overflow-y:auto}
+/* 闪卡背面三图标：语境重听 / 没记住 / 记住了 */
+.cico{width:52px;height:52px;border-radius:50%;border:1.5px solid var(--line);background:#fff;
+ display:inline-flex;align-items:center;justify-content:center;cursor:pointer;padding:0;color:var(--accBtn);flex:0 0 52px}
+.cico svg{width:24px;height:24px}
+.cico.no{color:var(--bad);border-color:#F1BFC0;background:#FFF5F5}
+.cico.ok{color:var(--ok);border-color:#B7E4CE;background:#F0FFF9}
+.ring{width:110px}
+.ring text{font-weight:700}
+.foot{color:var(--sub);font-size:12px;text-align:center;margin-top:14px}
+audio{width:100%}
+/* ===== 听单 / 播放页（P1 静态骨架）===== */
+.listen-page,.player-page{margin:calc(-14px - env(safe-area-inset-top,0px)) -14px 0;padding:0 0 calc(96px + env(safe-area-inset-bottom,0px));min-height:100vh;background:var(--bg)}
+.player-page{display:flex;flex-direction:column}
+.listen-page .lhead{padding:calc(14px + env(safe-area-inset-top,0px)) 18px 0;font-size:24px;color:var(--ink);letter-spacing:.5px}
+.lbooks{display:flex;gap:7px;overflow-x:auto;padding:11px 18px 0;scrollbar-width:none}
+.lbooks::-webkit-scrollbar{display:none}
+.lcaps{display:flex;gap:6px;padding:10px 18px 12px;overflow-x:auto;scrollbar-width:none}
+.lcaps::-webkit-scrollbar{display:none}
+.lcap{flex:0 0 auto;font-size:12px;color:var(--sub);background:#fff;border:1px solid var(--line);border-radius:999px;padding:5px 13px}
+.lcap.on{font-weight:600;color:var(--focus);background:var(--brandSoft);border-color:var(--brandSoft)}
+.lcap,.lchip{font-family:inherit;cursor:pointer}
+.lchip{flex:0 0 auto;display:inline-flex;align-items:center;gap:4px;white-space:nowrap;font-size:12.5px;color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:999px;padding:6px 14px}
+.lchip.on{color:#fff;background:var(--brand);border-color:var(--brand);font-weight:600}
+.lchip.lock{color:#ADB5BD;border-color:#EDF0F2;cursor:default}
+.lchip svg{width:11px;height:11px}
+.lempty{font-size:13px;color:var(--sub);text-align:center;padding:14px 4px}
+.lcard{margin:0 16px;background:#fff;border:0.5px solid var(--line);border-radius:16px;padding:13px}
+.lcard .lplay{width:46px;height:46px;border-radius:50%;background:var(--brand);display:flex;align-items:center;justify-content:center;flex:0 0 46px}
+.lcard .lplay svg{width:20px;height:20px}
+.lnow{font-size:11px;color:var(--focus);font-weight:600;letter-spacing:.4px}
+.lttl{font-size:15px;font-weight:600;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:1px}
+.ltime{font-size:11.5px;color:var(--sub);font-variant-numeric:tabular-nums}
+.lbar{height:3px;background:#EDF0F2;border-radius:2px;margin-top:11px;position:relative}
+.lbar i{position:absolute;left:0;top:0;height:3px;width:52%;background:var(--brand);border-radius:2px}
+.lbar b{position:absolute;left:52%;top:-3px;width:9px;height:9px;border-radius:50%;background:var(--brand);margin-left:-4px}
+.lmeta{display:flex;justify-content:space-between;align-items:center;margin-top:8px;font-size:11.5px;color:var(--sub)}
+.lmeta em{color:var(--focus);font-style:normal}
+.lpad{padding:14px 18px 7px;display:flex;align-items:baseline;justify-content:space-between}
+.lpad span:first-child{font-size:11.5px;font-weight:600;color:var(--sub);letter-spacing:.4px}
+.lpad span:last-child{font-size:11px;color:var(--sub);font-variant-numeric:tabular-nums}
+.lpacks{margin:0 16px;background:#fff;border:0.5px solid var(--line);border-radius:16px;overflow:hidden}
+.lpack{display:flex;align-items:center}
+.lsep{height:0.5px;background:var(--line);margin-left:66px}
+.lbadge{width:42px;height:42px;border-radius:11px;background:var(--brandSoft);display:flex;flex-direction:column;align-items:center;justify-content:center;flex:0 0 42px;color:var(--focus)}
+.lbadge span{font-size:14px;font-weight:700;letter-spacing:.3px;line-height:1.1}
+.lbadge.ref{background:#F1F3F5;color:var(--sub)}
+.lbadge.ref small{font-size:8.5px;line-height:1.2}
+.ldone{display:inline-flex;align-items:center;gap:5px;color:var(--focus);font-size:11px}
+.ldone svg{width:13px;height:13px}
+.lrun{display:inline-flex;align-items:center;gap:6px;color:var(--focus);font-size:11px;font-variant-numeric:tabular-nums}
+.lrun i{width:34px;height:3px;background:#EDF0F2;border-radius:2px;display:block;position:relative}
+.lrun i b{position:absolute;left:0;top:0;height:3px;background:var(--brand);border-radius:2px}
+.ldl{width:30px;height:30px;border-radius:50%;border:1px solid var(--line);display:inline-flex;align-items:center;justify-content:center}
+.ldl svg{width:15px;height:15px;color:var(--focus)}
+/* 播放页 */
+.player-page .ptop{display:flex;align-items:center;justify-content:space-between;padding:calc(6px + env(safe-area-inset-top,0px)) 12px 0}
+.ptop .pback,.ptop .pmore{width:44px;height:44px;display:flex;align-items:center;justify-content:center;color:var(--ink);text-decoration:none;position:relative;border:0;background:none;padding:0;font-family:inherit;cursor:pointer}
+.ptop svg{width:22px;height:22px}
+.ptop .pmore i{position:absolute;top:3px;right:3px;min-width:15px;height:15px;border-radius:8px;background:var(--brand);color:#fff;font-size:10px;display:flex;align-items:center;justify-content:center;padding:0 3px;font-style:normal}
+.ptitle{text-align:center;padding:2px 44px 6px}
+.ptitle b{font-size:18px;font-weight:600;color:var(--ink);line-height:1.3;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ptitle div{font-size:11.5px;color:var(--sub);margin-top:2px}
+.ptitle div span{color:var(--sub)}
+.ptitle div em{color:var(--focus);font-style:normal}
+.plyrics{position:relative;padding:22px 18px;display:flex;flex-direction:column;gap:15px;align-items:flex-start;min-height:260px;max-height:56vh;flex:1;overflow-y:auto;scrollbar-width:none;justify-content:flex-start;padding-bottom:44px}
+.plyrics::-webkit-scrollbar{display:none}
+.pline[data-si]{cursor:pointer}
+.pfade{position:absolute;left:0;right:0;height:36px;z-index:2;pointer-events:none}
+.pfade.top{top:0;background:linear-gradient(var(--bg),rgba(245,246,248,0))}
+.pfade.bot{bottom:0;background:linear-gradient(rgba(245,246,248,0),var(--bg))}
+.pline{line-height:1.5}
+.pline.d1{font-size:15px;color:#B7BDC4}
+.pline.d2{font-size:18px;color:#CED4DA}
+.pline.now{font-size:23px;color:var(--ink);font-weight:600;line-height:1.45;border-left:3px solid var(--brand);padding-left:12px;margin-left:-3px}
+.pops{display:flex;justify-content:space-around;padding:8px 12px 0}
+.pops button{width:56px;display:flex;flex-direction:column;align-items:center;gap:3px;background:none;border:0;
+ font-family:inherit;cursor:pointer;padding:0;color:var(--sub)}
+.pops button.on{color:var(--focus)}
+.pops svg{width:22px;height:22px}
+.pops span{font-size:11px;color:inherit}
+.pbar{display:flex;align-items:center;gap:10px;padding:12px 18px 0;font-size:11px;color:var(--sub);font-variant-numeric:tabular-nums}
+.pbar>div{flex:1;height:4px;background:#E3E5E8;border-radius:2px;position:relative}
+.pbar>div i{position:absolute;left:0;top:0;height:4px;background:var(--brand);border-radius:2px}
+.pbar>div b{position:absolute;top:-5px;width:14px;height:14px;border-radius:50%;background:var(--brand);border:2.5px solid var(--bg);margin-left:-7px}
+/* 无字幕＝黑胶唱片区 */
+.pdisc{flex:1;display:flex;align-items:center;justify-content:center;min-height:260px}
+.pvinyl{width:228px;height:228px;border-radius:50%;background:radial-gradient(circle at 50% 50%,#2B2B2B 0 28%,#1A1A1A 29% 100%);display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 1px #111,inset 0 0 0 2px #333}
+.pvinyl span{width:84px;height:84px;border-radius:50%;background:var(--brand);color:#fff;font-size:19px;font-weight:700;display:flex;align-items:center;justify-content:center}
+/* 更多面板：收藏复选进队列 */
+.pqueue{margin:6px 16px 0;background:#fff;border:0.5px solid var(--line);border-radius:14px;padding:12px 13px}
+.pchk{width:20px;height:20px;border-radius:50%;border:1.5px solid var(--line);flex:0 0 20px;display:flex;align-items:center;justify-content:center;font-size:12px;color:#fff}
+.pchk.on{background:var(--focus);border-color:var(--focus)}
+.pctl{display:flex;align-items:center;justify-content:center;gap:26px;padding:10px 20px 6px}
+.pmini{width:44px;height:44px;display:flex;align-items:center;justify-content:center;color:var(--brand)}
+.pmini svg{width:26px;height:26px}
+.pmain{width:56px;height:56px;border-radius:50%;background:var(--brand);display:flex;align-items:center;justify-content:center}
+.pmain svg{width:24px;height:24px}
+/* ===== 盲听三分支（P2）===== */
+.blind-wrap{padding:6px 0}
+.blind-listen{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:46px 18px 20px;min-height:46vh}
+.blind-ear{width:88px;height:88px;border-radius:50%;background:var(--brandSoft);display:flex;align-items:center;justify-content:center;color:var(--focus);animation:blindPulse 2s ease-in-out infinite}
+.blind-ear svg{width:44px;height:44px}
+@keyframes blindPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
+.blind-ttl{font-size:22px;font-weight:700;color:var(--ink);margin-top:22px}
+.blind-sub{font-size:14px;color:var(--sub);margin-top:8px}
+.blind-q{font-size:19px;font-weight:600;color:var(--ink);line-height:1.5;padding:16px 18px;background:#fff;border:1px solid var(--line);border-radius:16px;margin:6px 0 14px}
+.blind-opts{display:flex;flex-direction:column;gap:10px}
+.blind-opt{display:flex;align-items:center;gap:12px;text-align:left;width:100%;min-height:58px;padding:10px 14px;border:1.5px solid var(--line);border-radius:14px;background:#fff;font-family:inherit;font-size:15px;color:var(--ink);cursor:pointer}
+.blind-opt b{flex:0 0 30px;height:30px;border-radius:50%;background:var(--brandSoft);color:var(--focus);display:flex;align-items:center;justify-content:center;font-size:14px}
+.blind-opt span{flex:1;line-height:1.4}
+.blind-opt.right{border-color:var(--brand);background:var(--brandSoft)}
+.blind-opt.right b{background:var(--brand);color:#fff}
+.blind-opt.wrong{border-color:var(--bad);background:#FFF5F5;opacity:.7}
+.blind-opt.wrong b{background:#F1BFC0;color:#fff}
+.blind-reveal{margin-top:14px;padding:12px 14px;background:var(--brandSoft);border-radius:14px;color:var(--focus);font-size:14px;line-height:1.5}
+.blind-hint{margin-top:10px;padding:10px 14px;background:#fff;border:1px dashed var(--line);border-radius:12px;color:var(--sub);font-size:14px}
+/* ===== 精听 Anki 句卡（P2-2）===== */
+.int-wrap{padding:2px 0}
+.int-card{margin:4px 16px 0;background:#fff;border:1px solid var(--line);border-radius:18px;min-height:300px;display:flex;flex-direction:column;overflow:hidden}
+.ankiTop{display:flex;align-items:center;justify-content:space-between;padding:12px 16px}
+.ankiTag{background:var(--brandSoft);color:var(--focus);border-radius:999px;padding:3px 10px;font-weight:600;font-size:12px}
+.ankiFav{color:var(--focus);font-size:14px;font-weight:600;cursor:pointer;opacity:.55}
+.ankiFav.on{opacity:1}
+.ankiBody{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;text-align:center;padding:16px 22px}
+.ankiEn{font-family:Georgia,"Times New Roman",serif;font-size:20px;line-height:1.5;color:var(--ink);font-weight:600}
+.ankiZh{font-size:16px;line-height:1.6;color:var(--sub)}
+.ankiFoot{display:flex;justify-content:space-between;padding:12px 16px;border-top:1px solid var(--line);font-size:11.5px;color:var(--sub)}
+.int-tip{text-align:center;font-size:11px;color:var(--sub);margin:8px 0}
+.int-bar{padding:0 24px;background:#fff;margin:0 16px;border-radius:14px 14px 0 0}
+.int-lang{display:flex;justify-content:flex-end;padding:10px 0 4px}
+.int-lang .seg{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden}
+.int-lang .seg span{padding:5px 12px;font-size:12px;color:var(--sub);cursor:pointer;background:#fff}
+.int-lang .seg span.on{background:var(--brandSoft);color:var(--focus);font-weight:600}
+.int-prog{display:flex;align-items:center;gap:8px;font-size:11px;color:var(--sub);padding:8px 0}
+.int-track{flex:1;height:4px;background:#E3E5E8;border-radius:2px;position:relative}
+.int-track i{position:absolute;left:0;top:0;height:4px;background:var(--brand);border-radius:2px}
+.int-track b{position:absolute;top:-5px;width:14px;height:14px;border-radius:50%;background:var(--brand);border:2.5px solid #fff;margin-left:-7px}
+.int-ctl{display:flex;align-items:center;justify-content:center;gap:26px;padding:10px 20px 4px;background:#fff;margin:0 16px;border-radius:0 0 14px 14px}
+.int-mini{width:44px;height:44px;display:flex;align-items:center;justify-content:center;border:0;background:none;color:var(--brand);cursor:pointer}
+.int-mini svg{width:26px;height:26px}
+.int-play{width:56px;height:56px;border-radius:50%;background:var(--brand);border:0;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.int-play svg{width:24px;height:24px}
+/* ===== 跟读全文容器 + 工具条（P2-3）===== */
+.shadow-wrap{padding-bottom:calc(96px + env(safe-area-inset-bottom,0px))}
+.kstage{overflow-y:auto;display:block;gap:0;padding:16px 18px;height:calc(100vh - 300px);min-height:230px;max-height:560px;background:#fff;margin:0 16px;border-radius:16px;border:1px solid var(--line);scrollbar-width:none}
+.kstage::-webkit-scrollbar{display:none}
+.krow{transition:opacity .2s}
+.krow .en{font-family:Georgia,"Times New Roman",serif;font-size:17px;line-height:1.5;color:var(--ink)}
+.krow .zh{font-size:14px;line-height:1.5;color:var(--sub);margin-top:3px}
+.krow.dim{opacity:.32}
+.krow.now .en{font-size:21px;font-weight:700}
+.krow.now .zh{opacity:1}
+.kplayer{display:flex;align-items:center;gap:10px;padding:10px 18px 4px}
+.kplay{width:28px;height:28px;border-radius:50%;background:var(--brand);border:0;display:flex;align-items:center;justify-content:center;flex:0 0 28px;cursor:pointer}
+.kplay svg{width:14px;height:14px;fill:#fff}
+.ktrack{flex:1;height:4px;background:#E3E5E8;border-radius:2px;position:relative}
+.ktrack i{position:absolute;left:0;top:0;height:4px;background:var(--brand);border-radius:2px}
+.ktrack b{position:absolute;top:-4px;width:12px;height:12px;border-radius:50%;background:var(--brand);border:2px solid #fff;margin-left:-6px}
+.ktime{font-size:11px;color:var(--sub);font-variant-numeric:tabular-nums}
+.ktool{display:flex;align-items:center;gap:10px;padding:10px 18px 14px}
+.ktool .seg{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;height:34px}
+.ktool .seg span{padding:7px 12px;font-size:13px;color:var(--sub);cursor:pointer;background:#fff;display:flex;align-items:center}
+.ktool .seg span.on{background:var(--brandSoft);color:var(--focus);font-weight:600}
+.ktool .fbtn{min-height:34px;height:34px;border-radius:999px;padding:0 16px;font-size:13px;border:0;background:var(--focus);color:#fff;font-family:inherit;font-weight:600;cursor:pointer;margin-left:auto}
+@media (orientation:landscape) and (max-height:520px){ .kstage{height:230px;min-height:230px;gap:2px;padding:2px 18px} .krow .en{line-height:1.32} .krow .zh{margin-top:0} .krow.now .en{font-size:19px} }
+/* ===== 录音关（屏5/6）：全篇中文 · 断点录制 · 完成卡 ===== */
+.khead2{display:flex;align-items:center;justify-content:space-between;padding:8px 18px 6px;font-size:15px;font-weight:600;color:var(--ink)}
+.khead2 a{color:var(--focus);text-decoration:none;font-size:13px}
+.rec-row .zh{font-size:15px;line-height:1.5;color:var(--sub)}
+.krow.now.rec-row .zh{font-size:18px;color:var(--ink);font-weight:600}
+.rec-row.done .zh{color:var(--focus)}
+.rec-state{background:#EDF1F4;color:var(--sub)}
+.rec-state.on{background:var(--brandSoft);color:var(--focus)}
+.rec-prog{padding:10px 18px 0}
+.rsegs{display:flex;gap:4px}
+.rseg{flex:1;height:5px;border-radius:3px;background:#E3E5E8;transition:background .2s}
+.rseg.done{background:var(--focus)}
+.rseg.now{background:var(--brand)}
+.rec-time{display:flex;justify-content:space-between;font-size:11px;color:var(--sub);margin-top:6px;font-variant-numeric:tabular-nums}
+.rec-ctl{display:flex;align-items:center;justify-content:center;gap:18px;padding:12px 20px 6px}
+/* 录音关滚动容器压矮，保证进度条+三按钮进视口 */
+.rec-wrap .kstage{height:auto;max-height:42vh;min-height:180px}
+.rec-ctl .fbtn.sm{width:88px;min-height:44px;height:44px;border-radius:12px;background:#fff;border:1px solid var(--line);color:var(--ink);font-weight:500}
+.rec-ctl .fbtn.sm[disabled]{opacity:.45}
+.rec-big{width:56px;height:56px;border-radius:50%;border:0;background:var(--focus);color:#fff;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex:0 0 56px}
+.rec-big.on{animation:pulse 1s infinite}
+.rec-hint{text-align:center;font-size:12px;color:var(--sub);padding:0 18px 8px}
+/* 完成卡 */
+.reccard{background:#fff;border:1px solid var(--line);border-radius:16px;margin:18px 16px 0;padding:18px}
+.rct{font-size:20px;font-weight:700;color:var(--ink)}
+.rcs{font-size:13px;color:var(--sub);margin-top:6px}
+.rcrow{display:flex;justify-content:space-between;margin-top:14px;font-size:13px;color:var(--sub)}
+.rcrow b{color:var(--ink);font-weight:600}
+.rcacts{margin:20px 16px 0;display:flex;flex-direction:column;gap:9px}
+.rcacts .fbtn{min-height:54px;border-radius:14px;background:var(--focus);color:#fff;border:0;font-size:16px;font-weight:600;font-family:inherit;cursor:pointer}
+.rcacts .fbtn.ghost{background:#fff;border:1px solid var(--line);color:var(--ink);min-height:46px;font-size:14px;font-weight:500}
+/* ===== 复习 7 轮：屏 7 到期入口 / 屏 8 完成本轮 ===== */
+.rev-entry{display:flex;flex-direction:column;min-height:calc(100vh - 210px);padding:0 18px}
+.rev-ttl{font-size:22px;font-weight:700;color:var(--ink);margin-top:26px;letter-spacing:.3px}
+.rev-card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px;margin-top:20px}
+.rev-lab{font-size:12.5px;color:var(--sub);margin-bottom:12px}
+.rev-pills{display:flex;gap:8px;flex-wrap:wrap}
+.rev-pills .pill{font-size:14px;padding:4px 14px;border-radius:999px}
+.rev-pills .pill.pc{background:#EDF1F4;color:var(--sub)}
+.rev-blind{margin-top:12px;display:flex}
+.pill.mute{background:#EDF1F4;color:var(--sub);font-size:12.5px;padding:3px 11px}
+.rev-note{font-size:12.5px;color:var(--sub);margin-top:12px;line-height:1.6}
+.rev-acts{margin-top:auto;padding:18px 0 6px;display:flex;flex-direction:column;gap:9px}
+.rev-acts .fbtn{min-height:52px;border-radius:14px;background:var(--focus);color:#fff;border:0;font-size:16px;font-weight:600;font-family:inherit;cursor:pointer}
+.rev-acts .fbtn.ghost{background:#fff;border:1px solid var(--line);color:var(--ink);min-height:46px;font-size:14px;font-weight:500}
+.rev-done-wrap{display:flex;flex-direction:column;min-height:calc(100vh - 150px);padding:0 16px}
+/* 7 轮时间轴：只画轮次位图，无曲线、无「艾宾浩斯」字样 */
+.rnd{display:flex;align-items:center;justify-content:space-between;margin-top:18px;padding:0 2px}
+.rnd .dot{width:26px;height:26px;border-radius:50%;border:1.5px solid var(--line);background:#fff;color:var(--sub);
+ font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex:0 0 26px}
+.rnd .dot.sm{width:20px;height:20px;flex:0 0 20px;font-size:11px;border:0;background:var(--brandSoft);color:var(--focus)}
+.rnd .dot.done{background:var(--focus);border-color:var(--focus);color:#fff}
+.rnd .dot.now{background:var(--brandSoft);border-color:var(--focus);color:var(--focus);box-shadow:0 0 0 3px rgba(16,185,129,.16)}
+.rnd .ln{flex:1;height:1.5px;background:var(--line);margin:0 3px}
+.rndlab{display:flex;justify-content:space-between;font-size:11.5px;color:var(--sub);margin-top:7px;padding:0 1px}
+@media (hover:none){.btn:active,.play:active,.star:active,nav.tabs a:active{transform:scale(.96)}}
+@media (hover:hover){.btn:hover,.play:hover{filter:brightness(1.05)}}
+.skel{height:16px;border-radius:8px;margin:10px 0;background:linear-gradient(90deg,#EEF0F3 25%,#F8F9FA 45%,#EEF0F3 65%);background-size:200% 100%;animation:skm 1.2s infinite}
+@keyframes skm{to{background-position:-200% 0}}
+@media (orientation:landscape) and (min-width:1000px){ .wrap{max-width:1100px} .wrap .sec{max-width:920px;margin-left:auto;margin-right:auto} }
+@media print{nav.tabs{display:none}}
+
+/* ===== v42 原型 · 设计稿 v4.2 样式表原样搬运 =====
+   来源：设计稿_五段流程_v4_2.html :64-137（屏内组件），变量 :30-35
+   差异仅两处：① 评审外壳 .phone/.status（假 9:41 状态栏 + 8px 边框）→ 安全区
+              ② 容器 .scr → #app.v42-lesson 自身（去掉外包一层） */
+body:has(#app.v42-lesson) nav.tabs{display:none}
+#app.v42-lesson{
+ --ink:#263039;--sub:#5C6773;--line:#E2E6EB;--bg:#F4F6F8;
+ --focus:#0B8A5F;--focusDeep:#08704D;--brand:#10B981;--brandSoft:#E6F7F0;
+ --amber:#C08A3E;--amberInk:#8A5E22;--bad:#B04A43;--card:#fff;
+ background:var(--bg);color:var(--ink);line-height:1.5;
+ /* 覆盖 .wrap 的居中/留白，课文页是满屏 App 形态 */
+ padding:0;margin:0;max-width:none;width:100%;
+ height:100vh;height:100dvh;overflow:hidden;
+ display:flex;flex-direction:column;position:relative}
+#app.v42-lesson *{box-sizing:border-box}
+/* —— 顶栏（稿 .khead）：屏 1 L1·私人谈话 / 屏 2 精听·第n/m句 / 屏 3-4 跟读·全篇
+      / 屏 5 背诵·全篇·仅中文 / 屏 6 本课完成 —— */
+#app.v42-lesson .khead{display:flex;justify-content:space-between;align-items:center;
+ padding:calc(6px + env(safe-area-inset-top,0px)) 20px 2px;color:var(--sub);font-size:12.5px;flex:0 0 auto}
+#app.v42-lesson .khead a{color:var(--sub);text-decoration:none}
+/* —— 四段流程条（稿 .flownav）：只读指示，不可点切段（11-17 拍板） —— */
+#app.v42-lesson .flownav{display:flex;align-items:center;justify-content:center;gap:3px;
+ padding:7px 8px 9px;border-bottom:1px solid var(--line);background:transparent;flex:0 0 auto}
+#app.v42-lesson .fn{display:flex;flex-direction:column;align-items:center;gap:2px;
+ width:58px;font-size:10.5px;color:var(--sub)}
+#app.v42-lesson .fni{width:22px;height:22px;border-radius:50%;border:1.5px solid var(--line);
+ display:flex;align-items:center;justify-content:center;font-size:10px;font-style:normal;font-weight:600}
+#app.v42-lesson .fn.on{color:var(--focusDeep)}
+#app.v42-lesson .fn.on .fni{border-color:var(--focus);background:#EDF1F4;color:var(--focusDeep)}
+#app.v42-lesson .fn.done .fni{background:var(--focus);border-color:var(--focus);color:#fff}
+#app.v42-lesson .fnar{color:var(--line);font-size:11px}
+/* —— 舞台容器 —— */
+#app.v42-lesson #stage{flex:1;min-height:0;display:flex;flex-direction:column;overflow:hidden}
+#app.v42-lesson .body{flex:1;min-height:0;display:flex;flex-direction:column;overflow:hidden}
+#app.v42-lesson .kstage{flex:1;min-height:0;display:flex;flex-direction:column;
+ justify-content:center;overflow-y:auto;-webkit-overflow-scrolling:touch}
+/* —— 文本层（稿 .title/.subtle/.big/.zhline） —— */
+#app.v42-lesson .title{font-size:20px;font-weight:700;text-align:center;margin:6px 0 2px}
+#app.v42-lesson .subtle{font-size:12.5px;color:var(--sub);text-align:center;line-height:1.6}
+#app.v42-lesson .hint{font-size:12.5px;color:var(--sub);text-align:center}
+#app.v42-lesson .big{font-family:Georgia,"Times New Roman",serif;font-size:21px;
+ line-height:1.55;color:var(--ink);text-align:center}
+#app.v42-lesson .zhline{font-size:14px;color:var(--sub);line-height:1.6;text-align:center}
+/* —— 按钮（稿 .fbtn）：主按钮 54 / sm 44 / ghost 描边 —— */
+#app.v42-lesson .fbtn{display:flex;align-items:center;justify-content:center;gap:8px;border:0;
+ border-radius:16px;font-family:inherit;font-size:16px;font-weight:600;min-height:54px;
+ background:var(--focus);color:#fff;cursor:pointer;width:100%}
+#app.v42-lesson .fbtn:disabled{opacity:.45}
+#app.v42-lesson .fbtn.ghost{background:transparent;color:var(--sub);font-size:14px;
+ font-weight:500;border:1.5px solid var(--line)}
+#app.v42-lesson .fbtn.sm{min-height:44px;font-size:13.5px;border-radius:12px;width:auto}
+/* —— 选项（稿 .opt）：24px 圆徽 + 描边卡 —— */
+#app.v42-lesson .opt{display:flex;align-items:center;gap:10px;width:100%;
+ border:1.5px solid var(--line);background:#fff;border-radius:14px;padding:11px 12px;
+ font-size:14.5px;text-align:left;color:var(--ink);font-family:inherit;cursor:pointer}
+#app.v42-lesson .opt b{flex:0 0 24px;height:24px;border-radius:50%;background:#F1F3F5;
+ color:var(--sub);font-size:12px;display:flex;align-items:center;justify-content:center}
+#app.v42-lesson .opt.right{border-color:var(--focus);background:var(--brandSoft)}
+#app.v42-lesson .opt.wrong{border-color:var(--bad);background:#FCEBEB}
+/* —— 分段选择器（稿 .seg）：中/英/双语 · 1遍/3遍 同构 —— */
+#app.v42-lesson .seg{display:flex;gap:3px;background:#F1F3F5;border-radius:999px;padding:3px}
+#app.v42-lesson .seg span{padding:5px 11px;border-radius:999px;font-size:12px;
+ color:var(--sub);white-space:nowrap;cursor:pointer}
+#app.v42-lesson .seg span.on{background:#fff;color:var(--focusDeep);font-weight:600}
+/* —— Anki 句卡（稿 .ankiCard）：白卡 + 中性描边，★ 收藏在右上角 —— */
+#app.v42-lesson .ankiCard{background:var(--card);border:1px solid var(--line);border-radius:16px;
+ padding:14px 16px;display:flex;flex:1;flex-direction:column;min-height:0;
+ touch-action:pan-y;user-select:none}
+#app.v42-lesson .ankiTop{display:flex;justify-content:space-between;align-items:center;
+ font-size:11.5px;color:var(--sub)}
+#app.v42-lesson .ankiTag{background:var(--brandSoft);color:var(--focusDeep);border-radius:999px;
+ padding:3px 9px;font-weight:600}
+#app.v42-lesson .ankiFav{color:var(--amberInk);font-size:14px;font-weight:600;cursor:pointer}
+#app.v42-lesson .ankiFav.on{color:var(--focus)}
+#app.v42-lesson .ankiBody{flex:1;display:flex;flex-direction:column;justify-content:center;
+ gap:10px;text-align:center}
+#app.v42-lesson .ankiFoot{display:flex;justify-content:space-between;font-size:11px;color:var(--sub);
+ border-top:1px solid var(--line);padding-top:8px;margin-top:8px}
+/* —— 通用卡（稿 .card/.pill） —— */
+#app.v42-lesson .card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px 14px}
+#app.v42-lesson .pill{display:inline-flex;align-items:center;gap:5px;border-radius:999px;
+ padding:4px 10px;font-size:11.5px;background:#EDF1F4;color:var(--focusDeep)}
+#app.v42-lesson .pill.live{background:#E6F7F0;color:#0B8A5F}
+/* —— 跟读/精听播放条 —— */
+#app.v42-lesson .v42-play{background:#fff;border-top:1px solid var(--line);
+ padding:0 24px 6px;flex:0 0 auto}
+#app.v42-lesson .v42-prog{background:#fff;border-top:1px solid var(--line);
+ padding:0 24px 6px;flex:0 0 auto}
+#app.v42-lesson .v42-time{display:flex;justify-content:space-between;font-size:11px;
+ color:#6C757D;font-variant-numeric:tabular-nums;padding-top:6px}
+#app.v42-lesson .v42-track{height:4px;background:#E3E5E8;border-radius:2px;position:relative}
+#app.v42-lesson .v42-track i{position:absolute;left:0;top:0;height:4px;background:var(--focus);
+ border-radius:2px}
+#app.v42-lesson .v42-track b{position:absolute;top:-5px;width:14px;height:14px;border-radius:50%;
+ background:var(--focus);border:2.5px solid #fff;margin-left:-7px}
+#app.v42-lesson .v42-clock{font-size:11px;color:#6C757D;font-variant-numeric:tabular-nums;white-space:nowrap}
+#app.v42-lesson .v42-ctl{display:flex;align-items:center;justify-content:center;gap:26px;
+ padding:4px 20px calc(10px + env(safe-area-inset-bottom,0px));background:#fff;flex:0 0 auto}
+#app.v42-lesson .v42-mini{width:44px;height:44px;display:flex;align-items:center;
+ justify-content:center;cursor:pointer;background:transparent;border:0}
+#app.v42-lesson .v42-mini svg{width:26px;height:26px}
+#app.v42-lesson .v42-main{width:56px;height:56px;border-radius:50%;background:var(--focus);
+ display:flex;align-items:center;justify-content:center;cursor:pointer;border:0;flex:0 0 56px}
+#app.v42-lesson .v42-main svg{width:24px;height:24px}
+/* —— 跟读工具条（稿 .ktool）：三件同族 34px 全圆，选择器靠左、主按钮靠右 —— */
+#app.v42-lesson .ktool{display:flex;align-items:center;justify-content:flex-start;gap:10px;
+ padding:8px 12px;border-top:1px solid var(--line);background:#fff;flex:0 0 auto}
+#app.v42-lesson .ktool .seg{padding:3px}
+#app.v42-lesson .ktool .seg span{padding:7px 10px;font-size:12px;line-height:1.2}
+#app.v42-lesson .ktool .fbtn.sm{min-height:34px;min-width:0;border-radius:999px;font-size:13px;
+ font-weight:600;padding:0 15px;flex:0 0 auto;margin-left:auto}
+/* —— 正文行（稿 .krow）：焦点 21px 加粗，其余虚化 32% —— */
+#app.v42-lesson .krow{padding:5px 18px;text-align:center}
+#app.v42-lesson .krow .en{font-family:Georgia,"Times New Roman",serif;font-size:16px;
+ line-height:1.4;color:var(--ink)}
+#app.v42-lesson .krow .zh{font-size:12px;line-height:1.5;color:var(--sub);margin-top:2px}
+#app.v42-lesson .krow.dim{opacity:.32}
+#app.v42-lesson .krow.now .en{font-size:21px;font-weight:700}
+/* —— 录音分段进度（稿屏 5）：深绿已录 / 亮绿当前 / 灰未录 —— */
+#app.v42-lesson .rsegs{display:flex;gap:3px}
+#app.v42-lesson .rseg{flex:1;height:5px;border-radius:3px;background:#E3E5E8}
+#app.v42-lesson .rseg.done{background:var(--focus)}
+#app.v42-lesson .rseg.now{background:var(--brand)}
+#app.v42-lesson .v42-ctl.rctl{gap:18px}
+#app.v42-lesson .v42-ctl.rctl .fbtn.sm{min-width:88px}
+#app.v42-lesson .v42-ctl.rctl .fbtn.sm.done{border-color:var(--focus);color:var(--focusDeep)}
+/* —— 横屏（稿 .phone.land）：隐藏流程条 + 可用高仅 230px 须压行距（11-19 修正） —— */
+@media (orientation:landscape){
+  #app.v42-lesson .flownav{display:none}
+  /* 稿 230px 是「评审外壳扣掉假状态栏后的可用高」实测值；真机用 flex:1 直接吃满剩余高，避免机型差异裁首行 */
+  #app.v42-lesson .kstage{flex:1;min-height:0;padding:2px 0}
+  #app.v42-lesson .krow{padding:2px 18px}
+  #app.v42-lesson .krow .en{line-height:1.32}
+  #app.v42-lesson .krow .zh{margin-top:0}
+  /* 稿屏 3 顺序：正文 → 紧凑播放条 → 工具条（竖屏是 工具条 → 进度 → 三键，靠 order 区分） */
+  #app.v42-lesson .v42-play.land-only{display:block;order:1}
+  #app.v42-lesson .ktool{order:2}
+  #app.v42-lesson .port-only{display:none}
+}
+@media (orientation:portrait){
+  #app.v42-lesson .land-only{display:none}
+  #app.v42-lesson .port-only{display:block}
+  #app.v42-lesson .port-only.v42-ctl{display:flex}
+}
+
+</style>
+</head>
+<body data-page-node-id="fkACEsMfaEvRSAXz4FoagJ">
+<div class="wrap" id="app" data-page-node-id="oND3mH3lBDkPCMSWcxaOBg"></div>
+<nav class="tabs" id="tabs" data-page-node-id="qssm8we7nXdqwvPn6FNoA8"></nav>
+<audio id="au" preload="none" data-page-node-id="cnVWohopJ1fh7zxa2sl41R"></audio>
+
+<script>
+/* ===== 会话与页内登录（学生）：不登录可学习（仅本地），登录后数据上云 ===== */
+(function(){
+  var SB='https://zwatrfbqkrvxpqtypdgx.supabase.co';
+  var KEY='sb_publishable_mnkBBrHF70guvwfUNXuhBg_sIok8eBc';
+  function esc(x){ return String(x==null?'':x).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
+  var s=null; try{ s=JSON.parse(localStorage.getItem('el2_session')||'null'); }catch(e){}
+  if(s && (s.role!=='kid' || (s.expires_at||0)<Date.now())) s=null;   /* 仅接受有效学生会话 */
+  window.EL2SESS=s;
+  function save(){ try{ localStorage.setItem('el2_session',JSON.stringify(s)); }catch(e){} window.EL2SESS=s; }
+  window.el2Refresh=function(){
+    if(!s) return Promise.resolve(null);
+    if(Date.now() < s.expires_at - 60000) return Promise.resolve(s.access_token);
+    if(!navigator.onLine) return Promise.resolve(s.access_token);
+    return fetch(SB+'/auth/v1/token?grant_type=refresh_token',{
+      method:'POST', headers:{'apikey':KEY,'Content-Type':'application/json'},
+      body:JSON.stringify({refresh_token:s.refresh_token})
+    }).then(function(r){ return r.json(); }).then(function(d){
+      if(d&&d.access_token){
+        s.access_token=d.access_token; s.refresh_token=d.refresh_token;
+        s.expires_at=Date.now()+(d.expires_in||3600)*1000; save();
+        return s.access_token;
+      }
+      s=null; save(); renderBar();   /* 刷新失败即视为未登录 */
+      return null;
+    }).catch(function(){ return null; });
+  };
+  /* 旧会话迁移：补 uid / family_code */
+  if(s && (!s.uid || !s.family_code) && navigator.onLine){
+    fetch(SB+'/auth/v1/user',{headers:{'apikey':KEY,'Authorization':'Bearer '+s.access_token}})
+      .then(function(r){ return r.ok?r.json():null; })
+      .then(function(u){ if(u&&u.id){ s.uid=u.id; if(!s.email&&u.email) s.email=u.email; return api2('/rest/v1/el2_accounts?select=role,family_code'); } return null; })
+      .then(function(rows){ if(rows&&rows[0]&&rows[0].family_code){ s.family_code=rows[0].family_code; save(); } })
+      .catch(function(){});
+    function api2(path){ return fetch(SB+path,{headers:{'apikey':KEY,'Authorization':'Bearer '+s.access_token}}).then(function(r){ return r.json(); }); }
+  }
+
+  /* 顶栏 + 登录弹窗 */
+  var css=document.createElement('style');
+  css.textContent=''
+    +''
+    +''
+    +'#loginMask{position:fixed;inset:0;background:rgba(33,37,41,.45);z-index:1000;display:flex;align-items:center;justify-content:center;padding:20px}'
+    +'#loginMask .lmCard{position:relative;background:#fff;border-radius:18px;padding:24px 22px;width:100%;max-width:min(400px,92vw);box-shadow:0 18px 50px rgba(0,0,0,.25)}'
+    +'#loginMask h3{font-size:20px;margin-bottom:2px}#loginMask .sub{font-size:14px;color:#6C757D;margin-bottom:10px}'
+    +'#loginMask label{display:block;font-size:14px;font-weight:600;margin:10px 0 5px}'
+    +'#loginMask input{width:100%;height:52px;border:1.5px solid #E9ECEF;border-radius:12px;padding:0 14px;font-size:17px;outline:none;background:#FBFCFD}'
+    +'#loginMask input:focus{border-color:#3B5BDB;background:#fff}'
+    +'#loginMask .go{width:100%;height:54px;border:0;border-radius:13px;background:#3B5BDB;color:#fff;font-size:17px;font-weight:700;margin-top:16px;cursor:pointer}'
+    +'#loginMask .err{color:#E03131;font-size:14px;min-height:18px;margin-top:8px;text-align:center}'
+    +'#loginMask.kb .lmCard{padding:14px 18px;max-height:62vh;overflow-y:auto}'
+    +'#loginMask.kb .sub{display:none}#loginMask.kb h3{margin-bottom:0}'
+    +'#loginMask.kb{align-items:flex-start;padding-top:calc(48px + env(safe-area-inset-top,0px))}'
+    +'#loginMask .x{position:absolute;top:10px;right:12px;border:0;background:none;font-size:20px;color:#6C757D;cursor:pointer}';
+  document.head.appendChild(css);
+  var mask=document.createElement('div'); mask.id='loginMask'; mask.style.display='none';
+  mask.innerHTML='<div class="lmCard">'
+    +'<button class="x" id="lmx" title="关闭">×</button>'
+    +'<h3>学生登录</h3><div class="sub">登录后学习记录持久化保存</div>'
+    +'<label for="lmEm">账号邮箱</label><input id="lmEm" type="email" autocomplete="username">'
+    +'<label for="lmPw">密码</label><input id="lmPw" type="password" autocomplete="current-password">'
+    +'<button class="go" id="lmGo">登 录</button><div class="err" id="lmErr"></div></div>';
+  document.body.appendChild(mask);
+  mask.querySelectorAll('input').forEach(function(inp){
+    inp.addEventListener('focus',function(){ mask.classList.add('kb'); });
+    inp.addEventListener('blur',function(){ mask.classList.remove('kb'); });
+  });
+  function closeMask(){ mask.style.display='none'; mask.classList.remove('kb'); }
+  mask.querySelector('#lmx').addEventListener('click',closeMask);
+  mask.addEventListener('click',function(e){ if(e.target===mask) closeMask(); });
+  window.el2OpenLogin=function(){ mask.style.display='flex'; };
+  window.el2Logout=function(){
+    if(!window.confirm('退出登录？退出后学习记录将停止同步（本机进度保留）')) return;
+    try{ localStorage.removeItem('el2_session'); }catch(e){}
+    window.EL2SESS=null;
+    if(typeof window.el2AuthChanged==='function') window.el2AuthChanged();
+    else if(typeof nav==='function') nav();
+  };
+  mask.querySelector('#lmGo').addEventListener('click',function(){
+    var err=mask.querySelector('#lmErr'), go=mask.querySelector('#lmGo');
+    var em=mask.querySelector('#lmEm').value.trim().toLowerCase(), pw=mask.querySelector('#lmPw').value;
+    err.textContent=''; go.disabled=true; go.textContent='登录中…';
+    fetch(SB+'/auth/v1/token?grant_type=password',{method:'POST',
+      headers:{'apikey':KEY,'Authorization':'Bearer '+KEY,'Content-Type':'application/json'},
+      body:JSON.stringify({email:em,password:pw})})
+    .then(function(r){ return r.json().then(function(d){ return {ok:r.ok,d:d}; }); })
+    .then(function(res){
+      if(!res.ok||!res.d.access_token){ throw new Error(res.d.error_description||res.d.msg||'登录失败'); }
+      return fetch(SB+'/rest/v1/el2_accounts?uid=eq.'+encodeURIComponent(res.d.user.id)+'&select=role,family_code',{headers:{'apikey':KEY,'Authorization':'Bearer '+res.d.access_token}})
+        .then(function(r){ return r.json(); })
+        .then(function(rows){
+          var row=rows&&rows[0];
+          if(!row||!row.role){ throw new Error('该账号未配置角色'); }
+          if(row.role==='kid'){
+            s={access_token:res.d.access_token,refresh_token:res.d.refresh_token,
+               expires_at:Date.now()+(res.d.expires_in||3600)*1000,role:'kid',
+               family_code:row.family_code||'',uid:res.d.user?res.d.user.id:'',email:em};
+            save(); closeMask(); if(typeof window.el2AuthChanged==='function') window.el2AuthChanged(); else if(typeof nav==='function') nav();
+            var _g=document.getElementById('lmGo'); if(_g){ _g.disabled=false; _g.textContent='登 录'; }
+          }else if(row.role==='teacher'){
+            throw new Error('教师端已停用，请联系管理员');
+          }else{
+            throw new Error('家长端已停用，请联系管理员');
+          }
+        });
+    })
+    .catch(function(e){
+      err.textContent=String(e.message||e).replace('ApiError: ','');
+      go.disabled=false; go.textContent='登 录';
+    });
+  });
+  if(s && Date.now()>s.expires_at){ window.el2Refresh(); }
+})();
+</script>
+
+<script>
+/* ================= 状态与存储层 ================= */
+if(window.__EL2_GATE__==='deny'){ /* 已被门禁拦下，跳过初始化 */ }
+else
+{
+const LS='el2_';
+const OFFSETS=[0.25,1,2,4,7,21,60];          // 7 轮复习（天）：6小时→1→2→4→7→21→60 天（11-21 定稿 60 天版）
+const STAGES=['盲听','精听','跟读'];      /* 11-23 用户定：删录音段，三段 + 学习完成卡 */
+const $=s=>document.querySelector(s);
+const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const pad=n=>(n<10?'0':'')+n;
+const todayStr=()=>{const d=new Date();return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());};
+const isoOf=ts=>{const d=new Date(ts);return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());};
+const fmtDate=s=>{if(!s)return'';const p=String(s).slice(0,10).split('-');return (+p[1])+'月'+(+p[2])+'日';};
+
+const store={
+  get(){ try{return JSON.parse(localStorage.getItem(LS+'progress')||'{}');}catch(e){return{};} },
+  set(p){ localStorage.setItem(LS+'progress',JSON.stringify(p)); },
+  getHard(){ try{return JSON.parse(localStorage.getItem(LS+'hard')||'[]');}catch(e){return[];} },
+  setHard(a){ localStorage.setItem(LS+'hard',JSON.stringify(a)); },
+  getStats(){ try{return JSON.parse(localStorage.getItem(LS+'stats')||'{}');}catch(e){return{};} },
+  setStats(s){ localStorage.setItem(LS+'stats',JSON.stringify(s)); },
+};
+/* ===== 进度存储 v3：按课程分组 {_v:3, courses:{nce2:{"1":{…}}}} =====
+   v3 前是扁平 {课号:记录}——第二门课一接入就会与 NCE2 同课号写成同一条记录（静默互串）。
+   迁移在读取时做一次，对同一份旧数据幂等；旧数据全部归属默认课程。 */
+const DEF_COURSE='nce2';
+function blankProg(){ return {stage:0,si:0,listened:{},shadow:{},hard:[],firstLearnAt:0,reviews:0,lastReviewAt:0,blindDone:false,retellDone:false,revDone:null,revMiss:0}; }
+function migrateProg(raw){
+  if(!raw||typeof raw!=='object') return {_v:4,courses:{}};
+  if(raw._v===3||raw._v===4){
+    /* 兜底：旧版 JS（缓存未更新）仍按扁平结构写入时，把它并回默认课程，别丢数据 */
+    const stray=Object.keys(raw).filter(k=>/^\d+$/.test(k));
+    if(stray.length){
+      const o=raw.courses[DEF_COURSE]||(raw.courses[DEF_COURSE]={});
+      stray.forEach(k=>{ o[k]=raw[k]; delete raw[k]; });
+    }
+    /* v4 顺序迁移：旧[盲听0,跟读1,精听2,复述3] → 新[盲听0,精听1,跟读2,录音3]，stage 1↔2 互换。
+       幂等：靠 __v4 标记，只跑一次；stage 0/3 语义不变（盲听/末段）。 */
+    if(!raw.__v4){
+      for(const cid in raw.courses){ const c=raw.courses[cid];
+        if(!c||typeof c!=='object') continue;
+        for(const k in c){ const q=c[k];
+          if(q&&typeof q.stage==='number'){ if(q.stage===1)q.stage=2; else if(q.stage===2)q.stage=1; }
+        }
+      }
+      raw.__v4=1;
+    }
+    raw._v=4;
+    return raw;
+  }
+  const inner={};
+  for(const k in raw){ if(/^\d+$/.test(k)&&raw[k]&&typeof raw[k]==='object') inner[k]=raw[k]; }
+  /* 先补跑 v2 顺序迁移：旧顺序[精听0,跟读1,盲听2,复述3] → 新顺序[盲听0,跟读1,精听2,复述3] */
+  if(!raw.__v2){ for(const k in inner){ const q=inner[k];
+    if(typeof q.stage==='number'){ if(q.stage===0)q.stage=2; else if(q.stage===2)q.stage=0; } } }
+  /* v4：再跑 stage 1↔2 互换（跟读↔精听）→ 盲听0/精听1/跟读2/录音3 */
+  for(const k in inner){ const q=inner[k];
+    if(typeof q.stage==='number'){ if(q.stage===1)q.stage=2; else if(q.stage===2)q.stage=1; } }
+  return {_v:4,__v4:1,courses:{[DEF_COURSE]:inner}};
+}
+let PROG=migrateProg(store.get());
+try{ store.set(PROG); }catch(e){}
+let STATS=Object.assign({playSec:0,shadowN:0,recN:0,days:{}},store.getStats());
+function saveProgress(){ store.set(PROG); }
+function saveStats(){ store.setStats(STATS); }
+/* 当前课程：接入第二门课时由路由写入 CUR.course；现在恒为 nce2 */
+function curCourse(){ return (CUR&&CUR.course)||DEF_COURSE; }
+function progOf(cid){
+  cid=cid||curCourse();
+  if(!PROG.courses) PROG.courses={};
+  if(!PROG.courses[cid]) PROG.courses[cid]={};
+  return PROG.courses[cid];
+}
+function prog(no,cid){ const o=progOf(cid), k=String(no);
+  if(!o[k]) o[k]=blankProg();
+  else{ const d=blankProg(); for(const f in d){ if(o[k][f]===undefined) o[k][f]=d[f]; } }
+  return o[k]; }
+/* ===== 复习 7 轮：本轮三段有效提取（v4.2 屏 7/8） =====
+   revDone 只对「当前轮」有效，换轮自动重置；seen 记录精听已走过的句卡，跨会话保留。
+   两段齐了才 reviews+1 —— 不允许「点一次就记账」。 */
+const REV_STEPS=['精听','跟读'];           /* 11-23：复习随首学改为两段 */
+const REV_GRACE_MS=3*864e5;                    /* 3 天宽限内补做不算漏 */
+function revState(p){
+  const r=(p.reviews||0)+1;
+  if(!p.revDone||typeof p.revDone!=='object'||p.revDone.r!==r) p.revDone={r:r,s:[false,false],seen:{}};
+  if(!Array.isArray(p.revDone.s)||p.revDone.s.length!==REV_STEPS.length) p.revDone.s=[false,false];
+  if(!p.revDone.seen||typeof p.revDone.seen!=='object') p.revDone.seen={};
+  return p.revDone;
+}
+function revMark(i){ const p=prog(CUR.no); const st=revState(p); if(!st.s[i]){ st.s[i]=true; saveProgress(); } return st; }
+function revMissing(p){
+  const st=revState(p), m=[];
+  st.s.forEach((v,i)=>{ if(!v) m.push(REV_STEPS[i]); });
+  return m;
+}
+/* 本轮收尾：两段齐了才 reviews+1；超 3 天宽限记未通关；随后进屏 8 */
+function finishReview(){
+  const p=prog(CUR.no);
+  const st=revState(p);
+  const miss=[];
+  st.s.forEach((v,i)=>{ if(!v) miss.push(REV_STEPS[i]); });
+  if(miss.length){ toast('本轮还差：'+miss.join(' / ')); CUR.rstep=Math.max(0,st.s.findIndex(v=>!v)); renderLesson(); return false; }
+  const due=nextDue(p);                       /* 必须在 reviews+1 之前算 */
+  const late=!!due&&(Date.now()-due>REV_GRACE_MS);
+  const snap=st.s.slice();
+  p.reviews=Math.min((p.reviews||0)+1,OFFSETS.length);
+  p.lastReviewAt=Date.now();
+  if(late) p.revMiss=(p.revMiss||0)+1;
+  p.revDone=null;                             /* 换轮重置 */
+  saveProgress();
+  syncEnqueue('review',0,null);
+  CUR.revDoneShown={round:p.reviews,s:snap,late:late};
+  CUR.rstep=null;                             /* 11-23：录音段已删，屏 8 不再有分享录音 */
+  renderLesson();
+  return true;
+}
+/* 单课程汇总：已学 / 通关 / 复习轮数 / 最近课号 / 继续目标 */
+function progStat(cid){
+  const o=progOf(cid), ks=Object.keys(o);
+  let learned=0,done=0,rounds=0,best=-1,cont=0,last=0;
+  ks.forEach(k=>{ const p=o[k]||{}; const sc=(p.stage||0)*100+(p.si||0);
+    if(sc>best){best=sc;cont=+k;}
+    if(p.firstLearnAt){ learned++; if(p.reviews>=OFFSETS.length) done++; rounds+=(p.reviews||0);
+      if(+k>last) last=+k; } });
+  return {learned,done,rounds,cont,last};
+}
+function progStatAll(){
+  const a={learned:0,done:0,rounds:0};
+  const ids=(typeof myCourses==='function')?myCourses():Object.keys(PROG.courses||{});
+  ids.forEach(c=>{ const s=progStat(c); a.learned+=s.learned; a.done+=s.done; a.rounds+=s.rounds; });
+  return a;
+}
+/* 最近一次学习时间（跨课程排序用）：取该课进度里最大的 firstLearnAt */
+function lastAt(cid){
+  const o=(PROG.courses||{})[cid]||{}; let t=0;
+  for(const k in o){ const p=o[k]||{}; if(p.firstLearnAt&&p.firstLearnAt>t) t=p.firstLearnAt; }
+  return t;
+}
+/* 难句/卡片 的课程范围（内存态，不持久化）——方案 C：跟随 + 状态外显
+   规则：
+   · 从课程页（#/c/:id）或课文页（#/lesson/N?c=）进来 → 默认选中那门课
+   · 从课程中心/课程库/冷启动进来 → 默认「全部」
+   · 在「难句 ↔ 卡片」之间来回切 → 沿用当前选择，不打断刚做的筛选
+   筛选条出现条件：有 ≥2 门课有难句，或已选中某门课（保证单课程时也能切回「全部」） */
+let HARDF='all', LAST_HASH='';
+function scopeOnEnter(){
+  const prev=LAST_HASH||'';
+  if(prev.startsWith('#/hard')||prev.startsWith('#/cards')) return;
+  if(prev.startsWith('#/c/')){ HARDF=decodeURIComponent(prev.slice(4).split('?')[0])||DEF_COURSE; return; }
+  if(prev.startsWith('#/lesson/')){ const Q=hashQs(); HARDF=Q.c||CUR.course||curCourse()||DEF_COURSE; return; }
+  HARDF='all';
+}
+function hardList(){
+  const a=hardAll();
+  return HARDF==='all'?a:a.filter(x=>(x.cid||DEF_COURSE)===HARDF);
+}
+function hardChips(){
+  const a=hardAll();
+  const cids=[...new Set(a.map(x=>x.cid||DEF_COURSE))];
+  if(cids.length<2 && HARDF==='all') return '';          /* 单课程且未筛选 → 不制造无意义控件 */
+  if(HARDF!=='all' && cids.indexOf(HARDF)<0) cids.push(HARDF);  /* 选中的课暂时没难句也要能切回来 */
+  const cnt=id=>a.filter(x=>(x.cid||DEF_COURSE)===id).length;
+  const chip=(v,label,n)=>`<button class="hchip${HARDF===v?' on':''}" data-act="hardf" data-v="${v}">${label}<i>${n}</i></button>`;
+  return `<div class="hchips">${chip('all','全部',a.length)}`+
+    cids.map(id=>{ const c=catCourse(id)||{}; return chip(id,c.short||id,cnt(id)); }).join('')+`</div>`;
+}
+/* 难句本：v3 前没有 cid 字段（只可能是 NCE2），读取时补默认课程 */
+function hardAll(){
+  const a=store.getHard(); let ch=false;
+  a.forEach(x=>{ if(!x.cid){ x.cid=DEF_COURSE; ch=true; } });
+  if(ch){ try{ store.setHard(a); }catch(e){} }
+  return a;
+}
+
+/* 复习调度：nextDue(no) → 毫秒时间戳；dueRound(no) → 第几轮(1-7) 或 0 */
+function nextDue(p){
+  if(!p.firstLearnAt||p.reviews>=OFFSETS.length) return 0;
+  return p.firstLearnAt+OFFSETS[p.reviews]*864e5;
+}
+/* cid 省略 = 全部课程（首页聚合）；给了就只看这一门 */
+function dueList(cid){
+  const now=Date.now(),out=[];
+  const cs=cid?[cid]:((typeof myCourses==='function')?myCourses():Object.keys(PROG.courses||{}));
+  cs.forEach(c=>{ const o=(PROG.courses||{})[c]||{};
+    for(const k in o){ const p=o[k];
+      if(!p.firstLearnAt) continue;
+      const nd=nextDue(p);
+      if(nd&&now>=nd) out.push({cid:c,no:+k,round:p.reviews+1,due:nd,overdueDays:Math.floor((now-nd)/864e5)});
+    } });
+  out.sort((a,b)=>a.due-b.due); return out;
+}
+
+/* 统计 */
+function statDay(sec){ const d=todayStr(); STATS.playSec=(STATS.playSec||0)+sec;
+  STATS.days[d]=(STATS.days[d]||0)+sec; saveStats();
+  try{ const st=['intensive','shadow','blind','retell'];
+    const idx=(CUR.mode==='rev')?(CUR.rstep||0):((prog(CUR.no).stage)||0);
+    syncEnqueue(st[idx]||'intensive',sec,null); }catch(e){} }
+
+/* ================= 云同步（Supabase el2_events，纯匿名静默上报；无登录、无家庭码、无 token） ================= */
+const SYNC_URL='https://zwatrfbqkrvxpqtypdgx.supabase.co/rest/v1/el2_events';
+const SYNC_KEY='sb_publishable_mnkBBrHF70guvwfUNXuhBg_sIok8eBc';
+const SYNC_Q='el2_sync_q';
+function syncDid(){ let d=localStorage.getItem('el2_did');
+  if(!d){ d='did-'+Math.random().toString(36).slice(2,10)+Date.now().toString(36); localStorage.setItem('el2_did',d); }
+  return d; }
+function syncEnqueue(stage,duration_s,self_rating){
+  try{
+    if(!(CUR.no>=1&&CUR.no<=96)) return;
+    const q=JSON.parse(localStorage.getItem(SYNC_Q)||'[]');
+    q.push({device_id:syncDid(),lesson_no:CUR.no,stage,duration_s:Math.max(0,Math.round(duration_s||0)),
+      self_rating:self_rating||null,occurred_at:new Date().toISOString(),client_date:todayStr()});
+    while(q.length>500) q.shift();
+    localStorage.setItem(SYNC_Q,JSON.stringify(q));
+    clearTimeout(window.__syncT); window.__syncT=setTimeout(syncFlush,8000);
+  }catch(e){}
+}
+async function syncFlush(){
+  let q=[]; try{ q=JSON.parse(localStorage.getItem(SYNC_Q)||'[]'); }catch(e){}
+  if(!q.length||!navigator.onLine) return;
+  const batch=q.slice(0,50);
+  try{
+    const r=await fetch(SYNC_URL,{method:'POST',
+      headers:{'apikey':SYNC_KEY,'Content-Type':'application/json','Prefer':'return=minimal'},
+      body:JSON.stringify(batch)});
+    if(r.ok){ localStorage.setItem(SYNC_Q,JSON.stringify(q.slice(batch.length))); }
+    /* 失败/被拒 → 队列保留待下轮重试 */
+  }catch(e){} /* 失败保留队列，下轮重试 */
+}
+setInterval(syncFlush,60000);
+window.syncFlush=syncFlush; /* 供调试/验收脚本触发 */
+document.addEventListener('visibilitychange',()=>{ if(!document.hidden) syncFlush(); });
+
+/* ================= 录音（IndexedDB：每句保留最新一条） ================= */
+let IDB=null;
+function idb(){ if(IDB) return Promise.resolve(IDB);
+  return new Promise((res,rej)=>{
+    const rq=indexedDB.open('el2rec',1);
+    rq.onupgradeneeded=()=>rq.result.createObjectStore('r');
+    rq.onsuccess=()=>{IDB=rq.result;res(IDB);}; rq.onerror=()=>rej(rq.error);
+  });
+}
+async function recSave(key,blob){ try{ const db=await idb();
+  await new Promise((res,rej)=>{const tx=db.transaction('r','readwrite');tx.objectStore('r').put(blob,key);tx.oncomplete=res;tx.onerror=rej;});
+}catch(e){} }
+async function recLoad(key){ try{ const db=await idb();
+  return await new Promise((res)=>{const tx=db.transaction('r','readonly');const q=tx.objectStore('r').get(key);
+    q.onsuccess=()=>res(q.result||null); q.onerror=()=>res(null);});
+}catch(e){ return null; } }
+
+/* ================= 音频引擎 ================= */
+const AU=$('#au'); let segStop=null,playT0=0;
+function audioSrcOf(a){ return /^audio\//.test(a) ? a : 'audio/'+a; }
+function curAudio(){ return audioSrcOf((CUR.data||{}).audio); }
+function playSeg(t,t2,onend,src){
+  AU.src=src||curAudio(); AU.currentTime=t; AU.play();
+  playT0=Date.now();
+  if(segRaf){ cancelAnimationFrame(segRaf); segRaf=null; }
+  if(segStop) AU.removeEventListener('timeupdate',segStop);
+  /* rAF 轮询（~16ms）替代 timeupdate（~250ms）：句尾过冲从 0.25s 降到 0.02s，
+     避免下一句起音漏进本句（L1 "interesting."/"I" 边界实测余量仅 0.12s） */
+  const step=()=>{
+    if(AU.paused){ segRaf=null; return; }
+    if(AU.currentTime>=t2){
+      AU.pause(); segRaf=null;
+      statDay((Date.now()-playT0)/1000); if(onend)onend();
+      return;
+    }
+    segRaf=requestAnimationFrame(step);
+  };
+  segRaf=requestAnimationFrame(step);
+}
+let segRaf=null;
+function playAll(onend){ AU.src=curAudio(); AU.currentTime=0; AU.play(); playT0=Date.now();
+  if(segRaf){ cancelAnimationFrame(segRaf); segRaf=null; }
+  if(segStop) AU.removeEventListener('timeupdate',segStop);
+  segStop=()=>{ if(AU.ended){ AU.removeEventListener('timeupdate',segStop); statDay((Date.now()-playT0)/1000); if(onend)onend(); } };
+  AU.addEventListener('timeupdate',segStop);
+}
+
+/* ================= 数据加载（按课程取 dataPat，第二门课接入即生效） ================= */
+const DATACACHE={};
+async function loadLesson(no,cid){
+  cid=cid||curCourse();
+  const key=cid+':'+no;
+  if(DATACACHE[key]) return DATACACHE[key];
+  const c=catCourse(cid)||{dataPat:'data/L{NN}.json',pad:2};
+  const path=(c.dataPat||'data/L{NN}.json').replace('{NN}',String(no).padStart(c.pad||2,'0'));
+  const r=await fetch(path);
+  DATACACHE[key]=await r.json(); return DATACACHE[key];
+}
+/* 盲听选项：96 课三选一（1正确+2干扰），懒加载一次 */
+let BLANDOPT=null;
+async function loadBlindOpt(){
+  if(BLANDOPT) return BLANDOPT;
+  try{ const r=await fetch('blind_options.json',{cache:'force-cache'}); BLANDOPT=await r.json(); }
+  catch(e){ BLANDOPT={}; }
+  return BLANDOPT;
+}
+
+/* ================= 路由 ================= */
+let CUR={no:0,data:null,stage:0,mode:'learn',course:'nce2'};
+window.CUR=CUR;   /* 调试/验收钩子 */
+/* hash 查询参数：#/lesson/12?m=rev&c=nce1 → {m:'rev',c:'nce1'} */
+function hashQs(){
+  const o={}, q=(location.hash.split('?')[1]||'');
+  q.split('&').forEach(kv=>{ if(!kv) return; const i=kv.indexOf('=');
+    o[i<0?kv:kv.slice(0,i)] = i<0?'':decodeURIComponent(kv.slice(i+1)); });
+  return o;
+}
+/* 生成课程内页链接：默认课程保持干净 URL，非默认课程带 c 参数 */
+function lessonHref(no,cid,mode){
+  cid=cid||curCourse();
+  let q=[];
+  if(mode) q.push('m='+mode);
+  if(cid!==DEF_COURSE) q.push('c='+encodeURIComponent(cid));
+  return '#/lesson/'+no+(q.length?'?'+q.join('&'):'');
+}
+function tipQ(key,text){
+  return `<span class="tipq" data-act="tipq" data-tk="${key}" title="说明">?</span><div class="tipd" id="tipd-${key}" style="display:none"><div class="tip">${text}</div></div>`;
+}
+/* ===== 课程清单：catalog.json 是唯一运营入口（上架新课不用发版）；本地兜底保证离线首启可用 ===== */
+const COURSES=[
+ {id:'nce2',name:'新概念英语 2',short:'N2',tag:'NCE2 Loop',cover:'covers/nce2_s.jpg',lessons:96,ready:true,default:true,sizeMB:78,
+  desc:'96 课 · 盲听 / 精听 / 跟读 + 7 轮复习',dataPat:'data/L{NN}.json',audioPat:'audio/L{NN}.mp3',pad:2},
+ {id:'nce1',name:'新概念英语 1',short:'N1',tag:'NCE1 Loop',cover:'covers/nce1_s.jpg',lessons:144,ready:false,default:false,sizeMB:0,
+  desc:'144 课 · 音频对齐与课件制作中',dataPat:'nce1/data/L{NN}.json',audioPat:'nce1/audio/L{NN}.mp3',pad:2},
+ {id:'tks',name:'Think Starter',short:'TKS',tag:'Cambridge TH!NK',cover:'covers/tks_s.jpg',lessons:12,ready:false,default:false,sizeMB:0,
+  desc:'12 单元 · 音频对齐与课件制作中',dataPat:'tks/data/L{NN}.json',audioPat:'tks/audio/L{NN}.mp3',pad:2},
+ {id:'tk1',name:'Think 1',short:'TK1',tag:'Cambridge TH!NK',cover:'covers/tk1_s.jpg',lessons:12,ready:false,default:false,sizeMB:0,
+  desc:'12 单元 · 音频对齐与课件制作中',dataPat:'tk1/data/L{NN}.json',audioPat:'tk1/audio/L{NN}.mp3',pad:2},
+ {id:'ref',name:'Reading Explorer F',short:'REF',tag:'National Geographic',cover:'covers/ref_s.jpg',lessons:12,ready:false,default:false,sizeMB:0,
+  desc:'12 单元（A/B 两篇） · 音频对齐与课件制作中',dataPat:'ref/data/L{NN}.json',audioPat:'ref/audio/L{NN}.mp3',pad:2},
+ {id:'re1',name:'Reading Explorer 1',short:'RE1',tag:'National Geographic',cover:'covers/re1_s.jpg',lessons:12,ready:false,default:false,sizeMB:0,
+  desc:'12 单元（A/B 两篇） · 音频对齐与课件制作中',dataPat:'re1/data/L{NN}.json',audioPat:'re1/audio/L{NN}.mp3',pad:2}
+];
+let CATALOG={v:0,courses:COURSES,codes:[]};
+function catList(){ return (CATALOG.courses&&CATALOG.courses.length)?CATALOG.courses:COURSES; }
+function catCourse(id){ return catList().filter(c=>c.id===id)[0]||null; }
+async function loadCatalog(){
+  let c=null;
+  try{ const r=await fetch('catalog.json',{cache:'no-store'}); if(r&&r.ok) c=await r.json(); }catch(e){}
+  if(!c){ try{ c=JSON.parse(localStorage.getItem(LS+'catalog')||'null'); }catch(e){} }
+  if(c&&c.courses&&c.courses.length){
+    CATALOG=c;
+    try{ localStorage.setItem(LS+'catalog',JSON.stringify(c)); }catch(e){}
+  }
+  return CATALOG;
+}
+/* 我的课程：设备级存储（与学习进度同层，跨设备同步属独立工程，暂不做） */
+function myCourses(){
+  let a=null; try{ a=JSON.parse(localStorage.getItem(LS+'mycourses')||'null'); }catch(e){}
+  if(!Array.isArray(a)){
+    a=catList().filter(c=>c.default).map(c=>c.id); if(!a.length) a=['nce2'];
+    try{ localStorage.setItem(LS+'mycourses',JSON.stringify(a)); }catch(e){}
+  }
+  return a.filter(id=>!!catCourse(id));
+}
+function setMyCourses(a){ try{ localStorage.setItem(LS+'mycourses',JSON.stringify(a)); }catch(e){} }
+function addCourse(id){ const a=myCourses(); if(a.indexOf(id)<0){ a.push(id); setMyCourses(a); } }
+const TITLES=["A Private Conversation", "Breakfast or Lunch?", "Please Send Me a Card", "An Exciting Trip", "No Wrong Numbers", "Percy Buttons", "Too Late", "The Best and the Worst", "A Cold Welcome", "Not for Jazz", "One Good Turn Deserves Another", "Goodbye and Good Luck", "The Greenwood Boys", "Do You Speak English?", "Good News", "A Polite Request", "Always Young", "He Often does This!", "Sold Out", "One Man in a Boat", "Mad or Not?", "A Glass Envelope", "A New House", "It Could be Worse", "Do the English Speak English?", "The Best Art Critics", "A Wet Night", "No Parking", "Taxi!", "Football or Polo?", "Success Story", "Shopping Made Easy", "Out of the Darkness", "Quick Work", "Stop Thief!", "Across the Channel", "The Olympic Games", "Everything Except the Weather", "Am I All Right?", "Food and Talk", "Do You Call That a Hat?", "Not Very Musical", "Over the South Pole", "Through the Forest", "A Clear Conscience", "Expensive and Uncomfortable", "A Thirsty Ghost", "Did You Want to Tell Me Something?", "The End of a Dream", "Taken for a Ride", "Reward for Virtue", "A Pretty Carpet", "Hot Snake", "Sticky Fingers", "Not a Gold Mine", "Faster Than Sound!", "Can I Help You, Madam?", "A Blessing in Disguise?", "In or Out?", "The Future", "Trouble with the Hubble", "After the Fire", "She Was Not Amused", "The Channel Tunnel", "Jumbo Versus the Police", "Sweet as Honey!", "Volcanoes", "Persistent", "But not Murder!", "Red for Danger", "A Famous Clock", "A Car Called Bluebird", "The Record-Holder", "Out of the Limelight", "SOS", "April Fools' Day", "A Successful Operation", "The Last One?", "By Air", "The Crystal Palace", "Escape", "Monster or Fish?", "After the Elections", "On Strike", "Never Too Old To Learn", "Out of Control", "A Perfect Alibi", "Trapped in a Mine", "A Slip of the Tongue", "What's for Supper?", "Three Men in a Basket", "Asking for Trouble", "A Noble Gift", "Future Champions", "A Fantasy", "The Dead Return"];
+const IC_HEADSET='<path d="M4 15v-3a8 8 0 0 1 16 0v3"/><path d="M4 15h3v5H5.5A1.5 1.5 0 0 1 4 18.5z"/><path d="M20 15h-3v5h1.5A1.5 1.5 0 0 0 20 18.5z"/>';
+const TABS=[
+  ['#/home','课程','<path d="M4 11l8-7 8 7v9a1 1 0 0 1-1 1h-5v-6h-4v6H5a1 1 0 0 1-1-1z"/>'],
+  ['#/hard','难句','<path d="M12 21s-7-4.6-9.5-8.5C.6 9.5 2.4 6 5.7 6c2 0 3.4 1.1 4.3 2.6h4c.9-1.5 2.3-2.6 4.3-2.6 3.3 0 5.1 3.5 3.2 6.5C19 16.4 12 21 12 21z"/>'],
+  ['#/listen','',IC_HEADSET],   /* 居中听单＝凸起圆钮，无文字、常亮 */
+  ['#/cards','卡片','<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18"/>'],
+  /* 第 5 tab「我的」＝账号 + 学习统计 + 离线包 + 数据管理 */
+  ['#/me','我的','<circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5"/>'],
+];
+function nav(){ const h=location.hash||'#/home';
+  $('#tabs').innerHTML=TABS.map(t=>{
+    if(t[0]==='#/listen') return `<span class="fab"><a href="#/listen" class="fabbtn" aria-label="听单"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">${IC_HEADSET}</svg></a></span>`;
+    let on='';
+    if(t[0]==='#/me'){ on=(h.startsWith('#/me')||h.startsWith('#/stats'))?' class="on"':''; }
+    else on=(h.startsWith(t[0])||(t[0]==='#/home'&&(h.startsWith('#/c/')||h.startsWith('#/lesson/')||h.startsWith('#/store'))))?' class="on"':'';
+    return `<a href="${t[0]}"${on}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">${t[2]}</svg>${t[1]}</a>`;}).join('');
+  if(dueList().length>0 && h!=='#/home' && !h.startsWith('#/c/')){
+    const hm=document.querySelector('nav.tabs a[href="#/home"]');
+    if(hm && !hm.querySelector('.bdg')){ const b=document.createElement('i'); b.className='bdg'; hm.appendChild(b); }
+  }
+}
+async function router(){
+  nav();
+  const h=location.hash||'#/home';
+  /* v42：#app 本身即 .wrap，必须保留；课文页再加 v42-lesson 挂稿作用域，其余页保持主 App 现状 */
+  $('#app').className = h.startsWith('#/lesson/') ? 'wrap v42-lesson' : 'wrap';
+  if(LAST_HASH&&LAST_HASH.startsWith('#/player')&&!h.startsWith('#/player')) plrSave();
+  if(h.startsWith('#/hard')||h.startsWith('#/cards')) scopeOnEnter();
+  if(h.startsWith('#/lesson/')){
+    const Q=hashQs();
+    const cid=Q.c||curCourse();
+    setTimeout(()=>{ const no=+h.match(/#\/lesson\/(\d+)/)[1];
+      if(!window.caches || !navigator.onLine) return;
+      const c=catCourse(cid)||{audioPat:'audio/L{NN}.mp3',pad:2};
+      const src=(c.audioPat||'audio/L{NN}.mp3').replace('{NN}',String(no).padStart(c.pad||2,'0'));
+      caches.open(CACHE_CONTENT).then(cc=>cc.match(src).then(m=>{
+        if(m) return;                       // 已缓存，跳过
+        return cc.add(src);                 // 预取整课：fetch+落缓存
+      })).catch(()=>{});
+    }, 2500); // 开课 2.5s 后空闲预取整课音频，逐句播放本地命中
+
+    CUR.mode=Q.m==='rev'?'rev':'learn';
+    if(Q.c) CUR.course=Q.c;
+    CUR.revDoneShown=null;                      /* 每次进入课程页都从入口/当前段重来，不残留屏 8 */
+    if(CUR.mode==='rev') CUR.rstep=null;
+    const no=+h.match(/#\/lesson\/(\d+)/)[1];
+    if(CUR.no!==no||!CUR.data){
+      CUR.no=no;
+      CUR.blind=null; CUR.blindStarted=false;   /* 换课重置盲听三分支状态 */
+      $('#app').innerHTML='<h1>L'+no+'</h1><div class="sec"><div class="skel" style="width:70%"></div><div class="skel"></div><div class="skel"></div><div class="skel" style="width:85%"></div><div class="skel"></div><div class="skel" style="width:60%"></div></div>';
+      CUR.data=await loadLesson(no,cid);
+    }
+    renderLesson();
+  }else if(h.startsWith('#/hard')) renderHard();
+  else if(h.startsWith('#/cards')) renderCards();
+  else if(h.startsWith('#/player')) renderPlayer();
+  else if(h.startsWith('#/listen')) renderListen();
+  else if(h.startsWith('#/stats')) renderMe();      /* 旧地址兼容：#/stats 并入「我的」 */
+  else if(h.startsWith('#/me')) renderMe();
+  else if(h.startsWith('#/store')) renderStore();
+  else if(h.startsWith('#/c/')){
+    /* 通用课程内页：第二门课 ready 后这里直接生效，无需再改路由 */
+    const cid=decodeURIComponent(h.slice(4).split('?')[0])||DEF_COURSE;
+    const c=catCourse(cid);
+    CUR.course=(c&&c.ready)?cid:DEF_COURSE;
+    CUR.cellFilter='all'; CUR.cellQ='';              /* 每次进教材页回到「全部」，筛选/搜索不跨页残留 */
+    if(c&&c.ready) renderHome(); else renderCourseSoon(cid);
+  }
+  else renderCourses();
+  LAST_HASH=h;                                     /* 记住来源页：难句/卡片据此决定默认课程范围 */
+}
+window.addEventListener('hashchange',router);
+/* 方向变化要重算跟读行窗口（竖屏 7 行 / 横屏 5 行），否则横屏仍按 7 行渲染会裁首行 */
+window.addEventListener('resize',function(){
+  if(!CUR.data||!location.hash.startsWith('#/lesson/')) return;
+  clearTimeout(window.__v42rz);
+  window.__v42rz=setTimeout(function(){ if(CUR.data) renderStage(); },180);
+});
+/* 返回键保护：back 永远回到首页（防学习误退）；退出用系统手势/后台划掉 */
+(function(){
+  function arm(){ history.pushState({l2g:1}, ''); }   /* 不带 URL：保留当前地址 */
+  window.addEventListener('popstate', function(ev){
+    /* 仅当落点是「首页陷阱层」时重新布防；fragment 导航的 popstate(state=null) 不干预 */
+    if((location.hash||'#/home')==='#/home' && ev.state && ev.state.l2g) arm();
+  });
+  window.addEventListener('hashchange', function(){
+    if((location.hash||'#/home')==='#/home') arm();
+  });
+  if((location.hash||'#/home')==='#/home') arm();
+})();
+
+/* ================= 首页 ================= */
+/* 轻提示：添加课程 / 下载完成等瞬时反馈（不挡操作） */
+let toastT=null;
+function toast(msg){
+  let el=document.getElementById('el2toast');
+  if(!el){ el=document.createElement('div'); el.id='el2toast'; document.body.appendChild(el); }
+  el.textContent=msg; el.classList.add('on');
+  clearTimeout(toastT); toastT=setTimeout(()=>el.classList.remove('on'),2600);
+}
+function renderCourses(){
+  const due=dueList();
+  const my=myCourses();
+  /* 首页「今日任务」优先显示最早到期那门课的继续目标；
+     无到期时推「最近在学」的那门课（按最近学习时间排，而非添加顺序） */
+  const recent=[...my].sort((a,b)=>lastAt(b)-lastAt(a));
+  const firstCid=(due[0]&&due[0].cid)||recent[0]||my[0]||DEF_COURSE;
+  const firstStat=progStat(firstCid);
+  const contNo=firstStat.cont||firstStat.last||1;
+  const IC_CHEV='<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>';
+  const IC_ARROW='<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 5.5l6.5 6.5-6.5 6.5"/></svg>';
+  let h=`<div class="topbar"><h1>我的课程</h1><button class="hbtn" data-go="#/store">＋ 选择课程</button></div>
+  <div class="sec"><h2>今日任务</h2>`;
+  if(due.length){
+    h+=due.map(dd=>`<div class="item"><div class="tt"><div class="en">${esc((catCourse(dd.cid)||{}).name||dd.cid)} · L${dd.no} · 第 ${dd.round} 轮</div>
+      <div class="meta">${dd.overdueDays>0?`<span class="late">已逾期 ${dd.overdueDays} 天</span>`:'今日到期'}</div></div>
+      <button class="btn sm" data-go="${lessonHref(dd.no,dd.cid,'rev')}">开始</button></div>`).join('');
+  }else{
+    h+=`<div class="item"><div class="tt"><div class="en">${esc((catCourse(firstCid)||{}).name||firstCid)} · 继续精听 L${contNo}</div>
+      <div class="meta">今天没有到期复习</div></div>
+      <button class="btn sm" data-go="${lessonHref(contNo,firstCid)}" aria-label="继续">${IC_ARROW}</button></div>`;
+  }
+  h+=`</div>
+  <div class="sec"><h2>我的课程</h2>`;
+  if(!my.length){
+    h+=`<div class="empty">还没有课程。点右上角「＋ 选择课程」添加一门。</div>`;
+  }else{
+    h+=my.map(id=>{
+      const c=catCourse(id); if(!c) return '';
+      const s=progStat(c.id);
+      const meta=c.ready?`已学 ${s.learned}/${c.lessons}`:'教材数据准备中 · 敬请期待';
+      return `<div class="item" data-act="openc" data-c="${c.id}" style="cursor:pointer">
+        <img class="bk2" src="${c.cover}" alt="${esc(c.name)}"${c.ready?'':' style="opacity:.7"'}>
+        <div class="tt"><div class="en oneline">${esc(c.name)}</div><div class="meta">${meta}</div></div>
+        <button class="btn sm${c.ready?'':' g'}"${c.ready?' aria-label="进入"':''}>${c.ready?IC_CHEV:'筹备中'}</button></div>`;
+    }).join('');
+  }
+  h+=`</div>
+  <div class="cap" id="stgLine">储存信息读取中…</div>`;
+  $('#app').innerHTML=h;
+  fillStorage();
+}
+/* 储存条：离线占用（已下载课程体积和）+ 设备配额 */
+function fillStorage(){
+  const el=document.getElementById('stgLine'); if(!el) return;
+  let used=0, n=0;
+  myCourses().forEach(id=>{ const st=dlGet(id); if(st&&st.state==='done'){ const c=catCourse(id); used+=(c?c.sizeMB:0); n++; } });
+  const dot=`<b class="${n?'':'no'}"></b>`;
+  if(!navigator.storage||!navigator.storage.estimate){ el.innerHTML=dot+(n?`离线 ${n} 门 · 约 ${used}MB`:'暂无离线课程'); return; }
+  navigator.storage.estimate().then(ev=>{
+    const free=Math.round(((ev.quota||0)-(ev.usage||0))/1048576);
+    el.innerHTML=dot+(n?`离线 ${n} 门 · 已用 ${used}MB`:'暂无离线课程')+(free>0?` · 设备可用 ${free>=1024?(free/1024).toFixed(1)+'GB':free+'MB'}`:'');
+  }).catch(()=>{ el.innerHTML=dot+(n?`离线 ${n} 门 · 已用 ${used}MB`:'暂无离线课程'); });
+}
+/* ================= 课程库（商店） ================= */
+/* 封面即状态（v4.2 屏 9）：soon 筹备中 / dim 待下载 / prog 下载中 / lit 已下载 / fail 失败（点封面重试） */
+function coverState(c){
+  const st=dlGet(c.id), pct=dlPct(c.id);
+  if(!c.ready) return 'soon';
+  if(st&&st.state==='done') return 'lit';
+  if(st&&st.state==='fail') return 'fail';
+  if(st&&(st.state==='run'||(st.state==='pause'&&pct>0))) return 'prog';
+  return 'dim';
+}
+/* 极简卡片：彩色封面（自带状态角标）+ 名称；整卡点击（stcard），长按移除 */
+function renderStoreCard(c){
+  const clickable=c.ready?` data-act="stcard" data-c="${c.id}" style="cursor:pointer"`:'';
+  const stt=coverState(c), pct=dlPct(c.id);
+  const IC_DL='<svg viewBox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5M4 20h16"/></svg>';
+  const IC_OK='<svg viewBox="0 0 24 24"><path d="M4 12l5 5L20 6"/></svg>';
+  let ring='',badge='';
+  if(stt==='prog'){
+    const C=2*Math.PI*26, off=(C*(1-pct/100)).toFixed(1);
+    ring=`<svg class="pring" viewBox="0 0 64 64"><circle cx="32" cy="32" r="26" fill="none" stroke="rgba(255,255,255,.65)" stroke-width="6"/><circle class="arc" cx="32" cy="32" r="26" fill="none" stroke="#0B8A5F" stroke-width="6" stroke-linecap="round" stroke-dasharray="${C.toFixed(1)}" stroke-dashoffset="${off}" transform="rotate(-90 32 32)"/></svg><b class="ppct">${pct}%</b>`;
+  }else if(stt==='fail'){
+    ring=`<svg class="pring" viewBox="0 0 64 64"><circle cx="32" cy="32" r="26" fill="none" stroke="rgba(255,255,255,.65)" stroke-width="6"/><circle cx="32" cy="32" r="26" fill="none" stroke="#B04A43" stroke-width="6" stroke-linecap="round"/></svg><b class="ppct rd">!</b>`;
+  }else if(stt==='lit'){
+    badge=`<span class="dlbadge ok">${IC_OK}</span>`;
+  }else if(stt==='dim'){
+    badge=`<span class="dlbadge">${IC_DL}</span>`;
+  }
+  return `<div class="coCard${c.ready?'':' off'}" id="sc-${c.id}"${clickable}>
+    <span class="cover ${stt}"${stt==='fail'?' title="下载失败 · 点封面重试"':''}><img class="bkc" src="${c.cover}" alt="${esc(c.name)}" onerror="this.style.display='none'">${ring}${badge}</span>
+    <div class="coName">${esc(c.name)}</div></div>`;
+}
+/* 长按 600ms 移除课程（原 rmc 逻辑）；随后那次 click 会被吞掉 */
+(function(){
+  let t=null, fired=null, sx=0, sy=0;
+  document.addEventListener('pointerdown',e=>{
+    const el=e.target.closest('.coCard[data-c]'); if(!el) return;
+    sx=e.clientX; sy=e.clientY; fired=null;
+    t=setTimeout(()=>{ t=null; fired=el; rmCourse(el.dataset.c); },600);
+  });
+  ['pointerup','pointercancel'].forEach(ev=>document.addEventListener(ev,()=>{ if(t){ clearTimeout(t); t=null; } }));
+  document.addEventListener('pointermove',e=>{
+    if(t&&(Math.abs(e.clientX-sx)>10||Math.abs(e.clientY-sy)>10)){ clearTimeout(t); t=null; }
+  });
+  document.addEventListener('contextmenu',e=>{ if(e.target.closest('.coCard[data-c]')) e.preventDefault(); });
+  document.addEventListener('click',e=>{
+    if(fired){ e.stopPropagation(); e.preventDefault(); fired=null; }
+  },true);
+})();
+function renderStore(){
+  const cs=catList();
+  const codes=(CATALOG&&CATALOG.codes)||[];
+  const cnt={lit:0,prog:0,fail:0,ready:0,soon:0}; let mb=0;
+  cs.forEach(c=>{ const s=coverState(c); cnt[s]=(cnt[s]||0)+1;
+    if(c.ready) cnt.ready++;
+    if(s==='lit') mb+=(c.sizeMB||0); });
+  const todo=Math.max(0,cnt.ready-cnt.lit-cnt.prog-cnt.fail);   /* 待下载＝可下载但还没下 */
+  let h=`<div class="topbar">
+    <div class="ttitle">课程库</div>
+    <button class="hbtn" id="storePickBtn" style="height:38px;padding:0 12px;font-size:13px">＋ 选择课程</button>
+  </div>
+  <div class="tip" style="margin-bottom:12px">点封面：添加并自动下载 · 下载中再点暂停 · 长按移除</div>
+  <div class="coGrid">${cs.map(renderStoreCard).join('')}</div>
+  <div class="stfoot"><span>已下载 ${cnt.lit} 门 · 下载中 ${cnt.prog} 门 · 待下载 ${todo} 门${cnt.soon?` · 筹备中 ${cnt.soon} 门`:''}</span><span>${mb>0?'约 '+mb+'MB':'未占用空间'}</span></div>`;
+  if(codes.length){
+    h+=`<div class="sec"><h2>课程码</h2>
+      <div class="codeRow"><input id="codeIn" placeholder="输入老师给的课程码" autocomplete="off" autocapitalize="characters">
+        <button class="btn sm" data-act="codego" style="min-width:96px">添加</button></div>
+      <div class="tip" style="margin:8px 0 0">输入课程码直接加入对应课程并下载。</div></div>`;
+  }
+  h+=`<div class="foot">课程内容与音频会存到本机，断网也能学。</div>`;
+  $('#app').innerHTML=h;
+}
+function renderCourseSoon(cid){
+  const c=catCourse(cid||'nce1')||{id:'nce1',name:'新概念英语 1',cover:'covers/nce1_s.jpg',lessons:144};
+  $('#app').innerHTML=`<div class="topbar">
+  <div class="ttitle">${esc(c.name)}</div><a class="tbBack" href="#/home">‹ 返回</a></div>
+  <div class="sec"><div class="item"><img class="bk2" src="${c.cover}" alt="${esc(c.name)}" style="width:66px;height:88px;border-radius:12px">
+    <div class="tt"><div class="en">教材数据准备中</div><div class="meta">${c.lessons||''} 课 · 音频对齐与课件制作进行中，敬请期待</div></div></div></div>`;
+}
+/* 教材页 = 一本书的课表（2026-11-21 IA 定案）：
+   今日任务归「我的课程」tab；本页只留跨课表的接续入口与待复习筛选，新手指引改浮层不占正文 */
+const CELL_FILTERS=[['all','全部'],['due','待复习'],['new','未学'],['doing','学习中'],['done','通关']];
+function introMarkup(){
+  return `<div class="introMask" id="introMask" hidden><div class="introSheet">
+    <div class="rev-ttl" style="text-align:center">怎么用？三步就上手</div>
+    <div class="item"><div class="tt"><div class="en">① 盲听整课</div><div class="meta">先读题预测，不看字幕完整听一遍，听大意</div></div></div>
+    <div class="item"><div class="tt"><div class="en">② 精听 → 跟读</div><div class="meta">点 ▶ 逐句抠懂每句，难句点 ★ 收藏；再逐句跟读</div></div></div>
+    <div class="item"><div class="tt"><div class="en">③ 读完 → 等 7 轮复习</div><div class="meta">跟读完成后系统自动排 7 轮复习提醒（红点提示）</div></div></div>
+    <button class="btn" id="introGo" style="width:100%;margin-top:8px">我知道了，开始学习</button>
+  </div></div>`;
+}
+function introShow(){ const m=document.getElementById('introMask'); if(m) m.hidden=false; }
+function introHide(persist){
+  const m=document.getElementById('introMask'); if(m) m.hidden=true;
+  if(persist){ try{ localStorage.setItem(LS+'intro','1'); }catch(e){} }
+}
+function renderHome(){
+  const cid=curCourse();
+  const c=catCourse(cid)||{lessons:96,name:'新概念英语 2',tag:'NCE2 Loop',cover:'covers/nce2_s.jpg'};
+  const total=c.lessons||96;
+  const due=dueList(cid);
+  const s=progStat(cid);
+  const learned=s.learned, done=s.done;
+  const nextNo=(s.cont||1)<=total?(s.cont||1):1;
+  const flt=CUR.cellFilter||'all';
+  const counts={all:total,due:due.length,new:total-learned,doing:learned-done,done:done};
+  const chips=CELL_FILTERS.map(([k,lab])=>{
+    const cls='fchip'+(k===flt?' on':'')+(k==='due'&&due.length?' due':'');
+    return `<span class="${cls}" data-filter="${k}">${lab} ${counts[k]}</span>`;
+  }).join('');
+  let h=`<div class="topbar">
+    <h1 style="flex:1;min-width:0;display:flex;align-items:center;gap:8px;font-size:19px;overflow:hidden"><img src="${c.cover}" alt="" style="width:24px;height:32px;border-radius:6px;object-fit:cover;border:0.5px solid var(--line);background:#F1F3F5;flex:0 0 24px"><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(c.name)}</span> <span style="font-size:12px;color:var(--sub);font-weight:400;flex:0 0 auto">${esc(c.tag||'')}</span></h1>
+    <span class="tipQ" id="homeIntroBtn" title="使用说明">?</span>
+    <a class="tbBack" href="#/home">‹ 返回</a></div>
+  <div class="sec" style="padding:10px 13px;margin-top:8px">
+    <div class="item" style="border:0;padding:0">
+      <div class="tt"><div class="en" style="font-size:15px">接着学 L${nextNo} · ${esc(TITLES[nextNo-1]||'')}</div>
+        <div class="meta">已学 ${learned}/${total} · 通关 ${done}/${total}</div></div>
+      <button class="btn sm" data-go="${lessonHref(nextNo,cid)}">继续</button>
+    </div>
+  </div>
+  <div class="hchips cfilter">${chips}</div>
+  <input id="cellQ" placeholder="搜索课号或标题（如 12 / dolphin）" autocomplete="off" value="${esc(CUR.cellQ||'')}" style="width:calc(100% - 28px);margin:6px 14px 10px;height:46px;border:1.5px solid var(--line);border-radius:12px;padding:0 14px;font-size:16px;outline:none;background:#FBFCFD">
+  <div class="grid">${cells()}</div>
+  <div class="foot">上滑看全部 ${total} 课 · 红点＝今日到期</div>
+  ${introMarkup()}`;
+  $('#app').innerHTML=h;
+  applyCellQuery();
+  let seen=false; try{ seen=!!localStorage.getItem(LS+'intro'); }catch(e){}
+  if(!seen) introShow();
+}
+function cells(){
+  const cid=curCourse();
+  const c=catCourse(cid)||{lessons:96};
+  const total=c.lessons||96;
+  const dueSet=new Set(dueList(cid).map(d=>d.no));
+  const o=progOf(cid), flt=CUR.cellFilter||'all';
+  const nextNo=(progStat(cid).cont||1);
+  let h='';
+  for(let n=1;n<=total;n++){
+    const p=o[n], learned=!!(p&&p.firstLearnAt), done=!!(p&&p.reviews>=OFFSETS.length);
+    if(flt==='due'&&!dueSet.has(n)) continue;
+    if(flt==='new'&&learned) continue;
+    if(flt==='doing'&&(!learned||done)) continue;
+    if(flt==='done'&&!done) continue;
+    const cls=p?(done?'done':learned?'doing':''):'';
+    const due=dueSet.has(n);
+    /* 超过 3 天宽限仍在排队 → 标「未通关」，不静默清零轮次 */
+    const nd=(p&&p.firstLearnAt)?nextDue(p):0;
+    const over=!!nd&&(Date.now()-nd>REV_GRACE_MS);
+    const label=(p&&p.firstLearnAt)?(done?'通关':(over?'未通关':'第'+(p.reviews+1)+'轮')):'未学';
+    const tipTxt=(p&&p.firstLearnAt)?`第 ${(p.reviews||0)+1} 轮${over?'（已超出 3 天宽限）':''}`:'';
+    h+=`<div class="cell ${cls} ${due?'due':''}${over?' miss':''}${n===nextNo?' next':''}" title="${esc(tipTxt)}" data-go="${lessonHref(n,cid)}" data-t="${(TITLES[n-1]||'').toLowerCase()}"><b>L${n}</b><span>${label}</span></div>`;
+  }
+  return h;
+}
+function applyCellQuery(){
+  const inp=document.getElementById('cellQ'); if(!inp) return;
+  const q=inp.value.trim().toLowerCase();
+  document.querySelectorAll('#app .cell').forEach(c=>{
+    const t=(c.getAttribute('data-t')||'')+' '+c.textContent.toLowerCase();
+    c.style.display=(!q||t.includes(q))?'':'none';
+  });
+}
+document.addEventListener('click',e=>{
+  const el=e.target.closest('[data-go]');
+  if(el){ location.hash=el.getAttribute('data-go'); }
+});
+document.addEventListener('click',e=>{
+  if(e.target.closest('#homeIntroBtn')){ introShow(); return; }
+  if(e.target.id==='introGo'){ introHide(true); return; }
+  const f=e.target.closest('[data-filter]');
+  if(f){ CUR.cellFilter=f.dataset.filter; renderHome(); return; }
+});
+document.addEventListener('click',e=>{
+  if(!e.target.closest('#storePickBtn')) return;
+  const inp=document.getElementById('codeIn');
+  if(inp){ inp.scrollIntoView({behavior:'smooth',block:'center'}); inp.focus(); }
+  else toast('课程码功能未启用');
+});
+document.addEventListener('input',e=>{
+  if(e.target.id!=='cellQ') return;
+  CUR.cellQ=e.target.value.trim();
+  applyCellQuery();
+});
+
+/* ================= 课程页（精听/跟读/盲听/复述 + 复习模式） ================= */
+function renderLesson(){
+  const p=prog(CUR.no), d=CUR.data;
+  const rev=CUR.mode==='rev';
+  if(rev){
+    /* 屏 7/8 尚未按稿重画：摘掉稿作用域类，按「保留现状」走主 App 样式 */
+    if(CUR.revDoneShown){ $('#app').className='wrap'; return renderRevDone(); }
+    if(CUR.rstep==null){ $('#app').className='wrap'; return renderRevEntry(p,d); }
+  }
+  const app=$('#app'); app.className='wrap v42-lesson';
+  const cur=rev?CUR.rstep:(p.stage??0);
+  const body=Math.max(1,d.sentences.length-1);     /* 正文句数＝sentences[1..]，题干句不计 */
+  const doneCard=!rev&&cur>=STAGES.length;      /* 跟读完 → 学习完成卡（不再是第四段） */
+  /* .khead 左文案随当前段变化（照稿逐屏） */
+  let head;
+  if(doneCard) head='本课完成';
+  else if(!rev&&cur===0) head=`L${d.no} · ${esc(d.titleZh)}`;
+  else if(cur===(rev?0:1)) head=`精听 · 第 ${CUR.intSi||1} / ${body} 句`;
+  else head='跟读 · 全篇';
+  app.innerHTML=`<div class="khead"><span>${head}</span><a href="#/c/${curCourse()}">‹ 退出</a></div>
+  ${flowNav(rev,cur,doneCard)}
+  <div id="stage"></div>`;
+  renderStage();
+}
+/* 通用行窗口：稿 §3「N=min(7, 奇数(floor(可用高/行高)))」，当前项居中，两端补足
+   入参 cur 为 0-based，返回 {from,to} 闭区间（0-based） */
+function rowWin(cur,total,n){
+  n=Math.min(n,total);
+  const half=(n-1)/2;
+  let from=Math.max(0,Math.round(cur-half)), to=from+n-1;
+  if(to>total-1){ to=total-1; from=Math.max(0,total-n); }
+  if(from<0){ from=0; to=Math.min(total-1,n-1); }
+  return {from:from,to:to};
+}
+/* 三段流程条：只读指示。首学按 stage 推进；复习从精听起，盲听恒显示已完成（7 轮不重跑） */
+function flowNav(rev,cur,done){
+  const names=STAGES;
+  const base=rev?cur+1:cur;                        /* 复习第 0 段＝精听，对应段号 1 */
+  let h='';
+  names.forEach((nm,n)=>{
+    let cls='',mark=String(n+1);
+    if(done){ cls='done'; mark='✓'; }
+    else if(rev&&n===0){ cls='done'; mark='✓'; }
+    else if(n<base){ cls='done'; mark='✓'; }
+    else if(n===base){ cls='on'; }
+    h+=(n?'<span class="fnar">·</span>':'')+`<span class="fn ${cls}"><i class="fni">${mark}</i>${nm}</span>`;
+  });
+  return `<div class="flownav">${h}</div>`;
+}
+
+/* —— 屏 7：到期入口（盲听只在首学做一次，这里显示为已完成） —— */
+function renderRevEntry(p,d){
+  const round=(p.reviews||0)+1;
+  const nd=nextDue(p);
+  const late=!!nd&&(Date.now()-nd>REV_GRACE_MS);
+  $('#app').innerHTML=`<div class="topbar">
+    <h1 style="flex:1;min-width:0;font-size:19px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">L${d.no} · ${esc(d.title)}</h1>
+    <a class="tbBack" href="#/c/${curCourse()}">‹ 退出</a></div>
+  <div class="rev-entry">
+    <div class="rev-ttl">第 ${round} 轮 · 该复习了</div>
+    <div class="rev-card">
+      <div class="rev-lab">本轮 ${REV_STEPS.length} 段</div>
+      <div class="rev-pills">${REV_STEPS.map(s=>`<span class="pill">${s}</span>`).join('')}</div>
+      <div class="rev-blind"><span class="pill mute">盲听 ✓ 已完成</span></div>
+    </div>
+    ${late?`<div class="rev-note" style="color:var(--bad)">已超出 3 天宽限，本轮将记为补做</div>`:''}
+    <div class="rev-acts">
+      <button class="fbtn" data-act="revbegin">开始本轮</button>
+      <button class="fbtn ghost sm" data-act="revlater">晚点再做（3 天内补做不算漏）</button>
+    </div>
+  </div>`;
+}
+/* —— 屏 8：完成本轮（7 轮时间轴 + 本轮做了什么） —— */
+function renderRevDone(){
+  const p=prog(CUR.no), d=CUR.data, V=CUR.revDoneShown;
+  const reviews=p.reviews||0, last=OFFSETS.length;
+  /* 时间轴只画轮次位图：首学 + 第 1..7 轮；已过轮次打勾，本轮为当前位，之后待做 */
+  const dots=[`<span class="dot done sm">✓</span>`];
+  for(let i=1;i<=last;i++){
+    if(i>1) dots.push('<span class="ln"></span>');
+    const cls=i<reviews?'done':(i===reviews?'now':'');
+    dots.push(`<span class="dot ${cls}">${i<reviews?'✓':i}</span>`);
+  }
+  const pills=REV_STEPS.map((s,i)=>`<span class="pill${V.s[i]?'':' pc'}">${s} ${V.s[i]?'✓':'—'}</span>`).join('');
+  $('#app').innerHTML=`<div class="topbar">
+    <h1 style="flex:1;min-width:0;font-size:19px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">第 ${V.round} 轮完成</h1>
+    <a class="tbBack" href="#/c/${curCourse()}">‹ 退出</a></div>
+  <div class="rev-done-wrap">
+    <div class="rev-ttl" style="text-align:center">本轮完成</div>
+    <div class="rnd">${dots.join('')}</div>
+    <div class="rndlab"><span>首学</span><span>第 ${V.round} 轮</span><span>通关</span></div>
+    <div class="rev-card" style="margin:22px 0 0">
+      <div class="rev-lab">本轮做了什么</div>
+      <div class="rev-pills">${pills}</div>
+    </div>
+    <div class="rev-note" style="text-align:center">${V.round>=last?'7 轮复习已全部完成，本课通关':`下次复习：${fmtDate(isoOf(nextDue(p)))}`}${p.revMiss?` · 未通关 ${p.revMiss} 轮`:''}</div>
+    ${V.late?`<div class="rev-note" style="text-align:center;color:var(--bad)">已超出 3 天宽限，本轮记为补做</div>`:''}
+    <div class="rev-acts">
+      <button class="fbtn" data-act="revclose">回到课程</button>
+    </div>
+  </div>`;
+}
+function renderStage(){
+  const p=prog(CUR.no), d=CUR.data, rev=CUR.mode==='rev';
+  const el=$('#stage');
+  const step=rev?CUR.rstep:p.stage;
+  if(rev){
+    /* 复习两段：精听 → 跟读（无盲听、无难句补练） */
+    el.innerHTML=[stageIntensive,stageShadow][step]();
+  }else if(step>=STAGES.length){
+    el.innerHTML=studyDoneCard();                /* 学习完成卡：三段走完的终点 */
+    return;
+  }else{
+    el.innerHTML=[stageBlind,stageIntensive,stageShadow][step]();
+  }
+  /* 盲听首学：渲染后自动启动无字播放（同一 phase 只启动一次） */
+  if(!rev && step===0 && CUR.blind && CUR.blind.phase==='playing' && !CUR.blindStarted){
+    CUR.blindStarted=true; blindStart();
+  }
+  /* 精听：绑定卡片左右手势；复习轮记录已走过的句卡（精听段的有效提取判据） */
+  if((!rev&&step===1)||(rev&&step===0)){
+    bindIntGesture();
+    if(rev&&CUR.intSi!=null){
+      const st=revState(p);
+      if(!st.seen[CUR.intSi]){ st.seen[CUR.intSi]=1; saveProgress(); }
+    }
+  }
+  /* 跟读：把焦点行滚到容器中部（录音段已删） */
+  const isShadow=(!rev&&step===2)||(rev&&step===1);
+  if(isShadow){
+    const ks=document.getElementById('kstage'), now=ks&&ks.querySelector('.krow.now');
+    if(ks&&now){ try{ ks.scrollTop=now.offsetTop-ks.clientHeight/2+now.offsetHeight/2; }catch(e){} }
+  }
+  if(CUR.afterRender){ const f=CUR.afterRender; CUR.afterRender=null; f(); }
+}
+/* —— 精听（稿屏 2）：Anki 句卡 + 右上角 ★ 收藏；语言三档上移到播放条上方右对齐 —— */
+function stageIntensive(){
+  const p=prog(CUR.no), d=CUR.data;
+  const body=Math.max(1,d.sentences.length-1);     /* 题干句不入句卡 */
+  if(CUR.intSi==null||CUR.intSi<1||CUR.intSi>body) CUR.intSi=(p.si>=1&&p.si<=body)?p.si:1;
+  if(!CUR.lang) CUR.lang='bi';                     /* 中/英/双语，与跟读共用 */
+  const i=CUR.intSi, s=d.sentences[i]||{};
+  const star=p.hard.includes(i);
+  const seg=(v,label)=>`<span class="${CUR.lang===v?'on':''}" data-act="intlang" data-v="${v}">${label}</span>`;
+  const total=d.duration||76, t0=s.t||0;
+  const pct=Math.min(100,Math.round(t0*100/(total||1)));
+  /* 卡片只负责呈现：播放/切换统一走底部条（稿：删「跟读一次」「下一句」） */
+  return `<div class="body" style="padding:10px 18px 8px">
+    <div class="ankiCard" id="intCard">
+      <div class="ankiTop"><span class="ankiTag">句卡 ${i} / ${body}</span>
+        <span class="ankiFav${star?' on':''}" data-act="star" data-i="${i}">★ ${star?'已收藏':'收藏'}</span></div>
+      <div class="ankiBody">
+        ${CUR.lang==='zh'?'':`<div class="big">${esc(s.en||'')}</div>`}
+        ${CUR.lang==='en'?'':`<div class="zhline">${esc(s.zh||'')}</div>`}
+      </div>
+      <div class="ankiFoot"><span>点播放听本句</span><span>${pad((p.reviews||0)+1)} / ${pad(OFFSETS.length)} 轮</span></div>
+    </div>
+  </div>
+  <div class="v42-play">
+    <div style="display:flex;align-items:center;justify-content:flex-end;padding:4px 0 2px">
+      <div class="seg">${seg('zh','中')}${seg('en','英')}${seg('bi','双语')}</div></div>
+    <div class="v42-time"><span>${fmtSec(t0)}</span><span>${fmtSec(total)}</span></div>
+    <div style="height:18px;display:flex;align-items:center">
+      <div class="v42-track" style="width:100%"><i style="width:${pct}%"></i><b style="left:${pct}%"></b></div></div>
+  </div>
+  <div class="v42-ctl">
+    <button class="v42-mini" data-act="intprev" aria-label="上一句"><svg viewBox="0 0 24 24" fill="var(--focus)"><path d="M6 5h2v14H6zM20 5l-10 7 10 7z"/></svg></button>
+    <button class="v42-main" data-act="intplay" aria-label="播放本句"><svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5l11 7-11 7z"/></svg></button>
+    <button class="v42-mini" data-act="intnext" aria-label="下一句"><svg viewBox="0 0 24 24" fill="var(--focus)"><path d="M16 5h2v14h-2zM4 5l10 7-10 7z"/></svg></button>
+  </div>
+  <div style="padding:0 16px calc(8px + env(safe-area-inset-bottom,0px));background:#fff">
+    <button class="fbtn ghost sm" style="width:100%" data-act="tostage" data-v="${CUR.mode==='rev'?1:2}">进入跟读 →</button>
+  </div>`;
+}
+
+/* 绑定精听卡片左右手势：仅横向位移超阈值生效 */
+function bindIntGesture(){
+  const card=document.getElementById('intCard'); if(!card) return;
+  let x0=null,y0=null;
+  card.addEventListener('touchstart',e=>{ const t=e.changedTouches[0]; x0=t.clientX; y0=t.clientY; },{passive:true});
+  card.addEventListener('touchend',e=>{
+    if(x0==null) return; const t=e.changedTouches[0];
+    const dx=t.clientX-x0, dy=t.clientY-y0;
+    if(Math.abs(dx)>50 && Math.abs(dx)>Math.abs(dy)*1.4){ intStep(dx<0?1:-1); }
+    x0=y0=null;
+  },{passive:true});
+}
+function intStep(dir){
+  const last=Math.max(1,CUR.data.sentences.length-1);
+  const cur=(CUR.intSi>=1&&CUR.intSi<=last)?CUR.intSi:1;
+  const ni=Math.max(1,Math.min(last,cur+dir));
+  if(ni===cur) return;
+  AU.pause(); CUR.intSi=ni;
+  const p=prog(CUR.no); p.si=ni; saveProgress();
+  renderStage();   /* 切卡后暂停并复位，不自动播放、不写 reviews */
+}
+function sentDetail(s){
+  let h='';
+  if(s.chunks) h+='<div style="margin:4px 0">'+s.chunks.map(c=>`<span class="ch">${esc(c.x)}<i>${esc(c.g||c.c)}</i></span>`).join('')+'</div>';
+  if(s.pat) h+=`<div style="margin:4px 0"><span class="tag">${esc(s.pat)}</span>${(s.gp||[]).map(g=>`<span class="tag w">${esc(g)}</span>`).join('')}</div>`;
+  if(s.zh) h+=`<div class="zh">${esc(s.zh)}</div>`;
+  return h;
+}
+/* —— 跟读（稿屏 3 横屏 / 屏 4 竖屏）：同一容器，横屏紧凑播放条 + 竖屏完整三键 —— */
+function stageShadow(){
+  const p=prog(CUR.no), d=CUR.data;
+  const total=Math.max(1,d.sentences.length-1);    /* 与精听同口径：题干句不进正文 */
+  if(CUR.shSi==null||CUR.shSi<1||CUR.shSi>total) CUR.shSi=(p.si>=1&&p.si<=total)?p.si:1;
+  if(!CUR.lang) CUR.lang='bi';
+  if(!CUR.loops||(CUR.loops!==1&&CUR.loops!==3)) CUR.loops=1;   /* 只有 1↔3 两档 */
+  const cur=CUR.shSi;
+  /* 行窗口：稿 §3「N=min(7, 奇数(floor(可用高/行高)))」—— 竖屏 7 行、横屏可用高 230px 故 5 行 */
+  const landNow=window.matchMedia('(orientation:landscape)').matches;
+  const w=rowWin(cur-1,total,landNow?5:7), winFrom=w.from+1, winTo=w.to+1;
+  let rows='';
+  for(let i=winFrom;i<=winTo;i++){
+    const s=d.sentences[i], now=i===cur;
+    const en=(CUR.lang==='zh')?'':`<div class="en">${esc(s.en)}</div>`;
+    const zh=(CUR.lang==='en')?'':`<div class="zh">${esc(s.zh)}</div>`;
+    rows+=`<div class="krow ${now?'now':'dim'}" data-act="shrow" data-i="${i}">${en}${zh}</div>`;
+  }
+  const segLang=['zh','en','bi'].map(v=>
+    `<span class="${CUR.lang===v?'on':''}" data-act="intlang" data-v="${v}">${{zh:'中',en:'英',bi:'双语'}[v]}</span>`).join('');
+  const segLoop=[1,3].map(n=>
+    `<span class="${CUR.loops===n?'on':''}" data-act="loopsel" data-v="${n}">${n} 遍</span>`).join('');
+  const secs=d.duration||76, t0=(d.sentences[cur]||{}).t||0;
+  const pct=Math.min(100,Math.round(t0*100/(secs||1)));
+  const icoPrev=`<svg viewBox="0 0 24 24" fill="var(--focus)"><path d="M6 5h2v14H6zM20 5l-10 7 10 7z"/></svg>`;
+  const icoNext=`<svg viewBox="0 0 24 24" fill="var(--focus)"><path d="M16 5h2v14h-2zM4 5l10 7-10 7z"/></svg>`;
+  const icoPlay=`<svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5l11 7-11 7z"/></svg>`;
+  return `<div class="kstage" id="kstage">${rows}</div>
+  <div class="ktool">
+    <div class="seg">${segLang}</div>
+    <div class="seg">${segLoop}</div>
+    <button class="fbtn sm" data-act="tostage" data-v="${CUR.mode==='rev'?2:3}">读完了 →</button>
+  </div>
+  <div class="v42-play land-only">
+    <div style="display:flex;align-items:center;gap:10px;padding:6px 0 2px">
+      <button data-act="shplay" aria-label="播放/暂停" style="width:28px;height:28px;border-radius:50%;background:var(--focus);display:flex;align-items:center;justify-content:center;border:0;flex:0 0 28px;cursor:pointer"><svg viewBox="0 0 24 24" fill="#fff" style="width:14px;height:14px"><path d="M8 5l11 7-11 7z"/></svg></button>
+      <div class="v42-track" style="flex:1"><i style="width:${pct}%"></i><b style="left:${pct}%"></b></div>
+      <span class="v42-clock">${fmtSec(t0)} / ${fmtSec(secs)}</span>
+    </div>
+  </div>
+  <div class="v42-prog port-only">
+    <div class="v42-time"><span>${fmtSec(t0)}</span><span>${fmtSec(secs)}</span></div>
+    <div style="height:18px;display:flex;align-items:center">
+      <div class="v42-track" style="width:100%"><i style="width:${pct}%"></i><b style="left:${pct}%"></b></div></div>
+  </div>
+  <div class="v42-ctl port-only">
+    <button class="v42-mini" data-act="shprev" aria-label="上一句">${icoPrev}</button>
+    <button class="v42-main" data-act="shplay" aria-label="播放/暂停">${icoPlay}</button>
+    <button class="v42-mini" data-act="shnext" aria-label="下一句">${icoNext}</button>
+  </div>`;
+}
+
+/* 聚焦到跟读某句（滚动容器居中 + 不自动播放） */
+function shFocus(i){
+  const last=Math.max(1,CUR.data.sentences.length-1);
+  const ni=Math.max(1,Math.min(last,i));
+  CUR.shSi=ni; const p=prog(CUR.no); p.si=ni; saveProgress();
+  renderStage();
+}
+/* —— 盲听（稿屏 1）：无字播 1 遍 → 出题；答对直入 / 答错重听 / 再错揭底（11-18 拍板） —— */
+function stageBlind(){
+  const d=CUR.data;
+  if(!CUR.blind) CUR.blind={tries:0,showAnswer:false,phase:'playing',picked:-1};
+  const B=CUR.blind, O=CUR.blindOpt;
+  /* 播的期间只留一个聆听提示：不显示题干、选项、译文、答案（无说明句） */
+  if(B.phase==='playing'){
+    return `<div class="body" style="padding:14px 18px 8px;justify-content:center;gap:12px">
+      <div class="big" style="font-size:22px;margin:0">仔细听</div></div>`;
+  }
+  const opts=(O&&O.options)||[];
+  const optHtml=opts.map((o,i)=>{
+    let cls='opt';
+    if(B.showAnswer&&i===O.correctIdx) cls+=' right';
+    else if(B.picked===i&&i!==O.correctIdx) cls+=' wrong';
+    return `<button class="${cls}" data-act="blindpick" data-i="${i}"><b>${'ABC'[i]}</b><span>${esc(o)}</span></button>`;
+  }).join('');
+  if(B.showAnswer){
+    /* 第 2 次仍错：直接揭底，再点「进入精听」（不计分、不写 reviews） */
+    return `<div class="body" style="padding:14px 18px 8px;justify-content:center;gap:12px">
+      <div class="big" style="font-size:18px;margin:0">${esc((d.question&&d.question.en)||'')}</div>
+      <div style="display:flex;flex-direction:column;gap:9px">${optHtml}</div>
+      <div class="zhline">正确答案：${'ABC'[O.correctIdx]} ${esc(opts[O.correctIdx]||'')}</div>
+      <button class="fbtn" style="margin-top:2px" data-act="blind2jingting">进入精听 →</button></div>`;
+  }
+  return `<div class="body" style="padding:14px 18px 8px;justify-content:center;gap:12px">
+    <div class="big" style="font-size:18px;margin:0">${esc((d.question&&d.question.en)||'')}</div>
+    <div style="display:flex;flex-direction:column;gap:9px">${optHtml}</div>
+    <button class="fbtn ghost sm" style="margin-top:8px;align-self:center" data-act="blindhint">显示中文提示</button>
+    <div class="zhline" id="blindHint" style="display:none">${esc((d.question&&d.question.zh)||'')}</div></div>`;
+}
+
+/* 异步启动盲听播放：加载选项 → 无字播全文 → 播完出题 */
+async function blindStart(){
+  const B=CUR.blind;
+  const opts=await loadBlindOpt();
+  CUR.blindOpt=opts[String(CUR.no)]||null;
+  /* 无选项兜底：仍可听，播完直接进精听提示 */
+  const t0=Date.now();
+  playAll(()=>{
+    STATS.blindSec=(STATS.blindSec||0)+Math.round((Date.now()-t0)/1000); saveStats();
+    setTimeout(()=>{ if(window.el2BlindDone) window.el2BlindDone(); },600);
+  });
+}
+/* 播完出题的唯一入口：正常回调与验收脚本共用（headless 下音频不真播时用） */
+window.el2BlindDone=function(){
+  const B=CUR.blind; if(!B) return;
+  B.phase='question'; CUR.blindStarted=false; renderStage();
+};
+/* —— 学习完成卡（11-23 定案）：三段走完的终点，不再是「第四段」 —— */
+function studyDoneCard(){
+  const p=prog(CUR.no), d=CUR.data;
+  const next=p.reviews>=OFFSETS.length
+    ? '7 轮复习已全部完成，本课通关'
+    : `首轮复习：约 6 小时后（${fmtDate(isoOf(nextDue(p)))}）`;
+  return `<div class="body" style="padding:14px 18px calc(10px + env(safe-area-inset-bottom,0px))">
+    <div class="card" style="margin-top:14px">
+      <div class="title" style="margin:0">学习完成</div>
+      <div class="subtle" style="margin-top:6px">第 ${d.no} 课 · ${esc(d.title)}</div>
+      <div style="display:flex;justify-content:space-between;margin-top:16px;font-size:13px;color:var(--sub)"><span>已完成</span><b style="color:var(--ink)">盲听 · 精听 · 跟读</b></div>
+      <div style="display:flex;justify-content:space-between;margin-top:8px;font-size:13px;color:var(--sub)"><span>复习安排</span><b style="color:var(--ink)">${next}</b></div>
+    </div>
+    <div style="margin-top:auto;display:flex;flex-direction:column;gap:9px">
+      <button class="fbtn" data-act="doneback">完成，返回课程</button>
+    </div>
+  </div>`;
+}
+
+function fmtSec(sec){
+  sec=Math.max(0,Math.round(sec||0));
+  const m=Math.floor(sec/60), s=sec%60;
+  return pad(m)+':'+pad(s);                        /* 统一 mm:ss，照稿 00:48 / 01:16 */
+}
+function finBlock(){
+  const p=prog(CUR.no), rev=CUR.mode==='rev';
+  if(rev){
+    return `<div style="margin-top:10px"><button class="btn ok" data-act="revfin">✓ 完成第 ${p.reviews+1} 轮</button>
+      <div class="tip" style="margin-top:6px">完成后自动排入下一轮：${p.reviews+1<OFFSETS.length?OFFSETS[p.reviews+1]+' 天后':'全部 7 轮已通关'}</div></div>`;
+  }
+  if(p.firstLearnAt){
+    const nd=nextDue(p);
+    return `<div class="detail" style="margin-top:10px">✓ 首次学习已完成（${fmtDate(isoOf(p.firstLearnAt))}）。
+      ${nd?`下一轮：<b>${fmtDate(isoOf(nd))}</b>`:'7 轮复习全部完成，本课通关 🎉'}
+      <div style="margin-top:8px"><a href="#/home" class="btn sm g" style="text-decoration:none">回首页</a></div></div>`;
+  }
+  return `<div style="margin-top:10px"><button class="btn ok" data-act="fin">✓ 完成本课</button></div>`;
+}
+/* —— 难句补练（复习模式第 2 步） —— */
+function stageHardDrill(){
+  const p=prog(CUR.no), d=CUR.data;
+  const hs=p.hard.length?p.hard:Object.keys(p.listened).map(Number).slice(0,3);
+  if(!hs.length) return '<div class="sec"><div class="empty">本课还没有收藏难句，直接进入复述即可</div></div>';
+  return `<div class="sec"><h2>难句补练</h2>${tipQ('drill','只练你收藏的难句：听 → 跟读 → 对比自己的录音，每句至少 2 遍。')}
+    ${hs.map(i=>{const s=d.sentences[i];return `<div class="sent">
+      <button class="play" data-act="plays" data-i="${i}">▶</button>
+      <div class="tt"><div class="en">${esc(s.en)}</div><div class="zh">${esc(s.zh)}</div></div>
+      <button class="star on" data-act="star" data-i="${i}">★</button></div>`;}).join('')}
+    <div style="margin-top:12px"><button class="btn" data-act="tostage" data-v="2">进入复述 →</button></div></div>`;
+}
+
+/* —— 交互（全局委托，事件→改状态→重渲染，渲染函数互不调用） —— */
+const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+const STT_AVAIL=!!SR;
+let REC=null,RECCHUNKS=[];
+function refreshStage(){ renderStage(); }
+
+document.addEventListener('click',async e=>{
+  const el=e.target.closest('[data-act]');
+  if(!el) return;
+  const act=el.dataset.act;
+  /* 听单 / 播放页的动作不依赖已载入的课程：否则在 #/listen、#/player 上会被门禁整片挡掉 */
+  const P4ACTS=['lbook','lview','lopen','packdl','plrtoggle','plrprev','plrnext','plrseek','plrfav',
+                'plrcache','plrloop','plrsub','plrmore','plrpick','plrqplay','plrqclear',
+                'tipq'];   /* tipq：难句/卡片/我的页的说明，CUR.data 为空时也要能点开 */
+  const isP4=P4ACTS.indexOf(act)>=0;
+  if(!CUR.data&&!isP4) return;
+  const i=+el.dataset.i, p=isP4?null:prog(CUR.no), d=isP4?null:CUR.data;
+  const cid=curCourse();
+  const rev=CUR.mode==='rev';   /* P0 修复：rev 从未定义，plays 点击必抛 ReferenceError（自 f52a179 潜伏） */
+  if(act==='plays'){
+    const s=d.sentences[i];
+    if(p.stage===1||el.closest('.shadow')){
+      CUR.loopsLeft=CUR.loopsLeft??CUR.loops;
+      const once=()=>{ CUR.loopsLeft--; const ll=$('#loopLeft'); if(ll) ll.textContent='剩 '+Math.max(CUR.loopsLeft,0)+' 遍';
+        if(CUR.loopsLeft>0){ playSeg(s.t,s.t2,once); } else { CUR.loopsLeft=CUR.loops; } };
+      playSeg(s.t,s.t2,once);
+    }else{
+      playSeg(s.t,s.t2);
+    }
+    const zz=$('#zh'+i); if(zz) zz.style.display='block';
+        if(!rev){ p.si=i; if(CUR.si!=null)CUR.si=i; if(p.stage===2){ p.listened[i]=1; saveProgress(); const bt=el.closest('.sent'); if(bt&&bt.querySelector('.play'))bt.querySelector('.play').style.background='var(--accBtn)'; } else saveProgress(); }
+    else saveProgress();
+  }
+  else if(act==='det'){ const z=$('#zh'+i),dt=$('#det'+i); if(z)z.style.display=z.style.display==='none'?'block':'none'; if(dt)dt.style.display=dt.style.display==='none'?'block':'none'; }
+  else if(act==='star'){
+    const arr=p.hard, ix=arr.indexOf(i);
+    if(ix>=0){arr.splice(ix,1); store.setHard(hardAll().filter(x=>!(x.cid===cid&&x.no===CUR.no&&x.i===i)));}
+    else{arr.push(i); const s=d.sentences[i]; const hard=hardAll(); hard.unshift({cid,no:CUR.no,i,en:s.en,zh:s.zh,pat:s.pat||'',ts:Date.now()}); store.setHard(hard);}
+    saveProgress(); el.classList.toggle('on');
+  }
+  else if(act==='intlang'){ CUR.lang=el.dataset.v; renderStage(); }
+  else if(act==='intprev'){ intStep(-1); }
+  else if(act==='intnext'){ intStep(1); }
+  else if(act==='intplay'){
+    const s=d.sentences[CUR.intSi||0];
+    playSeg(s.t,s.t2,()=>{ p.listened[CUR.intSi]=1; saveProgress(); syncEnqueue('intensive',0,null); });
+  }
+  else if(act==='loop'){ CUR.loops=+el.dataset.v; CUR.loopsLeft=CUR.loops; refreshStage(); }
+  else if(act==='loopsel'){ CUR.loops=+el.dataset.v; renderStage(); }
+  else if(act==='shrow'){ shFocus(+el.dataset.i); }
+  else if(act==='shprev'){ shFocus((CUR.shSi||1)-1); }
+  else if(act==='shnext'){ shFocus((CUR.shSi||1)+1); }
+  else if(act==='shplay'){
+    const s=d.sentences[CUR.shSi||0];
+    CUR.loopsLeft=CUR.loops;
+    const once=()=>{ CUR.loopsLeft--;
+      if(CUR.loopsLeft>0){ playSeg(s.t,s.t2,once); }
+      else{ CUR.loopsLeft=CUR.loops; p.shadow[CUR.shSi]=1; saveProgress(); syncEnqueue('shadow',0,null); }
+    };
+    once();
+  }
+  else if(act==='ps'){ if(CUR.si>0){CUR.si--;CUR.blob=null;CUR.grade='';refreshStage();} }
+  else if(act==='ns'){ if(CUR.si<d.sentences.length-1){CUR.si++;CUR.blob=null;CUR.grade='';refreshStage();} }
+  else if(act==='rate'){ p.shadow[CUR.si]=+el.dataset.v; STATS.shadowN=(STATS.shadowN||0)+1; saveProgress(); saveStats(); syncEnqueue('shadow',0,+el.dataset.v); refreshStage(); }
+  else if(act==='aborig'){ const s=d.sentences[CUR.si??i]; playSeg(s.t,s.t2); }
+  else if(act==='abmine'){ if(CUR.blob){ AU.pause(); AU.src=URL.createObjectURL(CUR.blob); AU.play(); } }
+  else if(act==='rec'){
+    if(REC&&REC.state==='recording'){ REC.stop(); return; }
+    try{
+      const stream=await navigator.mediaDevices.getUserMedia({audio:true});
+      RECCHUNKS=[]; REC=new MediaRecorder(stream);
+      REC.ondataavailable=ev=>RECCHUNKS.push(ev.data);
+      REC.onstop=()=>{
+        stream.getTracks().forEach(t=>t.stop());
+        CUR.blob=new Blob(RECCHUNKS,{type:REC.mimeType||'audio/webm'});
+        const key=el.dataset.retell?`${cid}_${CUR.no}_retell`:`${cid}_${CUR.no}_s${CUR.si}`;
+        recSave(key,CUR.blob);
+        STATS.recN=(STATS.recN||0)+1; saveStats();
+        el.textContent='● 录跟读'; el.classList.remove('recording');
+        const rs=$('#recState'); if(rs)rs.textContent='已录 ✓（重新录会覆盖）';
+        const bm=$('#btnMine'); if(bm)bm.disabled=false;
+      };
+      REC.start(); el.textContent='■ 停止'; el.classList.add('recording');
+    }catch(err){ alert('麦克风不可用：'+err.message); }
+  }
+  else if(act==='stt'){
+    if(!SR) return;
+    const target=d.sentences[CUR.si].en, btn=$('#btnStt');
+    btn.disabled=true; btn.textContent='聆听中…';
+    try{
+      const r=new SR(); r.lang='en-US'; r.interimResults=false; r.maxAlternatives=1;
+      r.onresult=ev=>{ const said=ev.results[0][0].transcript;
+        const norm=s=>s.toLowerCase().replace(/[^a-z' ]/g,'').split(/\s+/).filter(Boolean);
+        const tw=norm(target), sw=new Set(norm(said));
+        const hit=tw.filter(w=>sw.has(w)).length, ratio=hit/tw.length;
+        const grade=ratio>=0.85?'A':ratio>=0.65?'B':'C';
+        CUR.grade=`识别：「${said}」<br>命中 ${hit}/${tw.length} 词（${Math.round(ratio*100)}%）→ 评级 <b>${grade}</b>`;
+        const g=$('#grade'); if(g)g.innerHTML=CUR.grade;
+      };
+      r.onerror=ev=>{ CUR.grade='识别失败（'+ev.error+'）。Chrome 识别需联网；Safari/iOS 暂不支持，请用自评。';
+        const g=$('#grade'); if(g)g.textContent=CUR.grade; };
+      r.onend=()=>{ btn.disabled=false; btn.textContent='识别评分'; };
+      r.start();
+    }catch(err){ btn.disabled=false; btn.textContent='识别评分'; }
+  }
+  else if(act==='tostage'){
+    if(CUR.mode==='rev'){
+      const v=+el.dataset.v, p0=prog(CUR.no), st=revState(p0);
+      /* 精听 → 跟读：必须走过全部句卡，才算本段有效提取 */
+      if(v===1){
+        const total=Math.max(1,CUR.data.sentences.length-1), seen=Object.keys(st.seen||{}).length;
+        if(seen<total){ toast(`还有 ${total-seen} 句没看，滑完再进跟读`); return; }
+        revMark(0);
+      }
+      /* 跟读读完 → 两段齐，直接进入本轮完成卡（录音段已删） */
+      if(v===2){ revMark(1); finishReview(); return; }
+      CUR.rstep=v;
+    }else{
+      p.stage=+el.dataset.v; p.si=CUR.si??p.si;
+      if(+el.dataset.v>=STAGES.length) p.firstLearnAt=p.firstLearnAt||Date.now();  /* 首学锚点：进完成卡即落定 */
+      saveProgress();
+    }
+    CUR.grade=''; CUR.loopsLeft=null; renderLesson();
+  }
+  else if(act==='doneback'){
+    p.firstLearnAt=p.firstLearnAt||Date.now(); p.stage=STAGES.length; saveProgress();
+    location.hash='#/c/'+curCourse();
+  }
+  else if(act==='jump'){
+    /* 四段条只读：设计稿 11-17 定稿，不可点自由切换 */
+    return;
+  }
+  else if(act==='blindpick'){
+    /* 点即判定，无提交按钮；不写对错内容，只记次数 */
+    const B=CUR.blind, O=CUR.blindOpt;
+    if(!O||B.showAnswer) return;
+    B.tries++; B.picked=+el.dataset.i;
+    STATS.blindN=(STATS.blindN||0)+1; saveStats();
+    p.blindDone=true; saveProgress();
+    if(B.picked===O.correctIdx){
+      /* 答对 → 直入精听 */
+      p.stage=1; saveProgress(); CUR.blind=null; CUR.blindStarted=false; renderLesson();
+    }else if(B.tries>=2){
+      /* 第 2 次仍错 → 揭底，等用户点「进入精听」 */
+      B.showAnswer=true; renderStage();
+    }else{
+      /* 答错 → 自动再听 1 遍，回同一题重选（回调走统一入口） */
+      B.picked=-1; B.phase='playing'; CUR.blindStarted=true; renderStage();
+      playAll(()=>{ if(window.el2BlindDone) window.el2BlindDone(); });
+    }
+  }
+  else if(act==='blindhint'){ const h=$('#blindHint'); if(h) h.style.display=h.style.display==='none'?'block':'none'; }
+  else if(act==='blind2jingting'){ p.stage=1; saveProgress(); CUR.blind=null; CUR.blindStarted=false; renderLesson(); }
+  else if(act==='retelldone'){ p.retellDone=el.checked; saveProgress(); syncEnqueue('retell',0,null); }
+  else if(act==='fin'){
+    p.firstLearnAt=Date.now(); p.stage=3; saveProgress(); renderLesson();
+  }
+  else if(act==='revbegin'){ CUR.rstep=0; CUR.revDoneShown=null; renderLesson(); }
+  else if(act==='revlater'){ CUR.rstep=null; CUR.revDoneShown=null; location.hash='#/c/'+curCourse(); }
+  else if(act==='revclose'){ CUR.rstep=null; CUR.revDoneShown=null; location.hash='#/c/'+curCourse(); }
+  else if(act==='revfin'){ finishReview(); }
+  /* —— 听单 / 播放页（P4） —— */
+  else if(act==='lbook'){ LBOOK=el.dataset.c; LVIEW='recent'; renderListen(); }
+  else if(act==='lview'){ LVIEW=el.dataset.v; renderListen(); }
+  else if(act==='lopen'){ location.hash='#/player?c='+el.dataset.c+'&n='+el.dataset.n; }
+  else if(act==='packdl'){ const cc=catCourse(el.dataset.c); if(cc) packDl(cc,el.dataset.lv); }
+  else if(act==='plrtoggle'){ plrToggle(); }
+  else if(act==='plrprev'){ plrStep(-1); }
+  else if(act==='plrnext'){ plrStep(1); }
+  else if(act==='plrseek'){ plrSeek(el,e.clientX); }
+  else if(act==='plrfav'){ favToggle(PLR.cid,PLR.no); renderPlayer(); }
+  else if(act==='plrcache'){ plrCacheAudio(); }
+  else if(act==='plrloop'){ PLR.loop=!PLR.loop; plrSave(); renderPlayer(); }
+  else if(act==='plrsub'){ PLR.sub=!PLR.sub; plrSave(); renderPlayer(); }
+  else if(act==='plrmore'){ plrMore(); }
+  else if(act==='plrpick'){ const k=el.dataset.k; if(PLR.picked[k]) delete PLR.picked[k]; else PLR.picked[k]=1; plrMore(true); }
+  else if(act==='plrqplay'){ plrQueuePlay(); }
+  else if(act==='plrqclear'){ PLR.picked={}; plrMore(true); }
+  else if(act==='playall'){ playAll(); }
+});
+
+/* ================= 难句本 ================= */
+/* 范围提示：只在「跟随某门课」时出现，提醒孩子这是局部视图，可一键回全课程 */
+function hardScopeTip(){
+  if(HARDF==='all') return '';
+  const c=catCourse(HARDF)||{};
+  return `<div class="tip" style="margin:0 0 8px">当前只看 <b style="color:var(--accBtn)">${esc(c.name||HARDF)}</b> 的难句 · 点「全部」可跨课程复习</div>`;
+}
+function renderHard(){
+  const hard=hardList();
+  let h=`<div class="topbar"><h1>难句本 ${tipQ('hard','精听时点 ★ 收藏的句子都汇总在这里，点「重练」回到原课再练一遍。')}</h1></div>
+  <div class="sec">${hardChips()}${hardScopeTip()}`;
+  if(!hard.length) h+= HARDF==='all'
+    ? '<div class="empty">还没有收藏，去精听里点亮星星吧</div>'
+    : '<div class="empty">这门课还没有收藏的难句</div>';
+  h+=hard.map(x=>{
+    const c=catCourse(x.cid||DEF_COURSE)||{};
+    return `<div class="item">
+    <div class="tt"><div class="en">${esc(x.en)}</div>
+      <div class="zh">${esc(x.zh)}${x.pat?` · <span class="tag">${esc(x.pat)}</span>`:''} · <span style="color:var(--accBtn);font-weight:600">${esc(c.short||x.cid||DEF_COURSE)}</span> L${x.no}</div></div>
+    <button class="btn sm g" data-act="goSent" data-no="${x.no}" data-c="${x.cid||DEF_COURSE}" data-i="${x.i}">重练</button>
+    <button class="star on" data-act="unstar" data-c="${x.cid||DEF_COURSE}" data-no="${x.no}" data-i="${x.i}">★</button></div>`;}).join('');
+  h+='</div>';
+  $('#app').innerHTML=h;
+}
+/* ================= 闪卡 ================= */
+function renderCards(){
+  const now=Date.now();
+  const hard=hardList().slice().sort((a,b)=>(a.due||0)-(b.due||0));
+  const dueN=hard.filter(x=>!x.due||x.due<=now).length;
+  let h=`<div class="topbar"><h1>语境闪卡 ${tipQ('cards','看中文回忆英文 → 点卡翻转核对 → 自评。没记住的 12 小时后再出现，记住了 3 天后再见。')}</h1></div>
+  ${hardChips()}${hardScopeTip()}<div class="tip">今日待复习 ${dueN} / ${hard.length} 张。</div>`;
+  if(!hard.length){ h+=`<div class="sec"><div class="empty">${HARDF==='all'?'收藏难句后，这里会自动生成卡片':'这门课还没有收藏的难句'}</div></div>`; $('#app').innerHTML=h; return; }
+  const IC_SPK='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 6a8.5 8.5 0 0 1 0 12"/></svg>';
+  const IC_NO='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M15 9l-6 6M9 9l6 6"/></svg>';
+  const IC_OK='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M8 12.5l2.7 2.7L16 9.5"/></svg>';
+  h+='<div id="deck">'+hard.map((x,ix)=>`
+    <div class="card" data-act="flip" data-ix="${ix}" style="${(x.due&&x.due>now)?'opacity:.55':''}"><div class="in">
+      <div class="f"><div style="font-size:20px;font-weight:700">${esc(x.zh)||'（无译文）'}</div></div>
+      <div class="b"><div class="en" style="font-family:Georgia,'Times New Roman',serif;font-size:18px">${esc(x.en)}</div>
+        <div style="display:flex;gap:16px;justify-content:center;margin-top:14px">
+          <button class="cico" data-act="cardplay" data-no="${x.no}" data-c="${x.cid||DEF_COURSE}" data-i="${x.i}" title="语境重听" aria-label="语境重听">${IC_SPK}</button>
+          <button class="cico no" data-act="cardno" data-c="${x.cid||DEF_COURSE}" data-no="${x.no}" data-i="${x.i}" title="没记住" aria-label="没记住">${IC_NO}</button>
+          <button class="cico ok" data-act="cardok" data-c="${x.cid||DEF_COURSE}" data-no="${x.no}" data-i="${x.i}" title="记住了" aria-label="记住了">${IC_OK}</button></div></div>
+    </div></div>`).join('')+'</div>';
+  $('#app').innerHTML=h;
+}
+/* ================= 听单（泛听）· 屏 10 / 屏 11 =================
+   P4 真实化：课本横滑（ready 门禁）+ 三胶囊三视图 + 正在听卡 + 离线音频包（课本 × 等级）
+   + 全屏播放页（字幕逐句跟随 / 四操作 / 更多＝收藏复选×队列）。
+   包 id = `{cid}:{level}`，只含 mp3；el2_pack 只记进度，图标一律实查 el2-content。 */
+const FAVK='el2_fav', LPK='el2_listen', PACKK='el2_pack';
+let LVIEW='recent', LBOOK='nce2', PACK_DL={};
+
+/* —— 收藏（音频级，按 cid 分组防串课） —— */
+function favAll(){ try{ const a=JSON.parse(localStorage.getItem(FAVK)||'[]'); return Array.isArray(a)?a:[]; }catch(e){ return []; } }
+function favSave(a){ try{ localStorage.setItem(FAVK,JSON.stringify(a)); }catch(e){} }
+function favHas(cid,no){ return favAll().some(x=>x.cid===cid&&+x.no===+no); }
+function favToggle(cid,no){
+  const a=favAll(), i=a.findIndex(x=>x.cid===cid&&+x.no===+no);
+  if(i<0) a.unshift({cid:cid,no:+no,at:Date.now()}); else a.splice(i,1);
+  favSave(a); return i<0;
+}
+/* —— 聆听位置（正在听卡 / 播放页续播） —— */
+function listenGet(){ try{ return JSON.parse(localStorage.getItem(LPK)||'null'); }catch(e){ return null; } }
+function listenSet(v){ try{ if(v) localStorage.setItem(LPK,JSON.stringify(v)); else localStorage.removeItem(LPK); }catch(e){} }
+
+/* —— 离线音频包：id=`{cid}:{level}`，键空间与 el2_dl 不重叠 —— */
+function packMap(){ try{ return JSON.parse(localStorage.getItem(PACKK)||'{}'); }catch(e){ return {}; } }
+function packSet(id,v){ const m=packMap(); if(v===null) delete m[id]; else m[id]=v;
+  try{ localStorage.setItem(PACKK,JSON.stringify(m)); }catch(e){} }
+function packId(cid,level){ return cid+':'+level; }
+async function levelsOf(c){
+  if(!c||!c.levels) return null;
+  if(c.levels.__x) return c.levels.__x;
+  const L=Object.assign({},c.levels);
+  if(L.file){ try{ const r=await fetch(L.file,{cache:'force-cache'}); if(r&&r.ok) L.data=await r.json(); }catch(e){} }
+  L.list=(L.list||[]).map(x=>typeof x==='string'?{level:x,src:L.src||'publisher'}:x);
+  c.levels.__x=L; return L;
+}
+function packNoList(c,L,level){
+  if(L&&L.mode==='perLesson'){
+    const m=(L.data&&L.data.lessons)||{};
+    return Object.keys(m).map(Number).filter(n=>m[String(n)]===level).sort((a,b)=>a-b);
+  }
+  const n=+c.lessons||0, out=[]; for(let i=1;i<=n;i++) out.push(i); return out;
+}
+function lessonAudio(c,no){ return (c.audioPat||'audio/L{NN}.mp3').replace('{NN}',String(no).padStart(c.pad||2,'0')); }
+function lessonTitle(c,no){
+  if(c.id===DEF_COURSE&&TITLES[no-1]) return TITLES[no-1];
+  return 'L'+no;
+}
+/* 包信息（课数/时长/体积）与包内文件；派生：整本已下 → 包一律已下载 */
+async function packInfo(c,level){
+  const L=await levelsOf(c);
+  const nos=packNoList(c,L,level);
+  const pm=(L&&L.data&&L.data.packMeta&&L.data.packMeta[level])||null;
+  return {id:packId(c.id,level),cid:c.id,level:level,src:(L&&L.src)||'publisher',
+    nos:nos, files:nos.map(n=>lessonAudio(c,n)),
+    lessons:pm?pm.lessons:nos.length,
+    durSec:pm?pm.durSec:0, mb:pm?pm.mb:Math.round((c.sizeMB||0)*nos.length/Math.max(1,c.lessons||1)),
+    label:(L&&L.label)||'官方等级'};
+}
+async function packStat(c,level){
+  const P=await packInfo(c,level);
+  const d=dlGet(c.id);
+  if(c.ready&&d&&d.state==='done')
+    return Object.assign(P,{state:'done',pct:100,hit:P.files.length,derived:true});
+  let hit=0;
+  try{ const cc=await caches.open(CACHE_CONTENT);
+    for(const f of P.files){ if(await cc.match(f)) hit++; } }catch(e){}
+  const total=Math.max(1,P.files.length);
+  const rec=packMap()[P.id]||null;
+  if(P.files.length&&hit>=P.files.length) return Object.assign(P,{state:'done',pct:100,hit:hit});
+  if(rec&&rec.state==='run') return Object.assign(P,{state:'run',pct:rec.pct!=null?rec.pct:Math.round(hit*100/total),hit:hit});
+  if(rec&&rec.state==='fail') return Object.assign(P,{state:'fail',pct:Math.round(hit*100/total),hit:hit});
+  return Object.assign(P,{state:'idle',pct:Math.round(hit*100/total),hit:hit});
+}
+/* 单包下载：逐 mp3 落 el2-content，进度写 el2_pack，只就地刷这一行 */
+async function packDl(c,level){
+  const P=await packInfo(c,level);
+  if(PACK_DL[P.id]) return;
+  PACK_DL[P.id]=true;
+  let hit=0;
+  try{
+    const cc=await caches.open(CACHE_CONTENT);
+    packSet(P.id,{done:0,total:P.files.length,state:'run',pct:0});
+    refreshPackRow(P.id);
+    for(const f of P.files){
+      const m=await cc.match(f);
+      if(!m){ const r=await fetch(f); if(!r.ok) throw new Error('HTTP '+r.status); await cc.put(f,r); }
+      hit++;
+      const pct=Math.round(hit*100/Math.max(1,P.files.length));
+      packSet(P.id,{done:hit,total:P.files.length,state:hit>=P.files.length?'done':'run',pct:pct});
+      if(hit%2===0||hit===P.files.length) refreshPackRow(P.id);
+    }
+  }catch(e){
+    packSet(P.id,{done:hit,total:P.files.length,state:'fail',pct:Math.round(hit*100/Math.max(1,P.files.length))});
+    toast('音频包下载失败，点下载键重试');
+  }finally{ delete PACK_DL[P.id]; refreshPackRow(P.id); }
+}
+async function refreshPackRow(id){
+  const el=document.getElementById('pk-'+id.replace(':','_'));
+  if(!el) return;
+  const cid=id.split(':')[0], level=id.split(':')[1];
+  const c=catCourse(cid); if(!c) return;
+  const st=await packStat(c,level);
+  if(el&&el.parentNode) el.outerHTML=packRowHTML(st);
+}
+function fmtDur(sec){
+  sec=Math.round(sec||0);
+  const h=Math.floor(sec/3600), m=Math.floor(sec%3600/60), s=sec%60;
+  return h?`${h}:${pad(m)}:${pad(s)}`:`${m}:${pad(s)}`;
+}
+function packRowHTML(P){
+  const bad=P.src==='publisher'
+    ? `<div class="lbadge"><span>${P.level}</span></div>`
+    : `<div class="lbadge ref"><span>${P.level}</span><small>参考</small></div>`;
+  let right;
+  if(P.state==='done') right=`<span class="ldone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5 5L20 6"/></svg>已下载</span>`;
+  else if(P.state==='run') right=`<span class="lrun"><i><b style="width:${P.pct}%"></b></i>${P.pct}%</span>`;
+  else if(P.state==='fail') right=`<button class="ldl" data-act="packdl" data-c="${P.cid}" data-lv="${P.level}" title="下载失败，点此重试" style="border-color:var(--bad)"><svg viewBox="0 0 24 24" fill="none" stroke="var(--bad)" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v9M8 10l4 4 4-4"/></svg></button>`;
+  else right=`<button class="ldl" data-act="packdl" data-c="${P.cid}" data-lv="${P.level}" aria-label="下载这一包"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7 10l5 5 5-5M4 20h16"/></svg></button>`;
+  const c=catCourse(P.cid)||{name:P.cid};
+  return `<div class="lpack" id="pk-${P.id.replace(':','_')}"><div style="display:flex;align-items:center;gap:11px;padding:11px 13px;width:100%">
+    ${bad}<div style="flex:1;min-width:0">
+      <div style="font-size:13.5px;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(c.name)}</div>
+      <div style="font-size:11px;color:var(--sub);margin-top:1px">${P.lessons} 课 · ${fmtDur(P.durSec)} · ${P.mb} MB</div>
+    </div>${right}</div></div>`;
+}
+/* 全部可听包：只为 ready 且定义了 levels 的课程生成 */
+async function allPacks(){
+  const out=[];
+  for(const c of catList()){
+    if(!c.ready||!c.levels) continue;
+    const L=await levelsOf(c);
+    for(const lv of (L.list||[])) out.push(await packStat(c,lv.level));
+  }
+  return out;
+}
+/* —— 最近在听 / 正在听 —— */
+function recentListened(){
+  const out=[];
+  const cs=myCourses();
+  cs.forEach(cid=>{ const o=(PROG.courses||{})[cid]||{};
+    for(const k in o){ const p=o[k];
+      if(!p||!p.firstLearnAt) continue;
+      out.push({cid:cid,no:+k,at:Math.max(p.firstLearnAt||0,p.lastReviewAt||0)}); } });
+  out.sort((a,b)=>b.at-a.at);
+  return out;
+}
+function nowPlaying(){
+  const l=listenGet();
+  if(l&&l.cid&&l.no) return l;
+  const r=recentListened()[0];
+  if(!r) return null;
+  return {cid:r.cid,no:r.no,pos:0,dur:0,loop:true};
+}
+/* —— 屏 10：听单首页 —— */
+async function renderListen(){
+  const books=catList();
+  if(!books.some(b=>b.id===LBOOK&&b.ready)){
+    const first=books.filter(b=>b.ready)[0];
+    if(first) LBOOK=first.id;
+  }
+  const chips=books.map(b=>{
+    const on=b.id===LBOOK, lock=!b.ready;
+    const cls=lock?'lchip lock':(on?'lchip on':'lchip');
+    const ico=lock?'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>':'';
+    return `<button class="${cls}"${lock?' disabled aria-disabled="true"':` data-act="lbook" data-c="${b.id}"`}>${ico}<span>${esc(b.name)}</span></button>`;
+  }).join('');
+  const favN=favAll().length;
+  const caps=[['recent','最近在听'],['fav','我的收藏'+(favN?' '+favN:'')],['packs','离线音频']]
+    .map(([k,t])=>`<button class="lcap${LVIEW===k?' on':''}" data-act="lview" data-v="${k}">${t}</button>`).join('');
+
+  let body='';
+  if(LVIEW==='recent'){
+    const np=nowPlaying();
+    if(np){
+      const c=catCourse(np.cid)||{};
+      if(!np.dur){ try{ const dd=await loadLesson(np.no,np.cid); np.dur=(dd&&dd.duration)||0; }catch(e){} }
+      const dur=np.dur||0, pos=np.pos||0;
+      const pct=dur?Math.round(pos*100/dur):0;
+      body+=`<div class="lcard" data-act="lopen" data-c="${np.cid}" data-n="${np.no}" style="cursor:pointer">
+        <div style="display:flex;align-items:center;gap:12px">
+          <div class="lplay"><svg viewBox="0 0 24 24" fill="#fff"><rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/></svg></div>
+          <div style="min-width:0;flex:1"><div class="lnow">正在听 · L${np.no}</div><div class="lttl">${esc(lessonTitle(c,np.no))}</div></div>
+          <div class="ltime">${fmtDur(pos)} / ${fmtDur(dur)}</div></div>
+        <div class="lbar"><i style="width:${pct}%"></i><b style="left:${pct}%"></b></div>
+        <div class="lmeta"><span>第 1 遍 · ${np.sub===false?'无字幕':'有字幕'}</span><span>循环 <em>${np.loop===false?'关':'开'}</em></span></div>
+      </div>`;
+    }else{
+      body+=`<div class="lcard"><div class="lempty">还没有听过课文，从下面选一本开始</div></div>`;
+    }
+    const packs=(await allPacks()).slice(0,3);
+    if(packs.length){
+      const totalMB=packs.reduce((a,p)=>a+p.mb,0);
+      body+=`<div class="lpad"><span>离线音频包 · 按课本 × 等级</span><span>共 ${totalMB} MB</span></div>
+      <div class="lpacks">${packs.map(packRowHTML).join('<div class="lsep"></div>')}</div>`;
+    }
+  }else if(LVIEW==='fav'){
+    const favs=favAll();
+    if(!favs.length){
+      body+=`<div class="lcard"><div class="lempty">还没有收藏的课文，播放页点爱心就收进来</div></div>`;
+    }else{
+      body+=`<div class="lpad"><span>我的收藏</span><span>${favs.length} 课</span></div>
+      <div class="lpacks">${favs.map(f=>{
+        const c=catCourse(f.cid)||{};
+        return `<div class="lpack" data-act="lopen" data-c="${f.cid}" data-n="${f.no}" style="cursor:pointer"><div style="display:flex;align-items:center;gap:11px;padding:11px 13px;width:100%">
+          <div class="lbadge"><span>${esc(c.short||c.id||'')}</span></div>
+          <div style="flex:1;min-width:0"><div style="font-size:13.5px;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(lessonTitle(c,f.no))} · L${f.no}</div>
+          <div style="font-size:11px;color:var(--sub);margin-top:1px">${esc(c.name||f.cid)}</div></div>
+          <svg viewBox="0 0 24 24" fill="var(--brand)" style="width:16px;height:16px;flex:0 0 16px"><path d="M12 21s-7-4.6-9.5-8.5C.6 9.5 2.4 6 5.7 6c2 0 3.4 1.1 4.3 2.6h4c.9-1.5 2.3-2.6 4.3-2.6 3.3 0 5.1 3.5 3.2 6.5C19 16.4 12 21 12 21z"/></svg></div></div>`;
+      }).join('<div class="lsep"></div>')}</div>`;
+    }
+  }else{
+    const packs=await allPacks();
+    const done=packs.filter(p=>p.state==='done');
+    const used=done.reduce((a,p)=>a+p.mb,0);
+    let free='';
+    try{ if(navigator.storage&&navigator.storage.estimate){
+      const ev=await navigator.storage.estimate();
+      const f=Math.round(((ev.quota||0)-(ev.usage||0))/1048576);
+      free=f>=1024?(f/1024).toFixed(1)+'GB':f+'MB';
+    } }catch(e){}
+    body+=`<div class="lpad"><span>已用 ${used} MB${free?' · 设备可用 '+free:''}</span><span>${packs.length} 个包</span></div>`;
+    body+=packs.length
+      ? `<div class="lpacks">${packs.map(packRowHTML).join('<div class="lsep"></div>')}</div>`
+      : `<div class="lcard"><div class="lempty">暂无可下载的音频包</div></div>`;
+  }
+  $('#app').innerHTML=`<div class="listen-page">
+    <div class="lhead"><b>听单</b></div>
+    <div class="lbooks">${chips}</div>
+    <div class="lcaps">${caps}</div>
+    ${body}
+  </div>`;
+}
+
+/* —— 屏 11：全屏播放页 —— */
+let PLR={cid:null,no:null,data:null,si:1,playing:false,loop:false,sub:true,pos:0,dur:0,raf:null,queue:[],picked:{}};
+window.PLR=PLR;
+function plrAudioSrc(){ const c=catCourse(PLR.cid)||{audioPat:'audio/L{NN}.mp3',pad:2}; return audioSrcOf(lessonAudio(c,PLR.no)); }
+function plrBody(){ const ss=(PLR.data&&PLR.data.sentences)||[]; return ss.slice(1); }
+function plrSiAt(t){
+  const b=plrBody(); if(!b.length) return 1;
+  let si=1;
+  for(let i=0;i<b.length;i++){ if((b[i].t||0)<=t) si=i+1; else break; }
+  return Math.min(si,b.length);
+}
+async function renderPlayer(){
+  const Q=hashQs();
+  const cid=Q.c||nowPlaying()&&nowPlaying().cid||DEF_COURSE;
+  const no=+Q.n||(nowPlaying()&&nowPlaying().no)||1;
+  if(PLR.cid!==cid||PLR.no!==no||!PLR.data){
+    PLR.cid=cid; PLR.no=no; PLR.data=await loadLesson(no,cid);
+    const l=listenGet();
+    PLR.pos=(l&&l.cid===cid&&l.no===no)?(l.pos||0):0;
+    PLR.loop=(l&&l.cid===cid&&l.no===no)?(l.loop!==false):true;
+    PLR.sub=(l&&l.cid===cid&&l.no===no)?(l.sub!==false):true;
+    PLR.si=PLR.pos?plrSiAt(PLR.pos):1;
+  }
+  const c=catCourse(cid)||{name:cid};
+  const L=await levelsOf(c);
+  const lvTxt=(()=>{
+    const lv=(L&&L.data&&L.data.lessons&&L.data.lessons[String(no)])||(L&&L.list&&L.list[0]&&L.list[0].level);
+    if(!lv) return '';
+    return L.src==='publisher'?`<em>${esc(lv)}</em>`:`<span>参考</span> <em>${esc(lv)}</em>`;
+  })();
+  const fav=favHas(cid,no);
+  let cached=false;
+  try{ const cc=await caches.open(CACHE_CONTENT); cached=!!(await cc.match(plrAudioSrc())); }catch(e){}
+  PLR.dur=PLR.dur||(PLR.data&&PLR.data.duration)||0;
+  const lines=plrBody().map((s,i)=>{
+    const k=i+1, d=Math.abs(k-PLR.si);
+    const cls=k===PLR.si?'now':(d<=1?'d2':'d1');
+    return `<div class="pline ${cls}" data-si="${k}">${esc(s.en)}</div>`;
+  }).join('');
+  const disc=`<div class="pdisc"><div class="pvinyl"><span>${pad(no)}</span></div></div>`;
+  $('#app').innerHTML=`<div class="player-page">
+    <div class="ptop">
+      <a class="pback" href="#/listen" aria-label="收起"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></a>
+      <span></span>
+      <button class="pmore" data-act="plrmore" aria-label="更多">${Object.keys(PLR.picked).length?`<i>${Object.keys(PLR.picked).length}</i>`:''}<svg viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg></button>
+    </div>
+    <div class="ptitle"><b>${esc((PLR.data&&PLR.data.title)||('L'+no))}</b><div>${esc(c.name)} · L${no}${lvTxt?' · '+lvTxt:''}</div></div>
+    ${PLR.sub?`<div class="plyrics" id="plyrics"><div class="pfade top"></div>${lines}<div class="pfade bot"></div></div>`:disc}
+    <div class="pops">
+      <button class="${fav?'on':'off'}" data-act="plrfav">${fav?'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7-4.6-9.5-8.5C.6 9.5 2.4 6 5.7 6c2 0 3.4 1.1 4.3 2.6h4c.9-1.5 2.3-2.6 4.3-2.6 3.3 0 5.1 3.5 3.2 6.5C19 16.4 12 21 12 21z"/></svg>':'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-4.6-9.5-8.5C.6 9.5 2.4 6 5.7 6c2 0 3.4 1.1 4.3 2.6h4c.9-1.5 2.3-2.6 4.3-2.6 3.3 0 5.1 3.5 3.2 6.5C19 16.4 12 21 12 21z"/></svg>'}<span>${fav?'已收藏':'收藏'}</span></button>
+      <button class="${cached?'on':'off'}" data-act="plrcache"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12M7 10l5 5 5-5M4 20h16"/></svg><span>已缓存</span></button>
+      <button class="${PLR.loop?'on':'off'}" data-act="plrloop"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11a8 8 0 1 0-2.3 5.7M20 5v6h-6"/></svg><span>单曲循环</span></button>
+      <button class="${PLR.sub?'on':'off'}" data-act="plrsub"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M7 12h2M11 12h2M15 12h2"/></svg><span>${PLR.sub?'有字幕':'无字幕'}</span></button>
+    </div>
+    <div class="pbar"><span id="pnow">${fmtDur(PLR.pos)}</span><div data-act="plrseek"><i id="pfill" style="width:${PLR.dur?Math.round(PLR.pos*100/PLR.dur):0}%"></i><b id="pknob" style="left:${PLR.dur?Math.round(PLR.pos*100/PLR.dur):0}%"></b></div><span>${fmtDur(PLR.dur)}</span></div>
+    <div class="pctl">
+      <div class="pmini" data-act="plrprev"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 5h2v14H6zM20 5l-10 7 10 7z"/></svg></div>
+      <div class="pmain" data-act="plrtoggle"><svg viewBox="0 0 24 24" fill="#fff">${PLR.playing?'<rect x="7" y="5" width="4" height="14" rx="1"/><rect x="13" y="5" width="4" height="14" rx="1"/>':'<path d="M8 5l11 7-11 7z"/>'}</svg></div>
+      <div class="pmini" data-act="plrnext"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 5h2v14h-2zM4 5l10 7-10 7z"/></svg></div>
+    </div>
+    <div class="pqueue" id="plrqueue" hidden></div>
+  </div>`;
+  plrScrollTo(PLR.si);
+  if(PLR.autoplay){ PLR.autoplay=false; PLR.pos=0; plrToggle(); return; }
+  if(PLR.playing) plrSync();
+}
+function plrScrollTo(si){
+  const box=document.getElementById('plyrics'); if(!box) return;
+  const el=box.querySelector('.pline.now'); if(!el) return;
+  try{ box.scrollTo({top:el.offsetTop-box.clientHeight/2+el.offsetHeight/2,behavior:'smooth'}); }catch(e){}
+}
+function plrToggle(){
+  if(!PLR.data) return;
+  if(AU.paused){ AU.src=plrAudioSrc(); AU.currentTime=PLR.pos||0; AU.play().catch(()=>{}); PLR.playing=true; plrSync(); }
+  else { AU.pause(); PLR.playing=false; plrSave(); }
+  renderPlayer();
+}
+function plrSync(){
+  if(PLR.raf) cancelAnimationFrame(PLR.raf);
+  const step=()=>{
+    if(!PLR.playing||AU.paused){ PLR.raf=null; return; }
+    const t=AU.currentTime||0;
+    PLR.pos=t;
+    const dur=AU.duration||PLR.dur||0;
+    if(dur&&Math.abs(dur-PLR.dur)>0.5) PLR.dur=dur;
+    const n=document.getElementById('pnow'), f=document.getElementById('pfill'), k=document.getElementById('pknob');
+    if(n) n.textContent=fmtDur(t);
+    const pct=dur?Math.round(t*100/dur):0;
+    if(f) f.style.width=pct+'%'; if(k) k.style.left=pct+'%';
+    const si=plrSiAt(t);
+    if(si!==PLR.si){
+      PLR.si=si;
+      const box=document.getElementById('plyrics');
+      if(box){
+        box.querySelectorAll('.pline').forEach(el=>{
+          const s=+el.dataset.si, d=Math.abs(s-si);
+          el.className='pline '+(s===si?'now':(d<=1?'d2':'d1'));
+        });
+        plrScrollTo(si);
+      }
+    }
+    PLR.raf=requestAnimationFrame(step);
+  };
+  PLR.raf=requestAnimationFrame(step);
+}
+function plrSave(){
+  if(!PLR.cid) return;
+  listenSet({cid:PLR.cid,no:PLR.no,pos:Math.round((PLR.pos||0)*10)/10,dur:PLR.dur||0,
+    loop:PLR.loop,sub:PLR.sub,at:Date.now()});
+}
+function plrSeek(el,x){
+  const bar=el.getBoundingClientRect();
+  const r=Math.max(0,Math.min(1,(x-bar.left)/bar.width));
+  if(!PLR.dur) return;
+  PLR.pos=r*PLR.dur;
+  if(AU.src){ AU.currentTime=PLR.pos; }
+  renderPlayer();
+}
+function plrBadge(){
+  const b=document.querySelector('.pmore'); if(!b) return;
+  const n=Object.keys(PLR.picked).length;
+  let i=b.querySelector('i');
+  if(n){ if(!i){ i=document.createElement('i'); b.insertBefore(i,b.firstChild); } i.textContent=n; }
+  else if(i) i.remove();
+}
+function plrMore(keep){
+  const box=document.getElementById('plrqueue'); if(!box) return;
+  plrBadge();
+  if(!box.hidden&&!keep){ box.hidden=true; box.innerHTML=''; return; }
+  const favs=favAll();
+  box.hidden=false;
+  box.innerHTML=`<div class="lpad" style="padding:0 0 6px"><span>我的收藏 · 复选进队列</span><span>${Object.keys(PLR.picked).length} 首</span></div>
+    ${favs.length?favs.map(f=>{
+      const k=f.cid+':'+f.no, on=!!PLR.picked[k];
+      const c=catCourse(f.cid)||{};
+      return `<div class="lpack" data-act="plrpick" data-k="${k}" data-c="${f.cid}" data-n="${f.no}" style="cursor:pointer"><div style="display:flex;align-items:center;gap:11px;padding:10px 4px;width:100%">
+        <span class="pchk${on?' on':''}">${on?'✓':''}</span>
+        <div style="flex:1;min-width:0"><div style="font-size:13px;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(lessonTitle(c,f.no))} · L${f.no}</div>
+        <div style="font-size:11px;color:var(--sub)">${esc(c.name||f.cid)}</div></div></div></div>`;
+    }).join(''):'<div class="lempty" style="padding:8px 0">还没有收藏</div>'}
+    <div style="display:flex;gap:8px;margin-top:10px"><button class="btn sm g" data-act="plrqplay" style="flex:1">按队列播放</button>
+    <button class="btn sm" data-act="plrqclear" style="flex:1">清空</button></div>`;
+}
+/* 上一课/下一课（本册内，越界不动） */
+function plrStep(d){
+  const c=catCourse(PLR.cid); if(!c) return;
+  const n=PLR.no+d;
+  if(n<1||n>(c.lessons||0)) return;
+  AU.pause(); PLR.playing=false; PLR.pos=0; plrSave();
+  location.hash='#/player?c='+PLR.cid+'&n='+n;
+}
+/* 本课音频落缓存（已缓存则只提示） */
+async function plrCacheAudio(){
+  const src=plrAudioSrc();
+  try{
+    const cc=await caches.open(CACHE_CONTENT);
+    if(await cc.match(src)){ toast('本课音频已在本机'); return; }
+    const r=await fetch(src); if(!r.ok) throw new Error('HTTP '+r.status);
+    await cc.put(src,r); toast('本课音频已缓存'); renderPlayer();
+  }catch(e){ toast('缓存失败，请稍后重试'); }
+}
+/* 收藏复选 → 队列（只改本次播放，不回写 el2_fav） */
+function plrQueuePlay(){
+  const keys=Object.keys(PLR.picked);
+  if(!keys.length){ toast('先勾选要听的课文'); return; }
+  PLR.queue=keys.map(k=>{ const a=k.split(':'); return {cid:a[0],no:+a[1]}; });
+  PLR.picked={};
+  const f=PLR.queue[0]; PLR.autoplay=true;
+  location.hash='#/player?c='+f.cid+'&n='+f.no;
+}
+/* 单曲循环 / 队列续播 */
+AU.addEventListener('ended',()=>{
+  if(!(location.hash||'').startsWith('#/player')) return;
+  if(PLR.loop){ try{ AU.currentTime=0; AU.play(); }catch(e){} return; }
+  if(PLR.queue&&PLR.queue.length>1){
+    PLR.queue.shift();
+    const n=PLR.queue[0]; PLR.autoplay=true;
+    location.hash='#/player?c='+n.cid+'&n='+n.no;
+    return;
+  }
+  PLR.playing=false; plrSave(); renderPlayer();
+});
+
+/* ================= 统计 ================= */
+function ringSvg(id,pct,color,label){
+  const C=2*Math.PI*46;
+  return `<div style="text-align:center"><svg class="ring" viewBox="0 0 110 110">
+    <circle cx="55" cy="55" r="46" fill="none" stroke="#EDF2F7" stroke-width="11"/>
+    <circle cx="55" cy="55" r="46" fill="none" stroke="${color}" stroke-width="11" stroke-linecap="round"
+      stroke-dasharray="${C.toFixed(1)}" stroke-dashoffset="${(C*(1-pct/100)).toFixed(1)}" transform="rotate(-90 55 55)"/>
+    <text x="55" y="53" text-anchor="middle" font-size="19" fill="#212529">${pct}%</text>
+    <text x="55" y="73" text-anchor="middle" font-size="11" fill="#868E96">${label}</text></svg></div>`;
+}
+/* ================= 我的（账号 + 统计 + 离线包 + 数据管理，四合一） ================= */
+/* 离线包一行：状态 + 对应动作（下载 / 暂停 / 更新）；paintDl 会就地重绘这一行 */
+function meOfflineRow(c){
+  const st=dlGet(c.id), pct=dlPct(c.id);
+  const ready=!!(st&&st.state==='done'), run=!!(st&&st.state==='run'), fail=!!(st&&st.state==='fail');
+  const state=ready?'<span style="color:var(--ok)">✓ 已就绪 · 断网也能学</span>'
+    :(run?`<span style="color:var(--accBtn)">下载中 ${pct}%（可退出去听课，回来接着下）</span>`
+    :(fail?'<span class="late">下载失败 · 点「重试」继续</span>'
+    :`未下载 · 约 ${c.sizeMB||0}MB`));
+  const btn=ready?`<button class="btn sm g" data-act="dlc" data-c="${c.id}">更新</button>`
+    :(run?`<button class="btn sm g" data-act="pausec" data-c="${c.id}">暂停</button>`
+    :(fail?`<button class="btn sm" data-act="dlc" data-c="${c.id}">重试</button>`
+    :`<button class="btn sm" data-act="dlc" data-c="${c.id}">下载</button>`));
+  return `<div class="item" id="ol-${c.id}"><div class="tt"><div class="en oneline">${esc(c.name)}</div>
+    <div class="meta">${state}</div></div>${btn}</div>`;
+}
+function renderMe(){
+  const sess=window.EL2SESS;
+  const ag=progStatAll();
+  const learned=ag.learned, done=ag.done, rounds=ag.rounds;
+  const my=myCourses();
+  const totLearn=my.reduce((a,id)=>a+((catCourse(id)||{}).lessons||0),0)||96;
+  const due=dueList().length;
+  const mins=Math.round((STATS.playSec||0)/60);
+  const days=[...Array(7)].map((_,k)=>{ const d=new Date(Date.now()-(6-k)*864e5);
+    const key=d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());
+    return {label:'周'+'日一二三四五六'[d.getDay()],v:Math.round((STATS.days[key]||0)/60)}; });
+  const max=Math.max(5,...days.map(x=>x.v));
+  const readyCs=my.map(id=>catCourse(id)).filter(c=>c&&c.ready&&(dlGet(c.id)||{}).state==='done');
+  const readyMB=readyCs.reduce((a,c)=>a+(c.sizeMB||0),0);
+
+  let h=`<div class="topbar"><h1>我的</h1></div>`;
+  /* ① 账号（未登录=页内登录卡，不再单独占一个 tab） */
+  if(sess){
+    h+=`<div class="sec"><h2>账号</h2>
+      <div class="item"><div class="tt"><div class="en">${esc(sess.email||'')}</div>
+        <div class="meta">学习记录会在本机持续保存</div></div>
+        <button class="btn sm g" id="meOut2">退出</button></div></div>`;
+  }else{
+    h+=`<div class="sec"><h2>登录</h2>
+      <div class="item"><div class="tt"><div class="en">还没有登录</div>
+        <div class="meta">登录可选，不登录也能照常学习；记录保存在本机。</div></div>
+        <button class="btn sm" data-act="melogin">登录</button></div></div>`;
+  }
+  /* ② 学习概览 */
+  h+=`<div class="sec"><h2>学习概览</h2>
+    <div style="display:flex;justify-content:space-around">
+      ${ringSvg('a',Math.round(learned*100/totLearn),'#0B8A5F','已学')}${ringSvg('b',Math.round(done*100/totLearn),'#10B981','通关')}${ringSvg('c',learned?Math.min(100,Math.round(rounds*100/(learned*7))):0,'#5DCAA5','复习')}</div>
+    <div class="tip" style="text-align:center;margin-top:6px">已学 ${learned}/${totLearn} · 通关 ${done}/${totLearn} · 复习 ${rounds} 轮 · 待复习 ${due} 课</div></div>`;
+  /* ③ 近 7 天 */
+  h+=`<div class="sec"><h2>近 7 天练习（分钟）</h2>
+    <div style="display:flex;align-items:flex-end;gap:8px;height:120px;padding:0 4px">
+      ${days.map(x=>`<div style="flex:1;text-align:center"><div style="font-size:12px;color:var(--sub)">${x.v||''}</div>
+        <div style="background:var(--acc);border-radius:6px 6px 0 0;height:${Math.round(x.v/max*88)}px;min-height:3px"></div>
+        <div style="font-size:12px;color:var(--sub)">${x.label}</div></div>`).join('')}
+    </div>
+    <div class="item" style="margin-top:10px"><div class="tt">累计收听</div><b>${mins} 分钟</b></div>
+    <div class="item"><div class="tt">跟读句子次数</div><b>${STATS.shadowN||0}</b></div></div>`;
+  /* ④ 离线包：按「我的课程」逐门列，操作就地完成 */
+  h+=`<div class="sec"><h2>离线包 ${tipQ('ofl','下载后断网也能学。在课程库里点「移除」只释放文件，学习进度与难句本都会保留。')}</h2>
+    ${my.map(id=>catCourse(id)).filter(c=>c&&c.ready).map(meOfflineRow).join('')||'<div class="empty">还没有可下载的课程</div>'}
+    <div class="tip" style="margin-top:8px">已下载 ${readyCs.length} 门 · 约 ${readyMB}MB</div>
+    <div style="margin-top:8px"><button class="btn sm g" data-go="#/store">去课程库管理</button></div></div>`;
+  /* ⑤ 数据管理（打印时排除） */
+  h+=`<div class="sec no-print"><h2>数据管理</h2><div class="tip">换新平板前，先点「导出备份」保存记录。</div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <button class="btn sm g" data-act="exp">导出 JSON 备份</button>
+      <button class="btn sm g" data-act="imp">导入恢复</button>
+      <input type="file" id="impFile" accept=".json" style="display:none">
+      <button class="btn sm g" data-act="clr">清空全部记录</button></div></div>`;
+  $('#app').innerHTML=h;
+  const b=document.getElementById('meOut2');
+  if(b) b.addEventListener('click',()=>{ if(window.el2Logout) window.el2Logout(); });
+}
+/* 登录态变化（登录/退出）→ 顶部 tab 与「我的」页同步刷新 */
+window.el2AuthChanged=function(){ nav(); const hh=location.hash||'#/home';
+  if(hh.startsWith('#/me')||hh.startsWith('#/stats')) renderMe(); };
+/* ===== 课程离线包：按课程下载进 el2-content 缓存层（设备级，不依赖登录） ===== */
+const CACHE_CONTENT='el2-content';
+const DL={};                       /* 运行期进度缓存，避免每次渲染都读 localStorage */
+const DLSTOP={};                   /* 每门课的暂停旗标：下载循环每步检查，不靠状态字段自欺 */
+function dlMap(){ try{ return JSON.parse(localStorage.getItem(LS+'dl')||'{}'); }catch(e){ return {}; } }
+function dlGet(id){ if(DL[id]) return DL[id]; const m=dlMap(); return m[id]||null; }
+function dlSet(id,v){
+  if(v===null){ delete DL[id]; const m=dlMap(); delete m[id]; try{ localStorage.setItem(LS+'dl',JSON.stringify(m)); }catch(e){} return; }
+  DL[id]=v; const m=dlMap(); m[id]=v; try{ localStorage.setItem(LS+'dl',JSON.stringify(m)); }catch(e){}
+}
+function dlPct(id){ const s=dlGet(id); if(!s||!s.total) return 0; return Math.max(0,Math.min(100,Math.round(s.done*100/s.total))); }
+function courseFiles(c){
+  const n=+c.lessons||0, out=[];
+  for(let i=1;i<=n;i++){ const k=String(i).padStart(c.pad||2,'0');
+    if(c.dataPat) out.push(c.dataPat.replace('{NN}',k));
+    if(c.audioPat) out.push(c.audioPat.replace('{NN}',k)); }
+  return out;
+}
+/* 旧版一键离线包（只存了 el2_offline 标记）→ 迁移成 nce2 已就绪，不让老用户白下一遍 */
+(function(){ try{
+  if(localStorage.getItem('el2_offline')&&!dlGet('nce2')){
+    const n=courseFiles(catCourse('nce2')||{lessons:96}).length;
+    dlSet('nce2',{done:n,total:n,state:'done'});
+  }
+}catch(e){} })();
+async function dlCourse(id){
+  const c=catCourse(id); if(!c||!c.ready) return;
+  const prev=dlGet(id); if(prev&&prev.state==='run'&&!DLSTOP[id]) return;
+  const files=courseFiles(c);
+  const st={done:(prev&&prev.state!=='done')?Math.min(prev.done||0,files.length):0,total:files.length,state:'run'};
+  DLSTOP[id]=0; dlSet(id,st); paintDl(id);
+  /* 申请持久化存储，避免系统清理掉几十 MB 的离线包 */
+  if(navigator.storage&&navigator.storage.persist){ try{ navigator.storage.persist(); }catch(e){} }
+  let cache; try{ cache=await caches.open(CACHE_CONTENT); }
+  catch(e){ dlSet(id,Object.assign({},st,{state:'fail'})); paintDl(id); return; }
+  for(let i=st.done;i<files.length;i++){
+    if(DLSTOP[id]) return;                                       /* 暂停 / 已移除 → 立即停 */
+    try{
+      const m=await cache.match(files[i]);
+      if(!m){ const r=await fetch(files[i]); if(r&&r.ok) await cache.put(files[i],r); }
+    }catch(e){}
+    if(DLSTOP[id]) return;                                       /* 在途请求期间被暂停 → 不覆盖暂停态 */
+    st.done=i+1; dlSet(id,st);
+    if(i%4===0||i===files.length-1) paintDl(id);
+  }
+  dlSet(id,{done:files.length,total:files.length,state:'done'});
+  paintDl(id);
+  toast(c.name+' 离线包下载完成 ✓');
+}
+function dlPause(id){
+  const s=dlGet(id); if(s&&s.state==='run'){ DLSTOP[id]=1; dlSet(id,Object.assign({},s,{state:'pause'})); }
+  paintDl(id);
+}
+async function rmCourse(id){
+  const c=catCourse(id); if(!c) return;
+  if(!confirm('从「我的课程」移除「'+c.name+'」？\n学习进度与难句本会保留，只释放离线文件（约 '+(c.sizeMB||0)+'MB）。')) return;
+  dlPause(id);
+  try{ const cache=await caches.open(CACHE_CONTENT);
+    for(const f of courseFiles(c)){ try{ await cache.delete(f); }catch(e){} } }catch(e){}
+  dlSet(id,null);
+  setMyCourses(myCourses().filter(x=>x!==id));
+  renderStore();
+}
+/* 只重绘受影响的那一格 + 进度条，避免整页闪 */
+function paintDl(id){
+  const c=catCourse(id); if(!c) return;
+  const cell=document.getElementById('sc-'+id);
+  if(cell&&document.body.contains(cell)&&cell.parentNode){ cell.outerHTML=renderStoreCard(c); }
+  const row=document.getElementById('ol-'+id);          /* 「我的」页离线包那一行 */
+  if(row&&document.body.contains(row)&&row.parentNode){ row.outerHTML=meOfflineRow(c); }
+}
+window.dlOffline=function(){
+  const cid=(typeof curCourse==='function')?curCourse():DEF_COURSE;
+  const s=dlGet(cid);
+  if(s&&s.state==='run'){ dlPause(cid); return; }
+  return dlCourse(cid);
+};
+/* ================= 数据管理动作 ================= */
+document.addEventListener('click',e=>{
+  const el=e.target.closest('[data-act]'); if(!el) return;
+  const act=el.dataset.act;
+  /* —— 课程库 / 我的课程 —— */
+  if(act==='openc'){ location.hash='#/c/'+el.dataset.c; return; }
+  if(act==='stcard'){   /* 课程库极简卡：点封面 = 状态相关主操作（逻辑与原按钮一致） */
+    const c=catCourse(el.dataset.c); if(!c||!c.ready) return;
+    const st=dlGet(c.id);
+    if(myCourses().indexOf(c.id)<0){ addCourse(c.id); dlCourse(c.id); toast('已加入「'+c.name+'」· 正在后台下载'); return; }  /* 添加即下载 */
+    if(st&&st.state==='run'){ dlPause(c.id); return; }                           /* 下载中 → 暂停 */
+    if(st&&st.state==='done'){ location.hash='#/c/'+c.id; return; }              /* 就绪 → 打开 */
+    dlCourse(c.id); return;                                                      /* 待下载/暂停 → 续传 */
+  }
+  if(act==='addc'){ addCourse(el.dataset.c); dlCourse(el.dataset.c); return; }
+  if(act==='dlc'){ dlCourse(el.dataset.c); return; }
+  if(act==='pausec'){ dlPause(el.dataset.c); return; }
+  if(act==='rmc'){ rmCourse(el.dataset.c); return; }
+  if(act==='codego'){
+    const inp=document.getElementById('codeIn');
+    const code=(inp?inp.value:'').trim().toUpperCase();
+    const hit=((CATALOG.codes)||[]).filter(x=>String(x.code).toUpperCase()===code)[0];
+    if(!hit){ alert('课程码无效，请核对后重试'); return; }
+    const ids=(hit.add||[]).filter(id=>{ const c=catCourse(id); return !!(c&&c.ready); });
+    if(!ids.length){ alert('这个课程码对应的课程还在筹备中'); return; }
+    ids.forEach(id=>{ addCourse(id); dlCourse(id); });
+    toast('已加入我的课程 · 正在后台下载');
+    renderStore();
+    return;
+  }
+  if(act==='melogin'){ if(window.el2OpenLogin) window.el2OpenLogin(); return; }
+  if(act==='logout'){ localStorage.removeItem('el2_session'); location.replace('login.html'); return; }
+  if(act==='revsh'){ CUR.shReveal=!CUR.shReveal; renderLesson(); return; }
+  if(act==='retellhint'){ CUR.retellHint=!CUR.retellHint; renderLesson(); return; }
+  if(act==='tipq'){ const dEl=document.getElementById('tipd-'+el.dataset.tk); if(dEl) dEl.style.display=dEl.style.display==='none'?'block':'none'; return; }
+  if(act==='hardf'){ HARDF=el.dataset.v||'all';
+    if((location.hash||'').startsWith('#/hard')) renderHard();
+    else if((location.hash||'').startsWith('#/cards')) renderCards();
+    return;
+  }
+  if(act==='cardok'||act==='cardno'){
+    const hard=hardAll();
+    const cid=el.dataset.c||DEF_COURSE, no=+el.dataset.no, si=+el.dataset.i;
+    const it=hard.filter(x=>(x.cid||DEF_COURSE)===cid&&x.no===no&&x.i===si)[0]; if(!it) return;
+    it.due = Date.now() + (act==='cardok'?3*864e5:12*36e5);
+    store.setHard(hard);
+    const cd=el.closest('.card'); cd.classList.remove('flip'); cd.style.opacity=.4; cd.style.pointerEvents='none';
+    return;
+  }
+  if(act==='flip'){ el.classList.toggle('flip'); }
+  else if(act==='goSent'){
+    const c = el.dataset.c||DEF_COURSE;
+    location.hash=lessonHref(+el.dataset.no,c);
+    CUR.afterRender=()=>{ prog(+el.dataset.no,c).stage=0; renderLesson(); };
+  }
+  else if(act==='unstar'){
+    const cid=el.dataset.c||DEF_COURSE, no=+el.dataset.no, si=+el.dataset.i;
+    store.setHard(hardAll().filter(x=>!((x.cid||DEF_COURSE)===cid&&x.no===no&&x.i===si)));
+    const o=progOf(cid)[no];
+    if(o&&o.hard){ const k=o.hard.indexOf(si); if(k>=0){ o.hard.splice(k,1); saveProgress(); } }
+    renderHard();
+  }
+  else if(act==='cardplay'){ (async()=>{ const d=await loadLesson(+el.dataset.no, el.dataset.c);
+      const s=d.sentences[+el.dataset.i]; if(s) playSeg(s.t,s.t2,null,audioSrcOf(d.audio)); })(); }
+  else if(act==='exp'){
+    const blob=new Blob([JSON.stringify({exportedAt:new Date().toISOString(),v:3,progress:PROG,hard:hardAll(),stats:STATS},null,2)],{type:'application/json'});
+    const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='nce2_loop备份_'+todayStr()+'.json'; a.click();
+    setTimeout(()=>URL.revokeObjectURL(a.href),2000);
+  }
+  else if(act==='imp'){ $('#impFile').click(); }
+  else if(act==='clr'){
+    if(!confirm('确定清空全部学习记录？（课程文件不受影响）')) return;
+    if(!confirm('再次确认：此操作不可恢复！')) return;
+    PROG={_v:3,courses:{}}; STATS={playSec:0,shadowN:0,recN:0,days:{}}; store.setHard([]);
+    saveProgress(); saveStats(); renderMe();
+  }
+});
+document.addEventListener('change',e=>{
+  if(e.target&&e.target.id==='impFile'&&e.target.files[0]){
+    const fr=new FileReader();
+    fr.onload=()=>{ try{ const d=JSON.parse(fr.result);
+        if(d.progress){ PROG=migrateProg(d.progress); saveProgress(); }   /* 旧格式备份也能导入 */
+        if(d.hard){ const a=d.hard.map(x=>Object.assign({cid:DEF_COURSE},x)); store.setHard(a); }
+        if(d.stats){ STATS=Object.assign({playSec:0,shadowN:0,recN:0,days:{}},d.stats); saveStats(); }
+        alert('已导入'); location.hash='#/home'; router();
+      }catch(err){ alert('导入失败：'+err.message); } };
+    fr.readAsText(e.target.files[0]);
+  }
+});
+
+/* ================= 启动 ================= */
+/* 真实性校验：标记说「已就绪」不算数，抽 3 个文件确认缓存里真有（防系统清缓存后界面说谎） */
+async function verifyDl(id){
+  const c=catCourse(id), s=dlGet(id); if(!c||!s||s.state!=='done') return;
+  const files=courseFiles(c);
+  const picks=[files[0],files[Math.floor(files.length/2)],files[files.length-1]].filter(Boolean);
+  try{
+    const cache=await caches.open(CACHE_CONTENT);
+    for(const f of picks){
+      const m=await cache.match(f);
+      if(!m){ dlSet(id,Object.assign({},s,{state:'pause',done:0})); return; }
+    }
+  }catch(e){}
+}
+async function verifyAll(){ for(const id of myCourses()){ await verifyDl(id); } }
+/* 上次没下完（切后台/杀进程）的课程，回来自动续传 */
+function resumeDl(){
+  setTimeout(()=>{ myCourses().forEach(id=>{
+    const s=dlGet(id); if(s&&s.state==='run') dlCourse(id);
+  }); }, 1200);
+}
+hardAll();                                 /* 难句本补 cid（v3 迁移），顺手落盘 */
+router();                                  /* 先用内嵌清单渲染，秒开 */
+loadCatalog().then(verifyAll).then(()=>{ router(); resumeDl(); }).catch(()=>{});
+}
+</script>
+<script>
+/* ===== PWA 安装引导：安卓 beforeinstallprompt 弹横幅（可触发系统安装框）；iOS 弹「分享→添加到主屏幕」分步提示 ===== */
+(function(){
+  var standalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+  if (standalone) return;                                   // 已安装，不打扰
+  var isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent) ||
+              (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  var KEY = 'el2_install_hide';
+  function canShow(){ try{ var t = +localStorage.getItem(KEY) || 0; return Date.now() > t; }catch(e){ return true; } }
+  function hide(days){ try{ localStorage.setItem(KEY, String(Date.now() + days * 864e5)); }catch(e){} }
+  function build(title, body, okText, onOk){
+    var wrap = document.createElement('div');
+    wrap.style.cssText = 'position:fixed;left:12px;right:12px;bottom:calc(76px + env(safe-area-inset-bottom,0px));z-index:999;'
+      + 'background:#fff;border:1.5px solid #E9ECEF;border-radius:16px;box-shadow:0 10px 30px rgba(33,37,41,.18);padding:14px 16px;';
+    wrap.innerHTML = '<div style="display:flex;gap:12px;align-items:flex-start">'
+      + '<svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#3B5BDB" stroke-width="2" style="flex:0 0 34px;margin-top:2px">'
+      + '<rect x="5" y="2" width="14" height="20" rx="3"/><path d="M9 18h6"/></svg>'
+      + '<div style="flex:1"><div style="font-weight:700;font-size:15px;color:#212529">' + title + '</div>'
+      + '<div style="font-size:13px;color:#6C757D;line-height:1.55;margin-top:3px">' + body + '</div></div></div>'
+      + '<div style="display:flex;gap:10px;margin-top:10px">'
+      + '<button id="pwaOk" style="flex:1;min-height:50px;border:0;border-radius:12px;background:#3B5BDB;color:#fff;font-size:15px;font-weight:700;cursor:pointer">' + okText + '</button>'
+      + '<button id="pwaNo" style="min-width:88px;min-height:50px;border:1.5px solid #E9ECEF;border-radius:12px;background:#fff;color:#6C757D;font-size:14px;cursor:pointer">暂不</button></div>';
+    document.body.appendChild(wrap);
+    wrap.querySelector('#pwaOk').addEventListener('click', function(){ hide(365); wrap.remove(); if (onOk) onOk(); });
+    wrap.querySelector('#pwaNo').addEventListener('click', function(){ hide(7); wrap.remove(); });
+  }
+  var deferred = null;
+  window.addEventListener('beforeinstallprompt', function(e){
+    e.preventDefault(); deferred = e;
+    if (canShow()) build('安装 NCE2 Loop 到桌面', '像 App 一样全屏启动，听过一遍的课文离线也能学。', '立即安装', function(){
+      if (deferred) { deferred.prompt(); deferred = null; }
+    });
+  });
+  var isAndroid=/android/i.test(navigator.userAgent);
+  var hasInstallAPI='onbeforeinstallprompt' in window;
+  var isHuawei=/HuaweiBrowser|HarmonyOS|HUAWEI/i.test(navigator.userAgent);
+  var androidNoChrome=isAndroid && !/Chrome\/|Edg\/|SamsungBrowser/i.test(navigator.userAgent);
+  if ((isHuawei || androidNoChrome) && canShow()) {
+    window.addEventListener('load', function(){
+      setTimeout(function(){
+        if (canShow()) build('添加到桌面（2 步）',
+          '安卓浏览器不会自动弹安装框：① 点浏览器右上角「⋮」或底部「我的」打开菜单 ② 选「添加到桌面 / 添加到主屏幕」。完成后从桌面图标全屏进入，听课更流畅。',
+          '知道了', null);
+      }, 1500);
+    });
+  }
+  if (isIOS && canShow()) {
+    window.addEventListener('load', function(){
+      setTimeout(function(){
+        if (canShow()) build('添加到主屏幕（2 步）',
+          'iOS 不会自动弹安装框：① 点浏览器底部的「分享」按钮 ② 在列表里选「添加到主屏幕」。完成后从桌面图标全屏进入。',
+          '知道了', null);
+      }, 1500);
+    });
+  }
+})();
+/* Service Worker 注册（离线学习） */
+/* v42 prototype: no service worker registration */
+if (false) {
+}
+</script>
+</body>
+</html>
