@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="utf-8">
+<title>v42 组1 对稿</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#EEF1F4;font-family:"Noto Sans SC","Microsoft YaHei",system-ui,sans-serif;
+  color:#263039;padding:28px 32px 40px}
+h1{font-size:20px;font-weight:700;margin-bottom:4px}
+.sub{font-size:12.5px;color:#5C6773;margin-bottom:20px}
+.sub code{font-family:ui-monospace,Consolas,monospace;background:#fff;border:1px solid #E2E6EB;
+  border-radius:4px;padding:1px 5px}
+.legend{display:flex;gap:18px;font-size:12px;color:#5C6773;margin-bottom:18px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px;vertical-align:middle}
+.row{display:grid;grid-template-columns:132px 424px auto;gap:18px;align-items:start;justify-content:start;
+  background:#fff;border:1px solid #E2E6EB;border-radius:14px;padding:16px 18px;margin-bottom:16px}
+.row.land{grid-template-columns:132px 824px auto}
+.meta b{display:block;width:26px;height:26px;border-radius:50%;background:#263039;color:#fff;
+  font-size:13px;line-height:26px;text-align:center;margin-bottom:8px}
+.meta span{font-size:12.5px;color:#5C6773;line-height:1.5}
+.cell{background:#F4F6F8;border:1px dashed #D7DDE4;border-radius:10px;padding:8px;
+  display:flex;justify-content:flex-start}
+.cell img{display:block;max-width:100%;max-height:600px;width:auto;height:auto;border-radius:6px}
+.cell.ref img{border-radius:30px}
+.tag{font-size:11px;color:#8A939C;text-align:center;margin-top:6px}
+.obsolete{display:flex;align-items:center;justify-content:center;width:100%;height:600px;text-align:center;line-height:2;color:#98A1AA;font-size:13px}
+</style></head><body>
+<h1>设计稿 v4.2 × App 实码 · 组 1（屏 1–6）逐屏对稿</h1>
+<div class="sub">左＝<code>设计稿_五段流程_v4_2.html</code> 原稿屏（含评审外壳 .phone）　右＝<code>ily-echo/v42/index.html</code> 实码（安全区替代假状态栏、去手机边框）　数据：L01 · 正文 16 句</div>
+<div class="legend"><span><i style="background:#0B8A5F"></i>--focus 深绿</span>
+<span><i style="background:#10B981"></i>--brand 亮绿</span>
+<span><i style="background:#8A5E22"></i>--amberInk 收藏</span>
+<span><i style="background:#E2E6EB"></i>--line 描边</span></div>
+
+  <section class="row">
+    <div class="meta"><b>1</b><span>盲听 · 播完出题</span></div>
+    <div class="cell ref"><img src="ref_s1.png" alt="稿 1"></div>
+    <div class="cell ours"><img src="s1_blind_quiz.png" alt="v42 1"></div>
+  </section>
+  <section class="row">
+    <div class="meta"><b>2</b><span>精听 · Anki 句卡</span></div>
+    <div class="cell ref"><img src="ref_s2.png" alt="稿 2"></div>
+    <div class="cell ours"><img src="s2_intensive.png" alt="v42 2"></div>
+  </section>
+  <section class="row">
+    <div class="meta"><b>3</b><span>跟读 · 横屏主态</span></div>
+    <div class="cell ref land"><img src="ref_s3.png" alt="稿 3"></div>
+    <div class="cell ours land"><img src="s3_shadow_landscape.png" alt="v42 3"></div>
+  </section>
+  <section class="row">
+    <div class="meta"><b>4</b><span>跟读 · 竖屏备态</span></div>
+    <div class="cell ref"><img src="ref_s4.png" alt="稿 4"></div>
+    <div class="cell ours"><img src="s4_shadow_portrait.png" alt="v42 4"></div>
+  </section>
+  <section class="row">
+    <div class="meta"><b>✓</b><span>稿屏 5/6 已删除<br><small>11-23 用户决策</small></span></div>
+    <div class="cell ref"><div class="obsolete">稿原「录音全篇」+「录音完成·分享到微信群」<br>两段整体移除，不再对照</div></div>
+    <div class="cell ours"><img src="s6_study_done.png" alt="学习完成卡"></div>
+  </section>
+</body></html>

@@ -2,7 +2,7 @@ shots/
 _p1_shots/
 _p2_shots/
 _p3_shots/
-_ia_design/
+# _ia_design/ 2026-11-25 解除忽略：验收图与对稿报告纳入仓库留档
 .env
 tests/
 # 盲听选项的一次性生成中间产物（成品是 blind_options.json）

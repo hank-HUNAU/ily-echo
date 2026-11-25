@@ -1,0 +1,24 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><style>
+    *{box-sizing:border-box;margin:0;padding:0}body{background:#F5F6F8;font-family:"Noto Sans SC","Microsoft YaHei",sans-serif;padding:26px 30px 34px}
+    h1{font-size:21px;font-weight:600;color:#212529;margin-bottom:6px}
+    .sub{font-size:13px;color:#6C757D;margin-bottom:22px}
+    .row{display:flex;gap:26px;align-items:flex-start}
+    .card{background:#fff;border:1px solid #E9ECEF;border-radius:16px;padding:14px;width:826px}
+    .lab{font-size:15px;font-weight:600;margin-bottom:10px;color:#212529}
+    .lab small{font-size:12px;font-weight:400;color:#6C757D;margin-left:8px}
+    img{width:390px;height:844px;display:block;border:1px solid #E9ECEF;border-radius:12px}
+    .note{font-size:13px;color:#B04A43;margin-top:10px;line-height:1.6}
+    .ok{color:#0B8A5F}
+    </style></head><body>
+    <h1>教材页信息架构：改前 / 改后</h1>
+    <div class="sub">390 × 844 手机视口 · 使用线上真实样式渲染</div>
+    <div class="row">
+      <div class="card"><div class="lab">现状 <small>点进教材后的第一屏</small></div>
+        <img src="course_before.png">
+        <div class="note">首屏只有三张卡，96 格课表从 y=854 开始，一格都看不到。</div>
+      </div>
+      <div class="card"><div class="lab ok">建议 <small>课表做主角，任务降级为入口</small></div>
+        <img src="course_after.png">
+        <div class="note ok">接续条 + 筛选 + 搜索后置，首屏直接看到 L01–L24；新手指引移到顶栏 ?。</div>
+      </div>
+    </div></body></html>
