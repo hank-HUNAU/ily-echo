@@ -449,7 +449,9 @@ body:has(#app.v42-lesson) nav.tabs{display:none}
 #app.v42-lesson #stage{flex:1;min-height:0;display:flex;flex-direction:column;overflow:hidden}
 #app.v42-lesson .body{flex:1;min-height:0;display:flex;flex-direction:column;overflow:hidden}
 #app.v42-lesson .kstage{flex:1;min-height:0;display:flex;flex-direction:column;
- justify-content:center;overflow-y:auto;-webkit-overflow-scrolling:touch}
+ justify-content:center;overflow-y:auto;-webkit-overflow-scrolling:touch;
+ /* 11-26：覆盖主 App 基础 .kstage 的白卡（稿屏3/4 均为透明底） */
+ background:transparent;border:0;border-radius:0;margin:0}
 /* —— 文本层（稿 .title/.subtle/.big/.zhline） —— */
 #app.v42-lesson .title{font-size:20px;font-weight:700;text-align:center;margin:6px 0 2px}
 #app.v42-lesson .subtle{font-size:12.5px;color:var(--sub);text-align:center;line-height:1.6}
