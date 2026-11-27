@@ -439,6 +439,76 @@ body:has(#app.land-shadow) nav.tabs{display:none}
 #app.land-shadow .ktool .seg span{padding:7px 10px;font-size:12px;border-radius:999px;line-height:1.2}
 #app.land-shadow .ktool .fbtn{min-height:34px;height:34px;border-radius:999px;padding:0 15px;font-size:13px}
 
+/* ===== 11-26 主 App 竖屏跟读照稿屏4（port-shadow）：7 行窗口 + 透明底 + 工具条贴 tab 上方 ===== */
+/* 保留 topbar/tip/stepper 头部与底 tab；kstage 吃满剩余高，kplayer/ktool 贴底不被 tab 遮挡 */
+#app.port-shadow{display:flex;flex-direction:column;
+  min-height:100vh;min-height:100dvh;
+  padding-bottom:calc(96px + env(safe-area-inset-bottom,0px))}
+#app.port-shadow #stage{flex:1;min-height:0;display:flex;flex-direction:column;overflow:hidden}
+#app.port-shadow .shadow-wrap{display:flex;flex-direction:column;flex:1;min-height:0;padding-bottom:0}
+#app.port-shadow .shadow-wrap>.kstage{flex:1 1 0;min-height:0;height:0;max-height:none;
+  background:transparent;border:0;border-radius:0;margin:0;padding:2px 0;overflow-y:auto;
+  display:flex;flex-direction:column;justify-content:center}
+#app.port-shadow .krow{text-align:center;padding:4px 4px}
+#app.port-shadow .krow .en{font-size:16px;line-height:1.4}
+#app.port-shadow .krow .zh{font-size:12.5px;margin-top:1px}
+#app.port-shadow .krow.now .en{font-size:21px;font-weight:700}
+#app.port-shadow .kplayer{flex:0 0 auto;border-top:1px solid var(--line);
+  margin:6px -14px 0;background:#fff;padding:10px 32px 4px}
+#app.port-shadow .shadow-wrap>.ktool{flex:0 0 auto;background:#fff;
+  margin:0 -14px;padding:10px 32px 14px;border-top:0}
+
+
+/* ===== 11-27 M2 学习完成卡：单层顶栏，卡片居中 ===== */
+#app.done-card{display:flex;flex-direction:column;height:100vh;height:100dvh;overflow:hidden;padding:0}
+#app.done-card .done-head{display:flex;justify-content:space-between;align-items:center;
+  padding:calc(8px + env(safe-area-inset-top,0px)) 20px 4px;color:var(--sub);font-size:13px;flex:0 0 auto}
+#app.done-card .done-head a{color:var(--focus);text-decoration:none}
+#app.done-card #stage{flex:1;min-height:0;display:flex;flex-direction:column;overflow-y:auto;
+  padding:0 18px calc(24px + env(safe-area-inset-bottom,0px))}
+#app.done-card .done-body{flex:1;display:flex;flex-direction:column;justify-content:center;
+  padding-bottom:0;max-width:720px;width:100%;margin:0 auto}
+#app.done-card .reccard{width:100%}
+
+
+/* ===== 11-27 平板适配：竖屏 720 居中 / 横屏左右分栏 / 音频 720 字幕上限 =====
+   手机端（<601 宽）完全不受影响；手机横屏（<1000 宽）仍走 land-shadow 稿屏3。 */
+@media (min-width:601px) and (max-width:1023px) and (orientation:portrait){
+  /* 内容统一 720 居中，不拉伸 */
+  .wrap{max-width:720px;padding-left:0;padding-right:0}
+  .listen-page,.player-page{margin-left:0;margin-right:0}
+  /* 教材页课格自适应：88px 最小列宽随屏宽换列，820 宽约 6 列 */
+  .grid{grid-template-columns:repeat(auto-fit,minmax(88px,1fr))}
+  .coGrid{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+  /* 课文/精听/跟读内容不超 720 */
+  .stepper,.tip,.int-wrap,.shadow-wrap{max-width:720px;margin-left:auto;margin-right:auto}
+  /* 播放页字幕 720 上限 */
+  .player-page{max-width:720px;margin-left:auto;margin-right:auto}
+  .plyrics{padding-left:20px;padding-right:20px}
+  .pqueue{margin-left:0;margin-right:0}
+}
+@media (min-width:1000px) and (orientation:landscape){
+  /* 横屏左右分栏：主内容 720，右侧辅助列；外层居中 */
+  .wrap{max-width:1180px;padding-left:20px;padding-right:20px}
+  .grid{grid-template-columns:repeat(auto-fit,minmax(88px,1fr))}
+  /* 教材页：筛选/搜索/课格在左，接续/概览用右侧栏由 grid 自动排 */
+  .course-page{max-width:1180px;margin:0 auto}
+  /* 课文页四段：主内容 720 居中，避免字幕/题干横拉 */
+  .stepper,.tip,.int-wrap,.shadow-wrap{max-width:720px;margin-left:0;margin-right:auto}
+  /* 播放页：左字幕 + 右控件（CSS grid 两列，DOM 顺序不变） */
+  /* 左 720 字幕 + 右控件列：由 renderPlayer 分包，两列自然流式，无重叠 */
+  .player-page{max-width:1180px;margin:0 auto}
+  .player-page.tablet-land{padding-bottom:calc(96px + env(safe-area-inset-bottom,0px))}
+  .plr-cols{display:grid;grid-template-columns:720px minmax(240px,1fr);column-gap:32px;
+    padding:0 20px;align-items:start}
+  .plr-main .plyrics{width:720px;max-width:720px;max-height:none;min-height:560px;padding:22px 24px}
+  .plr-side{display:flex;flex-direction:column;gap:18px;padding-top:16px}
+  .plr-side .pops{justify-content:flex-start;gap:18px;padding:0 0 0 8px}
+  .plr-side .pbar{padding:0 8px}
+  .plr-side .pctl{justify-content:flex-start;padding:0 0 0 8px;gap:18px}
+  .plr-side .pqueue{margin:0}
+}
+
 </style>
 </head>
 <body data-page-node-id="fkACEsMfaEvRSAXz4FoagJ">
@@ -945,7 +1015,7 @@ function nav(){ const h=location.hash||'#/home';
 async function router(){
   nav();
   const h=location.hash||'#/home';
-  if(!h.startsWith('#/lesson/') && $('#app')) $('#app').classList.remove('land-shadow');
+  if(!h.startsWith('#/lesson/') && $('#app')) $('#app').classList.remove('land-shadow','port-shadow');
   if(LAST_HASH&&LAST_HASH.startsWith('#/player')&&!h.startsWith('#/player')) plrSave();
   if(h.startsWith('#/hard')||h.startsWith('#/cards')) scopeOnEnter();
   if(h.startsWith('#/lesson/')){
@@ -1270,6 +1340,14 @@ function renderLesson(){
   }
   const steps=rev?REV_STEPS:STAGES;                   /* 复习只跑后两段，盲听不重跑 */
   const cur=rev?CUR.rstep:(p.stage??0);
+  /* 11-27 M2：学习完成卡独立外壳——只留一层顶栏，无 stepper */
+  if(!rev && cur>=STAGES.length){
+    $('#app').className='wrap done-card';
+    $('#app').innerHTML=`<div class="khead done-head"><span>本课完成</span><a href="#/c/${curCourse()}">‹ 退出</a></div>
+  <div id="stage"></div>`;
+    renderStage();
+    return;
+  }
   /* 11-25：横屏跟读照设计稿屏3重画；竖屏原样不动 */
   const isShadowStep=(rev?cur===1:cur===2);
   if(isShadowStep && window.matchMedia('(orientation:landscape)').matches){
@@ -1280,6 +1358,8 @@ function renderLesson(){
     return;
   }
   if($('#app')) $('#app').classList.remove('land-shadow');
+  /* 11-26：竖屏跟读照稿屏4（port-shadow：7 行窗口 + 透明底 + 工具条贴 tab 上方） */
+  if($('#app')) $('#app').classList.toggle('port-shadow', !!isShadowStep);
   let h=`<div class="topbar">
     <h1 style="flex:1;min-width:0;font-size:19px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${(!rev&&cur>=STAGES.length)?'本课完成':`L${d.no} · ${esc(d.title)}`}</h1>
     <a class="tbBack" href="#/c/${curCourse()}">‹ 返回</a></div>
@@ -1461,13 +1541,17 @@ function stageShadow(){
       rows+=`<div class="krow ${now?'now':'dim'}" data-act="shrow" data-i="${i}">${en}${zh}</div>`;
     }
   }else{
-    d.sentences.forEach((s,i)=>{
-      if(i===0) return;                    /* 题干不入正文 */
-      const now=i===cur, cls=now?'now':'dim';
+    /* 稿屏4：竖屏 7 行窗口，当前句居中；两端不足时向另一侧补足 */
+    const winN=7, half=(winN-1)/2;
+    let from=Math.max(1,Math.round(cur-half)), to=from+winN-1;
+    if(to>total){ to=total; from=Math.max(1,total-winN+1); }
+    if(from<1){ from=1; to=Math.min(total,winN); }
+    for(let i=from;i<=to;i++){
+      const s=d.sentences[i], now=i===cur;
       const en=(CUR.lang==='zh')?'':`<div class="en">${esc(s.en)}</div>`;
       const zh=(CUR.lang==='en')?'':`<div class="zh">${esc(s.zh)}</div>`;
-      rows+=`<div class="krow ${cls}" data-act="shrow" data-i="${i}">${en}${zh}</div>`;
-    });
+      rows+=`<div class="krow ${now?'now':'dim'}" data-act="shrow" data-i="${i}">${en}${zh}</div>`;
+    }
   }
   const segLang=['zh','en','bi'].map(v=>`<span class="${CUR.lang===v?'on':''}" data-act="intlang" data-v="${v}">${{zh:'中',en:'英',bi:'双语'}[v]}</span>`).join('');
   const segLoop=[1,3].map(n=>`<span class="${CUR.loops===n?'on':''}" data-act="loopsel" data-v="${n}">${n} 遍</span>`).join('');
@@ -1560,8 +1644,7 @@ function studyDoneCard(){
   const next=p.reviews>=OFFSETS.length
     ? '7 轮复习已全部完成，本课通关'
     : `首轮复习：约 6 小时后（${fmtDate(isoOf(nextDue(p)))}）`;
-  return `<div class="shadow-wrap rec-done">
-    <div class="khead2"><span>本课完成</span><a href="#/c/${curCourse()}">‹ 退出</a></div>
+  return `<div class="shadow-wrap rec-done done-body">
     <div class="reccard">
       <div class="rct">学习完成</div>
       <div class="rcs">第 ${d.no} 课 · ${esc(d.title)}</div>
@@ -2101,14 +2184,41 @@ async function renderPlayer(){
     return `<div class="pline ${cls}" data-si="${k}">${esc(s.en)}</div>`;
   }).join('');
   const disc=`<div class="pdisc"><div class="pvinyl"><span>${pad(no)}</span></div></div>`;
-  $('#app').innerHTML=`<div class="player-page">
+  /* 平板横屏：左字幕 + 右控件列分包；手机/平板竖屏 DOM 不变 */
+  const tabletLand=window.innerWidth>=1000 && window.matchMedia('(orientation:landscape)').matches;
+  const mainPart=PLR.sub?`<div class="plyrics" id="plyrics"><div class="pfade top"></div>${lines}<div class="pfade bot"></div></div>`:disc;
+  const sideParts=`<div class="pops">
+      <button class="${fav?'on':'off'}" data-act="plrfav">${fav?'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7-4.6-9.5-8.5C.6 9.5 2.4 6 5.7 6c2 0 3.4 1.1 4.3 2.6h4c.9-1.5 2.3-2.6 4.3-2.6 3.3 0 5.1 3.5 3.2 6.5C19 16.4 12 21 12 21z"/></svg>':'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-4.6-9.5-8.5C.6 9.5 2.4 6 5.7 6c2 0 3.4 1.1 4.3 2.6h4c.9-1.5 2.3-2.6 4.3-2.6 3.3 0 5.1 3.5 3.2 6.5C19 16.4 12 21 12 21z"/></svg>'}<span>${fav?'已收藏':'收藏'}</span></button>
+      <button class="${cached?'on':'off'}" data-act="plrcache"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12M7 10l5 5 5-5M4 20h16"/></svg><span>已缓存</span></button>
+      <button class="${PLR.loop?'on':'off'}" data-act="plrloop"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11a8 8 0 1 0-2.3 5.7M20 5v6h-6"/></svg><span>单曲循环</span></button>
+      <button class="${PLR.sub?'on':'off'}" data-act="plrsub"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M7 12h2M11 12h2M15 12h2"/></svg><span>${PLR.sub?'有字幕':'无字幕'}</span></button>
+    </div>
+    <div class="pbar"><span id="pnow">${fmtDur(PLR.pos)}</span><div data-act="plrseek"><i id="pfill" style="width:${PLR.dur?Math.round(PLR.pos*100/PLR.dur):0}%"></i><b id="pknob" style="left:${PLR.dur?Math.round(PLR.pos*100/PLR.dur):0}%"></b></div><span>${fmtDur(PLR.dur)}</span></div>
+    <div class="pctl">
+      <div class="pmini" data-act="plrprev"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 5h2v14H6zM20 5l-10 7 10 7z"/></svg></div>
+      <div class="pmain" data-act="plrtoggle"><svg viewBox="0 0 24 24" fill="#fff">${PLR.playing?'<rect x="7" y="5" width="4" height="14" rx="1"/><rect x="13" y="5" width="4" height="14" rx="1"/>':'<path d="M8 5l11 7-11 7z"/>'}</svg></div>
+      <div class="pmini" data-act="plrnext"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 5h2v14h-2zM4 5l10 7-10 7z"/></svg></div>
+    </div>
+    <div class="pqueue" id="plrqueue" hidden></div>`;
+  if(tabletLand){
+    $('#app').innerHTML=`<div class="player-page tablet-land">
     <div class="ptop">
       <a class="pback" href="#/listen" aria-label="收起"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></a>
       <span></span>
       <button class="pmore" data-act="plrmore" aria-label="更多">${Object.keys(PLR.picked).length?`<i>${Object.keys(PLR.picked).length}</i>`:''}<svg viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg></button>
     </div>
     <div class="ptitle"><b>${esc((PLR.data&&PLR.data.title)||('L'+no))}</b><div>${esc(c.name)} · L${no}${lvTxt?' · '+lvTxt:''}</div></div>
-    ${PLR.sub?`<div class="plyrics" id="plyrics"><div class="pfade top"></div>${lines}<div class="pfade bot"></div></div>`:disc}
+    <div class="plr-cols"><div class="plr-main">${mainPart}</div><div class="plr-side">${sideParts}</div></div>
+  </div>`;
+  }else{
+    $('#app').innerHTML=`<div class="player-page">
+    <div class="ptop">
+      <a class="pback" href="#/listen" aria-label="收起"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></a>
+      <span></span>
+      <button class="pmore" data-act="plrmore" aria-label="更多">${Object.keys(PLR.picked).length?`<i>${Object.keys(PLR.picked).length}</i>`:''}<svg viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg></button>
+    </div>
+    <div class="ptitle"><b>${esc((PLR.data&&PLR.data.title)||('L'+no))}</b><div>${esc(c.name)} · L${no}${lvTxt?' · '+lvTxt:''}</div></div>
+    ${mainPart}
     <div class="pops">
       <button class="${fav?'on':'off'}" data-act="plrfav">${fav?'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7-4.6-9.5-8.5C.6 9.5 2.4 6 5.7 6c2 0 3.4 1.1 4.3 2.6h4c.9-1.5 2.3-2.6 4.3-2.6 3.3 0 5.1 3.5 3.2 6.5C19 16.4 12 21 12 21z"/></svg>':'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-4.6-9.5-8.5C.6 9.5 2.4 6 5.7 6c2 0 3.4 1.1 4.3 2.6h4c.9-1.5 2.3-2.6 4.3-2.6 3.3 0 5.1 3.5 3.2 6.5C19 16.4 12 21 12 21z"/></svg>'}<span>${fav?'已收藏':'收藏'}</span></button>
       <button class="${cached?'on':'off'}" data-act="plrcache"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12M7 10l5 5 5-5M4 20h16"/></svg><span>已缓存</span></button>
@@ -2123,6 +2233,7 @@ async function renderPlayer(){
     </div>
     <div class="pqueue" id="plrqueue" hidden></div>
   </div>`;
+  }
   plrScrollTo(PLR.si);
   if(PLR.autoplay){ PLR.autoplay=false; PLR.pos=0; plrToggle(); return; }
   if(PLR.playing) plrSync();
