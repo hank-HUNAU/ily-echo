@@ -1,0 +1,1271 @@
+{
+  "groups": [
+    {
+      "id": "g5a",
+      "x": 0,
+      "y": 0,
+      "axis": "y",
+      "items": [
+        {
+          "id": "i5a",
+          "kind": "topAppBar",
+          "label": "精听 · 句卡 1 / 16",
+          "icon": "arrow_back",
+          "variant": "filled",
+          "size": 820
+        }
+      ]
+    },
+    {
+      "id": "g5b",
+      "x": 50,
+      "y": 80,
+      "axis": "y",
+      "items": [
+        {
+          "id": "i5b",
+          "kind": "tabs",
+          "label": "",
+          "icon": null,
+          "variant": "filled",
+          "size": 720,
+          "tabs": [
+            {
+              "label": "盲听 ✓",
+              "icon": "check"
+            },
+            {
+              "label": "精听",
+              "icon": ""
+            },
+            {
+              "label": "跟读",
+              "icon": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "g5c",
+      "x": 50,
+      "y": 160,
+      "axis": "y",
+      "items": [
+        {
+          "id": "i5c",
+          "kind": "card",
+          "label": "Last week I went to the theatre.\n上星期我去看戏。",
+          "icon": "credit_card",
+          "variant": "elevated",
+          "size": 720,
+          "supporting": "句卡 1 / 16 · 点播放听本句"
+        }
+      ]
+    },
+    {
+      "id": "g5d",
+      "x": 50,
+      "y": 400,
+      "axis": "y",
+      "items": [
+        {
+          "id": "i5d",
+          "kind": "button",
+          "label": "★ 收藏",
+          "icon": null,
+          "variant": "text",
+          "size": 160
+        }
+      ]
+    },
+    {
+      "id": "g5e",
+      "x": 50,
+      "y": 480,
+      "axis": "y",
+      "items": [
+        {
+          "id": "i5e",
+          "kind": "tabs",
+          "label": "",
+          "icon": null,
+          "variant": "filled",
+          "size": 720,
+          "tabs": [
+            {
+              "label": "中",
+              "icon": ""
+            },
+            {
+              "label": "英",
+              "icon": ""
+            },
+            {
+              "label": "双语",
+              "icon": "check"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "g5f",
+      "x": 50,
+      "y": 560,
+      "axis": "y",
+      "items": [
+        {
+          "id": "i5f",
+          "kind": "linearProgress",
+          "label": "00:12 / 01:16",
+          "icon": null,
+          "variant": "filled",
+          "size": 720
+        }
+      ]
+    },
+    {
+      "id": "g5g",
+      "x": 50,
+      "y": 640,
+      "axis": "y",
+      "items": [
+        {
+          "id": "i5g",
+          "kind": "splitButton",
+          "label": "◀  ▶  ▶|",
+          "icon": null,
+          "variant": "filled",
+          "size": 720,
+          "supporting": "上一句 / 播放 / 下一句"
+        }
+      ]
+    },
+    {
+      "id": "g5h",
+      "x": 50,
+      "y": 760,
+      "axis": "y",
+      "items": [
+        {
+          "id": "i5h",
+          "kind": "button",
+          "label": "进入跟读 →",
+          "icon": null,
+          "variant": "filled",
+          "size": 720
+        }
+      ]
+    },
+    {
+      "id": "g5z",
+      "x": 0,
+      "y": 1092,
+      "axis": "y",
+      "items": [
+        {
+          "id": "g5zn",
+          "kind": "bottomNav",
+          "label": "",
+          "icon": null,
+          "variant": "filled",
+          "size": 820,
+          "tabs": [
+            {
+              "label": "课程",
+              "icon": "home"
+            },
+            {
+              "label": "难句",
+              "icon": "favorite"
+            },
+            {
+              "label": "听单",
+              "icon": "headphones"
+            },
+            {
+              "label": "卡片",
+              "icon": "credit_card"
+            },
+            {
+              "label": "我的",
+              "icon": "person"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "g6a",
+      "x": 0,
+      "y": 0,
+      "axis": "y",
+      "items": [
+        {
+          "id": "i6a",
+          "kind": "topAppBar",
+          "label": "本课完成",
+          "icon": "arrow_back",
+          "variant": "filled",
+          "size": 820
+        }
+      ]
+    },
+    {
+      "id": "g6b",
+      "x": 50,
+      "y": 80,
+      "axis": "y",
+      "items": [
+        {
+          "id": "i6b",
+          "kind": "card",
+          "label": "学习完成",
+          "icon": "check_circle",
+          "variant": "tonal",
+          "size": 720,
+          "supporting": "第 1 课 · A Private Conversation"
+        }
+      ]
+    },
+    {
+      "id": "g6c",
+      "x": 50,
+      "y": 300,
+      "axis": "y",
+      "items": [
+        {
+          "id": "i6c",
+          "kind": "listItem",
+          "label": "已完成",
+          "icon": "check",
+          "variant": "elevated",
+          "size": 720,
+          "supporting": "盲听 · 精听 · 跟读"
+        },
+        {
+          "id": "i6d",
+          "kind": "listItem",
+          "label": "复习安排",
+          "icon": "schedule",
+          "variant": "outlined",
+          "size": 720,
+          "supporting": "首轮复习：约 6 小时后"
+        }
+      ]
+    },
+    {
+      "id": "g6e",
+      "x": 50,
+      "y": 580,
+      "axis": "y",
+      "items": [
+        {
+          "id": "i6e",
+          "kind": "button",
+          "label": "完成，返回课程",
+          "icon": null,
+          "variant": "filled",
+          "size": 720
+        }
+      ]
+    },
+    {
+      "id": "g7a",
+      "x": 0,
+      "y": 0,
+      "axis": "y",
+      "items": [
+        {
+          "id": "i7a",
+          "kind": "topAppBar",
+          "label": "L1 · A Private Conversation",
+          "icon": "arrow_back",
+          "variant": "filled",
+          "size": 820
+        }
+      ]
+    },
+    {
+      "id": "g7b",
+      "x": 50,
+      "y": 80,
+      "axis": "y",
+      "items": [
+        {
+          "id": "i7b",
+          "kind": "card",
+          "label": "第 2 轮 · 该复习了",
+          "icon": "schedule",
+          "variant": "tonal",
+          "size": 720,
+          "supporting": "按 60 天 OFFSETS 自动排程"
+        }
+      ]
+    },
+    {
+      "id": "g7c",
+      "x": 50,
+      "y": 300,
+      "axis": "y",
+      "items": [
+        {
+          "id": "i7c",
+          "kind": "box",
+          "label": "本轮 2 段\n精听 · 跟读\n盲听 ✓ 已完成（7 轮不重跑）",
+          "icon": "checklist",
+          "variant": "outlined",
+          "size": 720
+        }
+      ]
+    },
+    {
+      "id": "g7d",
+      "x": 50,
+      "y": 560,
+      "axis": "y",
+      "items": [
+        {
+          "id": "i7d",
+          "kind": "button",
+          "label": "开始本轮",
+          "icon": null,
+          "variant": "filled",
+          "size": 720
+        },
+        {
+          "id": "i7e",
+          "kind": "button",
+          "label": "晚点再做（3 天内补做不算漏）",
+          "icon": null,
+          "variant": "text",
+          "size": 720
+        }
+      ]
+    },
+    {
+      "id": "g7z",
+      "x": 0,
+      "y": 1092,
+      "axis": "y",
+      "items": [
+        {
+          "id": "g7zn",
+          "kind": "bottomNav",
+          "label": "",
+          "icon": null,
+          "variant": "filled",
+          "size": 820,
+          "tabs": [
+            {
+              "label": "课程",
+              "icon": "home"
+            },
+            {
+              "label": "难句",
+              "icon": "favorite"
+            },
+            {
+              "label": "听单",
+              "icon": "headphones"
+            },
+            {
+              "label": "卡片",
+              "icon": "credit_card"
+            },
+            {
+              "label": "我的",
+              "icon": "person"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "g8a",
+      "x": 0,
+      "y": 0,
+      "axis": "y",
+      "items": [
+        {
+          "id": "i8a",
+          "kind": "topAppBar",
+          "label": "第 2 轮完成",
+          "icon": "arrow_back",
+          "variant": "filled",
+          "size": 820
+        }
+      ]
+    },
+    {
+      "id": "g8b",
+      "x": 50,
+      "y": 80,
+      "axis": "y",
+      "items": [
+        {
+          "id": "i8b",
+          "kind": "card",
+          "label": "本轮完成",
+          "icon": "check_circle",
+          "variant": "tonal",
+          "size": 720,
+          "supporting": "首学 ✓ → 第 2 轮 ● → 通关 ○ … 共 7 轮"
+        }
+      ]
+    },
+    {
+      "id": "g8c",
+      "x": 50,
+      "y": 300,
+      "axis": "y",
+      "items": [
+        {
+          "id": "i8c",
+          "kind": "listItem",
+          "label": "精听 ✓",
+          "icon": null,
+          "variant": "elevated",
+          "size": 720
+        },
+        {
+          "id": "i8d",
+          "kind": "listItem",
+          "label": "跟读 ✓",
+          "icon": null,
+          "variant": "elevated",
+          "size": 720
+        }
+      ]
+    },
+    {
+      "id": "g8e",
+      "x": 50,
+      "y": 520,
+      "axis": "y",
+      "items": [
+        {
+          "id": "i8e",
+          "kind": "box",
+          "label": "下次复习：按 OFFSETS 自动排\n已超出 3 天宽限记「补做」",
+          "icon": "schedule",
+          "variant": "outlined",
+          "size": 720
+        }
+      ]
+    },
+    {
+      "id": "g8f",
+      "x": 50,
+      "y": 760,
+      "axis": "y",
+      "items": [
+        {
+          "id": "i8f",
+          "kind": "button",
+          "label": "回到课程",
+          "icon": null,
+          "variant": "filled",
+          "size": 720
+        }
+      ]
+    },
+    {
+      "id": "g9a",
+      "x": 0,
+      "y": 0,
+      "axis": "y",
+      "items": [
+        {
+          "id": "i9a",
+          "kind": "topAppBar",
+          "label": "课程库",
+          "icon": "arrow_back",
+          "variant": "filled",
+          "size": 820,
+          "icon2": "add"
+        }
+      ]
+    },
+    {
+      "id": "g9b",
+      "x": 50,
+      "y": 80,
+      "axis": "y",
+      "items": [
+        {
+          "id": "i9b",
+          "kind": "box",
+          "label": "点封面：添加并自动下载 · 下载中再点暂停 · 长按移除",
+          "icon": null,
+          "variant": "outlined",
+          "size": 720
+        }
+      ]
+    },
+    {
+      "id": "g9c",
+      "x": 50,
+      "y": 200,
+      "axis": "y",
+      "items": [
+        {
+          "id": "i9c",
+          "kind": "card",
+          "label": "新概念英语 2",
+          "icon": "menu_book",
+          "variant": "tonal",
+          "size": 720,
+          "supporting": "已下载 · 96 课"
+        },
+        {
+          "id": "i9d",
+          "kind": "card",
+          "label": "新概念英语 1",
+          "icon": "menu_book",
+          "variant": "outlined",
+          "size": 720,
+          "supporting": "筹备中"
+        },
+        {
+          "id": "i9e",
+          "kind": "card",
+          "label": "Think Starter",
+          "icon": "menu_book",
+          "variant": "outlined",
+          "size": 720,
+          "supporting": "筹备中"
+        }
+      ]
+    },
+    {
+      "id": "g9f",
+      "x": 50,
+      "y": 620,
+      "axis": "y",
+      "items": [
+        {
+          "id": "i9f",
+          "kind": "box",
+          "label": "已下载 1 门 · 下载中 0 门 · 待下载 1 门 · 筹备中 4 门\n封面四态：已下载 / 下载中 / 未下载 / 筹备中",
+          "icon": "grid_view",
+          "variant": "outlined",
+          "size": 720
+        }
+      ]
+    },
+    {
+      "id": "g9z",
+      "x": 0,
+      "y": 1092,
+      "axis": "y",
+      "items": [
+        {
+          "id": "g9zn",
+          "kind": "bottomNav",
+          "label": "",
+          "icon": null,
+          "variant": "filled",
+          "size": 820,
+          "tabs": [
+            {
+              "label": "课程",
+              "icon": "home"
+            },
+            {
+              "label": "难句",
+              "icon": "favorite"
+            },
+            {
+              "label": "听单",
+              "icon": "headphones"
+            },
+            {
+              "label": "卡片",
+              "icon": "credit_card"
+            },
+            {
+              "label": "我的",
+              "icon": "person"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "g10a",
+      "x": 0,
+      "y": 0,
+      "axis": "y",
+      "items": [
+        {
+          "id": "i10a",
+          "kind": "topAppBar",
+          "label": "听单",
+          "icon": "arrow_back",
+          "variant": "filled",
+          "size": 820
+        }
+      ]
+    },
+    {
+      "id": "g10b",
+      "x": 50,
+      "y": 80,
+      "axis": "y",
+      "items": [
+        {
+          "id": "i10b",
+          "kind": "tabs",
+          "label": "",
+          "icon": null,
+          "variant": "filled",
+          "size": 720,
+          "tabs": [
+            {
+              "label": "最近在听",
+              "icon": "history"
+            },
+            {
+              "label": "我的收藏",
+              "icon": "favorite"
+            },
+            {
+              "label": "离线音频",
+              "icon": "download"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "g10c",
+      "x": 50,
+      "y": 160,
+      "axis": "x",
+      "items": [
+        {
+          "id": "i10c",
+          "kind": "chip",
+          "label": "新概念英语 2",
+          "icon": null,
+          "variant": "filled",
+          "size": 180
+        },
+        {
+          "id": "i10d",
+          "kind": "chip",
+          "label": "新概念英语 1",
+          "icon": null,
+          "variant": "outlined",
+          "size": 180
+        },
+        {
+          "id": "i10e",
+          "kind": "chip",
+          "label": "Think Starter",
+          "icon": null,
+          "variant": "outlined",
+          "size": 180
+        },
+        {
+          "id": "i10f",
+          "kind": "chip",
+          "label": "Think 1",
+          "icon": null,
+          "variant": "outlined",
+          "size": 180
+        }
+      ]
+    },
+    {
+      "id": "g10g",
+      "x": 50,
+      "y": 240,
+      "axis": "y",
+      "items": [
+        {
+          "id": "i10g",
+          "kind": "listItem",
+          "label": "A1 · 参考 · 新概念英语 2",
+          "icon": "download",
+          "variant": "elevated",
+          "size": 720,
+          "supporting": "32 课 · 51:23 · 26 MB · 已下载"
+        },
+        {
+          "id": "i10h",
+          "kind": "listItem",
+          "label": "A2 · 参考 · 新概念英语 2",
+          "icon": "download",
+          "variant": "outlined",
+          "size": 720,
+          "supporting": "32 课 · 55:44 · 26 MB · 待下载"
+        },
+        {
+          "id": "i10i",
+          "kind": "listItem",
+          "label": "B1 · 参考 · 新概念英语 2",
+          "icon": "download",
+          "variant": "outlined",
+          "size": 720,
+          "supporting": "32 课 · 57:34 · 26 MB · 待下载"
+        }
+      ]
+    },
+    {
+      "id": "g10z",
+      "x": 0,
+      "y": 1092,
+      "axis": "y",
+      "items": [
+        {
+          "id": "g10zn",
+          "kind": "bottomNav",
+          "label": "",
+          "icon": null,
+          "variant": "filled",
+          "size": 820,
+          "tabs": [
+            {
+              "label": "课程",
+              "icon": "home"
+            },
+            {
+              "label": "难句",
+              "icon": "favorite"
+            },
+            {
+              "label": "听单",
+              "icon": "headphones"
+            },
+            {
+              "label": "卡片",
+              "icon": "credit_card"
+            },
+            {
+              "label": "我的",
+              "icon": "person"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "g11a",
+      "x": 0,
+      "y": 0,
+      "axis": "y",
+      "items": [
+        {
+          "id": "i11a",
+          "kind": "topAppBar",
+          "label": "我的",
+          "icon": "arrow_back",
+          "variant": "filled",
+          "size": 820
+        }
+      ]
+    },
+    {
+      "id": "g11b",
+      "x": 50,
+      "y": 80,
+      "axis": "y",
+      "items": [
+        {
+          "id": "i11b",
+          "kind": "card",
+          "label": "登录可选",
+          "icon": "account_circle",
+          "variant": "outlined",
+          "size": 720,
+          "supporting": "不登录也能照常学习；记录保存在本机。"
+        }
+      ]
+    },
+    {
+      "id": "g11c",
+      "x": 50,
+      "y": 280,
+      "axis": "y",
+      "items": [
+        {
+          "id": "i11c",
+          "kind": "box",
+          "label": "学习概览\n已学 1% · 通关 0% · 复习 29%",
+          "icon": "bar_chart",
+          "variant": "tonal",
+          "size": 720
+        }
+      ]
+    },
+    {
+      "id": "g11d",
+      "x": 50,
+      "y": 480,
+      "axis": "y",
+      "items": [
+        {
+          "id": "i11d",
+          "kind": "box",
+          "label": "近 7 天练习（分钟）\n累计收听 · 跟读句子次数",
+          "icon": "show_chart",
+          "variant": "outlined",
+          "size": 720
+        }
+      ]
+    },
+    {
+      "id": "g11e",
+      "x": 50,
+      "y": 680,
+      "axis": "y",
+      "items": [
+        {
+          "id": "i11e",
+          "kind": "listItem",
+          "label": "离线包",
+          "icon": "download",
+          "variant": "elevated",
+          "size": 720,
+          "supporting": "按我的课程逐门管理"
+        },
+        {
+          "id": "i11f",
+          "kind": "listItem",
+          "label": "数据管理",
+          "icon": "storage",
+          "variant": "outlined",
+          "size": 720,
+          "supporting": "导入/导出/重置（打印时排除）"
+        }
+      ]
+    },
+    {
+      "id": "g11z",
+      "x": 0,
+      "y": 1092,
+      "axis": "y",
+      "items": [
+        {
+          "id": "g11zn",
+          "kind": "bottomNav",
+          "label": "",
+          "icon": null,
+          "variant": "filled",
+          "size": 820,
+          "tabs": [
+            {
+              "label": "课程",
+              "icon": "home"
+            },
+            {
+              "label": "难句",
+              "icon": "favorite"
+            },
+            {
+              "label": "听单",
+              "icon": "headphones"
+            },
+            {
+              "label": "卡片",
+              "icon": "credit_card"
+            },
+            {
+              "label": "我的",
+              "icon": "person"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "g12a",
+      "x": 0,
+      "y": 0,
+      "axis": "y",
+      "items": [
+        {
+          "id": "i12a",
+          "kind": "topAppBar",
+          "label": "难句本",
+          "icon": "arrow_back",
+          "variant": "filled",
+          "size": 820,
+          "icon2": "help"
+        }
+      ]
+    },
+    {
+      "id": "g12b",
+      "x": 50,
+      "y": 80,
+      "axis": "y",
+      "items": [
+        {
+          "id": "i12b",
+          "kind": "box",
+          "label": "范围：新概念英语 2 · 按课程/全书",
+          "icon": null,
+          "variant": "outlined",
+          "size": 720
+        }
+      ]
+    },
+    {
+      "id": "g12c",
+      "x": 50,
+      "y": 160,
+      "axis": "y",
+      "items": [
+        {
+          "id": "i12c",
+          "kind": "card",
+          "label": "Last week I went to the theatre.",
+          "icon": "favorite",
+          "variant": "elevated",
+          "size": 720,
+          "supporting": "上星期我去看戏。 · 主谓 · N2 L1"
+        },
+        {
+          "id": "i12d",
+          "kind": "card",
+          "label": "I had a very good seat.",
+          "icon": "favorite",
+          "variant": "outlined",
+          "size": 720,
+          "supporting": "我有一个很好的座位。 · SVO · N2 L1"
+        }
+      ]
+    },
+    {
+      "id": "g12e",
+      "x": 50,
+      "y": 460,
+      "axis": "y",
+      "items": [
+        {
+          "id": "i12e",
+          "kind": "button",
+          "label": "进入复述 →",
+          "icon": null,
+          "variant": "filled",
+          "size": 720
+        }
+      ]
+    },
+    {
+      "id": "g12z",
+      "x": 0,
+      "y": 1092,
+      "axis": "y",
+      "items": [
+        {
+          "id": "g12zn",
+          "kind": "bottomNav",
+          "label": "",
+          "icon": null,
+          "variant": "filled",
+          "size": 820,
+          "tabs": [
+            {
+              "label": "课程",
+              "icon": "home"
+            },
+            {
+              "label": "难句",
+              "icon": "favorite"
+            },
+            {
+              "label": "听单",
+              "icon": "headphones"
+            },
+            {
+              "label": "卡片",
+              "icon": "credit_card"
+            },
+            {
+              "label": "我的",
+              "icon": "person"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "g13a",
+      "x": 0,
+      "y": 0,
+      "axis": "y",
+      "items": [
+        {
+          "id": "i13a",
+          "kind": "topAppBar",
+          "label": "语境闪卡",
+          "icon": "arrow_back",
+          "variant": "filled",
+          "size": 820,
+          "icon2": "help"
+        }
+      ]
+    },
+    {
+      "id": "g13b",
+      "x": 50,
+      "y": -80,
+      "axis": "y",
+      "items": [
+        {
+          "id": "i13b",
+          "kind": "box",
+          "label": "今日待复习 1 / 1 张",
+          "icon": "schedule",
+          "variant": "outlined",
+          "size": 720
+        }
+      ]
+    },
+    {
+      "id": "g13c",
+      "x": 50,
+      "y": 0,
+      "axis": "y",
+      "items": [
+        {
+          "id": "i13c",
+          "kind": "card",
+          "label": "上星期我去看戏。\nLast week I went to the theatre.",
+          "icon": "credit_card",
+          "variant": "elevated",
+          "size": 720,
+          "supporting": "语境闪卡 · 点翻面看英文"
+        }
+      ]
+    },
+    {
+      "id": "g13d",
+      "x": 50,
+      "y": 240,
+      "axis": "y",
+      "items": [
+        {
+          "id": "i13d",
+          "kind": "tabs",
+          "label": "",
+          "icon": null,
+          "variant": "filled",
+          "size": 720,
+          "tabs": [
+            {
+              "label": "再来",
+              "icon": ""
+            },
+            {
+              "label": "一般",
+              "icon": ""
+            },
+            {
+              "label": "会了",
+              "icon": "check"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "g13e",
+      "x": 50,
+      "y": 320,
+      "axis": "y",
+      "items": [
+        {
+          "id": "i13e",
+          "kind": "box",
+          "label": "SRS 2 档 · 卡片评价不写 STATS",
+          "icon": "info",
+          "variant": "outlined",
+          "size": 720
+        }
+      ]
+    },
+    {
+      "id": "g13z",
+      "x": 0,
+      "y": 1092,
+      "axis": "y",
+      "items": [
+        {
+          "id": "g13zn",
+          "kind": "bottomNav",
+          "label": "",
+          "icon": null,
+          "variant": "filled",
+          "size": 820,
+          "tabs": [
+            {
+              "label": "课程",
+              "icon": "home"
+            },
+            {
+              "label": "难句",
+              "icon": "favorite"
+            },
+            {
+              "label": "听单",
+              "icon": "headphones"
+            },
+            {
+              "label": "卡片",
+              "icon": "credit_card"
+            },
+            {
+              "label": "我的",
+              "icon": "person"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "frames": [
+    {
+      "id": "rF1",
+      "name": "5 精听",
+      "x": 0,
+      "y": 5000,
+      "w": 820,
+      "h": 1180,
+      "place": "top",
+      "note": "5 精听"
+    },
+    {
+      "id": "rF2",
+      "name": "6 学习完成卡",
+      "x": 940,
+      "y": 5000,
+      "w": 820,
+      "h": 1180,
+      "place": "top",
+      "note": "6 学习完成卡"
+    },
+    {
+      "id": "rF3",
+      "name": "7 复习入口",
+      "x": 1880,
+      "y": 5000,
+      "w": 820,
+      "h": 1180,
+      "place": "top",
+      "note": "7 复习入口"
+    },
+    {
+      "id": "rF4",
+      "name": "8 复习完成",
+      "x": 2820,
+      "y": 5000,
+      "w": 820,
+      "h": 1180,
+      "place": "top",
+      "note": "8 复习完成"
+    },
+    {
+      "id": "rF5",
+      "name": "9 课程库",
+      "x": 3760,
+      "y": 5000,
+      "w": 820,
+      "h": 1180,
+      "place": "top",
+      "note": "9 课程库"
+    },
+    {
+      "id": "rF6",
+      "name": "10 听单",
+      "x": 4700,
+      "y": 5000,
+      "w": 820,
+      "h": 1180,
+      "place": "top",
+      "note": "10 听单"
+    },
+    {
+      "id": "rF7",
+      "name": "11 我的",
+      "x": 5640,
+      "y": 5000,
+      "w": 820,
+      "h": 1180,
+      "place": "top",
+      "note": "11 我的"
+    },
+    {
+      "id": "rF8",
+      "name": "12 难句",
+      "x": 6580,
+      "y": 5000,
+      "w": 820,
+      "h": 1180,
+      "place": "top",
+      "note": "12 难句"
+    },
+    {
+      "id": "rF9",
+      "name": "13 卡片",
+      "x": 7520,
+      "y": 5000,
+      "w": 820,
+      "h": 1180,
+      "place": "top",
+      "note": "13 卡片"
+    }
+  ],
+  "paletteKey": "custom",
+  "customPalette": {
+    "key": "nce2-green",
+    "label": "NCE2 冷灰绿",
+    "seed": "#0B8A5F",
+    "primary": "#0B8A5F",
+    "onPrimary": "#FFFFFF",
+    "primaryContainer": "#E6F7F0",
+    "onPrimaryContainer": "#08704D",
+    "inversePrimary": "#5DCAA5",
+    "secondary": "#10B981",
+    "secondaryContainer": "#E6F7F0",
+    "onSecondaryContainer": "#08704D",
+    "tertiary": "#8A5E22",
+    "tertiaryContainer": "#FBF1E3",
+    "onTertiary": "#FFFFFF",
+    "onTertiaryContainer": "#6B4716",
+    "error": "#B04A43",
+    "onError": "#FFFFFF",
+    "errorContainer": "#FCEBEB",
+    "onErrorContainer": "#8A2E28",
+    "surface": "#F4F6F8",
+    "onSurface": "#263039",
+    "surfaceContainerLow": "#FFFFFF",
+    "surfaceContainer": "#EDF1F4",
+    "surfaceContainerHigh": "#E4E9EE",
+    "surfaceContainerHighest": "#D9E0E6",
+    "onSurfaceVariant": "#5C6773",
+    "outline": "#E2E6EB",
+    "outlineVariant": "#CBD2D9",
+    "inverseSurface": "#263039",
+    "inverseOnSurface": "#F4F6F8"
+  },
+  "frame": "blank",
+  "platform": "web",
+  "title": "NCE2 Echo Loop · 平板竖屏补稿（剩余 9 页）",
+  "brief": "820×1180 平板竖屏，内容 720px 居中；补稿覆盖精听/学习完成卡/复习入口/复习完成/课程库/听单/我的/难句/卡片；沿用冷灰+品牌绿，不引入 Material 默认紫。",
+  "dynamicColor": false,
+  "theme": {
+    "dark": false,
+    "bothModes": false,
+    "contrast": "standard",
+    "shape": "rounded",
+    "font": "roboto",
+    "emphasized": false,
+    "motion": "standard"
+  }
+}

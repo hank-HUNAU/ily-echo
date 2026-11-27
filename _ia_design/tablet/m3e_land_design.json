@@ -1,0 +1,345 @@
+{
+  "groups": [
+    {
+      "id": "lh1a",
+      "x": 0,
+      "y": 2000,
+      "axis": "y",
+      "items": [
+        {
+          "id": "lh1a1",
+          "kind": "topAppBar",
+          "label": "新概念英语 2 · 教材",
+          "icon": "arrow_back",
+          "variant": "filled",
+          "size": 1180,
+          "icon2": "help"
+        }
+      ]
+    },
+    {
+      "id": "lh1b",
+      "x": 20,
+      "y": 2090,
+      "axis": "y",
+      "items": [
+        {
+          "id": "lh1b1",
+          "kind": "tabs",
+          "label": "",
+          "icon": null,
+          "variant": "filled",
+          "size": 720,
+          "tabs": [
+            {
+              "label": "全部",
+              "icon": ""
+            },
+            {
+              "label": "待复习",
+              "icon": ""
+            },
+            {
+              "label": "未学",
+              "icon": ""
+            },
+            {
+              "label": "学习中",
+              "icon": ""
+            },
+            {
+              "label": "通关",
+              "icon": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lh1c",
+      "x": 20,
+      "y": 2156,
+      "axis": "y",
+      "items": [
+        {
+          "id": "lh1c1",
+          "kind": "searchBar",
+          "label": "搜索课号或标题",
+          "icon": null,
+          "variant": "outlined",
+          "size": 720
+        }
+      ]
+    },
+    {
+      "id": "lh1d",
+      "x": 20,
+      "y": 2230,
+      "axis": "y",
+      "items": [
+        {
+          "id": "lh1d1",
+          "kind": "box",
+          "label": "自适应课格 grid-template-columns: repeat(auto-fit, minmax(88px,1fr))\n820 宽→6 列 / 1180 宽→11 列\nL1 L2 L3 L4 L5 L6 L7 L8 L9 L10 L11 … 共 96 格",
+          "icon": "grid_view",
+          "variant": "outlined",
+          "size": 720,
+          "supporting": "课格随屏幕宽度自动换列，不固定列数"
+        }
+      ]
+    },
+    {
+      "id": "lh1e",
+      "x": 780,
+      "y": 2090,
+      "axis": "y",
+      "items": [
+        {
+          "id": "lh1e1",
+          "kind": "card",
+          "label": "接着学 L1",
+          "icon": "play_arrow",
+          "variant": "tonal",
+          "size": 360,
+          "supporting": "A Private Conversation · 已学 1/96"
+        }
+      ]
+    },
+    {
+      "id": "lh1f",
+      "x": 780,
+      "y": 2260,
+      "axis": "y",
+      "items": [
+        {
+          "id": "lh1f1",
+          "kind": "box",
+          "label": "学习概览\n已学 1% · 通关 0% · 复习 29%",
+          "icon": "bar_chart",
+          "variant": "outlined",
+          "size": 360
+        }
+      ]
+    },
+    {
+      "id": "lh1g",
+      "x": 780,
+      "y": 2440,
+      "axis": "y",
+      "items": [
+        {
+          "id": "lh1g1",
+          "kind": "box",
+          "label": "今日任务\n新概念英语 2 · 继续精听 L1",
+          "icon": "home",
+          "variant": "tonal",
+          "size": 360
+        }
+      ]
+    },
+    {
+      "id": "lh2a",
+      "x": 1300,
+      "y": 2000,
+      "axis": "y",
+      "items": [
+        {
+          "id": "lh2a1",
+          "kind": "topAppBar",
+          "label": "跟读 · 全篇",
+          "icon": "arrow_back",
+          "variant": "filled",
+          "size": 1180
+        }
+      ]
+    },
+    {
+      "id": "lh2b",
+      "x": 1320,
+      "y": 2090,
+      "axis": "y",
+      "items": [
+        {
+          "id": "lh2b1",
+          "kind": "box",
+          "label": "Last week I went to the theatre.\nI had a very good seat.\nThe play was very interesting.\nI did not enjoy it.\nA young man and a young woman were sitting behind me.\nThey were talking loudly.\nI got very angry.",
+          "icon": "subject",
+          "variant": "outlined",
+          "size": 720,
+          "supporting": "7 行窗口 · 焦点行加粗，其余 32% 虚化"
+        }
+      ]
+    },
+    {
+      "id": "lh2c",
+      "x": 1320,
+      "y": 2340,
+      "axis": "y",
+      "items": [
+        {
+          "id": "lh2c1",
+          "kind": "toolbar",
+          "label": "00:20 / 01:16",
+          "icon": "play_arrow",
+          "variant": "filled",
+          "size": 720,
+          "supporting": "紧凑播放条"
+        }
+      ]
+    },
+    {
+      "id": "lh2d",
+      "x": 1320,
+      "y": 2420,
+      "axis": "y",
+      "items": [
+        {
+          "id": "lh2d1",
+          "kind": "tabs",
+          "label": "",
+          "icon": null,
+          "variant": "filled",
+          "size": 720,
+          "tabs": [
+            {
+              "label": "中",
+              "icon": ""
+            },
+            {
+              "label": "英",
+              "icon": ""
+            },
+            {
+              "label": "双语",
+              "icon": "check"
+            },
+            {
+              "label": "1 遍",
+              "icon": ""
+            },
+            {
+              "label": "3 遍",
+              "icon": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lh2e",
+      "x": 1320,
+      "y": 2500,
+      "axis": "y",
+      "items": [
+        {
+          "id": "lh2e1",
+          "kind": "button",
+          "label": "读完了 →",
+          "icon": null,
+          "variant": "filled",
+          "size": 720
+        }
+      ]
+    },
+    {
+      "id": "lh2f",
+      "x": 2100,
+      "y": 2090,
+      "axis": "y",
+      "items": [
+        {
+          "id": "lh2f1",
+          "kind": "card",
+          "label": "焦点句",
+          "icon": "format_color_text",
+          "variant": "tonal",
+          "size": 360,
+          "supporting": "I did not enjoy it. · 我不喜欢这出戏。"
+        }
+      ]
+    },
+    {
+      "id": "lh2g",
+      "x": 2100,
+      "y": 2260,
+      "axis": "y",
+      "items": [
+        {
+          "id": "lh2g1",
+          "kind": "box",
+          "label": "进度\n第 4 / 16 句 · 本轮精听/跟读",
+          "icon": "linear_scale",
+          "variant": "outlined",
+          "size": 360
+        }
+      ]
+    }
+  ],
+  "frames": [
+    {
+      "id": "lF1",
+      "name": "横1 教材页",
+      "x": 0,
+      "y": 2000,
+      "w": 1180,
+      "h": 820,
+      "place": "top"
+    },
+    {
+      "id": "lF2",
+      "name": "横2 跟读",
+      "x": 1300,
+      "y": 2000,
+      "w": 1180,
+      "h": 820,
+      "place": "top"
+    }
+  ],
+  "paletteKey": "custom",
+  "customPalette": {
+    "key": "nce2-green",
+    "label": "NCE2 冷灰绿",
+    "seed": "#0B8A5F",
+    "primary": "#0B8A5F",
+    "onPrimary": "#FFFFFF",
+    "primaryContainer": "#E6F7F0",
+    "onPrimaryContainer": "#08704D",
+    "inversePrimary": "#5DCAA5",
+    "secondary": "#10B981",
+    "secondaryContainer": "#E6F7F0",
+    "onSecondaryContainer": "#08704D",
+    "tertiary": "#8A5E22",
+    "tertiaryContainer": "#FBF1E3",
+    "onTertiary": "#FFFFFF",
+    "onTertiaryContainer": "#6B4716",
+    "error": "#B04A43",
+    "onError": "#FFFFFF",
+    "errorContainer": "#FCEBEB",
+    "onErrorContainer": "#8A2E28",
+    "surface": "#F4F6F8",
+    "onSurface": "#263039",
+    "surfaceContainerLow": "#FFFFFF",
+    "surfaceContainer": "#EDF1F4",
+    "surfaceContainerHigh": "#E4E9EE",
+    "surfaceContainerHighest": "#D9E0E6",
+    "onSurfaceVariant": "#5C6773",
+    "outline": "#E2E6EB",
+    "outlineVariant": "#CBD2D9",
+    "inverseSurface": "#263039",
+    "inverseOnSurface": "#F4F6F8"
+  },
+  "frame": "blank",
+  "platform": "web",
+  "title": "NCE2 Echo Loop · 平板横屏",
+  "brief": "1180×820 平板横屏：左 720px 主内容 + 右辅助区；教材页课格自适应网格 (auto-fit minmax(88px,1fr))，820 宽 6 列 / 1180 宽 11 列；冷灰+品牌绿，不引默认紫。",
+  "dynamicColor": false,
+  "theme": {
+    "dark": false,
+    "bothModes": false,
+    "contrast": "standard",
+    "shape": "rounded",
+    "font": "roboto",
+    "emphasized": false,
+    "motion": "standard"
+  }
+}

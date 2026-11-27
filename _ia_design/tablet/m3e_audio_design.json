@@ -1,0 +1,311 @@
+{
+  "groups": [
+    {
+      "id": "ap1a",
+      "x": 0,
+      "y": 4000,
+      "axis": "y",
+      "items": [
+        {
+          "id": "ap1a1",
+          "kind": "topAppBar",
+          "label": "",
+          "icon": "expand_more",
+          "variant": "filled",
+          "size": 820,
+          "icon2": "more_vert"
+        }
+      ]
+    },
+    {
+      "id": "ap1b",
+      "x": 50,
+      "y": 4072,
+      "axis": "y",
+      "items": [
+        {
+          "id": "ap1b1",
+          "kind": "card",
+          "label": "A Private Conversation",
+          "icon": "album",
+          "variant": "tonal",
+          "size": 720,
+          "supporting": "新概念英语 2 · L1 · 参考 A1"
+        }
+      ]
+    },
+    {
+      "id": "ap1c",
+      "x": 50,
+      "y": 4200,
+      "axis": "y",
+      "items": [
+        {
+          "id": "ap1c1",
+          "kind": "box",
+          "label": "Last week I went to the theatre.\nI had a very good seat.\nThe play was very interesting.\nI did not enjoy it.",
+          "icon": "lyrics",
+          "variant": "outlined",
+          "size": 720,
+          "supporting": "逐句高亮上滚 · 行宽 ≤ 720px，不横向拉伸"
+        }
+      ]
+    },
+    {
+      "id": "ap1d",
+      "x": 50,
+      "y": 4460,
+      "axis": "y",
+      "items": [
+        {
+          "id": "ap1d1",
+          "kind": "toolbar",
+          "label": "",
+          "icon": "favorite",
+          "variant": "filled",
+          "size": 720,
+          "supporting": "收藏 / 已缓存 / 单曲循环 / 有字幕"
+        }
+      ]
+    },
+    {
+      "id": "ap1e",
+      "x": 50,
+      "y": 4540,
+      "axis": "y",
+      "items": [
+        {
+          "id": "ap1e1",
+          "kind": "linearProgress",
+          "label": "0:00 ───────────── 1:16",
+          "icon": null,
+          "variant": "filled",
+          "size": 720,
+          "supporting": "进度条 + 时间"
+        }
+      ]
+    },
+    {
+      "id": "ap1f",
+      "x": 50,
+      "y": 4620,
+      "axis": "y",
+      "items": [
+        {
+          "id": "ap1f1",
+          "kind": "splitButton",
+          "label": "⏮  ▶  ⏭",
+          "icon": null,
+          "variant": "filled",
+          "size": 720,
+          "supporting": "播放/暂停 + 上一句/下一句"
+        }
+      ]
+    },
+    {
+      "id": "ap1g",
+      "x": 0,
+      "y": 5092,
+      "axis": "y",
+      "items": [
+        {
+          "id": "ap1g1",
+          "kind": "bottomNav",
+          "label": "",
+          "icon": null,
+          "variant": "filled",
+          "size": 820,
+          "tabs": [
+            {
+              "label": "课程",
+              "icon": "home"
+            },
+            {
+              "label": "难句",
+              "icon": "favorite"
+            },
+            {
+              "label": "听单",
+              "icon": "headphones"
+            },
+            {
+              "label": "卡片",
+              "icon": "credit_card"
+            },
+            {
+              "label": "我的",
+              "icon": "person"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ap2a",
+      "x": 940,
+      "y": 4000,
+      "axis": "y",
+      "items": [
+        {
+          "id": "ap2a1",
+          "kind": "topAppBar",
+          "label": "",
+          "icon": "expand_more",
+          "variant": "filled",
+          "size": 1180,
+          "icon2": "more_vert"
+        }
+      ]
+    },
+    {
+      "id": "ap2b",
+      "x": 990,
+      "y": 4080,
+      "axis": "y",
+      "items": [
+        {
+          "id": "ap2b1",
+          "kind": "box",
+          "label": "Last week I went to the theatre.\nI had a very good seat.\nThe play was very interesting.\nI did not enjoy it.",
+          "icon": "lyrics",
+          "variant": "outlined",
+          "size": 720,
+          "supporting": "左列字幕 · 行宽 720px · 逐句高亮上滚"
+        }
+      ]
+    },
+    {
+      "id": "ap2c",
+      "x": 1750,
+      "y": 4080,
+      "axis": "y",
+      "items": [
+        {
+          "id": "ap2c1",
+          "kind": "card",
+          "label": "A Private Conversation",
+          "icon": "album",
+          "variant": "tonal",
+          "size": 330,
+          "supporting": "新概念英语 2 · L1"
+        }
+      ]
+    },
+    {
+      "id": "ap2d",
+      "x": 1750,
+      "y": 4260,
+      "axis": "y",
+      "items": [
+        {
+          "id": "ap2d1",
+          "kind": "toolbar",
+          "label": "",
+          "icon": "favorite",
+          "variant": "filled",
+          "size": 330,
+          "supporting": "收藏 / 已缓存 / 循环 / 字幕"
+        }
+      ]
+    },
+    {
+      "id": "ap2e",
+      "x": 1750,
+      "y": 4360,
+      "axis": "y",
+      "items": [
+        {
+          "id": "ap2e1",
+          "kind": "linearProgress",
+          "label": "0:00 / 1:16",
+          "icon": null,
+          "variant": "filled",
+          "size": 330
+        }
+      ]
+    },
+    {
+      "id": "ap2f",
+      "x": 1750,
+      "y": 4440,
+      "axis": "y",
+      "items": [
+        {
+          "id": "ap2f1",
+          "kind": "splitButton",
+          "label": "⏮  ▶  ⏭",
+          "icon": null,
+          "variant": "filled",
+          "size": 330
+        }
+      ]
+    }
+  ],
+  "frames": [
+    {
+      "id": "aF1",
+      "name": "音1 竖屏播放页",
+      "x": 0,
+      "y": 4000,
+      "w": 820,
+      "h": 1180,
+      "place": "top"
+    },
+    {
+      "id": "aF2",
+      "name": "音2 横屏播放页",
+      "x": 940,
+      "y": 4000,
+      "w": 1180,
+      "h": 820,
+      "place": "top"
+    }
+  ],
+  "paletteKey": "custom",
+  "customPalette": {
+    "key": "nce2-green",
+    "label": "NCE2 冷灰绿",
+    "seed": "#0B8A5F",
+    "primary": "#0B8A5F",
+    "onPrimary": "#FFFFFF",
+    "primaryContainer": "#E6F7F0",
+    "onPrimaryContainer": "#08704D",
+    "inversePrimary": "#5DCAA5",
+    "secondary": "#10B981",
+    "secondaryContainer": "#E6F7F0",
+    "onSecondaryContainer": "#08704D",
+    "tertiary": "#8A5E22",
+    "tertiaryContainer": "#FBF1E3",
+    "onTertiary": "#FFFFFF",
+    "onTertiaryContainer": "#6B4716",
+    "error": "#B04A43",
+    "onError": "#FFFFFF",
+    "errorContainer": "#FCEBEB",
+    "onErrorContainer": "#8A2E28",
+    "surface": "#F4F6F8",
+    "onSurface": "#263039",
+    "surfaceContainerLow": "#FFFFFF",
+    "surfaceContainer": "#EDF1F4",
+    "surfaceContainerHigh": "#E4E9EE",
+    "surfaceContainerHighest": "#D9E0E6",
+    "onSurfaceVariant": "#5C6773",
+    "outline": "#E2E6EB",
+    "outlineVariant": "#CBD2D9",
+    "inverseSurface": "#263039",
+    "inverseOnSurface": "#F4F6F8"
+  },
+  "frame": "blank",
+  "platform": "web",
+  "title": "NCE2 Echo Loop · 音频组件适配",
+  "brief": "音频组件适配：竖屏播放页内容 720px 居中；横屏 1180×820 左 720 字幕 + 右辅助列（封面/四操作/进度/播放键），不把字幕和进度拉满全宽；沿用冷灰+品牌绿。",
+  "dynamicColor": false,
+  "theme": {
+    "dark": false,
+    "bothModes": false,
+    "contrast": "standard",
+    "shape": "rounded",
+    "font": "roboto",
+    "emphasized": false,
+    "motion": "standard"
+  }
+}

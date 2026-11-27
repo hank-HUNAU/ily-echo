@@ -1,0 +1,1023 @@
+{
+  "groups": [
+    {
+      "id": "g1a",
+      "x": 0,
+      "y": 0,
+      "axis": "y",
+      "items": [
+        {
+          "id": "i1a",
+          "kind": "topAppBar",
+          "label": "我的课程",
+          "icon": "menu",
+          "variant": "filled",
+          "size": 820,
+          "icon2": "add"
+        }
+      ]
+    },
+    {
+      "id": "g1b",
+      "x": 50,
+      "y": 96,
+      "axis": "y",
+      "items": [
+        {
+          "id": "i1b",
+          "kind": "card",
+          "label": "今日任务",
+          "icon": "home",
+          "variant": "tonal",
+          "size": 720,
+          "supporting": "新概念英语 2 · 继续精听 L1"
+        }
+      ]
+    },
+    {
+      "id": "g1c",
+      "x": 50,
+      "y": 280,
+      "axis": "y",
+      "items": [
+        {
+          "id": "i1c1",
+          "kind": "listItem",
+          "label": "新概念英语 2",
+          "icon": "book",
+          "variant": "elevated",
+          "size": 720,
+          "supporting": "已学 1/96 · 继续精听 L1"
+        },
+        {
+          "id": "i1c2",
+          "kind": "listItem",
+          "label": "＋ 选择课程",
+          "icon": "add",
+          "variant": "outlined",
+          "size": 720,
+          "supporting": "添加第二门课"
+        }
+      ]
+    },
+    {
+      "id": "g1d",
+      "x": 50,
+      "y": 480,
+      "axis": "y",
+      "items": [
+        {
+          "id": "i1d",
+          "kind": "box",
+          "label": "学习概览\n已学 1% · 通关 0% · 复习 29%",
+          "icon": "bar_chart",
+          "variant": "outlined",
+          "size": 720,
+          "supporting": "点环看明细"
+        }
+      ]
+    },
+    {
+      "id": "g1e",
+      "x": 50,
+      "y": 720,
+      "axis": "y",
+      "items": [
+        {
+          "id": "i1e",
+          "kind": "card",
+          "label": "近 7 天练习",
+          "icon": "show_chart",
+          "variant": "outlined",
+          "size": 720,
+          "supporting": "0 分钟 · 暂无数据"
+        }
+      ]
+    },
+    {
+      "id": "g1f",
+      "x": 0,
+      "y": 1092,
+      "axis": "y",
+      "items": [
+        {
+          "id": "g1fn",
+          "kind": "bottomNav",
+          "label": "",
+          "icon": null,
+          "variant": "filled",
+          "size": 820,
+          "tabs": [
+            {
+              "label": "课程",
+              "icon": "home"
+            },
+            {
+              "label": "难句",
+              "icon": "favorite"
+            },
+            {
+              "label": "听单",
+              "icon": "headphones"
+            },
+            {
+              "label": "卡片",
+              "icon": "credit_card"
+            },
+            {
+              "label": "我的",
+              "icon": "person"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "g2a",
+      "x": 940,
+      "y": 0,
+      "axis": "y",
+      "items": [
+        {
+          "id": "i2a",
+          "kind": "topAppBar",
+          "label": "新概念英语 2",
+          "icon": "arrow_back",
+          "variant": "filled",
+          "size": 820,
+          "icon2": "help"
+        }
+      ]
+    },
+    {
+      "id": "g2b",
+      "x": 990,
+      "y": 88,
+      "axis": "y",
+      "items": [
+        {
+          "id": "i2b",
+          "kind": "box",
+          "label": "接着学 L1 · A Private Conversation　已学 1/96 · 通关 0/96",
+          "icon": "play_arrow",
+          "variant": "tonal",
+          "size": 720
+        }
+      ]
+    },
+    {
+      "id": "g2c",
+      "x": 990,
+      "y": 200,
+      "axis": "y",
+      "items": [
+        {
+          "id": "i2c",
+          "kind": "tabs",
+          "label": "",
+          "icon": null,
+          "variant": "filled",
+          "size": 720,
+          "tabs": [
+            {
+              "label": "全部 96",
+              "icon": ""
+            },
+            {
+              "label": "待复习",
+              "icon": ""
+            },
+            {
+              "label": "未学",
+              "icon": ""
+            },
+            {
+              "label": "学习中",
+              "icon": ""
+            },
+            {
+              "label": "通关",
+              "icon": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "g2d",
+      "x": 990,
+      "y": 272,
+      "axis": "y",
+      "items": [
+        {
+          "id": "i2d",
+          "kind": "searchBar",
+          "label": "搜索课号或标题",
+          "icon": null,
+          "variant": "outlined",
+          "size": 720
+        }
+      ]
+    },
+    {
+      "id": "g2g0",
+      "x": 990,
+      "y": 352,
+      "axis": "x",
+      "items": [
+        {
+          "id": "i2g0_0",
+          "kind": "chip",
+          "label": "自适应格",
+          "icon": null,
+          "variant": "outlined",
+          "size": 108,
+          "supporting": "auto-fit minmax(88px,1fr) · 820宽6列"
+        },
+        {
+          "id": "i2g0_1",
+          "kind": "chip",
+          "label": "自适应格",
+          "icon": null,
+          "variant": "outlined",
+          "size": 108,
+          "supporting": "auto-fit minmax(88px,1fr) · 820宽6列"
+        },
+        {
+          "id": "i2g0_2",
+          "kind": "chip",
+          "label": "自适应格",
+          "icon": null,
+          "variant": "outlined",
+          "size": 108,
+          "supporting": "auto-fit minmax(88px,1fr) · 820宽6列"
+        },
+        {
+          "id": "i2g0_3",
+          "kind": "chip",
+          "label": "自适应格",
+          "icon": null,
+          "variant": "outlined",
+          "size": 108,
+          "supporting": "auto-fit minmax(88px,1fr) · 820宽6列"
+        },
+        {
+          "id": "i2g0_4",
+          "kind": "chip",
+          "label": "自适应格",
+          "icon": null,
+          "variant": "outlined",
+          "size": 108,
+          "supporting": "auto-fit minmax(88px,1fr) · 820宽6列"
+        },
+        {
+          "id": "i2g0_5",
+          "kind": "chip",
+          "label": "自适应格",
+          "icon": null,
+          "variant": "outlined",
+          "size": 108,
+          "supporting": "auto-fit minmax(88px,1fr) · 820宽6列"
+        }
+      ]
+    },
+    {
+      "id": "g2g1",
+      "x": 990,
+      "y": 444,
+      "axis": "x",
+      "items": [
+        {
+          "id": "i2g1_0",
+          "kind": "chip",
+          "label": "自适应格",
+          "icon": null,
+          "variant": "outlined",
+          "size": 108,
+          "supporting": "auto-fit minmax(88px,1fr) · 820宽6列"
+        },
+        {
+          "id": "i2g1_1",
+          "kind": "chip",
+          "label": "自适应格",
+          "icon": null,
+          "variant": "outlined",
+          "size": 108,
+          "supporting": "auto-fit minmax(88px,1fr) · 820宽6列"
+        },
+        {
+          "id": "i2g1_2",
+          "kind": "chip",
+          "label": "自适应格",
+          "icon": null,
+          "variant": "outlined",
+          "size": 108,
+          "supporting": "auto-fit minmax(88px,1fr) · 820宽6列"
+        },
+        {
+          "id": "i2g1_3",
+          "kind": "chip",
+          "label": "自适应格",
+          "icon": null,
+          "variant": "outlined",
+          "size": 108,
+          "supporting": "auto-fit minmax(88px,1fr) · 820宽6列"
+        },
+        {
+          "id": "i2g1_4",
+          "kind": "chip",
+          "label": "自适应格",
+          "icon": null,
+          "variant": "outlined",
+          "size": 108,
+          "supporting": "auto-fit minmax(88px,1fr) · 820宽6列"
+        },
+        {
+          "id": "i2g1_5",
+          "kind": "chip",
+          "label": "自适应格",
+          "icon": null,
+          "variant": "outlined",
+          "size": 108,
+          "supporting": "auto-fit minmax(88px,1fr) · 820宽6列"
+        }
+      ]
+    },
+    {
+      "id": "g2g2",
+      "x": 990,
+      "y": 536,
+      "axis": "x",
+      "items": [
+        {
+          "id": "i2g2_0",
+          "kind": "chip",
+          "label": "自适应格",
+          "icon": null,
+          "variant": "outlined",
+          "size": 108,
+          "supporting": "auto-fit minmax(88px,1fr) · 820宽6列"
+        },
+        {
+          "id": "i2g2_1",
+          "kind": "chip",
+          "label": "自适应格",
+          "icon": null,
+          "variant": "outlined",
+          "size": 108,
+          "supporting": "auto-fit minmax(88px,1fr) · 820宽6列"
+        },
+        {
+          "id": "i2g2_2",
+          "kind": "chip",
+          "label": "自适应格",
+          "icon": null,
+          "variant": "outlined",
+          "size": 108,
+          "supporting": "auto-fit minmax(88px,1fr) · 820宽6列"
+        },
+        {
+          "id": "i2g2_3",
+          "kind": "chip",
+          "label": "自适应格",
+          "icon": null,
+          "variant": "outlined",
+          "size": 108,
+          "supporting": "auto-fit minmax(88px,1fr) · 820宽6列"
+        },
+        {
+          "id": "i2g2_4",
+          "kind": "chip",
+          "label": "自适应格",
+          "icon": null,
+          "variant": "outlined",
+          "size": 108,
+          "supporting": "auto-fit minmax(88px,1fr) · 820宽6列"
+        },
+        {
+          "id": "i2g2_5",
+          "kind": "chip",
+          "label": "自适应格",
+          "icon": null,
+          "variant": "outlined",
+          "size": 108,
+          "supporting": "auto-fit minmax(88px,1fr) · 820宽6列"
+        }
+      ]
+    },
+    {
+      "id": "g2g3",
+      "x": 990,
+      "y": 628,
+      "axis": "x",
+      "items": [
+        {
+          "id": "i2g3_0",
+          "kind": "chip",
+          "label": "自适应格",
+          "icon": null,
+          "variant": "outlined",
+          "size": 108,
+          "supporting": "auto-fit minmax(88px,1fr) · 820宽6列"
+        },
+        {
+          "id": "i2g3_1",
+          "kind": "chip",
+          "label": "自适应格",
+          "icon": null,
+          "variant": "outlined",
+          "size": 108,
+          "supporting": "auto-fit minmax(88px,1fr) · 820宽6列"
+        },
+        {
+          "id": "i2g3_2",
+          "kind": "chip",
+          "label": "自适应格",
+          "icon": null,
+          "variant": "outlined",
+          "size": 108,
+          "supporting": "auto-fit minmax(88px,1fr) · 820宽6列"
+        },
+        {
+          "id": "i2g3_3",
+          "kind": "chip",
+          "label": "自适应格",
+          "icon": null,
+          "variant": "outlined",
+          "size": 108,
+          "supporting": "auto-fit minmax(88px,1fr) · 820宽6列"
+        },
+        {
+          "id": "i2g3_4",
+          "kind": "chip",
+          "label": "自适应格",
+          "icon": null,
+          "variant": "outlined",
+          "size": 108,
+          "supporting": "auto-fit minmax(88px,1fr) · 820宽6列"
+        },
+        {
+          "id": "i2g3_5",
+          "kind": "chip",
+          "label": "自适应格",
+          "icon": null,
+          "variant": "outlined",
+          "size": 108,
+          "supporting": "auto-fit minmax(88px,1fr) · 820宽6列"
+        }
+      ]
+    },
+    {
+      "id": "g2g4",
+      "x": 990,
+      "y": 720,
+      "axis": "x",
+      "items": [
+        {
+          "id": "i2g4_0",
+          "kind": "chip",
+          "label": "自适应格",
+          "icon": null,
+          "variant": "outlined",
+          "size": 108,
+          "supporting": "auto-fit minmax(88px,1fr) · 820宽6列"
+        },
+        {
+          "id": "i2g4_1",
+          "kind": "chip",
+          "label": "自适应格",
+          "icon": null,
+          "variant": "outlined",
+          "size": 108,
+          "supporting": "auto-fit minmax(88px,1fr) · 820宽6列"
+        },
+        {
+          "id": "i2g4_2",
+          "kind": "chip",
+          "label": "自适应格",
+          "icon": null,
+          "variant": "outlined",
+          "size": 108,
+          "supporting": "auto-fit minmax(88px,1fr) · 820宽6列"
+        },
+        {
+          "id": "i2g4_3",
+          "kind": "chip",
+          "label": "自适应格",
+          "icon": null,
+          "variant": "outlined",
+          "size": 108,
+          "supporting": "auto-fit minmax(88px,1fr) · 820宽6列"
+        },
+        {
+          "id": "i2g4_4",
+          "kind": "chip",
+          "label": "自适应格",
+          "icon": null,
+          "variant": "outlined",
+          "size": 108,
+          "supporting": "auto-fit minmax(88px,1fr) · 820宽6列"
+        },
+        {
+          "id": "i2g4_5",
+          "kind": "chip",
+          "label": "自适应格",
+          "icon": null,
+          "variant": "outlined",
+          "size": 108,
+          "supporting": "auto-fit minmax(88px,1fr) · 820宽6列"
+        }
+      ]
+    },
+    {
+      "id": "g2g5",
+      "x": 990,
+      "y": 812,
+      "axis": "x",
+      "items": [
+        {
+          "id": "i2g5_0",
+          "kind": "chip",
+          "label": "自适应格",
+          "icon": null,
+          "variant": "outlined",
+          "size": 108,
+          "supporting": "auto-fit minmax(88px,1fr) · 820宽6列"
+        },
+        {
+          "id": "i2g5_1",
+          "kind": "chip",
+          "label": "自适应格",
+          "icon": null,
+          "variant": "outlined",
+          "size": 108,
+          "supporting": "auto-fit minmax(88px,1fr) · 820宽6列"
+        },
+        {
+          "id": "i2g5_2",
+          "kind": "chip",
+          "label": "自适应格",
+          "icon": null,
+          "variant": "outlined",
+          "size": 108,
+          "supporting": "auto-fit minmax(88px,1fr) · 820宽6列"
+        },
+        {
+          "id": "i2g5_3",
+          "kind": "chip",
+          "label": "自适应格",
+          "icon": null,
+          "variant": "outlined",
+          "size": 108,
+          "supporting": "auto-fit minmax(88px,1fr) · 820宽6列"
+        },
+        {
+          "id": "i2g5_4",
+          "kind": "chip",
+          "label": "自适应格",
+          "icon": null,
+          "variant": "outlined",
+          "size": 108,
+          "supporting": "auto-fit minmax(88px,1fr) · 820宽6列"
+        },
+        {
+          "id": "i2g5_5",
+          "kind": "chip",
+          "label": "自适应格",
+          "icon": null,
+          "variant": "outlined",
+          "size": 108,
+          "supporting": "auto-fit minmax(88px,1fr) · 820宽6列"
+        }
+      ]
+    },
+    {
+      "id": "g2z",
+      "x": 940,
+      "y": 1092,
+      "axis": "y",
+      "items": [
+        {
+          "id": "g2zn",
+          "kind": "bottomNav",
+          "label": "",
+          "icon": null,
+          "variant": "filled",
+          "size": 820,
+          "tabs": [
+            {
+              "label": "课程",
+              "icon": "home"
+            },
+            {
+              "label": "难句",
+              "icon": "favorite"
+            },
+            {
+              "label": "听单",
+              "icon": "headphones"
+            },
+            {
+              "label": "卡片",
+              "icon": "credit_card"
+            },
+            {
+              "label": "我的",
+              "icon": "person"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "g3a",
+      "x": 1880,
+      "y": 0,
+      "axis": "y",
+      "items": [
+        {
+          "id": "i3a",
+          "kind": "topAppBar",
+          "label": "L1 · A Private Conversation",
+          "icon": "arrow_back",
+          "variant": "filled",
+          "size": 820
+        }
+      ]
+    },
+    {
+      "id": "g3b",
+      "x": 1930,
+      "y": 88,
+      "axis": "y",
+      "items": [
+        {
+          "id": "i3b",
+          "kind": "tabs",
+          "label": "",
+          "icon": null,
+          "variant": "filled",
+          "size": 720,
+          "tabs": [
+            {
+              "label": "盲听",
+              "icon": "hearing"
+            },
+            {
+              "label": "精听",
+              "icon": ""
+            },
+            {
+              "label": "跟读",
+              "icon": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "g3c",
+      "x": 1930,
+      "y": 160,
+      "axis": "y",
+      "items": [
+        {
+          "id": "i3c",
+          "kind": "card",
+          "label": "Why did the writer complain?",
+          "icon": "help",
+          "variant": "elevated",
+          "size": 720,
+          "supporting": "进入即显示题目，音频同步播 1 遍"
+        }
+      ]
+    },
+    {
+      "id": "g3d",
+      "x": 1930,
+      "y": 340,
+      "axis": "y",
+      "items": [
+        {
+          "id": "i3d1",
+          "kind": "listItem",
+          "label": "A  People behind him talked loudly.",
+          "icon": null,
+          "variant": "outlined",
+          "size": 720
+        },
+        {
+          "id": "i3d2",
+          "kind": "listItem",
+          "label": "B  The play was too long.",
+          "icon": null,
+          "variant": "outlined",
+          "size": 720
+        },
+        {
+          "id": "i3d3",
+          "kind": "listItem",
+          "label": "C  He could not find his seat.",
+          "icon": null,
+          "variant": "outlined",
+          "size": 720
+        }
+      ]
+    },
+    {
+      "id": "g3e",
+      "x": 1930,
+      "y": 600,
+      "axis": "y",
+      "items": [
+        {
+          "id": "i3e",
+          "kind": "button",
+          "label": "显示中文提示",
+          "icon": null,
+          "variant": "text",
+          "size": 240
+        }
+      ]
+    },
+    {
+      "id": "g3f",
+      "x": 1880,
+      "y": 1092,
+      "axis": "y",
+      "items": [
+        {
+          "id": "g3fn",
+          "kind": "bottomNav",
+          "label": "",
+          "icon": null,
+          "variant": "filled",
+          "size": 820,
+          "tabs": [
+            {
+              "label": "课程",
+              "icon": "home"
+            },
+            {
+              "label": "难句",
+              "icon": "favorite"
+            },
+            {
+              "label": "听单",
+              "icon": "headphones"
+            },
+            {
+              "label": "卡片",
+              "icon": "credit_card"
+            },
+            {
+              "label": "我的",
+              "icon": "person"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "g4a",
+      "x": 2820,
+      "y": 0,
+      "axis": "y",
+      "items": [
+        {
+          "id": "i4a",
+          "kind": "topAppBar",
+          "label": "跟读 · 全篇",
+          "icon": "arrow_back",
+          "variant": "filled",
+          "size": 820
+        }
+      ]
+    },
+    {
+      "id": "g4b",
+      "x": 2870,
+      "y": 88,
+      "axis": "y",
+      "items": [
+        {
+          "id": "i4b",
+          "kind": "box",
+          "label": "Last week I went to the theatre.\nI had a very good seat.\nThe play was very interesting.\nI did not enjoy it.\nA young man and a young woman were sitting behind me.\nThey were talking loudly.\nI got very angry.",
+          "icon": "subject",
+          "variant": "outlined",
+          "size": 720,
+          "supporting": "7 行窗口 · 焦点行加粗，其余 32% 虚化"
+        }
+      ]
+    },
+    {
+      "id": "g4c",
+      "x": 2870,
+      "y": 740,
+      "axis": "y",
+      "items": [
+        {
+          "id": "i4c",
+          "kind": "toolbar",
+          "label": "00:20 / 01:16",
+          "icon": "play_arrow",
+          "variant": "filled",
+          "size": 720,
+          "supporting": "28px 绿圆播放键 + 进度 + 时间"
+        }
+      ]
+    },
+    {
+      "id": "g4d",
+      "x": 2870,
+      "y": 828,
+      "axis": "y",
+      "items": [
+        {
+          "id": "i4d",
+          "kind": "tabs",
+          "label": "",
+          "icon": null,
+          "variant": "tonal",
+          "size": 720,
+          "tabs": [
+            {
+              "label": "中",
+              "icon": ""
+            },
+            {
+              "label": "英",
+              "icon": ""
+            },
+            {
+              "label": "双语",
+              "icon": "check"
+            },
+            {
+              "label": "1 遍",
+              "icon": ""
+            },
+            {
+              "label": "3 遍",
+              "icon": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "g4e",
+      "x": 2870,
+      "y": 912,
+      "axis": "y",
+      "items": [
+        {
+          "id": "i4e",
+          "kind": "button",
+          "label": "读完了 →",
+          "icon": null,
+          "variant": "filled",
+          "size": 720
+        }
+      ]
+    },
+    {
+      "id": "g4f",
+      "x": 2820,
+      "y": 1092,
+      "axis": "y",
+      "items": [
+        {
+          "id": "g4fn",
+          "kind": "bottomNav",
+          "label": "",
+          "icon": null,
+          "variant": "filled",
+          "size": 820,
+          "tabs": [
+            {
+              "label": "课程",
+              "icon": "home"
+            },
+            {
+              "label": "难句",
+              "icon": "favorite"
+            },
+            {
+              "label": "听单",
+              "icon": "headphones"
+            },
+            {
+              "label": "卡片",
+              "icon": "credit_card"
+            },
+            {
+              "label": "我的",
+              "icon": "person"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "frames": [
+    {
+      "id": "tF1",
+      "name": "1 我的课程",
+      "x": 0,
+      "y": 0,
+      "w": 820,
+      "h": 1180,
+      "place": "top",
+      "note": "1 我的课程",
+      "swipe": {
+        "right": "tF2"
+      }
+    },
+    {
+      "id": "tF2",
+      "name": "2 教材页",
+      "x": 940,
+      "y": 0,
+      "w": 820,
+      "h": 1180,
+      "place": "top",
+      "note": "2 教材页",
+      "swipe": {
+        "right": "tF3"
+      }
+    },
+    {
+      "id": "tF3",
+      "name": "3 盲听",
+      "x": 1880,
+      "y": 0,
+      "w": 820,
+      "h": 1180,
+      "place": "top",
+      "note": "3 盲听",
+      "swipe": {
+        "right": "tF4"
+      }
+    },
+    {
+      "id": "tF4",
+      "name": "4 跟读",
+      "x": 2820,
+      "y": 0,
+      "w": 820,
+      "h": 1180,
+      "place": "top",
+      "note": "4 跟读",
+      "swipe": {}
+    }
+  ],
+  "paletteKey": "custom",
+  "customPalette": {
+    "key": "nce2-green",
+    "label": "NCE2 冷灰绿",
+    "seed": "#0B8A5F",
+    "primary": "#0B8A5F",
+    "onPrimary": "#FFFFFF",
+    "primaryContainer": "#E6F7F0",
+    "onPrimaryContainer": "#08704D",
+    "inversePrimary": "#5DCAA5",
+    "secondary": "#10B981",
+    "secondaryContainer": "#E6F7F0",
+    "onSecondaryContainer": "#08704D",
+    "tertiary": "#8A5E22",
+    "tertiaryContainer": "#FBF1E3",
+    "onTertiary": "#FFFFFF",
+    "onTertiaryContainer": "#6B4716",
+    "error": "#B04A43",
+    "onError": "#FFFFFF",
+    "errorContainer": "#FCEBEB",
+    "onErrorContainer": "#8A2E28",
+    "surface": "#F4F6F8",
+    "onSurface": "#263039",
+    "surfaceContainerLow": "#FFFFFF",
+    "surfaceContainer": "#EDF1F4",
+    "surfaceContainerHigh": "#E4E9EE",
+    "surfaceContainerHighest": "#D9E0E6",
+    "onSurfaceVariant": "#5C6773",
+    "outline": "#E2E6EB",
+    "outlineVariant": "#CBD2D9",
+    "inverseSurface": "#263039",
+    "inverseOnSurface": "#F4F6F8"
+  },
+  "frame": "blank",
+  "platform": "web",
+  "title": "NCE2 Echo Loop · 平板竖屏",
+  "brief": "820×1180 平板竖屏，内容 720px 居中；教材页课格为自适应网格 (repeat(auto-fit,minmax(88px,1fr)))，820 宽下为 6 列；沿用冷灰+品牌绿。",
+  "dynamicColor": false,
+  "theme": {
+    "dark": false,
+    "bothModes": false,
+    "contrast": "standard",
+    "shape": "rounded",
+    "font": "roboto",
+    "emphasized": false,
+    "motion": "standard"
+  }
+}
