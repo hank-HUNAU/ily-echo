@@ -524,6 +524,15 @@ body:has(#app.land-shadow) nav.tabs{display:none}
   .plr-side .pfloat{position:static;margin:0;box-shadow:none;border:1px solid var(--line)}
 }
 
+
+/* ===== 播放页：全屏沉浸，不保留底部 tab 栏（设计稿屏11） ===== */
+body:has(.player-page){padding-bottom:0}
+body:has(.player-page) nav.tabs{display:none}
+/* 原 96px 底垫是给 tab 留的，播放页无 tab 后清掉，悬浮条才能真正贴底 */
+.player-page{padding-bottom:0}
+.player-page .pfloat{margin:12px 16px calc(16px + env(safe-area-inset-bottom,0px));
+  flex:0 0 auto;z-index:5}
+
 </style>
 </head>
 <body data-page-node-id="fkACEsMfaEvRSAXz4FoagJ">
